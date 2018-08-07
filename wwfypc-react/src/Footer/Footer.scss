@@ -1,0 +1,8 @@
+@import "../variables";
+
+.Footer {
+  display: grid;
+  grid-auto-flow: column;
+  background: $black;
+  text-align: center;
+}
