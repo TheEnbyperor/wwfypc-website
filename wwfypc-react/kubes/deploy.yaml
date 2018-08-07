@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wwfypc
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: wwfypc-test
+  namespace: wwfypc
+  labels:
+    app: wwfypc-test
+spec:
+  rules:
+  - host: wwfypc.fluidmedia.wales
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: wwfypc-react
+          servicePort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: wwfypc-react
+  namespace: wwfypc
+  labels:
+    app: wwfypc-test
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+  selector:
+    app: wwfypc-test
+    tier: server
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wwfypc-react
+  namespace: wwfypc
+spec:
+  selector:
+    matchLabels:
+      app: wwfypc-test
+      tier: server
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: wwfypc-test
+        tier: server
+    spec:
+      containers:
+      - name: server
+        image: evilben/wwfypc-react@sha256:8ba9b618e88aa6c7281691f407ea89e927627a35f395d62ec038e1084ba4b3a8
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: Always
+
+
+

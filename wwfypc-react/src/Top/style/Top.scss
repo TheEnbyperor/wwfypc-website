@@ -1,0 +1,125 @@
+@import "../../variables";
+
+header.Top {
+  background: url("../img/top-bg.jpg") 70% 70%;
+  background-size: cover;
+  height: 100%;
+
+  display: flex;
+  flex-flow: column;
+}
+
+.TopContent {
+  display: flex;
+  width: 70%;
+  margin: 10px auto;
+  align-items: center;
+  flex: 1 1 0;
+  min-height: 0;
+
+  > div {
+    flex: 1;
+  }
+}
+
+.TopLeft {
+  h1, h2 {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 55px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  p {
+    color: #fff;
+    font-size: 25px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+
+    > * {
+      flex: 1;
+      width: 40%;
+    }
+  }
+}
+
+.TopRight {
+  height: 100%;
+}
+
+.TopSlider {
+  height: 100%;
+
+  .TopSlidesInner {
+    position: relative;
+    display: flex;
+    max-height: 100%;
+    width: 100%;
+    .SliderImg {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0;
+      z-index: 999;
+      img {
+        display: block;
+        //height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .TopSlides {
+      position: absolute;
+
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 5%;
+      top: 1%;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+
+      .TopSlide {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .TopImg {
+          padding: 50px;
+
+          background: url("../img/slider-bg.jpg") 50% 50% no-repeat;
+          background-size: cover;
+
+          flex: 1;
+          display: flex;
+          align-items: center;
+        }
+
+        h2 {
+          text-align: center;
+          font-size: 30px;
+          margin: 15px 15px 0;
+        }
+
+        p {
+          text-align: center;
+          flex-basis: auto;
+          font-size: 20px;
+          margin: 15px;
+        }
+
+        .Button {
+          margin: 0 15px 20px;
+        }
+      }
+    }
+  }
+}

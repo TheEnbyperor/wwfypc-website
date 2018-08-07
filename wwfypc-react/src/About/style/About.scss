@@ -1,0 +1,87 @@
+@import "../../variables";
+
+.About {
+  min-height: 100vh;
+  height: unset;
+  background: $grey;
+
+  header {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/header.png") no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+      color: $blue;
+      font-size: 50px;
+      margin: 0;
+      width: 70%;
+      text-align: center;
+    }
+
+    hr {
+      border: 0;
+      background: $blue;
+      height: 3px;
+      width: 75%;
+    }
+
+    p {
+      color: #fff;
+      width: 70%;
+      font-size: 25px;
+    }
+  }
+
+  .bigReview {
+    text-align: center;
+    font-size: 23px;
+    width: 70%;
+    margin: 50px auto;
+
+    .stars {
+      img {
+        margin: 5px;
+      }
+    }
+
+    p:nth-of-type(2) {
+      font-style: italic;
+    }
+  }
+
+  .pointers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px;
+    text-align: center;
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: center;
+    color: $blue;
+
+    h2 {
+      font-family: "Adam CG Pro", sans-serif;
+      text-transform: uppercase;
+      color: $blue;
+    }
+
+    p {
+      font-size: 20px;
+    }
+  }
+
+  .whyUs {
+    padding: 50px;
+
+    font-size: 25px;
+
+    h1 {
+      font-family: "Bariol", sans-serif;
+      text-transform: none;
+    }
+  }
+}

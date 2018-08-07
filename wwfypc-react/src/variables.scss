@@ -1,0 +1,13 @@
+// Colours
+
+$grey: #e5e5e5;
+$grey2: #c6ccd3;
+$grey3: #a4adb7;
+$black: #434343;
+$blue: #54a1e7;
+$orange: #ff563e;
+$green: #00cc7b;
+$yellow: #fa9952;
+
+$blue-gradient: linear-gradient(75deg, $blue, lighten($blue, 15%));
+$yellow-gradient: linear-gradient(75deg, $yellow, lighten($yellow, 8%));

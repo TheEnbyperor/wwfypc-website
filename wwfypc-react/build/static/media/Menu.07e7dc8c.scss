@@ -1,0 +1,31 @@
+@import "../../variables";
+
+nav.Menu {
+  flex: 0 1 auto;
+  padding: 50px 0;
+
+  display: flex;
+
+  div {
+    flex: 1;
+    display: flex;
+
+    div {
+      flex: 1;
+      margin: 0 10px;
+
+      a {
+        display: inline-block;
+        text-align: center;
+        font-size: 25px;
+        text-transform: uppercase;
+        font-family: "Adam CG Pro", sans-serif;
+        font-weight: bold;
+
+        border-bottom: 2px solid $blue;
+        margin: 0 auto;
+        padding: 0 10px;
+      }
+    }
+  }
+}

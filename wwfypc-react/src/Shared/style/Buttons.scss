@@ -1,0 +1,22 @@
+@import "../../variables";
+
+.Button {
+  border-radius: 99999px;
+  padding: 20px;
+  margin: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  &.colour-1 {
+    background: $yellow-gradient;
+  }
+  &.colour-2 {
+    background: $blue-gradient;
+  }
+}
