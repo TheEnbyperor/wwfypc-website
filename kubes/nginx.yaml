@@ -54,11 +54,24 @@ spec:
         app: wwfypc-test
         tier: nginx
     spec:
+      volumes:
+      - name: gluster
+        glusterfs:
+          endpoints: glusterfs-cluster
+          path: kubes-pv
       containers:
       - name: nginx
         image: evilben/wwfypc-nginx:(hash)
         ports:
         - containerPort: 8000
         imagePullPolicy: Always
+        volumeMounts:
+        - name: gluster
+          mountPath: /src/static
+          subPath: lmi-site/static
+        - name: gluster
+          mountPath: /src/media
+          subPath: lmi-site/media
+
 
 
