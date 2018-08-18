@@ -1,0 +1,13 @@
+@import "../../variables";
+
+.BuyAndSell {
+  background: $grey2;
+  section {
+    width: 85%;
+    margin: 0 auto;
+
+    h1 {
+      margin: 20px 0;
+    }
+  }
+}
