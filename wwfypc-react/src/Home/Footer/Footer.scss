@@ -1,0 +1,34 @@
+@import "../../variables";
+
+.Footer {
+  background: $black;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  color: #ffffff;
+
+  > div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 80%;
+
+    p {
+      white-space: pre;
+    }
+
+    .social > * {
+      margin: 10px;
+      font-size: 25px;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      font-size: 17px;
+
+      > * {
+        margin: 2px 0;
+      }
+    }
+  }
+}

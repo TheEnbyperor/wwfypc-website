@@ -16,6 +16,11 @@
   src: url("/Bariol_Regular.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "Neutra";
+  src: url("/NeutraDisplay-Titling.otf") format("opentype");
+}
+
 body {
   font-family: "Bariol", sans-serif;
 }
@@ -29,7 +34,11 @@ img {
 h1, h2 {
   text-transform: uppercase;
   color: $orange;
-  font-family: "Adam CG Pro", sans-serif;
+  font-family: "Neutra", sans-serif;
+}
+
+h1.large {
+  font-size: 55px;
 }
 
 a {
