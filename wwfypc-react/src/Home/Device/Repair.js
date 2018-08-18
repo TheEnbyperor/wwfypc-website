@@ -3,6 +3,7 @@ import {Query} from "react-apollo";
 import gql from "graphql-tag";
 import "./style/Repair.scss";
 import Button from '../../Shared/Buttons';
+import {DELIVERY_TYPES} from "./Device";
 
 import iPhone from './img/iPhone-small.png';
 import Arrow from './img/Arrow.svg';
@@ -86,10 +87,30 @@ class RepairTypes extends Component {
     }
 }
 
+class DeliveryTypes extends Component {
+    render() {
+        if (this.props.repairType !== null) {
+            return DELIVERY_TYPES.map(({id, name, description}) => (
+                <div className={"deliveryType" + ((this.props.selectedDelivery === id) ? " selected" : "") +
+                            ((this.props.selectedDeliveryDetail === id) ? " open" : "")} key={id}
+                     onClick={() => this.props.selectDelivery(id)}>
+                    <div className="top">
+                        <span>{name}</span>
+                        <img src={Arrow} alt="" onClick={() => this.props.openDeliveryDetail(id)}/>
+                    </div>
+                    <p>{description}</p>
+                </div>
+            ));
+        } else {
+            return null;
+        }
+    }
+}
+
 class RepairInfo extends Component {
     render() {
         let disp = null;
-        if (this.props.deviceType !== null && this.props.repairType !== null) {
+        if (this.props.deviceType !== null && this.props.repairType !== null && this.props.deliveryType !== null) {
             disp = <Query query={REPAIR_INFO_QUERY} variables={{
                 deviceType: this.props.deviceType,
                 repairType: this.props.repairType
@@ -98,6 +119,8 @@ class RepairInfo extends Component {
                     if (loading) return <h2>Loading</h2>;
                     if (error) return <h2>Error</h2>;
 
+                    const deliveryType = DELIVERY_TYPES.find(type => type.id === this.props.deliveryType);
+
                     return ([
                         <img src={iPhone} alt="iPhone"/>,
                         <h2>{data.deviceType.name}</h2>,
@@ -105,12 +128,13 @@ class RepairInfo extends Component {
                             <ul>
                                 <li>In stock</li>
                                 <li>15 Minutes</li>
+                                <li>{deliveryType.name}</li>
                             </ul>
                             <div className="price">
                                 &pound;{data.repairType.price}
                             </div>
                         </div>,
-                        <Button colour={1}>
+                        <Button colour={1} onClick={this.props.nextStep}>
                             Fix your device now
                         </Button>
                     ]);
@@ -135,24 +159,55 @@ export default class RepairSelection extends Component {
             selectedModel: null,
             selectedRepair: null,
             selectedRepairDetail: null,
+            selectedDelivery: null,
+            selectedDeliveryDetail: null,
         };
 
+        this.goBack = this.goBack.bind(this);
         this.selectModel = this.selectModel.bind(this);
         this.selectRepair = this.selectRepair.bind(this);
+        this.selectDelivery = this.selectDelivery.bind(this);
         this.openRepairDetail = this.openRepairDetail.bind(this);
+        this.openDeliveryDetail = this.openDeliveryDetail.bind(this);
+        this.nextStep = this.nextStep.bind(this);
+    }
+
+    goBack() {
+        if (this.state.selectedRepair === null) {
+            this.props.goBack();
+        } else {
+            this.setState({
+                selectedRepair: null,
+                selectedDelivery: null,
+            });
+        }
     }
 
     selectModel(model) {
-        this.setState({
-            selectedModel: model,
-            selectedRepair: null,
-        })
+        if (model !== this.state.selectedModel) {
+            this.setState({
+                selectedModel: model,
+                selectedRepair: null,
+                selectedDelivery: null,
+            })
+        }
     }
 
     selectRepair(repair) {
-        this.setState({
-            selectedRepair: repair
-        })
+        if (repair !== this.state.selectedRepair) {
+            this.setState({
+                selectedRepair: repair,
+                selectedDelivery: null,
+            })
+        }
+    }
+
+    selectDelivery(delivery) {
+        if (delivery !== this.state.selectedDelivery) {
+            this.setState({
+                selectedDelivery: delivery
+            })
+        }
     }
 
     openRepairDetail(repair) {
@@ -167,26 +222,54 @@ export default class RepairSelection extends Component {
         }
     }
 
+    openDeliveryDetail(delivery) {
+        if (this.state.selectedDeliveryDetail === delivery) {
+            this.setState({
+                selectedDeliveryDetail: null
+            })
+        } else {
+            this.setState({
+                selectedDeliveryDetail: delivery
+            })
+        }
+    }
+
+    nextStep() {
+        this.props.nextStep(this.state.selectedModel, this.state.selectedRepair, this.state.selectedDelivery);
+    }
+
     render() {
-        let stage = "stage-1";
+        let stage = 1;
         if (this.state.selectedModel !== null) {
-            stage = "stage-2"
+            stage = 2;
         }
         if (this.state.selectedRepair !== null) {
-            stage = "stage-3"
+            stage = 3;
+        }
+        if (this.state.selectedDelivery !== null) {
+            stage = 4;
         }
 
         return (
             <div className="RepairSelection">
-                <div className={stage}>
+                <div className={"stage-" + stage}>
                     <div className="Select ">
-                        <RepairModels category={this.props.deviceCategory} selectedModel={this.state.selectedModel}
+                        <RepairModels category={this.props.deviceCategory}
+                                      selectedModel={this.state.selectedModel}
                                       selectModel={this.selectModel}/>
-                        <RepairTypes deviceType={this.state.selectedModel} selectedRepair={this.state.selectedRepair}
-                                     selectedRepairDetail={this.state.selectedRepairDetail} selectRepair={this.selectRepair}
+                        <RepairTypes deviceType={this.state.selectedModel}
+                                     selectedRepair={this.state.selectedRepair}
+                                     selectedRepairDetail={this.state.selectedRepairDetail}
+                                     selectRepair={this.selectRepair}
                                      openRepairDetail={this.openRepairDetail}/>
+                        <DeliveryTypes repairType={this.state.selectedRepair}
+                                       selectedDeliveryDetail={this.state.selectedDeliveryDetail}
+                                       selectedDelivery={this.state.selectedDelivery}
+                                       selectDelivery={this.selectDelivery}
+                                       openDeliveryDetail={this.openDeliveryDetail}/>
                     </div>
-                    <RepairInfo deviceType={this.state.selectedModel} repairType={this.state.selectedRepair}/>
+                    <RepairInfo deviceType={this.state.selectedModel} repairType={this.state.selectedRepair}
+                                deliveryType={this.state.selectedDelivery} nextStep={this.nextStep}/>
                 </div>
             </div>
         );
