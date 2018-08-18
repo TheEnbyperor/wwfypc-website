@@ -9,11 +9,12 @@
 
   > div {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr auto;
     grid-gap: 20px;
     margin: 20px 0;
     padding: 0 20px;
     width: 100%;
+    align-items: start;
 
     @mixin text-box {
       padding: 15px;
@@ -21,6 +22,12 @@
       color: #131313;
       font-size: 20px;
       font-family: "Bariol", sans-serif;
+    }
+
+    &.stage-1, &.stage-2, &.stage-3 {
+      .Info {
+        visibility: hidden;
+      }
     }
 
     &.stage-1 {
@@ -35,21 +42,28 @@
           margin: 0;
         }
       }
-      .Info {
-        visibility: hidden;
-      }
     }
 
     &.stage-2 {
-      .Info {
-        visibility: hidden;
-      }
-
       .Select {
         h2 {
           grid-row: 3;
           text-align: center;
           margin: 0;
+        }
+      }
+    }
+
+    &.stage-3, &.stage-4 {
+      .Select {
+        grid-template-columns: repeat(2, 1fr);
+
+        .model {
+          display: none;
+        }
+
+        .repairType {
+          grid-column: 1;
         }
       }
     }
@@ -72,7 +86,7 @@
         }
       }
 
-      .model, .repairType {
+      .model, .repairType, .deliveryType {
         @include text-box;
 
         &.selected {
@@ -91,7 +105,7 @@
         }
       }
 
-      .repairType {
+      .repairType, .deliveryType {
         grid-column: 3;
         margin: 0 0 0 20px;
         text-transform: uppercase;
@@ -132,11 +146,15 @@
           border-radius: 0 25px 25px;
         }
       }
+
+      .deliveryType {
+        grid-column: 2;
+      }
     }
 
     .Info > div {
       background: #fff;
-      padding: 25px;
+      padding: 25px 10px 10px;
       border-radius: 25px;
 
       display: flex;
@@ -157,10 +175,12 @@
         display: flex;
         width: 100%;
         align-items: center;
+        padding: 0 15px;
 
         ul {
           flex: 1;
           list-style: none;
+          margin-right: 10px;
 
           li {
             position: relative;
