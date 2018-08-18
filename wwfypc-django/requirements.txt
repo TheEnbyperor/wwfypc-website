@@ -4,3 +4,4 @@ gunicorn
 mysqlclient
 django-phonenumber-field
 graphene-django>=2.0
+django-cors-headers
