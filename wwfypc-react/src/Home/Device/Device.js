@@ -9,33 +9,22 @@ import WalkIn from "./WalkIn";
 
 export const APPOINTMENT_TYPE = 0, WALK_IN_TYPE = 1, POST_TYPE = 2;
 
-export const DELIVERY_TYPES = [
-    {
-        id: APPOINTMENT_TYPE,
-        name: "Book an appointment",
-        description: "Book an hour long time slot to bring your device in for."
-    },
-    {
-        id: WALK_IN_TYPE,
-        name: "Walk in",
-        description: "Our workshop is open to the public for repairs without an appointment," +
-            " however those with an appointment will receive priority."
-    },
-    {
-        id: POST_TYPE,
-        name: "Post",
-        description: "Get a form to put in the box with your device and post to us (you arrange and pay for postage)." +
-            " We'll repair your device and post it back to you. Payment for repair will be taken after the device is" +
-            " repaired fully."
-    }
-];
-
 const DEVICES_QUERY = gql`
   {
     deviceCategories {
       id
       icon
       name
+    }
+  }
+`;
+
+const DELIVERY_QUERY = gql`
+  {
+    siteConfig {
+      appointmentDescription
+      walkInDescription
+      postDescription
     }
   }
 `;
@@ -113,32 +102,59 @@ export default class Device extends Component {
     }
 
     render() {
-        let step = null;
-        let disp = null;
-
-        if (this.state.deviceType === null) {
-            step = 1;
-            disp = <Devices onSelect={this.selectType}/>;
-        } else if (this.state.delivery === null) {
-            step = 2;
-            disp = <RepairSelection ref="repairSelection" goBack={this.doGoBack} nextStep={this.nextStep}
-                                    deviceCategory={this.state.deviceType}/>;
-        } else {
-            step = 3;
-
-            if (this.state.delivery === WALK_IN_TYPE) {
-                step = 4;
-                disp = <WalkIn/>;
-            }
-        }
-
         return (
-            <div className={"Device step-" + step}>
-                <h1>Select your device</h1>
-                <div className="BackButton" onClick={this.goBack}>➜</div>
-                <Indicators steps={4} step={step}/>
-                {disp}
-            </div>
+            <Query query={DELIVERY_QUERY}>
+                {({loading, error, data}) => {
+                    if (loading) return <div className="Device"><h1>Loading</h1></div>;
+                    if (error) return <div className="Device"><h1>Error</h1></div>;
+
+                    const DELIVERY_TYPES = [
+                        {
+                            id: APPOINTMENT_TYPE,
+                            name: "Book an appointment",
+                            description: data.siteConfig.appointmentDescription
+                        },
+                        {
+                            id: WALK_IN_TYPE,
+                            name: "Walk in",
+                            description: data.siteConfig.walkInDescription
+                        },
+                        {
+                            id: POST_TYPE,
+                            name: "Post",
+                            description: data.siteConfig.postDescription
+                        }
+                    ];
+
+                    let step = null;
+                    let disp = null;
+
+                    if (this.state.deviceType === null) {
+                        step = 1;
+                        disp = <Devices onSelect={this.selectType}/>;
+                    } else if (this.state.delivery === null) {
+                        step = 2;
+                        disp = <RepairSelection ref="repairSelection" goBack={this.doGoBack} nextStep={this.nextStep}
+                                                deviceCategory={this.state.deviceType} devileryTypes={DELIVERY_TYPES}/>;
+                    } else {
+                        step = 3;
+
+                        if (this.state.delivery === WALK_IN_TYPE) {
+                            step = 4;
+                            disp = <WalkIn/>;
+                        }
+                    }
+
+                    return (
+                        <div className={"Device step-" + step}>
+                            <h1>Select your device</h1>
+                            <div className="BackButton" onClick={this.goBack}>➜</div>
+                            <Indicators steps={4} step={step}/>
+                            {disp}
+                        </div>
+                    );
+                }}
+            </Query>
         );
     }
 }
