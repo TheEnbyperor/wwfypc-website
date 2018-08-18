@@ -3,7 +3,6 @@ import {Query} from "react-apollo";
 import gql from "graphql-tag";
 import "./style/Repair.scss";
 import Button from '../../Shared/Buttons';
-import {DELIVERY_TYPES} from "./Device";
 
 import iPhone from './img/iPhone-small.png';
 import Arrow from './img/Arrow.svg';
@@ -90,7 +89,7 @@ class RepairTypes extends Component {
 class DeliveryTypes extends Component {
     render() {
         if (this.props.repairType !== null) {
-            return DELIVERY_TYPES.map(({id, name, description}) => (
+            return this.props.deliveryTypes.map(({id, name, description}) => (
                 <div className={"deliveryType" + ((this.props.selectedDelivery === id) ? " selected" : "") +
                             ((this.props.selectedDeliveryDetail === id) ? " open" : "")} key={id}
                      onClick={() => this.props.selectDelivery(id)}>
@@ -119,7 +118,7 @@ class RepairInfo extends Component {
                     if (loading) return <h2>Loading</h2>;
                     if (error) return <h2>Error</h2>;
 
-                    const deliveryType = DELIVERY_TYPES.find(type => type.id === this.props.deliveryType);
+                    const deliveryType = this.props.deliveryTypes.find(type => type.id === this.props.deliveryType);
 
                     return ([
                         <img src={iPhone} alt="iPhone"/>,
@@ -266,10 +265,12 @@ export default class RepairSelection extends Component {
                                        selectedDeliveryDetail={this.state.selectedDeliveryDetail}
                                        selectedDelivery={this.state.selectedDelivery}
                                        selectDelivery={this.selectDelivery}
+                                       deliveryTypes={this.props.devileryTypes}
                                        openDeliveryDetail={this.openDeliveryDetail}/>
                     </div>
                     <RepairInfo deviceType={this.state.selectedModel} repairType={this.state.selectedRepair}
-                                deliveryType={this.state.selectedDelivery} nextStep={this.nextStep}/>
+                                deliveryType={this.state.selectedDelivery} nextStep={this.nextStep}
+                                deliveryTypes={this.props.devileryTypes} />
                 </div>
             </div>
         );

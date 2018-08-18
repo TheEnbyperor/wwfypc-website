@@ -18,6 +18,10 @@ class SiteConfig(SingletonModel):
     opening_hours = models.TextField(blank=False)
     google_maps_place_id = models.CharField(max_length=255, blank=False)
 
+    appointment_description = models.TextField(verbose_name="\"Book an appointment\" description")
+    walk_in_description = models.TextField(verbose_name="\"Walk in\" description")
+    post_description = models.TextField(verbose_name="\"Post\" description")
+
     def __str__(self):
         return "Site config"
 
