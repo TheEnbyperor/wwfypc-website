@@ -1,0 +1,68 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: wwfypc-django-test
+  namespace: wwfypc
+  labels:
+    app: wwfypc-test
+    tier: django
+spec:
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  selector:
+    app: wwfypc-test
+    tier: django
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wwyfpc-django-test
+  namespace: wwfypc
+spec:
+  selector:
+    matchLabels:
+      app: wwfypc-test
+      tier: django
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: wwfypc-test
+        tier: django
+    spec:
+      volumes:
+      - name: gluster
+        glusterfs:
+          endpoints: glusterfs-cluster
+          path: kubes-pv
+      containers:
+      - name: django
+        image: evilben/wwfypc-django:(hash)
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Always
+        env:
+        - name: DB_HOST
+          value: mysql
+        - name: DB_USER
+          value: wwfypc-test
+        - name: DB_NAME
+          value: wwfypc-test
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass-test
+              key: pass
+        volumeMounts:
+        - name: gluster
+          mountPath: /src/static
+          subPath: wwfypc-test/static
+        - name: gluster
+          mountPath: /src/media
+          subPath: wwfypc-test/media
+
+
+
