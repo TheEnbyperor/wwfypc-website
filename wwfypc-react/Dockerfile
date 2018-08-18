@@ -9,6 +9,10 @@ COPY . /usr/src/app
 RUN yarn install
 RUN yarn add serve
 
+ENV BACKEND_HOST http://api.test.wwfypc.fluidmedia.wales
 RUN yarn build
 
-CMD ["bash", "-c", "serve -s build"]
+FROM funkygibbon/nginx-pagespeed
+
+COPY --from=0 /usr/src/app/build /build
+COPY nginx/config.conf /etc/nginx/nginx.conf
