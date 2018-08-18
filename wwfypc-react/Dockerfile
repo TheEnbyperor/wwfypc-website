@@ -11,7 +11,7 @@ RUN yarn add serve
 
 RUN yarn build
 
-FROM funkygibbon/nginx-pagespeed
+FROM nginx
 
 COPY --from=0 /usr/src/app/build /build
 COPY nginx/config.conf /etc/nginx/nginx.conf
