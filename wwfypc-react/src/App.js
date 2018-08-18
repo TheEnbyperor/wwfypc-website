@@ -3,12 +3,11 @@ import ApolloClient from "apollo-boost";
 import {ApolloProvider} from "react-apollo";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-
 import './App.scss';
 import Home from './Home/Home';
 import BuyAndSell from './BuyAndSell/BuyAndSell';
 
-export const BASE_URL = process.env.BACKEND_HOST || "http://127.0.0.1:8000";
+export const BASE_URL = process.env.REACT_APP_BACKEND_HOST || "http://127.0.0.1:8000";
 
 const client = new ApolloClient({
     uri: BASE_URL + "/graphql/"
