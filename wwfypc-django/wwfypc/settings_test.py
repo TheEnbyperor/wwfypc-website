@@ -142,7 +142,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 PHONENUMBER_DEFAULT_REGION = 'GB'
 
-CHROME_PATH = "/usr/bin/chromium-browser"
+CHROME_PATH = "/usr/bin/google-chrome"
 
 LOGGING = {
     'version': 1,

@@ -2,6 +2,7 @@ import graphene
 from graphene import Mutation
 from graphene_django.types import DjangoObjectType
 from graphene_django.converter import convert_django_field
+import django.utils.timezone
 import phonenumber_field.modelfields
 from django.core.exceptions import ValidationError
 import datetime
@@ -136,7 +137,7 @@ class CreatePostalOrder(Mutation):
         customer.save()
         order.customer = customer
 
-        order.date = datetime.datetime.now()
+        order.date = django.utils.timezone.now()
         order.device = device
         order.repair = repair
         order.additional_items = additional_items

@@ -68,10 +68,10 @@ spec:
         volumeMounts:
         - name: gluster
           mountPath: /src/static
-          subPath: lmi-site/static
+          subPath: wwfypc-test/static
         - name: gluster
           mountPath: /src/media
-          subPath: lmi-site/media
+          subPath: wwfypc-test/media
 
 
 
