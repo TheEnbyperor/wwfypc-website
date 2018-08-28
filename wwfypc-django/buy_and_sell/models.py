@@ -16,7 +16,7 @@ class ItemCategory(models.Model):
 class Item(models.Model):
     category = models.ForeignKey(ItemCategory, related_name='items', on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=255, blank=False)
-    price = models.DecimalField(decimal_places=2, max_digits=99, blank=False)
+    price = models.DecimalField(decimal_places=2, max_digits=10, blank=False)
     reserved = models.BooleanField(blank=False)
 
     def __str__(self):
