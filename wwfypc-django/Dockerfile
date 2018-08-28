@@ -1,7 +1,7 @@
 FROM python:3
 ENV PYTHONUNBUFFERED 1
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends default-libmysqlclient-dev google-chrome-stable \
+    && apt-get install -y --no-install-recommends default-libmysqlclient-dev chromium \
     && rm -rf /var/lib/apt/lists/* \
     && pip install --upgrade pip
 
