@@ -6,6 +6,7 @@ import Indicators from "./Indicators";
 import RepairSelection from './Repair';
 import {BASE_URL} from "../../App";
 import WalkIn from "./WalkIn";
+import Post from "./Post";
 
 export const APPOINTMENT_TYPE = 0, WALK_IN_TYPE = 1, POST_TYPE = 2;
 
@@ -54,22 +55,27 @@ export default class Device extends Component {
     constructor(props) {
         super(props);
 
+        this.repairSelection = React.createRef();
+
         this.state = {
             deviceType: null,
             device: null,
             repair: null,
-            delivery: null
+            delivery: null,
+            step: 1,
         };
 
         this.selectType = this.selectType.bind(this);
         this.goBack = this.goBack.bind(this);
         this.doGoBack = this.doGoBack.bind(this);
         this.nextStep = this.nextStep.bind(this);
+        this.finalStep = this.finalStep.bind(this);
     }
 
     selectType(type) {
         this.setState({
             deviceType: type,
+            step: 2,
         })
     }
 
@@ -77,27 +83,44 @@ export default class Device extends Component {
         if (this.state.delivery === null) {
             this.setState({
                 deviceType: null,
+                repair: null,
+                device: null,
+                step: 1,
             });
         } else {
             this.setState({
                 delivery: null,
                 repair: null,
                 device: null,
+                step: 2,
             });
         }
     }
 
     goBack() {
-        if (this.state.deviceType !== null) {
-            this.refs.repairSelection.goBack();
+        if (this.state.delivery !== null) {
+            this.doGoBack();
+        } else if (this.state.deviceType !== null) {
+            this.repairSelection.current.goBack();
         }
     }
 
     nextStep(device, repair, delivery) {
+        let step = 3;
+        if (delivery === WALK_IN_TYPE) {
+            step = 4;
+        }
         this.setState({
             device: device,
             repair: repair,
-            delivery: delivery
+            delivery: delivery,
+            step: step,
+        });
+    }
+
+    finalStep() {
+        this.setState({
+            step: 4,
         });
     }
 
@@ -126,30 +149,26 @@ export default class Device extends Component {
                         }
                     ];
 
-                    let step = null;
                     let disp = null;
 
                     if (this.state.deviceType === null) {
-                        step = 1;
                         disp = <Devices onSelect={this.selectType}/>;
                     } else if (this.state.delivery === null) {
-                        step = 2;
-                        disp = <RepairSelection ref="repairSelection" goBack={this.doGoBack} nextStep={this.nextStep}
+                        disp = <RepairSelection ref={this.repairSelection} goBack={this.doGoBack} nextStep={this.nextStep}
                                                 deviceCategory={this.state.deviceType} devileryTypes={DELIVERY_TYPES}/>;
                     } else {
-                        step = 3;
-
                         if (this.state.delivery === WALK_IN_TYPE) {
-                            step = 4;
                             disp = <WalkIn/>;
+                        } else if (this.state.delivery === POST_TYPE) {
+                            disp = <Post nextStep={this.finalStep} device={this.state.device} repair={this.state.repair}/>;
                         }
                     }
 
                     return (
-                        <div className={"Device step-" + step}>
+                        <div className={"Device step-" + this.state.step}>
                             <h1>Select your device</h1>
                             <div className="BackButton" onClick={this.goBack}>➜</div>
-                            <Indicators steps={4} step={step}/>
+                            <Indicators steps={4} step={this.state.step}/>
                             {disp}
                         </div>
                     );

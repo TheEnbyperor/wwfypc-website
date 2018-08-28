@@ -1,9 +1,31 @@
 import React, {Component} from "react";
+import gql from 'graphql-tag';
+import {Query} from 'react-apollo';
 import './style/Items.scss';
-
 import Button from '../../Shared/Buttons';
+import {BASE_URL} from "../../App";
 
-import Laptop from './img/Laptop.png';
+const ITEM_QUERY = gql`
+  query ($category: ID) {
+    buyAndSellItems(category: $category) {
+      id
+      name
+      reserved
+      price
+      category {
+        colour
+      }
+      specs {
+        name
+        value
+      }
+      images {
+        image
+        id
+      }
+    }
+  }
+`;
 
 class Indicators extends Component {
     render() {
@@ -21,8 +43,6 @@ class Indicators extends Component {
 }
 
 class Item extends Component {
-    slides = [Laptop, Laptop, Laptop];
-
     constructor(props) {
         super(props);
 
@@ -34,7 +54,7 @@ class Item extends Component {
     }
 
     setSlide(nextSlide) {
-        if (nextSlide >= this.slides.length) {
+        if (nextSlide >= this.props.item.images.length) {
             nextSlide = 0;
         }
 
@@ -43,7 +63,7 @@ class Item extends Component {
         if (nextSlide > activeSlide) {
             slide = activeSlide + 1;
         }
-        if (nextSlide === 0 && activeSlide === this.slides.length - 1) {
+        if (nextSlide === 0 && activeSlide === this.props.item.images.length - 1) {
             slide = 0;
         }
         this.setState({
@@ -55,38 +75,29 @@ class Item extends Component {
     }
 
     render() {
-        const prevActive = (this.state.activeSlide === 0) ? this.slides.length - 1 : this.state.activeSlide - 1;
-        const nextActive = ((this.state.activeSlide + 1) >= this.slides.length) ? 0 : this.state.activeSlide + 1;
-        const slidesDisp = this.slides.map((slide, i) =>
+        const prevActive = (this.state.activeSlide === 0) ? this.props.item.images.length - 1 : this.state.activeSlide - 1;
+        const nextActive = ((this.state.activeSlide + 1) >= this.props.item.images.length) ? 0 : this.state.activeSlide + 1;
+        const slidesDisp = this.props.item.images.map((slide, i) =>
             <img className={((i === this.state.activeSlide) ? "active" : "") + ((i === prevActive) ? " prevActive" : "")
-            + ((i === nextActive) ? " nextActive" : "")} key={i} src={slide} alt=""/>
+            + ((i === nextActive) ? " nextActive" : "")} key={slide.id} src={BASE_URL + slide.image} alt=""/>
         );
 
         return (
-            <div className={"Item" + ((this.props.reserved) ? " reserved" : "") +
-            ((this.props.selected) ? " selected" : "")}>
+            <div className={"Item" + ((this.props.item.reserved) ? " reserved" : "")}>
                 <div className="ImgSlider">
                     {slidesDisp}
                 </div>
-                <Indicators num={this.slides.length} active={this.state.activeSlide} onSelect={this.setSlide}/>
-                <h2>Packard Bell Easynote</h2>
+                <Indicators num={this.props.item.images.length} active={this.state.activeSlide} onSelect={this.setSlide}/>
+                <h2>{this.props.item.name}</h2>
                 <div className="specs">
-                    <span>Processor:</span>
-                    <span>Intel Pentium P6100 @ 2.6GHz</span>
-                    <span>Memory:</span>
-                    <span>5GB</span>
-                    <span>Screen:</span>
-                    <span>14"</span>
-                    <span>Storage:</span>
-                    <span>250GB HDD</span>
-                    <span>OS:</span>
-                    <span>Windows 7</span>
-                    <span>Features:</span>
-                    <span>Wireless, DVD-RW, HDMI, Webcam</span>
-                    <span>Grade:</span>
-                    <span>C</span>
+                    {this.props.item.specs.map((spec) => {
+                        return [
+                            <span key={1}>{spec.name}:</span>,
+                            <span key={2}>{spec.value}</span>
+                        ]
+                    })}
                 </div>
-                <Button colour={1} small>&pound;50</Button>
+                <Button colour={this.props.item.category.colour} small>&pound;{this.props.item.price}</Button>
                 <div className="reserved">
                     <p>Reserved</p>
                     <p>Get an email if item becomes available?</p>
@@ -99,15 +110,18 @@ class Item extends Component {
 
 export default class Items extends Component {
     render() {
-        let items = [];
-        for (let i = 0; i < 10; i++) {
-            items.push(<Item key={i} reserved={(i % 3) === 0} selected={(this.props.selectedCategory === null) ? true
-                : (((i % 4) - this.props.selectedCategory) === 0)}/>)
-        }
-
         return (
             <div className="Items">
-                {items}
+                <Query query={ITEM_QUERY} variables={{category: this.props.selectedCategory}}>
+                    {({loading, error, data}) => {
+                        if (loading) return null;
+                        if (error) return <h2>Error</h2>;
+
+                        return data.buyAndSellItems.map((item) => {
+                            return <Item key={item.id} item={item}/>
+                        })
+                    }}
+                </Query>
             </div>
         )
     }

@@ -1,0 +1,71 @@
+@import "_variables";
+
+@page {
+  margin: 0;
+  size: auto;
+}
+
+@font-face {
+  font-family: "Bariol";
+  src: url("Bariol_Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Neutra";
+  src: url("NeutraDisplay-Titling.otf") format("opentype");
+}
+
+* {
+  -webkit-box-sizing: border-box;
+}
+
+body {
+  font-family: "Bariol", sans-serif;
+}
+
+h1, h2 {
+  font-family: "Neutra", sans-serif;
+  color: $orange;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+header {
+  background: $black;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px 20px;
+  border-radius: 0 0 50px 50px;
+
+  img, h1 {
+  }
+
+  img {
+    object-fit: contain;
+    flex: 0;
+  }
+
+  h1 {
+    flex: 1;
+    text-align: right;
+    color: #fff;
+    margin: 0;
+  }
+}
+
+section {
+  padding: 10px;
+
+  .info {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    margin: 10px 0;
+
+    span {
+      &:nth-of-type(2n+1) {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{% load full_static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% full_static 'main_site/post_form.css' %}">
+    <title>Customer postal form</title>
+</head>
+<body>
+<header>
+    <img src="{% full_static 'main_site/logo.png' %}" alt="">
+    <h1>Customer postal form</h1>
+</header>
+<section>
+    <h2>Customer information</h2>
+    <div class="info">
+        <span>Name:</span>
+        <span>{{ order.customer.name }}</span>
+        <span>Phone:</span>
+        <span>{{ order.customer.phone.as_e164 }}</span>
+        <span>Address:</span>
+        <span>{{ order.customer.address|linebreaksbr }}</span>
+        <span>Date:</span>
+        <span>{{ order.date|date:"h:i:s A jS M Y" }}</span>
+    </div>
+</section>
+<section>
+    <h2>Box contents</h2>
+    <div class="info">
+        <span>Device:</span>
+        <span>{{ order.device.name }}</span>
+        <span>Suspected issue:</span>
+        <span>{{ order.repair.name }}</span>
+        <span>Additional items:</span>
+        <span>{{ order.additional_items }}</span>
+    </div>
+</section>
+<section>
+    <p>
+    Print this sheet out and put it INSIDE the box with your device.
+    This is NOT a valid postage stamp, you will have to pay for postage.
+    </p>
+    <p>
+        Please post to: <br>
+        {{ config.address|linebreaksbr }}
+    </p>
+</section>
+<section>
+    <img src="data:image/svg+xml;utf8,{{ barcode }}" alt="" width="200">
+</section>
+</body>
+</html>

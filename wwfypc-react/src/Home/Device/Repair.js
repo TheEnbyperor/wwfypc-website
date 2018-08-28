@@ -120,10 +120,10 @@ class RepairInfo extends Component {
 
                     const deliveryType = this.props.deliveryTypes.find(type => type.id === this.props.deliveryType);
 
-                    return ([
-                        <img src={iPhone} alt="iPhone"/>,
-                        <h2>{data.deviceType.name}</h2>,
-                        <div className="info">,
+                    return [
+                        <img key={1} src={iPhone} alt="iPhone"/>,
+                        <h2 key={2}>{data.deviceType.name}</h2>,
+                        <div key={3} className="info">,
                             <ul>
                                 <li>In stock</li>
                                 <li>15 Minutes</li>
@@ -133,10 +133,10 @@ class RepairInfo extends Component {
                                 &pound;{data.repairType.price}
                             </div>
                         </div>,
-                        <Button colour={1} onClick={this.props.nextStep}>
+                        <Button key={4} colour={1} onClick={this.props.nextStep}>
                             Fix your device now
                         </Button>
-                    ]);
+                    ];
                 }}
             </Query>;
         }
