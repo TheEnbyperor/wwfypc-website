@@ -28,7 +28,10 @@ def post_form_pdf(request, id):
     if request.GET.get("html") is not None:
         response = HttpResponse(html.encode())
     else:
-        options = {}
+        options = {
+            'disable-gpu': None,
+            'no-sandbox': None
+        }
         with tempfile.NamedTemporaryFile() as file:
             hardcopy.bytestring_to_pdf(html.encode(), file, **options)
             response = HttpResponse(file.read(), content_type='application/pdf')
