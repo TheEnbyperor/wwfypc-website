@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'solo',
     'main_site',
+    'buy_and_sell'
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,7 @@ GRAPHENE = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+CHROME_PATH = "/usr/bin/google-chrome"
+
+PHONENUMBER_DEFAULT_REGION = "GB"

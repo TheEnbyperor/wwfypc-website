@@ -10,6 +10,9 @@ const INFO_QUERY = gql`
       mobile
       address
       email
+      twitterUrl
+      googleUrl
+      facebookUrl
     }
   }
 `;
@@ -51,9 +54,9 @@ export default class Footer extends Component {
                                         <a href="">Report a bug</a>
 
                                         <div className="social">
-                                            <i className="fab fa-facebook-f"/>
-                                            <i className="fab fa-google"/>
-                                            <i className="fab fa-twitter"/>
+                                            <a href={data.siteConfig.facebookUrl}><i className="fab fa-facebook-f"/></a>
+                                            <a href={data.siteConfig.googleUrl}><i className="fab fa-google"/></a>
+                                            <a href={data.siteConfig.twitterUrl}><i className="fab fa-twitter"/></a>
                                         </div>
                                     </div>
                                 </div>

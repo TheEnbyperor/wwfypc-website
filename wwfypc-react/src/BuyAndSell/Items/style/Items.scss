@@ -12,8 +12,7 @@
     border-radius: 25px;
     flex-direction: column;
     position: relative;
-
-    display: none;
+    display: flex;
 
     .ImgSlider {
       position: relative;
@@ -107,10 +106,6 @@
     }
 
     &.reserved .reserved {
-      display: flex;
-    }
-
-    &.selected {
       display: flex;
     }
   }
