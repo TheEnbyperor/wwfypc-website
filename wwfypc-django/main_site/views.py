@@ -1,6 +1,7 @@
 import tempfile
 import hardcopy
-import barcode
+import qrcode
+import qrcode.image.svg
 import string
 from io import BytesIO
 from django.template.loader import render_to_string
@@ -13,7 +14,9 @@ def post_form_pdf(request, id):
     order = get_object_or_404(models.PostalOrder, uid=id)
 
     fp = BytesIO()
-    barcode.generate('code128', order.uid, output=fp)
+    factory = qrcode.image.svg.SvgPathImage
+    img = qrcode.make(order.uid, image_factory=factory, border=1)
+    img.save(fp)
     fp.seek(0)
     barcode_data = fp.read().decode()
 

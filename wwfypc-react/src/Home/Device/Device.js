@@ -166,10 +166,12 @@ export default class Device extends Component {
 
                     return (
                         <div className={"Device step-" + this.state.step}>
+                            <div>
                             <h1>Select your device</h1>
                             <div className="BackButton" onClick={this.goBack}>➜</div>
                             <Indicators steps={4} step={this.state.step}/>
                             {disp}
+                            </div>
                         </div>
                     );
                 }}

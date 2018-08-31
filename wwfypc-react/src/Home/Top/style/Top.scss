@@ -1,7 +1,7 @@
 @import "../../../variables";
 
 header.Top {
-  background: url("../img/top-bg.jpg") 70% 70%;
+  background: url("../img/top-bg1.jpg") 70% 70%;
   background-size: cover;
   height: 100%;
 
@@ -11,20 +11,20 @@ header.Top {
 
 .TopContent {
   display: flex;
-  width: 70%;
+  max-width: $max-width;
   margin: 10px auto;
   align-items: center;
   flex: 1 1 0;
   min-height: 0;
-
-  > div {
-    flex: 1;
-  }
 }
 
 .TopLeft {
+  margin-left: 10px;
+  flex: 2;
+
   h1, h2 {
     margin: 0;
+    text-shadow: 3px 3px 7px rgba(0, 0, 0, .43);
   }
 
   h2 {
@@ -34,10 +34,12 @@ header.Top {
   p {
     color: #fff;
     font-size: 25px;
+    width: 75%;
   }
 
   .buttons {
-    display: flex;
+    display: inline-flex;
+    width: 75%;
     justify-content: space-between;
 
     > * {
@@ -48,7 +50,7 @@ header.Top {
 }
 
 .TopRight {
-  height: 100%;
+  flex: 1;
 }
 
 .TopSlider {
@@ -159,8 +161,9 @@ header.Top {
 
         h2 {
           text-align: center;
-          font-size: 30px;
+          font-size: 28px;
           margin: 15px 15px 0;
+          font-family: "Adam CG Pro", sans-serif;
 
           &.colour-1 {
             color: $yellow;

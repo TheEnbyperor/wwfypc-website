@@ -21,6 +21,11 @@
   src: url("/NeutraDisplay-Titling.otf") format("opentype");
 }
 
+@font-face {
+  font-family: "Moon";
+  src: url("/Moon2.0-Regular.otf") format("opentype");
+}
+
 body {
   font-family: "Bariol", sans-serif;
 }
@@ -44,4 +49,19 @@ h1.large {
 a {
   color: #fff;
   text-decoration: none;
+}
+
+#fp-nav {
+  a span {
+    transition: .3s background;
+  }
+  a.active span {
+      background: $orange;
+  }
+
+  .fp-tooltip {
+    background: #333;
+    padding: 3px;
+    border-radius: 5px;
+  }
 }

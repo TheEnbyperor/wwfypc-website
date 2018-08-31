@@ -1,0 +1,56 @@
+@import "../../../variables";
+
+.Reviews {
+  min-height: 100vh;
+  height: unset;
+  background: $grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .bigReview {
+      text-align: center;
+      font-size: 23px;
+      width: 100%;
+      max-width: $max-width;
+
+      .stars {
+        img {
+          margin: 5px;
+        }
+      }
+
+      p:nth-of-type(2) {
+        font-style: italic;
+      }
+    }
+
+    .pointers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 20px;
+      text-align: center;
+      grid-gap: 20px;
+      justify-items: center;
+      align-items: center;
+      color: $blue;
+      width: 90%;
+
+      h2 {
+        font-family: "Adam CG Pro", sans-serif;
+        text-transform: uppercase;
+        color: $blue;
+      }
+
+      p {
+        font-size: 20px;
+      }
+    }
+  }
+}

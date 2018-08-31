@@ -1,0 +1,10 @@
+@import "../../../variables";
+
+header.PC-Top {
+  background: url("../img/top-bg2.jpg") 70% 70%;
+  background-size: cover;
+  height: 100%;
+
+  display: flex;
+  flex-flow: column;
+}

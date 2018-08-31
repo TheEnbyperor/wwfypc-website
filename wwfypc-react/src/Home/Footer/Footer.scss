@@ -10,7 +10,8 @@
   > div {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    width: 80%;
+    width: 100%;
+    max-width: $max-width;
 
     p {
       white-space: pre;

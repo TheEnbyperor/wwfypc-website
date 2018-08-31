@@ -37,9 +37,6 @@ header {
   padding: 10px 20px 20px;
   border-radius: 0 0 50px 50px;
 
-  img, h1 {
-  }
-
   img {
     object-fit: contain;
     flex: 0;
@@ -67,5 +64,9 @@ section {
         text-decoration: underline;
       }
     }
+  }
+
+  img {
+    width: 100px;
   }
 }
