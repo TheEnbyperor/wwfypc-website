@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import './App.scss';
 import Home from './Home/Home';
+import PC from './PC/PC';
 import BuyAndSell from './BuyAndSell/BuyAndSell';
 
 export const BASE_URL = process.env.REACT_APP_BACKEND_HOST || "http://127.0.0.1:8000";
@@ -22,6 +23,7 @@ class App extends Component {
                     <div className="App">
                         <Switch>
                             <Route exact path="/" component={Home}/>
+                            <Route exact path="/pc" component={PC}/>
                             <Route path="/buy-and-sell" component={BuyAndSell}/>
                         </Switch>
                     </div>

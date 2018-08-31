@@ -41,6 +41,7 @@ class Map extends Component {
         this.refs.mapContainer.removeEventListener("click", this.mapPointerEventsOn);
         this.refs.mapContainer.removeEventListener("mouseleave", this.mapPointerEventsOff);
     }
+
     render() {
         return (
             <div ref="mapContainer">
@@ -63,22 +64,30 @@ export default class Location extends Component {
                             return [
                                 <div className="Info" key={1}>
                                     <div>
-                                        <h2>Opening Hours</h2>
-                                        <p>{data.siteConfig.openingHours}
-                                        </p>
+                                    <div>
+                                        <div>
+                                            <h2>Opening Hours</h2>
+                                            <p>{data.siteConfig.openingHours}
+                                            </p>
+                                        </div>
                                     </div>
                                     <div>
-                                        <h2>Address</h2>
-                                        <p>{data.siteConfig.address}
-                                        </p>
+                                        <div>
+                                            <h2>Address</h2>
+                                            <p>{data.siteConfig.address}
+                                            </p>
+                                        </div>
                                     </div>
                                     <div>
-                                        <h2>Contact</h2>
-                                        <p>
-                                            {data.siteConfig.landline}<br/>
-                                            {data.siteConfig.mobile}
-                                        </p>
-                                        <p>{data.siteConfig.email}</p>
+                                        <div>
+                                            <h2>Contact</h2>
+                                            <p>
+                                                {data.siteConfig.landline}<br/>
+                                                {data.siteConfig.mobile}
+                                            </p>
+                                            <p>{data.siteConfig.email}</p>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>,
                                 <Map key={2} placeId={data.siteConfig.googleMapsPlaceId}/>

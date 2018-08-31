@@ -1,0 +1,23 @@
+@import "../../../variables";
+
+.WhyUs {
+  height: 100%;
+
+  background: $grey;
+  padding: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    max-width: $max-width;
+
+    font-size: 25px;
+
+    h1 {
+      font-family: "Bariol", sans-serif;
+      text-transform: none;
+    }
+  }
+}

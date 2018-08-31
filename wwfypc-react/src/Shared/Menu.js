@@ -18,31 +18,33 @@ const HashLink = withRouter(hashLink);
 export default class Top extends Component {
     render() {
         return (
-            <nav className="Menu">
-                <a href="/" className="img">
-                    <img src={Logo} alt=""/>
-                </a>
-                <div>
-                    <a href="">Services</a>
+            <div className="Menu">
+                <nav>
+                    <Link to="/" className="img">
+                        <img src={Logo} alt=""/>
+                    </Link>
                     <div>
-                        <a href="">Computers</a>
-                        <a href="">iPhones</a>
-                        <a href="">iPads</a>
-                        <a href="">Unlocking</a>
-                        <a href="">VHS</a>
-                        <a href="">Buy & Sell</a>
+                        <a href="">Services</a>
+                        <div>
+                            <Link to="/pc">Computers</Link>
+                            <a href="">iPhones</a>
+                            <a href="">iPads</a>
+                            <a href="">Unlocking</a>
+                            <a href="">VHS</a>
+                            <a href="">Buy & Sell</a>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <HashLink to="/" hash="#about">About Us</HashLink>
-                </div>
-                <div>
-                    <Link to="/buy-and-sell">Buy & Sell</Link>
-                </div>
-                <div>
-                    <a href="">Contact</a>
-                </div>
-            </nav>
+                    <div>
+                        <HashLink to="/" hash="#about">About Us</HashLink>
+                    </div>
+                    <div>
+                        <Link to="/buy-and-sell">Buy & Sell</Link>
+                    </div>
+                    <div>
+                        <a href="">Contact</a>
+                    </div>
+                </nav>
+            </div>
         )
     }
 }

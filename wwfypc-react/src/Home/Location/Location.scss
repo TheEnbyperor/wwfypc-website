@@ -10,22 +10,44 @@
   }
 
   .Info {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
 
     position: absolute;
     bottom: 0;
-    width: 80%;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 100%;
 
     padding: 50px 80px;
     background: rgba($grey, .7);
 
     text-transform: uppercase;
 
-    p {
-      white-space: pre;
+    display: flex;
+    justify-content: center;
+
+    > div {
+      $box-width: 300px;
+
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax($box-width, 1fr));
+      max-width: $max-width;
+      width: 100%;
+
+      > div {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        > div {
+          width: $box-width;
+        }
+      }
+
+      p {
+        white-space: pre;
+        font-family: "Helvetica Neue", sans-serif;
+        letter-spacing: 3px;
+        font-size: 17px;
+        color: #000;
+      }
     }
   }
 }

@@ -3,15 +3,20 @@ import React, {Component} from 'react';
 import Top from "./Top/Top";
 import Device from './Device/Device';
 import About from './About/About';
+import Reviews from './Reviews/Reviews';
+import WhyUs from './WhyUs/WhyUs';
 import Location from './Location/Location';
 import Footer from './Footer/Footer';
 
 
-export default class App extends Component {
+export default class Home extends Component {
     componentDidMount() {
         new window.fullpage(".Home", {
             scrollOverflow: true,
             anchors: ["top", "device", "about", "location", "footer"],
+            navigationTooltips: ["Home", "Repair your device", "About Us", "Reviews", "Why choose us",
+                "How to find us", "Footer"],
+            navigationPosition: 'right',
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
         })
@@ -27,6 +32,8 @@ export default class App extends Component {
                 <div className="section"><Top/></div>
                 <div className="section"><Device/></div>
                 <div className="section"><About/></div>
+                <div className="section"><Reviews/></div>
+                <div className="section"><WhyUs/></div>
                 <div className="section"><Location/></div>
                 <div className="section fp-auto-height"><Footer/></div>
             </div>
