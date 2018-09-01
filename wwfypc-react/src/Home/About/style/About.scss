@@ -10,29 +10,36 @@
     background-size: cover;
     height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    h1 {
-      color: $blue;
-      font-size: 50px;
-      margin: 0;
-      width: 70%;
-      text-align: center;
-    }
+    > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+      max-width: $max-width;
 
-    hr {
-      border: 0;
-      background: $blue;
-      height: 3px;
-      width: 75%;
-    }
+      h1 {
+        color: $blue;
+        font-size: 50px;
+        margin: 0;
+        width: 70%;
+        text-align: center;
+      }
 
-    p {
-      color: #fff;
-      width: 70%;
-      font-size: 25px;
+      hr {
+        border: 0;
+        background: $blue;
+        height: 3px;
+        width: 75%;
+      }
+
+      p {
+        color: #fff;
+        width: 70%;
+        font-size: 25px;
+      }
     }
   }
 }

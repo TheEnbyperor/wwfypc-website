@@ -1,7 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Logo from './img/logo.png';
 import './style/Menu.scss';
 import {Link, withRouter} from 'react-router-dom';
+import {Query} from 'react-apollo';
+import gql from 'graphql-tag';
+
+const SERVICES_QUERY = gql`
+  query {
+    servicePages {
+      id
+      name
+      url
+    }
+  }
+`;
 
 class hashLink extends Component {
     render() {
@@ -11,9 +23,9 @@ class hashLink extends Component {
             return <Link to={this.props.to + this.props.hash}>{this.props.children}</Link>;
         }
     }
-}
+};
 
-const HashLink = withRouter(hashLink);
+export const HashLink = withRouter(hashLink);
 
 export default class Top extends Component {
     render() {
@@ -25,14 +37,19 @@ export default class Top extends Component {
                     </Link>
                     <div>
                         <a href="">Services</a>
-                        <div>
-                            <Link to="/pc">Computers</Link>
-                            <a href="">iPhones</a>
-                            <a href="">iPads</a>
-                            <a href="">Unlocking</a>
-                            <a href="">VHS</a>
-                            <a href="">Buy & Sell</a>
-                        </div>
+                        <Query query={SERVICES_QUERY}>
+                            {({loading, error, data}) => {
+                                if (loading || error) return null;
+
+                                return (
+                                    <div>
+                                        {data.servicePages.map((page) => {
+                                            return <Link to={"/" + page.url} key={page.id}>{page.name}</Link>;
+                                        })}
+                                    </div>
+                                );
+                            }}
+                        </Query>
                     </div>
                     <div>
                         <HashLink to="/" hash="#about">About Us</HashLink>

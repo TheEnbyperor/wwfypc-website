@@ -2,7 +2,7 @@
 
 .section:nth-of-type(2n+1) {
   .Section {
-    background: #333;
+    background: $black;
 
     h1 {
       color: $orange;
@@ -23,7 +23,7 @@
 
 .Section {
   height: 100%;
-  background: #eee;
+  background: $grey;
   display: flex;
   justify-content: center;
 

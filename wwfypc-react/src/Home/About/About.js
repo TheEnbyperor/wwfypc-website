@@ -6,6 +6,7 @@ export default class About extends Component {
         return (
             <div className="About">
                 <header>
+                    <div>
                     <h1>Since the dawn of time we've been numbero uno</h1>
                     <hr/>
                     <p>
@@ -13,6 +14,7 @@ export default class About extends Component {
                         No one in Cardiff will work harder for you. No one in Cardiff enjoys our
                         outstanding referrals, customer loyalty and personal testimonials.
                     </p>
+                    </div>
                 </header>
             </div>
         );
