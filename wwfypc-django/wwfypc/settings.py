@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'solo',
     'main_site',
-    'buy_and_sell'
+    'buy_and_sell',
+    'services',
 ]
 
 MIDDLEWARE = [

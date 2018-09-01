@@ -5,6 +5,7 @@ import Menu from '../../Shared/Menu';
 import Button from '../../Shared/Buttons';
 import './style/Top.scss';
 import iPhone from './img/iphone-x.png';
+import {HashLink} from "../../Shared/Menu";
 import {BASE_URL} from "../../App";
 
 const SLIDER_QUERY = gql`
@@ -30,7 +31,7 @@ class TopLeft extends Component {
                 <p>You've arrived at We Will Fix Your PC. <br/> If your looking for expert help with your computer or
                     phone - without breaking the bank, then search no further.</p>
                 <div className="buttons">
-                    <Button colour={1}><a href="/#device">Start your repair</a></Button>
+                    <HashLink to="/" hash="#device"><Button colour={1}>Start your repair</Button></HashLink>
                     <Button colour={2}>Learn more</Button>
                 </div>
             </div>
@@ -198,7 +199,6 @@ export default class Top extends Component {
     render() {
         return (
             <header className="Top">
-                <Menu/>
                 <div className="TopContent">
                     <TopLeft/>
                     <TopRight/>

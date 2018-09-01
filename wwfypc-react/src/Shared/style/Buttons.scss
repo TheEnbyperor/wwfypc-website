@@ -10,10 +10,11 @@
   font-weight: bold;
   font-size: 14px;
   letter-spacing: 1px;
-  display: inline-flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Moon", sans-serif;
+  cursor: pointer;
 
   &.small {
     padding: 10px;

@@ -32,21 +32,21 @@ export default class Reviews extends Component {
                         <img src={Location} alt=""/>
                         <img src={Medal} alt=""/>
                         <div>
-                            <h2>Our goal: to be the best</h2>
+                            <h2>Our goal:<br/>to be the best</h2>
                             <p>
                                 I received fantastic service. Everything was explained very well, and I am extremely
                                 pleased with the service I received. I would recommend them any day.
                             </p>
                         </div>
                         <div>
-                            <h2>Friendly. Professional. Local</h2>
+                            <h2>Friendly.<br/>Professional. Local</h2>
                             <p>
                                 I received fantastic service. Everything was explained very well, and I am extremely
                                 pleased with the service I received. I would recommend them any day.
                             </p>
                         </div>
                         <div>
-                            <h2>Highly Recommended</h2>
+                            <h2>Highly<br/>Recommended</h2>
                             <p>
                                 I received fantastic service. Everything was explained very well, and I am extremely
                                 pleased with the service I received. I would recommend them any day.

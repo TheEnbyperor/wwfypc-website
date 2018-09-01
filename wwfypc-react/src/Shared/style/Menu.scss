@@ -3,6 +3,13 @@
 .Menu {
   display: flex;
   justify-content: center;
+  position: fixed;
+  top: 0;
+  z-index: 9999999;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: $max-width;
 
   nav {
     background: $black;

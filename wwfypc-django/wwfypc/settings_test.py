@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'solo',
     'main_site',
     'buy_and_sell',
+    'services',
 ]
 
 MIDDLEWARE = [
