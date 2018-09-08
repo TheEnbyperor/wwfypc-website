@@ -1,7 +1,9 @@
 @import "../../variables";
 
+$bar-height: 70px;
+
 body {
-  margin-bottom: 50px;
+  margin-bottom: $bar-height;
 }
 
 .BottomBar {
@@ -11,5 +13,58 @@ body {
   color: #fff;
   left: 0;
   right: 0;
-  height: 50px;
+  height: $bar-height;
+  border-top: 2px solid $orange;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    max-width: $max-width;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+  }
+}
+
+.ContactButton {
+  $button-height: 50px;
+  $button-width: 240px;
+
+  border-radius: 99999px;
+  border: 3px solid #fff;
+  display: flex;
+  cursor: pointer;
+  height: $button-height;
+  width: $button-width;
+  padding: 0 18px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: all .2s ease-in-out;
+  position: relative;
+
+  &:hover {
+    transform: scale(1.1);
+
+    span {
+      transform: translateX(-$button-width);
+    }
+  }
+
+  span {
+    font-family: "Moon", sans-serif;
+    background: $black;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    font-size: 20px;
+    line-height: $button-height - (20px / 2);
+    letter-spacing: 1px;
+    transition: all 1s ease-in-out;
+    transition-delay: .1s;
+    border-radius: 999999px;
+  }
 }

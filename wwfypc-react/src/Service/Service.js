@@ -24,10 +24,8 @@ export default class Service extends Component {
         this.renderCallback = this.renderCallback.bind(this);
     }
 
-    componentDidMount() {
+    renderCallback() {
         new window.fullpage(".Service", {
-            scrollOverflow: true,
-            navigationTooltips: ["Top"],
             navigationPosition: 'right',
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
@@ -35,24 +33,19 @@ export default class Service extends Component {
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy('all');
-    }
-
-    renderCallback() {
-        this.componentWillUnmount();
-        this.componentDidMount();
+        window.fullpage_api.destroy("all");
     }
 
     render() {
         return (
             <div className="Service">
-                <div className="section"><Top/></div>
+                <div className="section" data-tooltip="Top"><Top/></div>
                 <Query query={SERVICES_QUERY} variables={{id: this.props.serviceId}}>
                     {({loading, error, data}) => {
                         if (loading) return null;
                         if (error) return <div className="section"><h1>Error</h1></div>;
 
-                        setTimeout(this.renderCallback, 500);
+                        setTimeout(this.renderCallback, 10);
 
                         return data.servicePage.sections.map((section) => {
                             return <div className="section" key={section.id} data-tooltip={section.title}>
