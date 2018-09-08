@@ -1,9 +1,10 @@
 @import "../../../variables";
 
-.WhyUs {
-  height: 100%;
-
+[data-anchor="why-us"] {
   background: $grey;
+}
+
+.WhyUs {
   padding: 50px;
 
   display: flex;

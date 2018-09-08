@@ -1,16 +1,24 @@
 @import "../../variables";
 
+[data-anchor="location"] {
+  background: $black;
+}
+
 .Location {
   position: relative;
+  height: 100%;
 
-  iframe {
-    width: 100%;
-    height: 100vh;
-    pointer-events: none;
+  .mapContainer {
+    height: 100%;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
   }
 
   .Info {
-
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -42,10 +50,15 @@
         }
       }
 
-      p {
-        white-space: pre;
+      h2 {
         font-family: "Helvetica Neue", sans-serif;
-        letter-spacing: 3px;
+        letter-spacing: 2px;
+      }
+
+      p {
+        white-space: pre-wrap;
+        font-family: "Moon", sans-serif;
+        letter-spacing: 1px;
         font-size: 17px;
         color: #000;
       }
