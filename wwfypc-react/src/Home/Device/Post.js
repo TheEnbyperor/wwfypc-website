@@ -171,7 +171,6 @@ export default class Post extends Component {
 
         return (
             <div className="Post">
-                <h1>Post</h1>
                 {disp}
             </div>
         );

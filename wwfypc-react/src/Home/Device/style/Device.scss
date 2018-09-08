@@ -12,8 +12,15 @@
   display: flex;
   justify-content: center;
 
+    &.step-1 {
+      .BackButton {
+        display: none;
+      }
+    }
+
   > div {
-    width: $max-width;
+    width: 90%;
+    max-width: $max-width;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,16 +36,11 @@
       color: $orange;
     }
 
-    &.step-1 {
-      .BackButton {
-        display: none;
-      }
-    }
-
     h1 {
       text-align: center;
       font-size: 40px;
       flex: 0 1 auto;
+      margin: 10px 0;
     }
 
     .Indicators {

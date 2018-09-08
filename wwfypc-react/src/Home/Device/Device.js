@@ -7,6 +7,7 @@ import RepairSelection from './Repair';
 import {BASE_URL} from "../../App";
 import WalkIn from "./WalkIn";
 import Post from "./Post";
+import Appointment from "./Appointment";
 
 export const APPOINTMENT_TYPE = 0, WALK_IN_TYPE = 1, POST_TYPE = 2;
 
@@ -150,6 +151,7 @@ export default class Device extends Component {
                     ];
 
                     let disp = null;
+                    let title = "Select your device";
 
                     if (this.state.deviceType === null) {
                         disp = <Devices onSelect={this.selectType}/>;
@@ -159,18 +161,23 @@ export default class Device extends Component {
                     } else {
                         if (this.state.delivery === WALK_IN_TYPE) {
                             disp = <WalkIn/>;
+                            title = "Walk in";
                         } else if (this.state.delivery === POST_TYPE) {
                             disp = <Post nextStep={this.finalStep} device={this.state.device} repair={this.state.repair}/>;
+                            title = "Post";
+                        } else if (this.state.delivery === APPOINTMENT_TYPE) {
+                            disp = <Appointment device={this.state.device} repair={this.state.repair}/>;
+                            title = "Book your appointment";
                         }
                     }
 
                     return (
                         <div className={"Device step-" + this.state.step}>
                             <div>
-                            <h1>Select your device</h1>
-                            <div className="BackButton" onClick={this.goBack}>➜</div>
-                            <Indicators steps={4} step={this.state.step}/>
-                            {disp}
+                                <h1>{title}</h1>
+                                <div className="BackButton" onClick={this.goBack}>➜</div>
+                                <Indicators steps={4} step={this.state.step}/>
+                                {disp}
                             </div>
                         </div>
                     );

@@ -1,0 +1,134 @@
+@import "../../../variables";
+
+.Appointment {
+  width: 100%;
+  margin-top: 10px;
+
+  .Info > div {
+    padding: 0;
+  }
+}
+
+.Calendar {
+  border-radius: 50px;
+  background: #fff;
+  padding: 25px;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.Day {
+  .Month {
+    display: flex;
+    justify-content: space-evenly;
+
+    i, h3 {
+      background: $yellow-gradient;
+      background-clip: text;
+      color: rgba(0, 0, 0, 0);
+      font-size: 23px;
+      margin: 5px;
+    }
+
+    h3 {
+      display: inline-block;
+      font-family: "Neutra", sans-serif;
+    }
+  }
+
+  .Days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 1fr;
+    grid-gap: 10px;
+    margin: 5px;
+
+    > div {
+      text-transform: uppercase;
+      text-align: center;
+      font-family: "Moon", sans-serif;
+      letter-spacing: 3px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 1px;
+        height: 0;
+        padding-bottom: 70%;
+      }
+
+      &.name {
+        font-family: "Neutra", sans-serif;
+        letter-spacing: 0;
+      }
+
+      &.day-0 {
+        grid-column: 7;
+      }
+      &.day-1 {
+        grid-column: 1;
+      }
+      &.day-2 {
+        grid-column: 2;
+      }
+      &.day-3 {
+        grid-column: 3;
+      }
+      &.day-4 {
+        grid-column: 4;
+      }
+      &.day-5 {
+        grid-column: 5;
+      }
+      &.day-6 {
+        grid-column: 6;
+      }
+
+      transition: all .2s ease-in-out;
+      &.selected, &:not(.name):hover {
+        background: $blue;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.Time {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  align-self: stretch;
+
+  > div {
+    flex: 1;
+    background: $grey;
+    border-radius: 10px;
+    padding: 8px 15px;
+    text-align: center;
+    margin: 2px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.booked {
+      background: $black;
+      color: $grey2;
+    }
+
+    transition: all .2s ease-in-out;
+    &.selected, &:not(.booked):hover {
+      background: $blue;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}

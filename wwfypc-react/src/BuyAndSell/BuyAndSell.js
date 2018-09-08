@@ -1,11 +1,9 @@
 import React, {Component} from "react";
 import './style/BuyAndSell.scss';
 
-import Menu from "../Shared/Menu";
 import Footer from "../Shared/Footer/Footer";
 import Filter from "./Filter/Filter";
 import Items from "./Items/Items";
-import Top from "../Home/Top/Top";
 
 export default class BuyAndSell extends Component {
     constructor(props) {
