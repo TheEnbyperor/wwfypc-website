@@ -12,7 +12,6 @@ import Footer from './Footer/Footer';
 export default class Home extends Component {
     componentDidMount() {
         new window.fullpage(".Home", {
-            scrollOverflow: true,
             anchors: ["top", "device", "about", "location", "footer"],
             navigationTooltips: ["Home", "Repair your device", "About Us", "Reviews", "Why choose us",
                 "How to find us", "Footer"],
