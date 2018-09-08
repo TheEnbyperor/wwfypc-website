@@ -1,14 +1,12 @@
 @import "../../../variables";
 
-.About {
-  min-height: 100vh;
-  height: unset;
-  background: $grey;
-
-  header {
+[data-anchor="about"] {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/header.png") no-repeat;
     background-size: cover;
-    height: 100vh;
+}
+
+.About {
+  header {
     display: flex;
     align-items: center;
     justify-content: center;

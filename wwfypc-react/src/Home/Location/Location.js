@@ -44,7 +44,7 @@ class Map extends Component {
 
     render() {
         return (
-            <div ref="mapContainer">
+            <div ref="mapContainer" className="mapContainer">
                 <iframe title="google map" frameBorder="0" ref="map" style={{border: 0}}
                         src={"https://www.google.com/maps/embed/v1/place?q=place_id:" +
                         this.props.placeId +

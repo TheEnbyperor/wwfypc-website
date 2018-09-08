@@ -1,7 +1,11 @@
 @import "../../variables";
 
-.Footer {
+[data-anchor="footer"] {
   background: $black;
+  padding-top: 0 !important;
+}
+
+.Footer {
   display: flex;
   justify-content: center;
   padding: 50px;
@@ -13,13 +17,24 @@
     width: 100%;
     max-width: $max-width;
 
+    h2 {
+      font-family: "Helvetica Neue", sans-serif;
+      letter-spacing: 2px;
+    }
+
     p {
       white-space: pre;
     }
 
-    .social > * {
-      margin: 10px;
-      font-size: 25px;
+    .social {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+
+      > * {
+        margin: 10px;
+        font-size: 25px;
+      }
     }
 
     > div {

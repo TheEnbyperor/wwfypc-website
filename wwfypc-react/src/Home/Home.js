@@ -6,18 +6,21 @@ import About from './About/About';
 import Reviews from './Reviews/Reviews';
 import WhyUs from './WhyUs/WhyUs';
 import Location from './Location/Location';
-import Footer from './Footer/Footer';
+import Footer from '../Shared/Footer/Footer';
 
 
 export default class Home extends Component {
     componentDidMount() {
         new window.fullpage(".Home", {
-            anchors: ["top", "device", "about", "location", "footer"],
+            anchors: ["top", "device", "about", "reviews", "why-us", "location", "footer"],
             navigationTooltips: ["Home", "Repair your device", "About Us", "Reviews", "Why choose us",
                 "How to find us", "Footer"],
             navigationPosition: 'right',
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+            paddingTop: "60px",
+            paddingBottom: "70px",
+            scrollOverflow: true,
         })
     }
 

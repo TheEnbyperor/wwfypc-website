@@ -1,8 +1,11 @@
 @import "../../../variables";
 
-header.Top {
+[data-anchor="top"] {
   background: url("../img/top-bg1.jpg") 70% 70%;
   background-size: cover;
+}
+
+header.Top {
   height: 100%;
 
   display: flex;

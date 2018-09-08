@@ -1,11 +1,15 @@
 @import "../../../variables";
 
+[data-anchor="device"] {
+  background-color: $black;
+}
+
 .Device {
   border: 30px solid $black;
-  padding: 30px;
+  border-top: none;
+  background: $grey;
   height: 100%;
   display: flex;
-  background: $grey;
   justify-content: center;
 
   > div {
@@ -34,7 +38,6 @@
     h1 {
       text-align: center;
       font-size: 40px;
-      margin: 20px 0;
       flex: 0 1 auto;
     }
 
