@@ -17,7 +17,6 @@ export default class WalkIn extends Component {
     render() {
         return (
             <div className="WalkIn">
-                <h1>Walk in</h1>
                 <h2>Here's how to find us</h2>
                 <Query query={WALK_IN_QUERY}>
                     {({loading, error, data}) => {

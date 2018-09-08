@@ -152,75 +152,78 @@
       }
     }
 
-    .Info > div {
-      background: #fff;
-      padding: 25px 10px 10px;
-      border-radius: 25px;
+  }
+}
 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-items: center;
+.Device .Info > div {
+  background: #fff;
+  padding: 25px 10px 10px;
+  border-radius: 25px;
 
-      img {
-        margin-bottom: 20px;
-      }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
 
-      h2 {
-        color: $blue;
-        margin: 0;
-      }
+  img {
+    margin-bottom: 20px;
+  }
 
-      .info {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        padding: 0 15px;
+  h2 {
+    color: $blue;
+    margin: 0;
+  }
 
-        ul {
-          flex: 1;
-          list-style: none;
-          margin-right: 10px;
+  .info {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 0 15px;
 
-          li {
-            position: relative;
-            margin: 10px 0;
-            font-size: 20px;
+    ul {
+      flex: 1;
+      list-style: none;
+      margin-right: 10px;
+      margin-bottom: 0;
+      margin-top: 0;
 
-            &::before {
-              content: "";
-              position: absolute;
-              top: 50%;
-              left: -20px;
-              transform: translateY(-50%);
-              width: 10px;
-              height: 10px;
-              border-radius: 100%;
-              border: 1px solid $green;
-            }
-          }
-        }
+      li {
+        position: relative;
+        margin: 10px 0;
+        font-size: 20px;
 
-        .price {
-          $size: 60px;
-
-          background: $blue;
-          color: #fff;
-          font-size: 20px;
-          font-weight: bold;
-          font-family: "Adam CG Pro", sans-serif;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: -25px;
+          transform: translateY(-50%);
+          width: 10px;
+          height: 10px;
           border-radius: 100%;
-          height: $size;
-          width: $size;
-          text-align: center;
-          line-height: $size;
+          border: 2px solid $green;
         }
-      }
-
-      .Button {
-        width: 100%;
-        margin-bottom: 0;
       }
     }
+
+    .price {
+      $size: 60px;
+
+      background: $blue;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: "Adam CG Pro", sans-serif;
+      border-radius: 100%;
+      height: $size;
+      width: $size;
+      text-align: center;
+      line-height: $size;
+    }
+  }
+
+  .Button {
+    width: 100%;
+    margin-bottom: 0;
   }
 }

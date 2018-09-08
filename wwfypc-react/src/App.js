@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ApolloClient from "apollo-boost";
 import {ApolloProvider, Query} from "react-apollo";
-import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import gql from 'graphql-tag';
 
 import './App.scss';
@@ -10,7 +10,6 @@ import BottomBar from './Shared/BottomBar';
 import Home from './Home/Home';
 import Service from './Service/Service';
 import BuyAndSell from './BuyAndSell/BuyAndSell';
-import Section from "./Service/Section/Section";
 
 export const BASE_URL = process.env.REACT_APP_BACKEND_HOST || "http://127.0.0.1:8000";
 
