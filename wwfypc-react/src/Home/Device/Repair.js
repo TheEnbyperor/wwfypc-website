@@ -33,6 +33,7 @@ const REPAIR_INFO_QUERY = gql`
     }
     repairType(id: $repairType) {
       price
+      repairTime
     }
   }
 `;
@@ -123,17 +124,16 @@ class RepairInfo extends Component {
                     return [
                         <img key={1} src={iPhone} alt="iPhone"/>,
                         <h2 key={2}>{data.deviceType.name}</h2>,
-                        <div key={3} className="info">,
+                        <div key={3} className="info">
                             <ul>
-                                <li>In stock</li>
-                                <li>15 Minutes</li>
+                                <li>{data.repairType.repairTime}</li>
                                 <li>{deliveryType.name}</li>
                             </ul>
-                            <div className="price">
-                                &pound;{data.repairType.price}
-                            </div>
                         </div>,
-                        <Button key={4} colour={1} onClick={this.props.nextStep}>
+                            <div key={4} className="price">
+                                &pound;{data.repairType.price}
+                            </div>,
+                        <Button key={5} colour={2} onClick={this.props.nextStep}>
                             Fix your device now
                         </Button>
                     ];
@@ -271,6 +271,9 @@ export default class RepairSelection extends Component {
                     <RepairInfo deviceType={this.state.selectedModel} repairType={this.state.selectedRepair}
                                 deliveryType={this.state.selectedDelivery} nextStep={this.nextStep}
                                 deliveryTypes={this.props.devileryTypes} />
+                </div>
+                <div className="other">
+                    <Button colour={4} onClick={this.props.onSelectBack}>Back</Button>
                 </div>
             </div>
         );

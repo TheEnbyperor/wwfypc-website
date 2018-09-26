@@ -11,9 +11,9 @@
 
   > div:nth-of-type(odd) {
     flex: 0 1 auto;
-    width: 20px;
-    height: 20px;
-    border: 2px solid $orange;
+    width: 17px;
+    height: 17px;
+    border: 5px solid $orange;
     border-radius: 50%;
     position: relative;
 
@@ -24,7 +24,7 @@
 
   > div:nth-of-type(even) {
     flex: 1 1 auto;
-    height: 2px;
+    height: 4px;
     background: $orange;
   }
 }

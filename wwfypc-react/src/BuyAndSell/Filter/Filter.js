@@ -32,6 +32,12 @@ export default class Filter extends Component {
                         })
                     }}
                 </Query>
+                <div className="colour-4">
+                    Sell
+                </div>
+                <div className="colour-5">
+                    Build a PC
+                </div>
             </div>
         )
     }

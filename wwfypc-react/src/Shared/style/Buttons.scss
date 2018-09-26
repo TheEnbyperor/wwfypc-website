@@ -2,7 +2,7 @@
 
 .Button {
   border-radius: 99999px;
-  padding: 15px;
+  padding: 10px 15px;
   margin: 10px;
   color: #fff;
   text-transform: uppercase;
@@ -17,13 +17,22 @@
   cursor: pointer;
 
   &.small {
-    padding: 10px;
+    padding: 7px 10px;
   }
 
   &.colour-1 {
-    background: $yellow-gradient;
+    background: $yellow;
   }
   &.colour-2 {
-    background: $blue-gradient;
+    background: $blue;
+  }
+  &.colour-3 {
+    background: $orange;
+  }
+  &.colour-4 {
+    background: $green;
+  }
+  &.colour-5 {
+    background: $grey4;
   }
 }

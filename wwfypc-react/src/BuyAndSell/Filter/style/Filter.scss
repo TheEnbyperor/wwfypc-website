@@ -11,18 +11,22 @@
     color: #fff;
     font-weight: bold;
     font-family: "Moon", sans-serif;
+    cursor: pointer;
 
     &.colour-1 {
-      background: $yellow-gradient;
+      background: $yellow;
     }
     &.colour-2 {
-      background: $blue-gradient;
+      background: $blue;
     }
     &.colour-3 {
       background: $orange;
     }
-    &colour-4 {
+    &.colour-4 {
       background: $green;
     }
+  &.colour-5 {
+    background: $grey4;
+  }
   }
 }

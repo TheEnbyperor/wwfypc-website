@@ -1,22 +1,24 @@
 @import "../../../variables";
 
 [data-anchor="device"] {
-  background-color: $black;
+  background-color: $grey4;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px + 70px !important;
 }
 
 .Device {
-  border: 30px solid $black;
-  border-top: none;
-  background: $grey;
+  box-shadow: 0 0 38px rgba(0,0,0,.23);
+  background: #fff;
   height: 100%;
   display: flex;
   justify-content: center;
 
-    &.step-1 {
-      .BackButton {
-        display: none;
-      }
+  &.step-1 {
+    .BackButton {
+      display: none;
     }
+  }
 
   > div {
     width: 90%;
@@ -38,7 +40,7 @@
 
     h1 {
       text-align: center;
-      font-size: 40px;
+      font-size: 30pt;
       flex: 0 1 auto;
       margin: 10px 0;
     }
@@ -53,35 +55,72 @@
       display: flex;
       justify-content: center;
       flex-direction: column;
+      width: 100%;
 
-      > div {
-        display: inline-grid;
-        grid-template-columns: repeat(3, minmax(200px, min-content));
+      > div:not(.other) {
+        display: grid;
+        grid-auto-columns: 25%;
+        grid-auto-flow: column;
+        justify-content: center;
         grid-gap: 10px;
         justify-items: center;
+        align-items: stretch;
+        height: 100%;
+
+        > div {
+          display: flex;
+          flex-direction: column;
+
+          background: $grey;
+          border-radius: 25px;
+          padding: 7px 25px 7px;
+
+          > div:first-of-type {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            img {
+              max-width: 150px;
+              align-self: center;
+            }
+
+            h3 {
+              text-transform: uppercase;
+              text-align: center;
+              margin: 0;
+              padding: 15px 0;
+              border-bottom: 2px solid $orange;
+            }
+
+            p {
+              margin: 15px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      .other {
         align-items: center;
+        justify-content: end;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
 
-        :nth-child(1) {
-          grid-area: 1 / 1;
-        }
-        :nth-child(2) {
-          grid-area: 1 / 2;
-        }
-        :nth-child(3) {
-          grid-area: 1 / 3;
-        }
-        :nth-child(4) {
-          grid-area: 2 / 1;
-        }
-        :nth-child(5) {
-          grid-area: 2 / 2;
-        }
-        :nth-child(6) {
-          grid-area: 2 / 3;
-        }
-
-        h2 {
-          grid-area: 1 / 2 !important;
+        > * {
+          &:nth-of-type(4n+1) {
+            grid-column: 4;
+          }
+          &:nth-of-type(4n+2) {
+            grid-column: 3;
+          }
+          &:nth-of-type(4n+3) {
+            grid-column: 2;
+          }
+          &:nth-of-type(4n) {
+            grid-column: 1;
+          }
         }
       }
     }

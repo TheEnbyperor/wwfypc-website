@@ -1,6 +1,7 @@
 from django.db import models
 from solo.models import SingletonModel
 from django.utils.crypto import get_random_string
+import django.utils.timezone
 import datetime
 import string
 import phonenumber_field.modelfields
@@ -31,6 +32,26 @@ class SiteConfig(SingletonModel):
 
     def __str__(self):
         return "Site config"
+
+
+class AppointmentTimeRule(models.Model):
+    start_time = models.TimeField(default=datetime.time())
+    end_time = models.TimeField(default=datetime.time())
+
+    recurring = models.BooleanField(help_text="If recurring then End Date has no meaning", default=False)
+    start_date = models.DateField(default=django.utils.timezone.now)
+    end_date = models.DateField(blank=True, null=True)
+
+    monday = models.BooleanField(default=False)
+    tuesday = models.BooleanField(default=False)
+    wednesday = models.BooleanField(default=False)
+    thursday = models.BooleanField(default=False)
+    friday = models.BooleanField(default=False)
+    saturday = models.BooleanField(default=False)
+    sunday = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "#" + str(self.pk)
 
 
 class MainSliderSlide(models.Model):
@@ -73,6 +94,7 @@ class RepairType(models.Model):
                                     related_name="repair_types", blank=False)
     name = models.CharField(max_length=255, blank=False)
     price = models.DecimalField(blank=False, decimal_places=2, max_digits=10)
+    repair_time = models.CharField(max_length=255, blank=True)
     description = models.TextField(default="")
 
     def __str__(self):
@@ -100,6 +122,17 @@ class PostalOrder(models.Model):
     device = models.ForeignKey(DeviceType, on_delete=models.DO_NOTHING, blank=False)
     repair = models.ForeignKey(RepairType, on_delete=models.DO_NOTHING, blank=False)
     additional_items = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.uid
+
+
+class Appointment(models.Model):
+    uid = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=False, related_name="appointments")
+    date = models.DateTimeField(blank=False)
+    device = models.ForeignKey(DeviceType, on_delete=models.DO_NOTHING, blank=False)
+    repair = models.ForeignKey(RepairType, on_delete=models.DO_NOTHING, blank=False)
 
     def __str__(self):
         return self.uid
