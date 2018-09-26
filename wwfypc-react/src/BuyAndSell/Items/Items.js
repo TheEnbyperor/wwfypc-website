@@ -97,7 +97,10 @@ class Item extends Component {
                         ]
                     })}
                 </div>
-                <Button colour={this.props.item.category.colour} small>&pound;{this.props.item.price}</Button>
+                <div className="buttons">
+                    <Button colour={this.props.item.category.colour} small>&pound;{this.props.item.price}</Button>
+                    <Button colour={this.props.item.category.colour} small>Reserve</Button>
+                </div>
                 <div className="reserved">
                     <p>Reserved</p>
                     <p>Get an email if item becomes available?</p>

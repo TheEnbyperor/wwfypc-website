@@ -8,6 +8,8 @@ import {BASE_URL} from "../../App";
 import WalkIn from "./WalkIn";
 import Post from "./Post";
 import Appointment from "./Appointment";
+import OtherServices from "./OtherServices/OtherServices";
+import Button from "../../Shared/Buttons";
 
 export const APPOINTMENT_TYPE = 0, WALK_IN_TYPE = 1, POST_TYPE = 2;
 
@@ -42,10 +44,21 @@ class Devices extends Component {
                             if (error) return <h2>Error</h2>;
 
                             return data.deviceCategories.map(({id, icon, name}) => (
-                                <img src={BASE_URL + icon} alt={name} key={id} onClick={() => this.props.onSelect(id)}/>
+                                <div>
+                                    <div>
+                                        <img src={BASE_URL + icon} alt={name} key={id}/>
+                                        <h3>{name}</h3>
+                                        <p>Bacon ipsum dolor amet tail flank tongue, corned beef short loin doner pork chop
+                                            pastrami ham hock ground round pork loin.</p>
+                                    </div>
+                                    <Button colour={1} small onClick={() => this.props.onSelect(id)}>Start repair</Button>
+                                </div>
                             ))
                         }}
                     </Query>
+                </div>
+                <div className="other">
+                    <Button colour={4} onClick={this.props.onSelectOther}>Other services</Button>
                 </div>
             </div>
         );
@@ -64,6 +77,7 @@ export default class Device extends Component {
             repair: null,
             delivery: null,
             step: 1,
+            otherServices: false,
         };
 
         this.selectType = this.selectType.bind(this);
@@ -71,6 +85,13 @@ export default class Device extends Component {
         this.doGoBack = this.doGoBack.bind(this);
         this.nextStep = this.nextStep.bind(this);
         this.finalStep = this.finalStep.bind(this);
+        this.selectOtherServices = this.selectOtherServices.bind(this);
+    }
+
+    selectOtherServices(selected) {
+        this.setState({
+            otherServices: selected
+        })
     }
 
     selectType(type) {
@@ -153,17 +174,24 @@ export default class Device extends Component {
                     let disp = null;
                     let title = "Select your device";
 
-                    if (this.state.deviceType === null) {
-                        disp = <Devices onSelect={this.selectType}/>;
+                    if (this.state.otherServices === true) {
+                        title = "Other services";
+                        disp = <OtherServices onSelectBack={() => this.selectOtherServices(false)}/>
+                    } else if (this.state.deviceType === null) {
+                        disp = <Devices onSelect={this.selectType}
+                                        onSelectOther={() => this.selectOtherServices(true)}/>;
                     } else if (this.state.delivery === null) {
-                        disp = <RepairSelection ref={this.repairSelection} goBack={this.doGoBack} nextStep={this.nextStep}
-                                                deviceCategory={this.state.deviceType} devileryTypes={DELIVERY_TYPES}/>;
+                        disp =
+                            <RepairSelection ref={this.repairSelection} goBack={this.doGoBack}
+                                             onSelectBack={this.goBack} nextStep={this.nextStep}
+                                             deviceCategory={this.state.deviceType} devileryTypes={DELIVERY_TYPES}/>;
                     } else {
                         if (this.state.delivery === WALK_IN_TYPE) {
                             disp = <WalkIn/>;
                             title = "Walk in";
                         } else if (this.state.delivery === POST_TYPE) {
-                            disp = <Post nextStep={this.finalStep} device={this.state.device} repair={this.state.repair}/>;
+                            disp =
+                                <Post nextStep={this.finalStep} device={this.state.device} repair={this.state.repair}/>;
                             title = "Post";
                         } else if (this.state.delivery === APPOINTMENT_TYPE) {
                             disp = <Appointment device={this.state.device} repair={this.state.repair}/>;
@@ -175,8 +203,9 @@ export default class Device extends Component {
                         <div className={"Device step-" + this.state.step}>
                             <div>
                                 <h1>{title}</h1>
-                                <div className="BackButton" onClick={this.goBack}>➜</div>
-                                <Indicators steps={4} step={this.state.step}/>
+                                {this.state.otherServices === false ? (
+                                    <Indicators steps={4} step={this.state.step}/>
+                                ) : null}
                                 {disp}
                             </div>
                         </div>

@@ -79,7 +79,6 @@ class PostForm extends Component {
     }
 
     submit(createOrder) {
-        console.log(createOrder, this.name);
         createOrder({
             variables: {
                 name: this.name.current.value,

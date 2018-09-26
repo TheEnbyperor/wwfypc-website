@@ -3,25 +3,51 @@
 .RepairSelection {
   flex: 1 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
   max-width: 1200px;
 
-  > div {
+  .other {
+    width: 100%;
+        align-items: center;
+        justify-content: end;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        > * {
+          &:nth-of-type(4n+1) {
+            grid-column: 4;
+          }
+          &:nth-of-type(4n+2) {
+            grid-column: 3;
+          }
+          &:nth-of-type(4n+3) {
+            grid-column: 2;
+          }
+          &:nth-of-type(4n) {
+            grid-column: 1;
+          }
+        }
+      }
+
+  > div:not(.other) {
+    flex: 1;
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-gap: 20px;
-    margin: 20px 0;
-    padding: 0 20px;
+    grid-gap: 13px;
+    margin: 13px 0;
+    padding: 0 13px;
     width: 100%;
     align-items: start;
 
     @mixin text-box {
-      padding: 15px;
+      padding: 13px;
       background: $grey2;
       color: #131313;
-      font-size: 20px;
+      font-size: 17px;
       font-family: "Bariol", sans-serif;
+      font-weight: bold;
     }
 
     &.stage-1, &.stage-2, &.stage-3 {
@@ -71,7 +97,7 @@
     .Select {
       display: grid;
       grid-auto-flow: column;
-      grid-row-gap: 20px;
+      grid-row-gap: 13px;
       grid-template-columns: repeat(2, 1fr) 2fr;
       grid-auto-rows: 1fr;
 
@@ -90,7 +116,8 @@
         @include text-box;
 
         &.selected {
-          background: $blue-gradient;
+          background: $blue;
+          color: #fff;
         }
 
         .top {
@@ -107,19 +134,19 @@
 
       .repairType, .deliveryType {
         grid-column: 3;
-        margin: 0 0 0 20px;
+        margin: 0 0 0 13px;
         text-transform: uppercase;
         padding: 0;
 
         .top {
-          padding: 15px;
+          padding: 13px;
         }
 
         &.selected {
           background: $grey2;
 
           .top {
-            background: $blue-gradient;
+            background: $blue;
           }
         }
 
@@ -156,8 +183,8 @@
 }
 
 .Device .Info > div {
-  background: #fff;
-  padding: 25px 10px 10px;
+  background: $grey;
+  padding: 25px;
   border-radius: 25px;
 
   display: flex;
@@ -170,8 +197,13 @@
   }
 
   h2 {
-    color: $blue;
-    margin: 0;
+    color: $grey4;
+    text-transform: uppercase;
+    border-bottom: 2px solid $grey3;
+    padding-bottom: 13px;
+    margin: 0 0 13px;
+    width: 100%;
+    text-align: center;
   }
 
   .info {
@@ -183,44 +215,22 @@
     ul {
       flex: 1;
       list-style: none;
-      margin-right: 10px;
-      margin-bottom: 0;
-      margin-top: 0;
+      margin: 0;
+      padding-left: 0;
 
       li {
         position: relative;
         margin: 10px 0;
         font-size: 20px;
-
-        &::before {
-          content: "";
-          position: absolute;
-          top: 50%;
-          left: -25px;
-          transform: translateY(-50%);
-          width: 10px;
-          height: 10px;
-          border-radius: 100%;
-          border: 2px solid $green;
-        }
       }
     }
+  }
+
 
     .price {
-      $size: 60px;
-
-      background: $blue;
-      color: #fff;
-      font-size: 20px;
-      font-weight: bold;
-      font-family: "Adam CG Pro", sans-serif;
-      border-radius: 100%;
-      height: $size;
-      width: $size;
-      text-align: center;
-      line-height: $size;
+      font-family: "Neutra", sans-serif;
+      font-size: 30px;
     }
-  }
 
   .Button {
     width: 100%;

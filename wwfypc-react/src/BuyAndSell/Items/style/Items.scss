@@ -73,9 +73,15 @@
       grid-gap: 10px;
     }
 
-    .Button {
-      margin-left: 0;
-      margin-right: 0;
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 10px;
+
+      .Button {
+        margin-left: 0;
+        margin-right: 0;
+      }
     }
 
     .reserved {
