@@ -10,6 +10,7 @@ import BottomBar from './Shared/BottomBar';
 import Home from './Home/Home';
 import Service from './Service/Service';
 import BuyAndSell from './BuyAndSell/BuyAndSell';
+import Cart from './Cart/Cart';
 
 export const BASE_URL = process.env.REACT_APP_BACKEND_HOST || "http://127.0.0.1:8000";
 
@@ -37,6 +38,7 @@ class App extends Component {
                         <Switch>
                             <Route exact path="/" component={Home}/>
                             <Route path="/buy-and-sell" component={BuyAndSell}/>
+                            <Route path="/cart" component={Cart}/>
                             <Query query={SERVICES_QUERY}>
                                 {({loading, error, data}) => {
                                     if (loading || error) return null;

@@ -114,7 +114,7 @@ class Item extends Component {
 export default class Items extends Component {
     render() {
         return (
-            <div className="Items">
+            <div className="BuyAndSellItems">
                 <Query query={ITEM_QUERY} variables={{category: this.props.selectedCategory}}>
                     {({loading, error, data}) => {
                         if (loading) return null;
