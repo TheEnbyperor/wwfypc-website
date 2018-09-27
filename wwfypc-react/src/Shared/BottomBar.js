@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import CartIndicator from '../Cart/Indicator/Indicator';
 import './style/BottomBar.scss';
 
 class Contact extends Component {
@@ -16,6 +17,7 @@ export default class BottomBar extends Component {
         return (
             <div className="BottomBar">
                 <div>
+                    <CartIndicator/>
                     <Contact/>
                 </div>
             </div>

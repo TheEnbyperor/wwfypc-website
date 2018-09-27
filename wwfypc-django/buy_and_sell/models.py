@@ -38,3 +38,12 @@ class ItemSpec(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ItemPostage(models.Model):
+    item = models.ForeignKey(Item, related_name='specs', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=False)
+    value = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
+
+    def __str__(self):
+        return self.name
