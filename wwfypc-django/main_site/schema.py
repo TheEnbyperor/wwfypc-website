@@ -1,13 +1,16 @@
 import graphene
+from graphene import ObjectType
 from graphene import Mutation
 from graphene_django.types import DjangoObjectType
 from graphene_django.converter import convert_django_field
+from graphql import GraphQLError
 import django.utils.timezone
 import phonenumber_field.modelfields
 from django.core.exceptions import ValidationError
 import datetime
 from django.utils import timezone
 import pytz
+import buy_and_sell.schema
 from . import models
 
 
@@ -90,8 +93,28 @@ class Appointment(DjangoObjectType):
         model = models.Appointment
 
 
-class FormError(graphene.ObjectType):
-    field = graphene.String(required=True)
+class CartItemSpec(ObjectType):
+    name = graphene.NonNull(graphene.String)
+    value = graphene.NonNull(graphene.String)
+
+
+class CartItemDelivery(ObjectType):
+    id = graphene.NonNull(graphene.ID)
+    name = graphene.NonNull(graphene.String)
+    price = graphene.NonNull(graphene.Float)
+
+
+class CartItem(ObjectType):
+    name = graphene.NonNull(graphene.String)
+    price = graphene.NonNull(graphene.Float)
+    image = graphene.NonNull(graphene.String)
+    quantity_available = graphene.NonNull(graphene.Int)
+    specs = graphene.List(CartItemSpec)
+    deliveries = graphene.List(CartItemDelivery)
+
+
+class FormError(ObjectType):
+    field = graphene.NonNull(graphene.String)
     errors = graphene.List(
         graphene.String,
         required=True
@@ -288,6 +311,12 @@ class Query:
         date=graphene.Date(required=True)
     )
 
+    cart_item = graphene.Field(
+        CartItem,
+        category=graphene.NonNull(graphene.ID),
+        id=graphene.NonNull(graphene.ID)
+    )
+
     def resolve_site_config(self, info):
         return models.SiteConfig.objects.first()
 
@@ -324,6 +353,11 @@ class Query:
     def resolve_appointment_times(self, info, date):
         return get_booking_times(date)
 
+    def resolve_cart_item(self, info, category, id):
+        if category == "buy_and_sell":
+            return buy_and_sell.schema.get_item(id)
+        else:
+            raise GraphQLError("Invalid type")
 
 class Mutation:
     create_postal_order = CreatePostalOrder.Field()

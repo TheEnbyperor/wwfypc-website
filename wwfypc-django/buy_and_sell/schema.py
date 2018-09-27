@@ -1,6 +1,19 @@
 import graphene
 from graphene_django.types import DjangoObjectType
+import main_site.schema
 from . import models
+
+
+def get_item(id):
+    item = models.Item.objects.get(id=id)
+    return main_site.schema.CartItem(
+        name=item.name,
+        price=item.price,
+        quantity_available=1,
+        image=item.images.all()[0].image.url,
+        specs=map(lambda s: main_site.schema.CartItemSpec(name=s.name, value=s.value), item.specs.all()),
+        deliveries=map(lambda d: main_site.schema.CartItemDelivery(name=d.name, price=d.value, id=d.id), item.postage.all()),
+    )
 
 
 class ItemCategoryType(DjangoObjectType):

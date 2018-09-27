@@ -14,7 +14,7 @@ import Cart from './Cart/Cart';
 
 export const BASE_URL = process.env.REACT_APP_BACKEND_HOST || "http://127.0.0.1:8000";
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
     uri: BASE_URL + "/graphql/"
 });
 
