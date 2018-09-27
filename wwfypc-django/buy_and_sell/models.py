@@ -41,7 +41,7 @@ class ItemSpec(models.Model):
 
 
 class ItemPostage(models.Model):
-    item = models.ForeignKey(Item, related_name='specs', on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, related_name='postage', on_delete=models.CASCADE)
     name = models.CharField(max_length=255, blank=False)
     value = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
 
