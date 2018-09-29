@@ -51,7 +51,6 @@ export default class BuyAndSell extends Component {
             <div className="BuyAndSell">
                 <div className="section">
                     <section>
-                        <h1 className="large">Buy & Sell</h1>
                         <Filter onSelect={this.selectCategory}/>
                         <Items selectedCategory={this.state.selectedCategory}/>
                     </section>

@@ -3,13 +3,16 @@ import Button from '../../Shared/Buttons';
 import './style/Appointment.scss';
 import {Mutation, Query} from "react-apollo";
 import gql from "graphql-tag";
-import iPhone from "./img/iPhone-small.png";
+import {BASE_URL} from "../../App";
 import dateformat from 'dateformat';
 
 const REPAIR_INFO_QUERY = gql`
   query ($deviceType: ID!, $repairType: ID!) {
     deviceType(id: $deviceType) {
       name
+      deviceCategory {
+        icon
+      }
     }
     repairType(id: $repairType) {
       name
@@ -59,7 +62,7 @@ class RepairInfo extends Component {
                     time2.setHours(time2.getHours() + 1);
 
                     return [
-                        <img key={0} src={iPhone} alt="iPhone"/>,
+                        <img key={0} src={BASE_URL + data.deviceType.deviceCategory.icon} alt="iPhone"/>,
                         <h2 key={1}>{data.deviceType.name}</h2>,
                         <div key={2} className="info">
                             <ul>

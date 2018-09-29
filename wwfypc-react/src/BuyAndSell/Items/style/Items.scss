@@ -17,12 +17,13 @@
     .ImgSlider {
       position: relative;
       overflow: hidden;
-      padding-top: 50%;
+      padding-top: 100%;
 
       img {
         position: absolute;
         left: 0;
-        top: 0;
+        top: 50%;
+        transform: translateY(-50%);
         width: 100%;
         opacity: 0;
         object-fit: contain;

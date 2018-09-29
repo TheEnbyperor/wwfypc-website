@@ -25,7 +25,7 @@ class Item(models.Model):
 
 class ItemImage(models.Model):
     item = models.ForeignKey(Item, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(blank=False)
+    image = models.FileField(blank=False)
 
     def __str__(self):
         return str(self.id)

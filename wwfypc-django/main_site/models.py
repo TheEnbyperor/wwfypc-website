@@ -11,6 +11,8 @@ COLOURS = (
     (2, "Blue"),
     (3, "Orange"),
     (4, "Green"),
+    (5, "Black"),
+    (6, "Orange Inverse"),
 )
 
 
