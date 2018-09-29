@@ -1,0 +1,25 @@
+@import "../../variables";
+
+.CartSuccess {
+  display: flex;
+  background: $orange;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+
+  h1 {
+    font-size: 50px;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  p {
+    font-size: 25px;
+  }
+
+  h1, p {
+    margin: 10px;
+    color: #fff !important;
+  }
+}

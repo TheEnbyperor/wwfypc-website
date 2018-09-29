@@ -30,7 +30,7 @@ export default class BuyAndSell extends Component {
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy('all');
+        window.fullpage_api.destroy();
     }
 
     selectCategory(i) {

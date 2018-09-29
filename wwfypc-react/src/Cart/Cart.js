@@ -1,30 +1,12 @@
 import React, {Component} from 'react';
 import gql from 'graphql-tag';
-import {Query} from 'react-apollo';
 import Button from '../Shared/Buttons';
 import Footer from "../Shared/Footer/Footer";
-import {BASE_URL, client} from "../App";
+import Items from './Item';
+import Payment from './Payment';
+import Success from './Success';
+import {client} from "../App";
 import "./style/Cart.scss";
-
-const ITEM_QUERY = gql`
-  query($type: ID!, $id: ID!) {
-    cartItem(category: $type, id: $id) {
-      name
-      price
-      quantityAvailable
-      image
-      specs {
-        name
-        value
-      }
-      deliveries {
-        id
-        name
-        price
-      }
-    }
-  }
-`;
 
 const ITEM_PRICE_QUERY = gql`
   query($type: ID!, $id: ID!) {
@@ -52,134 +34,49 @@ export function getCart() {
     return cart;
 }
 
-class Quantity extends Component {
-    constructor(props) {
-        super(props);
+const cartUpdateCallbacks = [];
 
-        this.increment = this.increment.bind(this);
-        this.decrement = this.decrement.bind(this);
-        this.setNum = this.setNum.bind(this);
-    }
-
-    increment() {
-        let newVal = this.props.num + 1;
-        if (newVal >= this.props.max) newVal = this.props.max;
-        this.props.onChange(newVal);
-    }
-
-    decrement() {
-        let newVal = this.props.num - 1;
-        if (newVal <= 1) newVal = 1;
-        this.props.onChange(newVal);
-    }
-
-    setNum(event) {
-        let newVal = parseInt(event.target.value, 10);
-        if (!isNaN(newVal)) {
-            if (newVal <= 1) newVal = 1;
-            if (newVal >= this.props.max) newVal = this.props.max;
-            this.props.onChange(newVal);
-        } else {
-            this.props.onChange(this.props.num);
-        }
-    }
-
-    render() {
-        const val = parseInt(this.props.num, 10);
-        return <div className="Quantity">
-            <i className={"fas fa-minus" + (this.props.num <= 1 ? " disabled" : "")} onClick={this.decrement}/>
-            <input type="text" size={2} value={isNaN(val) ? 1 : val} onChange={this.setNum}/>
-            <i className={"fas fa-plus" + (this.props.num >= this.props.max ? " disabled" : "")}
-               onClick={this.increment}/>
-        </div>
-    }
+export function bindUpdateCart(callback) {
+    cartUpdateCallbacks.push(callback);
 }
 
-class Item extends Component {
-    render() {
-        return <Query query={ITEM_QUERY} variables={{type: this.props.item.type, id: this.props.item.id}}>
-            {({data, loading, error}) => {
-                if (loading) return null;
-                if (error) return <h2>Error</h2>;
-
-                return [
-                    <div key={0} className="Img">
-                        <img src={BASE_URL + data.cartItem.image} alt=""/>
-                        <Button colour={5} small>Remove</Button>
-                    </div>,
-                    <div key={1} className="ItemInfo">
-                        <span className="name">{data.cartItem.name}</span>
-                        <ul>
-                            {data.cartItem.specs.map((detail, i) =>
-                                <li key={i}>{detail.name}: {detail.value}</li>
-                            )}
-                        </ul>
-                    </div>,
-                    <Quantity num={this.props.item.quantity} max={data.cartItem.quantityAvailable}
-                              onChange={this.props.onUpdateNum} key={2}/>,
-                    <div className="price" key={3}>
-                        <span>&pound;{(this.props.item.quantity * data.cartItem.price).toFixed(2)}</span>
-                        <form>
-                            {
-                                data.cartItem.deliveries.map((option) => {
-                                    let price = "";
-
-                                    if (option.price > 0) {
-                                        price = " (+£" + option.price.toFixed(2) + ")";
-                                    }
-
-                                    return [
-                                        <input key={0} type="radio" value={"delivery-" + option.id}
-                                               checked={this.props.item.selectedDelivery === option.id}
-                                               onChange={() => this.props.onDeliveryChange(option.id)}
-                                        />,
-                                        <label key={1}>{option.name + price}</label>
-                                    ]
-                                })
-                            }
-                        </form>
-                    </div>,
-                ]
-            }}
-        </Query>
-    }
+function updateCart(cart) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    cartUpdateCallbacks.forEach((callback) => callback(cart));
 }
 
-class Items extends Component {
-    constructor(props) {
-        super(props);
+export function getItem(type, id) {
+    const cart = getCart();
 
-        this.updateItemNum = this.updateItemNum.bind(this);
-        this.updateItemDelivery = this.updateItemDelivery.bind(this);
+    return cart.find(elm => elm.type === type && elm.id === id);
+}
+
+export function addToCart(type, id) {
+    const cart = getCart();
+
+    const inCart = cart.findIndex(elm => elm.type === type && elm.id === id);
+    if (inCart !== -1) {
+        cart[inCart].quantity += 1;
+    } else {
+        cart.push({
+            type: type,
+            id: id,
+            selectedDelivery: null,
+            quantity: 1,
+        });
     }
+    updateCart(cart);
+}
 
+export function removeFromCart(type, id) {
+    const cart = getCart();
 
-    updateItemNum(i, num) {
-        this.props.cart[i].quantity = num;
-        this.props.onUpdate(this.props.cart)
+    const inCart = cart.findIndex(elm => elm.type === type && elm.id === id);
+    if (inCart !== -1) {
+        cart.splice(inCart, 1);
+        updateCart(cart);
     }
-
-    updateItemDelivery(i, delivery) {
-        this.props.cart[i].selectedDelivery = delivery;
-        this.props.onUpdate(this.props.cart)
-    }
-
-    render() {
-        return <div className="Items">
-            <h3>Item</h3>
-            <h3>Quantity</h3>
-            <h3>Price</h3>
-            {
-                this.props.cart.map((item, i) => {
-                    return [
-                        <Item key={0} item={item} onUpdateNum={(num) => this.updateItemNum(i, num)}
-                              onDeliveryChange={(delivery) => this.updateItemDelivery(i, delivery)}/>,
-                        <hr key={1}/>,
-                    ]
-                })
-            }
-        </div>
-    }
+    return cart;
 }
 
 class PriceTotal extends Component {
@@ -196,21 +93,23 @@ class PriceTotal extends Component {
     }
 
     calcPrice() {
-        this.props.cart.reduce(async (prev, item) => {
-            const {data} = await client.query({
-                query: ITEM_PRICE_QUERY,
-                variables: {type: item.type, id: item.id},
+        if (this.props.cart.length > 0) {
+            this.props.cart.reduce(async (prev, item) => {
+                const {data} = await client.query({
+                    query: ITEM_PRICE_QUERY,
+                    variables: {type: item.type, id: item.id},
+                });
+                const delivery = data.cartItem.deliveries.find(elm => elm.id === item.selectedDelivery);
+                const prev2 = await prev;
+                return [prev2[0] + data.cartItem.price * item.quantity, prev2[1] + delivery.price * item.quantity];
+            }, [0, 0]).then(price => {
+                this.setState({
+                    price: price[0],
+                    postage: price[1],
+                    total: price[0] + price[1],
+                });
             });
-            const delivery = data.cartItem.deliveries.find(elm => elm.id === item.selectedDelivery);
-            const prev2 = await prev;
-            return [prev2[0] + data.cartItem.price * item.quantity, prev2[1] + delivery.price * item.quantity];
-        }, [0, 0]).then(price => {
-            this.setState({
-                price: price[0],
-                postage: price[1],
-                total: price[0] + price[1],
-            });
-        });
+        }
     }
 
     componentDidMount() {
@@ -222,7 +121,7 @@ class PriceTotal extends Component {
             this.setState({
                 loadNewData: false,
             });
-          this.calcPrice();
+            this.calcPrice();
         }
     }
 
@@ -255,9 +154,11 @@ export default class Cart extends Component {
 
         this.state = {
             cart: getCart(),
+            state: 0,
         };
 
         this.onUpdate = this.onUpdate.bind(this);
+        this.onComplete = this.onComplete.bind(this);
     }
 
     componentDidMount() {
@@ -267,35 +168,63 @@ export default class Cart extends Component {
             navigationPosition: 'right',
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            scrollOverflow: true,
         })
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy('all');
+        window.fullpage_api.destroy();
     }
 
     onUpdate(cart) {
-        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCart(cart);
         this.setState({
             cart: cart
         });
     }
 
+    cartIsReady() {
+        return this.state.cart.reduce((prev, item) => {
+            if (item.selectedDelivery === null) return false;
+
+            return prev;
+        }, true);
+    }
+
+    onComplete() {
+        this.setState({
+            state: 2,
+            cart: [],
+        });
+        updateCart([]);
+    }
+
     render() {
+        let left = null;
+        let right = null;
+
+        if (this.state.state === 0) {
+            left = <Items cart={this.state.cart} onUpdate={this.onUpdate}/>;
+            right = this.cartIsReady() ?
+                <Button colour={3} onClick={() => this.setState({state: 1})}>Checkout</Button> :
+                <h3>Please complete the cart</h3>;
+        } else if (this.state.state === 1) {
+            left = <Payment cart={this.state.cart} onSubmit={this.onComplete}/>;
+        } else if  (this.state.state === 2) {
+            left = <Success/>;
+        }
+
         return <div className="Cart">
-            <div className="section CartInner">
-                <div className="inner">
-                    <div className="left">
-                        <h1>My cart</h1>
-                        <Items cart={this.state.cart} onUpdate={this.onUpdate}/>
-                    </div>
-                    <div className="right">
-                        <PriceTotal cart={this.state.cart}/>
-                        <Button colour={3}>Checkout</Button>
+                <div className={"section CartInner" + (this.state.state === 2 ? " orange" : "")}>
+                    <div className="inner">
+                        <div className="left">
+                            {left}
+                        </div>
+                        <div className="right">
+                            <PriceTotal cart={this.state.cart}/>
+                            {right}
+                        </div>
                     </div>
                 </div>
-            </div>
             <div className="section fp-auto-height"><Footer/></div>
         </div>;
     }

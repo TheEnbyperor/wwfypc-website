@@ -25,7 +25,7 @@ export default class Home extends Component {
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy('all');
+        window.fullpage_api.destroy();
     }
 
     render() {

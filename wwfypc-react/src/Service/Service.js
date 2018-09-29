@@ -33,7 +33,7 @@ export default class Service extends Component {
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy("all");
+        window.fullpage_api.destroy();
     }
 
     render() {
