@@ -12,6 +12,7 @@ const REPAIR_INFO_QUERY = gql`
       name
     }
     repairType(id: $repairType) {
+      name
       price
       repairTime
     }
@@ -20,7 +21,10 @@ const REPAIR_INFO_QUERY = gql`
 
 const BOOKING_TIMES_QUERY = gql`
   query ($day: Date!) {
-    appointmentTimes(date: $day)
+    appointmentTimes(date: $day) {
+      time
+      booked
+    }
   }
 `;
 
@@ -55,20 +59,21 @@ class RepairInfo extends Component {
                     time2.setHours(time2.getHours() + 1);
 
                     return [
-                        <img key={1} src={iPhone} alt="iPhone"/>,
-                        <h2 key={2}>{data.deviceType.name}</h2>,
-                        <div key={3} className="info">
+                        <img key={0} src={iPhone} alt="iPhone"/>,
+                        <h2 key={1}>{data.deviceType.name}</h2>,
+                        <div key={2} className="info">
                             <ul>
                                 {this.props.selectedDay !== null ?
                                     <li>{dateformat(this.props.selectedDay, "dddd dd/mm/yyyy")}</li> : null}
                                 {this.props.selectedTime !== null ?
                                     <li>{dateformat(this.props.selectedTime, "HH:MM")} - {dateformat(time2, "HH:MM")}</li>
                                     : null}
+                                <li>{data.repairType.name}</li>
                                 <li>{data.repairType.repairTime}</li>
                             </ul>
-                            <div className="price">
-                                &pound;{data.repairType.price}
-                            </div>
+                        </div>,
+                        <div key={3} className="price">
+                            &pound;{data.repairType.price}
                         </div>
                     ];
                 }}
@@ -203,16 +208,20 @@ class Time extends Component {
                         if (loading || error) return null;
 
                         return data.appointmentTimes.map((time, i) => {
-                            const time1 = new Date('1970-01-01T' + time + 'Z');
+                            const time1 = new Date('1970-01-01T' + time.time + 'Z');
                             const time2 = new Date(time1);
                             time2.setHours(time2.getHours() + 1);
-                            return <div key={i}
-                                        className={(this.props.selectedTime !== null &&
-                                            this.props.selectedTime.getTime() === time1.getTime())
-                                            ? "selected" : ""}
-                                        onClick={() => this.props.onSelect(time1)}>
-                                {dateformat(time1, "HH:MM")} - {dateformat(time2, "HH:MM")}
-                            </div>
+                            if (time.booked) {
+                                return <div key={i} className="booked">Booked</div>;
+                            } else {
+                                return <div key={i}
+                                            className={(this.props.selectedTime !== null &&
+                                                this.props.selectedTime.getTime() === time1.getTime())
+                                                ? "selected" : ""}
+                                            onClick={() => this.props.onSelect(time1)}>
+                                    {dateformat(time1, "HH:MM")} - {dateformat(time2, "HH:MM")}
+                                </div>;
+                            }
                         });
                     }}
                 </Query>
@@ -238,7 +247,7 @@ class Calendar extends Component {
 class AppointmentFinal extends Component {
     render() {
         return <div className="AppointmentFinal">
-            <h2>Appointment made</h2>,
+            <h2>Appointment made</h2>
             <div className="Info">
                 <RepairInfo deviceType={this.props.device} repairType={this.props.repair}
                             selectedDay={this.props.selectedDay} selectedTime={this.props.selectedTime}/>
@@ -267,7 +276,7 @@ class AppointmentForm extends Component {
                 email: this.email.current.value,
                 phone: this.phone.current.value,
                 date: dateformat(this.props.selectedDay, "yyyy-mm-dd"),
-                time: dateformat(this.props.selectedTime, "HH:MM"),
+                time: dateformat(this.props.selectedTime, "HH:MM", true),
                 device: this.props.device,
                 repair: this.props.repair,
             }

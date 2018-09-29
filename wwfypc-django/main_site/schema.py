@@ -128,6 +128,11 @@ class CartItem(ObjectType):
     deliveries = graphene.List(CartItemDelivery)
 
 
+class AppointmentTime(ObjectType):
+    time = graphene.NonNull(graphene.types.datetime.Time)
+    booked = graphene.NonNull(graphene.Boolean)
+
+
 class FormError(ObjectType):
     field = graphene.NonNull(graphene.String)
     errors = graphene.List(
@@ -368,49 +373,71 @@ def check_booking_time(date: datetime.date, time: datetime.time):
     now = datetime.datetime.now()
 
     cur_time = datetime.datetime.combine(date, time)
+    appointments = models.Appointment.objects.filter(date__year=date.year, date__month=date.month, date__day=date.day)
     passes_rules = False
-    if cur_time >= now:
-        for rule in rules:
-            if rule.start_date > cur_time.date():
-                continue
-            if not rule.recurring and rule.end_date < cur_time.date():
-                continue
+    booked = True
+    for rule in rules:
+        if rule.start_date > cur_time.date():
+            continue
+        if not rule.recurring and rule.end_date < cur_time.date():
+            continue
 
-            if not rule.monday and cur_time.weekday() == 0:
-                continue
-            if not rule.tuesday and cur_time.weekday() == 1:
-                continue
-            if not rule.wednesday and cur_time.weekday() == 2:
-                continue
-            if not rule.thursday and cur_time.weekday() == 3:
-                continue
-            if not rule.friday and cur_time.weekday() == 4:
-                continue
-            if not rule.saturday and cur_time.weekday() == 5:
-                continue
-            if not rule.sunday and cur_time.weekday() == 6:
-                continue
+        if not rule.monday and cur_time.weekday() == 0:
+            continue
+        if not rule.tuesday and cur_time.weekday() == 1:
+            continue
+        if not rule.wednesday and cur_time.weekday() == 2:
+            continue
+        if not rule.thursday and cur_time.weekday() == 3:
+            continue
+        if not rule.friday and cur_time.weekday() == 4:
+            continue
+        if not rule.saturday and cur_time.weekday() == 5:
+            continue
+        if not rule.sunday and cur_time.weekday() == 6:
+            continue
 
-            start_time = timezone.make_naive(timezone.make_aware(
-                datetime.datetime.combine(date, rule.start_time), tz) \
-                                             .astimezone(pytz.utc))
-            end_time = timezone.make_naive(timezone.make_aware(
-                datetime.datetime.combine(date, rule.end_time), tz) \
-                                           .astimezone(pytz.utc))
-            if not (start_time <= cur_time and end_time >= (cur_time + datetime.timedelta(hours=1))):
-                continue
+        start_time = timezone.make_naive(timezone.make_aware(
+            datetime.datetime.combine(date, rule.start_time), tz)
+                                         .astimezone(pytz.utc))
+        end_time = timezone.make_naive(timezone.make_aware(
+            datetime.datetime.combine(date, rule.end_time), tz)
+                                       .astimezone(pytz.utc))
+        if not (start_time <= cur_time and end_time >= (cur_time + datetime.timedelta(hours=1))):
+            continue
 
-            passes_rules = True
+        if cur_time.date() < now.date():
+            continue
 
-    return passes_rules
+        passes_rules = True
+
+        if cur_time < now:
+            continue
+
+        num_appointments = 0
+        for appointment in appointments:
+            date = timezone.make_naive(appointment.date)
+            slot_end = cur_time + datetime.timedelta(hours=1)
+            appointment_end = date + datetime.timedelta(hours=1)
+            if date < slot_end \
+                    and appointment_end > cur_time:
+                num_appointments += 1
+
+        if num_appointments >= 5:
+            continue
+
+        booked = False
+
+    return passes_rules, booked
 
 
 def get_booking_times(date: datetime.date):
     times = []
     cur_time = datetime.datetime.combine(date, datetime.datetime.min.time())
     while cur_time.time() <= datetime.time(23) and cur_time.date() == date:
-        if check_booking_time(cur_time.date(), cur_time.time()):
-            times.append(cur_time.time())
+        passes_rules, booked = check_booking_time(cur_time.date(), cur_time.time())
+        if passes_rules:
+            times.append(AppointmentTime(time=cur_time.time(), booked=booked))
             cur_time += datetime.timedelta(minutes=30)
 
         cur_time += datetime.timedelta(minutes=30)
@@ -425,6 +452,9 @@ class Query:
 
     device_categories = graphene.List(DeviceCategoryType)
 
+    device_category = graphene.Field(DeviceCategoryType,
+                                     id=graphene.NonNull(graphene.ID))
+
     device_types = graphene.List(DeviceTypeType,
                                  category=graphene.ID())
     device_type = graphene.Field(DeviceTypeType,
@@ -436,7 +466,7 @@ class Query:
                                  id=graphene.NonNull(graphene.ID))
 
     appointment_times = graphene.List(
-        graphene.types.datetime.Time,
+        AppointmentTime,
         date=graphene.Date(required=True)
     )
 
@@ -452,8 +482,11 @@ class Query:
     def resolve_main_slider_slides(self, info):
         return models.MainSliderSlide.objects.all()
 
-    def resolve_device_categories(self, info, **kwargs):
+    def resolve_device_categories(self, info):
         return models.DeviceCategory.objects.all()
+
+    def resolve_device_category(self, info, id):
+        return models.DeviceCategory.objects.get(id=id)
 
     def resolve_device_types(self, info, **kwargs):
         device_types = models.DeviceType.objects.all()

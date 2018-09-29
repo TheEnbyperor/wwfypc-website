@@ -11,7 +11,7 @@
   .other {
     width: 100%;
         align-items: center;
-        justify-content: end;
+        justify-content: flex-end;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
 
@@ -34,7 +34,7 @@
   > div:not(.other) {
     flex: 1;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 25%;
     grid-gap: 13px;
     margin: 13px 0;
     padding: 0 13px;
@@ -50,9 +50,11 @@
       font-weight: bold;
     }
 
-    &.stage-1, &.stage-2, &.stage-3 {
-      .Info {
-        visibility: hidden;
+    .Info {
+      height: 100%;
+
+      > div {
+        height: 100%;
       }
     }
 
@@ -194,6 +196,7 @@
 
   img {
     margin-bottom: 20px;
+    width: 50%;
   }
 
   h2 {
@@ -204,6 +207,7 @@
     margin: 0 0 13px;
     width: 100%;
     text-align: center;
+    font-size: 18px;
   }
 
   .info {
@@ -221,7 +225,7 @@
       li {
         position: relative;
         margin: 10px 0;
-        font-size: 20px;
+        font-size: 18px;
       }
     }
   }
@@ -230,6 +234,7 @@
     .price {
       font-family: "Neutra", sans-serif;
       font-size: 30px;
+      flex: 1;
     }
 
   .Button {
