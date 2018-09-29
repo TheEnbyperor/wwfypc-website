@@ -374,6 +374,7 @@ def check_booking_time(date: datetime.date, time: datetime.time):
 
     cur_time = datetime.datetime.combine(date, time)
     appointments = models.Appointment.objects.filter(date__year=date.year, date__month=date.month, date__day=date.day)
+    time_block_rules = models.AppointmentTimeBlockRule.objects.filter(date=date)
     passes_rules = False
     booked = True
     for rule in rules:
@@ -414,13 +415,28 @@ def check_booking_time(date: datetime.date, time: datetime.time):
         if cur_time < now:
             continue
 
+        blocked = False
+        for rule in time_block_rules:
+            start_time = timezone.make_naive(timezone.make_aware(
+                datetime.datetime.combine(date, rule.start_time), tz)
+                                             .astimezone(pytz.utc))
+            end_time = timezone.make_naive(timezone.make_aware(
+                datetime.datetime.combine(date, rule.end_time), tz)
+                                           .astimezone(pytz.utc))
+            slot_end = cur_time + datetime.timedelta(hours=1)
+            if start_time < slot_end and end_time > cur_time:
+                blocked = True
+                break
+
+        if blocked:
+            continue
+
         num_appointments = 0
         for appointment in appointments:
             date = timezone.make_naive(appointment.date)
             slot_end = cur_time + datetime.timedelta(hours=1)
             appointment_end = date + datetime.timedelta(hours=1)
-            if date < slot_end \
-                    and appointment_end > cur_time:
+            if date < slot_end and appointment_end > cur_time:
                 num_appointments += 1
 
         if num_appointments >= 5:
