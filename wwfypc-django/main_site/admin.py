@@ -12,6 +12,11 @@ class AppointmentTimeRuleAdmin(admin.ModelAdmin):
                      'thursday', 'friday', 'saturday', 'sunday')
 
 
+@admin.register(models.Appointment)
+class AppointmentAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'date')
+
+
 class OrderItemAdmin(admin.TabularInline):
     model = models.OrderItem
     fields = ('type', 'item_from_type', 'quantity', 'delivery_from_type',)
@@ -39,11 +44,29 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemAdmin]
 
 
+class CustomerPostalOrdersInline(admin.StackedInline):
+    model = models.PostalOrder
+    extra = 0
+
+
+class CustomerAppointmentInline(admin.StackedInline):
+    model = models.Appointment
+    extra = 0
+
+
+class CustomerOrderInline(admin.StackedInline):
+    model = models.Order
+    extra = 0
+
+
+@admin.register(models.Customer)
+class OrderAdmin(admin.ModelAdmin):
+    inlines = [CustomerPostalOrdersInline, CustomerAppointmentInline, CustomerOrderInline]
+
+
 admin.site.register(models.DeviceCategory)
 admin.site.register(models.DeviceType)
 admin.site.register(models.RepairType)
 admin.site.register(models.MainSliderSlide)
 admin.site.register(models.SiteConfig, solo.admin.SingletonModelAdmin)
-admin.site.register(models.Customer)
 admin.site.register(models.PostalOrder)
-admin.site.register(models.Appointment)

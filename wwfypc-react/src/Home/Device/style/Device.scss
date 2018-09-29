@@ -2,6 +2,7 @@
 
 [data-anchor="device"] {
   background-color: $grey4;
+  padding-top: 30px !important;
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 30px + 70px !important;
@@ -13,6 +14,7 @@
   height: 100%;
   display: flex;
   justify-content: center;
+  padding-top: 40px;
 
   &.step-1 {
     .BackButton {
@@ -104,7 +106,7 @@
 
       .other {
         align-items: center;
-        justify-content: end;
+        justify-content: flex-end;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
 
