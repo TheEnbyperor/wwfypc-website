@@ -12,6 +12,12 @@ class AppointmentTimeRuleAdmin(admin.ModelAdmin):
                      'thursday', 'friday', 'saturday', 'sunday')
 
 
+@admin.register(models.AppointmentTimeBlockRule)
+class AppointmentTimeRuleAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'start_time', 'end_time', 'date')
+    list_editable = ('start_time', 'end_time', 'date')
+
+
 @admin.register(models.Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'date')

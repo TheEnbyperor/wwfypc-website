@@ -54,6 +54,16 @@ class AppointmentTimeRule(models.Model):
         return "#" + str(self.pk)
 
 
+class AppointmentTimeBlockRule(models.Model):
+    start_time = models.TimeField(default=datetime.time())
+    end_time = models.TimeField(default=datetime.time())
+
+    date = models.DateField(default=django.utils.timezone.now)
+
+    def __str__(self):
+        return "#" + str(self.pk)
+
+
 class MainSliderSlide(models.Model):
     class Meta:
         verbose_name_plural = "Main slider"

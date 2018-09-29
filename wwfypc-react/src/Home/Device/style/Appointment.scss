@@ -32,6 +32,7 @@
     i, h3 {
       background: $orange;
       background-clip: text;
+      -webkit-background-clip: text;
       color: rgba(0, 0, 0, 0);
       font-size: 23px;
       margin: 5px;
