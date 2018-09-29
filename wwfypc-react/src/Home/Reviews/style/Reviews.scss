@@ -34,7 +34,8 @@
 
     .pointers {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      grid-auto-columns: 1fr;
       padding: 20px;
       text-align: center;
       grid-gap: 20px;
@@ -43,6 +44,10 @@
       color: $blue;
       width: 90%;
       max-width: $max-width;
+
+      img {
+        grid-row: 1;
+      }
 
       h2 {
         font-family: "Adam CG Pro", sans-serif;

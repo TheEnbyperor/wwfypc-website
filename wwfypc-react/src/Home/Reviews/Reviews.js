@@ -1,58 +1,59 @@
 import React, {Component} from 'react';
+import {Query} from 'react-apollo';
+import gql from 'graphql-tag';
+import {BASE_URL} from "../../App";
 import "./style/Reviews.scss";
 
-import Trophy from "./img/Trophy.svg"
-import Location from "./img/Location.svg"
-import Medal from "./img/Medal.svg"
 import Star from './img/Star.svg';
+
+const REVIEW_QUERY = gql`
+  query {
+    siteConfig {
+      featuredReview
+      featuredReviewName
+    }
+    sellingPoints {
+      title
+      text
+      image
+    }
+  }
+`;
 
 export default class Reviews extends Component {
     render() {
         return (
             <div className="Reviews">
                 <div>
-                    <div className="bigReview">
-                        <div className="stars">
-                            <img src={Star} alt=""/>
-                            <img src={Star} alt=""/>
-                            <img src={Star} alt=""/>
-                            <img src={Star} alt=""/>
-                            <img src={Star} alt=""/>
-                        </div>
-                        <p>
-                            "I received fantastic service. Everything was explained very well, and I am extremely
-                            pleased with the service I received. I would recommend them any day."
-                        </p>
-                        <p>
-                            Lisa Green - March 2018
-                        </p>
-                    </div>
-                    <div className="pointers">
-                        <img src={Trophy} alt=""/>
-                        <img src={Location} alt=""/>
-                        <img src={Medal} alt=""/>
-                        <div>
-                            <h2>Our goal:<br/>to be the best</h2>
-                            <p>
-                                I received fantastic service. Everything was explained very well, and I am extremely
-                                pleased with the service I received. I would recommend them any day.
-                            </p>
-                        </div>
-                        <div>
-                            <h2>Friendly.<br/>Professional. Local</h2>
-                            <p>
-                                I received fantastic service. Everything was explained very well, and I am extremely
-                                pleased with the service I received. I would recommend them any day.
-                            </p>
-                        </div>
-                        <div>
-                            <h2>Highly<br/>Recommended</h2>
-                            <p>
-                                I received fantastic service. Everything was explained very well, and I am extremely
-                                pleased with the service I received. I would recommend them any day.
-                            </p>
-                        </div>
-                    </div>
+                    <Query query={REVIEW_QUERY}>
+                        {({loading, error, data}) => {
+                            if (loading) return null;
+                            if (error) return <h2>Error</h2>;
+
+                            return [
+                                <div key={0} className="bigReview">
+                                    <div className="stars">
+                                        <img src={Star} alt=""/>
+                                        <img src={Star} alt=""/>
+                                        <img src={Star} alt=""/>
+                                        <img src={Star} alt=""/>
+                                        <img src={Star} alt=""/>
+                                    </div>
+                                    <p>{data.siteConfig.featuredReview}</p>
+                                    <p>{data.siteConfig.featuredReviewName}</p>
+                                </div>,
+                                <div key={1} className="pointers">
+                                    {data.sellingPoints.map(({image}) => <img src={BASE_URL + image} alt=""/>)}
+                                    {data.sellingPoints.map(({title, text}) =>
+                                        <div>
+                                        <h2>{title}</h2>
+                                        <p>{text}</p>
+                                    </div>
+                                    )}
+                                </div>
+                            ];
+                        }}
+                    </Query>
                 </div>
             </div>
         );

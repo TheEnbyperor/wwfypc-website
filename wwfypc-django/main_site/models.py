@@ -28,12 +28,48 @@ class SiteConfig(SingletonModel):
     walk_in_description = models.TextField(verbose_name="\"Walk in\" description")
     post_description = models.TextField(verbose_name="\"Post\" description")
 
+    featured_review = models.TextField()
+    featured_review_name = models.CharField(max_length=255)
+
+    why_choose_us = models.TextField()
+
     twitter_url = models.URLField(blank=True)
     google_url = models.URLField(blank=True)
     facebook_url = models.URLField(blank=True)
 
     def __str__(self):
         return "Site config"
+
+
+class SellingPoint(models.Model):
+    title = models.TextField()
+    text = models.TextField()
+    image = models.FileField()
+
+    def __str__(self):
+        return self.title
+
+
+class OtherService(models.Model):
+    name = models.TextField()
+    icon = models.FileField()
+    description = models.TextField()
+    colour = models.IntegerField(choices=COLOURS, default=1)
+    button_text = models.CharField(max_length=255)
+    link_to = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class AppointmentTimeBlockRule(models.Model):
+    start_time = models.TimeField(default=datetime.time())
+    end_time = models.TimeField(default=datetime.time())
+
+    date = models.DateField(default=django.utils.timezone.now)
+
+    def __str__(self):
+        return "#" + str(self.pk)
 
 
 class AppointmentTimeRule(models.Model):
@@ -51,16 +87,6 @@ class AppointmentTimeRule(models.Model):
     friday = models.BooleanField(default=False)
     saturday = models.BooleanField(default=False)
     sunday = models.BooleanField(default=False)
-
-    def __str__(self):
-        return "#" + str(self.pk)
-
-
-class AppointmentTimeBlockRule(models.Model):
-    start_time = models.TimeField(default=datetime.time())
-    end_time = models.TimeField(default=datetime.time())
-
-    date = models.DateField(default=django.utils.timezone.now)
 
     def __str__(self):
         return "#" + str(self.pk)

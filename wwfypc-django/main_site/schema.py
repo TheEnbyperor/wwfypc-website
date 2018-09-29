@@ -46,6 +46,24 @@ class MainSliderSlideType(DjangoObjectType):
         return self.background_image.url
 
 
+class SellingPointType(DjangoObjectType):
+    class Meta:
+        model = models.SellingPoint
+
+    def resolve_image(self, info):
+        return self.image.url
+
+
+class OtherServiceType(DjangoObjectType):
+    colour = graphene.NonNull(graphene.Int)
+
+    class Meta:
+        model = models.OtherService
+
+    def resolve_icon(self, info):
+        return self.icon.url
+
+
 class RepairTypeType(DjangoObjectType):
     class Meta:
         model = models.RepairType
@@ -324,7 +342,7 @@ class CreateOrder(Mutation):
         }, json={
             "token": card_token,
             "orderType": "ECOM",
-            "amount": int(total_price*100),
+            "amount": int(total_price * 100),
             "currencyCode": "GBP",
             "settlementCurrency": "GBP",
             "orderDescription": description,
@@ -345,7 +363,7 @@ class CreateOrder(Mutation):
             return CreateOrder(
                 ok=False,
                 errors=validation_error_to_graphene(
-                                   [("card", [f"Card error, reason: {resp_data['paymentStatusReason']}"])]
+                    [("card", [f"Card error, reason: {resp_data['paymentStatusReason']}"])]
                 )
             )
 
@@ -463,31 +481,39 @@ def get_booking_times(date: datetime.date):
 
 
 class Query:
-    site_config = graphene.Field(SiteConfigType)
+    site_config = graphene.NonNull(SiteConfigType)
 
-    main_slider_slides = graphene.List(MainSliderSlideType)
+    main_slider_slides = graphene.NonNull(graphene.List(graphene.NonNull(MainSliderSlideType)))
 
-    device_categories = graphene.List(DeviceCategoryType)
+    selling_points = graphene.NonNull(graphene.List(graphene.NonNull(SellingPointType)))
 
-    device_category = graphene.Field(DeviceCategoryType,
-                                     id=graphene.NonNull(graphene.ID))
+    other_services = graphene.NonNull(graphene.List(graphene.NonNull(OtherServiceType)))
 
-    device_types = graphene.List(DeviceTypeType,
-                                 category=graphene.ID())
-    device_type = graphene.Field(DeviceTypeType,
-                                 id=graphene.NonNull(graphene.ID))
+    device_categories = graphene.NonNull(graphene.List(graphene.NonNull(DeviceCategoryType)))
 
-    repair_types = graphene.List(RepairTypeType,
-                                 device_type=graphene.ID())
-    repair_type = graphene.Field(RepairTypeType,
-                                 id=graphene.NonNull(graphene.ID))
+    device_category = graphene.NonNull(DeviceCategoryType,
+                                       id=graphene.NonNull(graphene.ID))
 
-    appointment_times = graphene.List(
-        AppointmentTime,
+    device_types = graphene.NonNull(graphene.List(
+        DeviceTypeType,
+                         category=graphene.ID()))
+    device_type = graphene.NonNull(
+        DeviceTypeType,
+        id=graphene.NonNull(graphene.ID))
+
+    repair_types = graphene.NonNull(graphene.List(
+        RepairTypeType,
+                         device_type=graphene.ID()))
+    repair_type = graphene.NonNull(
+        RepairTypeType,
+        id=graphene.NonNull(graphene.ID))
+
+    appointment_times = graphene.NonNull(graphene.List(
+        graphene.NonNull(AppointmentTime),
         date=graphene.Date(required=True)
-    )
+    ))
 
-    cart_item = graphene.Field(
+    cart_item = graphene.NonNull(
         CartItem,
         category=graphene.NonNull(graphene.ID),
         id=graphene.NonNull(graphene.ID)
@@ -498,6 +524,12 @@ class Query:
 
     def resolve_main_slider_slides(self, info):
         return models.MainSliderSlide.objects.all()
+
+    def resolve_selling_points(self, info):
+        return models.SellingPoint.objects.all()
+
+    def resolve_other_services(self, info):
+        return models.OtherService.objects.all()
 
     def resolve_device_categories(self, info):
         return models.DeviceCategory.objects.all()
