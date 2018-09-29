@@ -1,5 +1,13 @@
 from django.contrib import admin
 from . import models
 
-admin.site.register(models.ServicePage)
-admin.site.register(models.ServicePageSection)
+
+class ServicePageSectionAdmin(admin.StackedInline):
+    model = models.ServicePageSection
+    extra = 1
+
+
+@admin.register(models.ServicePage)
+class ServicePageAdmin(admin.ModelAdmin):
+    inlines = [ServicePageSectionAdmin]
+
