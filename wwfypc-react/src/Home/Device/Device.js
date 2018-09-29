@@ -52,7 +52,7 @@ class Devices extends Component {
                                         <h3 className={"colour-" + colour}>{name}</h3>
                                         <p>{description}</p>
                                     </div>
-                                    <Button colour={1} small onClick={() => this.props.onSelect(id)}>Start repair</Button>
+                                    <Button colour={colour} small onClick={() => this.props.onSelect(id)}>Start repair</Button>
                                 </div>
                             ))
                         }}
