@@ -16,6 +16,37 @@ def get_item(id):
     )
 
 
+def validate_item(id, delivery, quantity):
+    try:
+        item = models.Item.objects.get(id=id)
+    except models.Item.DoesNotExist:
+        return [("id", ["Invalid device"])]
+    try:
+        delivery = models.ItemPostage.objects.get(id=delivery)
+    except models.ItemPostage.DoesNotExist:
+        return [("delivery", ["Invalid delivery"])]
+    if delivery.item.id != item.id:
+        return [("delivery", ["Invalid delivery"])]
+    if quantity > 1:
+        return [("quantity", ["Invalid quantity"])]
+
+
+def calculate_price(id, delivery, quantity):
+    item = models.Item.objects.get(id=id)
+    delivery = models.ItemPostage.objects.get(id=delivery)
+
+    return item.price * quantity + delivery.value * quantity
+
+
+def make_item_description(id, delivery, quantity):
+    item = models.Item.objects.get(id=id)
+    delivery = models.ItemPostage.objects.get(id=delivery)
+
+    specs = ", ".join(map(lambda s: f"{s.name}: {s.value}", item.specs.all()))
+
+    return f"{item.name} x {quantity} ({specs}) {delivery.name}"
+
+
 class ItemCategoryType(DjangoObjectType):
     colour = graphene.Int()
 

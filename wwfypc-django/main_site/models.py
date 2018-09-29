@@ -136,3 +136,26 @@ class Appointment(models.Model):
 
     def __str__(self):
         return self.uid
+
+
+class Order(models.Model):
+    uid = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=False, related_name="orders")
+    date = models.DateTimeField(blank=False, default=datetime.datetime.now)
+    card_token = models.CharField(max_length=255, blank=False)
+    name_on_card = models.CharField(max_length=255, blank=False)
+    worldpay_order_id = models.CharField(max_length=255, blank=False)
+
+    def __str__(self):
+        return self.uid
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=False, related_name="items")
+    type = models.CharField(max_length=255, blank=False)
+    item_id = models.CharField(max_length=255, blank=False)
+    quantity = models.IntegerField(blank=False)
+    delivery = models.CharField(max_length=255, blank=False)
+
+    def __str__(self):
+        return str(self.id)
