@@ -94,6 +94,25 @@
               margin: 0;
               padding: 15px 0;
               border-bottom: 2px solid $orange;
+
+              &.colour-1 {
+                border-color: $yellow;
+              }
+              &.colour-2 {
+                border-color: $blue;
+              }
+              &.colour-3 {
+                border-color: $orange;
+              }
+              &.colour-4 {
+                border-color: $green;
+              }
+              &.colour-5 {
+                border-color: $grey4;
+              }
+              &.colour-6 {
+                border-color: #fff;
+              }
             }
 
             p {

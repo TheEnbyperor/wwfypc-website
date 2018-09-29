@@ -62,6 +62,7 @@ class DeviceTypeType(DjangoObjectType):
 
 
 class DeviceCategoryType(DjangoObjectType):
+    colour = graphene.NonNull(graphene.Int)
     device_types = graphene.List(DeviceTypeType)
 
     class Meta:

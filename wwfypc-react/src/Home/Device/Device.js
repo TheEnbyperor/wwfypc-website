@@ -19,6 +19,8 @@ const DEVICES_QUERY = gql`
       id
       icon
       name
+      colour
+      description
     }
   }
 `;
@@ -43,13 +45,12 @@ class Devices extends Component {
                             if (loading) return <h2>Loading</h2>;
                             if (error) return <h2>Error</h2>;
 
-                            return data.deviceCategories.map(({id, icon, name}) => (
+                            return data.deviceCategories.map(({id, icon, name, description, colour}) => (
                                 <div>
                                     <div>
                                         <img src={BASE_URL + icon} alt={name} key={id}/>
-                                        <h3>{name}</h3>
-                                        <p>Bacon ipsum dolor amet tail flank tongue, corned beef short loin doner pork chop
-                                            pastrami ham hock ground round pork loin.</p>
+                                        <h3 className={"colour-" + colour}>{name}</h3>
+                                        <p>{description}</p>
                                     </div>
                                     <Button colour={1} small onClick={() => this.props.onSelect(id)}>Start repair</Button>
                                 </div>
