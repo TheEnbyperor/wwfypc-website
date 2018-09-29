@@ -72,16 +72,11 @@
         > div {
           display: flex;
           flex-direction: column;
+          width: 100%;
 
           background: $grey;
           border-radius: 25px;
-          padding: 7px 25px 7px;
-
-          > div:first-of-type {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+          padding: 25px 25px 7px;
 
             img {
               max-width: 150px;
@@ -116,10 +111,10 @@
             }
 
             p {
+              flex: 1;
               margin: 15px;
               font-size: 14px;
             }
-          }
         }
       }
 
