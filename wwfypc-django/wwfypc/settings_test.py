@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ay@l(d1wyjt18v%hg4hyrl$f8sywtes28cipe%c8(5b$tt+tg@'
+SECRET_KEY = os.getenv("DJANGO_SECRET", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'wwfypc.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': os.getenv('DB_NAME', 'lmi-site'),
+        'NAME': os.getenv('DB_NAME', 'wwfypc'),
         'USER': os.getenv('DB_USER', 'root'),
         'PASSWORD': os.getenv('DB_PASS', ''),
         'HOST': os.getenv('DB_HOST', 'db'),

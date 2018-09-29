@@ -1,6 +1,5 @@
 import graphene
-from graphene import ObjectType
-from graphene import Mutation
+from graphene import ObjectType, Mutation, InputObjectType
 from graphene_django.types import DjangoObjectType
 from graphene_django.converter import convert_django_field
 from graphql import GraphQLError
@@ -11,7 +10,11 @@ import datetime
 from django.utils import timezone
 import pytz
 import buy_and_sell.schema
+import requests
+import os
 from . import models
+
+WORLDPAY_API_KEY = os.getenv("WORLDPAY_SERVER_KEY", "")
 
 
 @convert_django_field.register(phonenumber_field.modelfields.PhoneNumberField)
@@ -91,6 +94,18 @@ class Appointment(DjangoObjectType):
 
     class Meta:
         model = models.Appointment
+
+
+class OrderItem(DjangoObjectType):
+    class Meta:
+        model = models.OrderItem
+
+
+class Order(DjangoObjectType):
+    items = graphene.NonNull(graphene.List(graphene.NonNull(OrderItem)))
+
+    class Meta:
+        model = models.Order
 
 
 class CartItemSpec(ObjectType):
@@ -233,6 +248,120 @@ class CreateAppointment(Mutation):
 
         return CreateAppointment(ok=True, appointment=appointment)
 
+
+class OrderItemInput(InputObjectType):
+    type = graphene.ID(required=True)
+    id = graphene.ID(required=True)
+    quantity = graphene.Int(required=True)
+    delivery = graphene.ID(required=True)
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+class CreateOrder(Mutation):
+    class Arguments:
+        name = graphene.String(required=True)
+        name_on_card = graphene.String(required=True)
+        email = graphene.String(required=True)
+        phone = graphene.String(required=True)
+        address = graphene.String(required=True)
+        card_token = graphene.String(required=True)
+        items = graphene.List(graphene.NonNull(OrderItemInput), required=True)
+
+    ok = graphene.NonNull(graphene.Boolean)
+    errors = graphene.List(FormError)
+    order = graphene.Field(Order)
+
+    def mutate(self, info, name, name_on_card, email, phone, address, card_token, items):
+        for item in items:
+            if item.type == "buy_and_sell":
+                validation = buy_and_sell.schema.validate_item(item.id, item.delivery, item.quantity)
+                if validation is not None:
+                    return CreateOrder(ok=False, errors=validation_error_to_graphene(validation))
+            else:
+                return CreateOrder(ok=False, errors=validation_error_to_graphene([("type", ["Invalid item type"])]))
+
+        matching_customers = models.Customer.objects.filter(email=email)
+        if len(matching_customers) > 0:
+            customer = matching_customers.first()
+        else:
+            customer = models.Customer()
+            customer.email = email
+        customer.name = name
+        customer.phone = phone
+        customer.address = address
+
+        try:
+            customer.full_clean()
+        except ValidationError as e:
+            return CreateOrder(ok=False, errors=validation_error_to_graphene(e))
+        customer.save()
+
+        total_price = 0
+        description = []
+        for item in items:
+            if item.type == "buy_and_sell":
+                total_price += buy_and_sell.schema.calculate_price(item.id, item.delivery, item.quantity)
+                description.append(buy_and_sell.schema.make_item_description(item.id, item.delivery, item.quantity))
+
+        description = "; ".join(description)
+
+        card_resp = requests.post("https://api.worldpay.com/v1/orders", headers={
+            "Authorization": WORLDPAY_API_KEY,
+        }, json={
+            "token": card_token,
+            "orderType": "ECOM",
+            "amount": int(total_price*100),
+            "currencyCode": "GBP",
+            "settlementCurrency": "GBP",
+            "orderDescription": description,
+            "name": name_on_card,
+            "shopperEmailAddress": email,
+            "shopperIdAddress": get_client_ip(info.context),
+            "shopperUserAgent": info.context.META.get("HTTP_USER_AGENT"),
+            "shopperAcceptHeader": info.context.META.get('HTTP_ACCEPT'),
+        })
+        resp_data = card_resp.json()
+        print(resp_data)
+
+        if card_resp.status_code != requests.codes.ok:
+            error = resp_data["message"] + ": " + resp_data["description"]
+            return CreateOrder(ok=False, errors=validation_error_to_graphene([("card", [error])]))
+
+        if resp_data["paymentStatus"] != "SUCCESS":
+            return CreateOrder(
+                ok=False,
+                errors=validation_error_to_graphene(
+                                   [("card", [f"Card error, reason: {resp_data['paymentStatusReason']}"])]
+                )
+            )
+
+        order = models.Order()
+        order.customer = customer
+        order.card_token = card_token
+        order.name_on_card = name_on_card
+        order.worldpay_order_id = resp_data["orderCode"]
+        order.save()
+
+        for item in items:
+            order_item = models.OrderItem()
+            order_item.order = order
+            order_item.type = item.type
+            order_item.item_id = item.id
+            order_item.delivery = item.delivery
+            order_item.quantity = item.quantity
+            order_item.save()
+
+        return CreateOrder(ok=True, order=order)
+
+
 def check_booking_time(date: datetime.date, time: datetime.time):
     tz = pytz.timezone("Europe/London")
     rules = models.AppointmentTimeRule.objects.all()
@@ -359,6 +488,8 @@ class Query:
         else:
             raise GraphQLError("Invalid type")
 
+
 class Mutation:
     create_postal_order = CreatePostalOrder.Field()
     create_appointment = CreateAppointment.Field()
+    create_order = CreateOrder.Field()
