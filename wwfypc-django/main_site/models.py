@@ -86,6 +86,8 @@ class DeviceCategory(models.Model):
         verbose_name_plural = "Device categories"
 
     name = models.CharField(max_length=255, blank=False)
+    description = models.TextField(blank=False)
+    colour = models.IntegerField(choices=COLOURS, blank=False, default=1)
     icon = models.FileField(blank=False)
 
     def __str__(self):
