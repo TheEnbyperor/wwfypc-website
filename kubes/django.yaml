@@ -56,6 +56,16 @@ spec:
             secretKeyRef:
               name: mysql-pass-test
               key: pass
+        - name: WORLDPAY_SERVER_KEY
+          valueFrom:
+            secretKeyRef:
+              name: worldpay-test
+              key: server
+        - name: DJANGO_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: django-secret-test
+              key: secret
         volumeMounts:
         - name: gluster
           mountPath: /src/static

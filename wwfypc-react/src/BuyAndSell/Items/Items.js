@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 import './style/Items.scss';
 import Button from '../../Shared/Buttons';
+import {addToCart, getItem} from "../../Cart/Cart";
 import {BASE_URL} from "../../App";
 
 const ITEM_QUERY = gql`
@@ -47,6 +48,7 @@ class Item extends Component {
         super(props);
 
         this.setSlide = this.setSlide.bind(this);
+        this.addToCart = this.addToCart.bind(this);
 
         this.state = {
             activeSlide: 0
@@ -74,6 +76,16 @@ class Item extends Component {
         }
     }
 
+    addToCart() {
+        const item = getItem("buy_and_sell", this.props.item.id);
+        if (typeof item !== "undefined") {
+            if (item.quantity >= 1) {
+                return;
+            }
+        }
+        addToCart("buy_and_sell", this.props.item.id);
+    }
+
     render() {
         const prevActive = (this.state.activeSlide === 0) ? this.props.item.images.length - 1 : this.state.activeSlide - 1;
         const nextActive = ((this.state.activeSlide + 1) >= this.props.item.images.length) ? 0 : this.state.activeSlide + 1;
@@ -98,8 +110,12 @@ class Item extends Component {
                     })}
                 </div>
                 <div className="buttons">
-                    <Button colour={this.props.item.category.colour} small>&pound;{this.props.item.price}</Button>
-                    <Button colour={this.props.item.category.colour} small>Reserve</Button>
+                    <Button colour={this.props.item.category.colour} small onClick={this.addToCart}>
+                        &pound;{this.props.item.price}
+                    </Button>
+                    <Button colour={this.props.item.category.colour} small>
+                        Reserve
+                    </Button>
                 </div>
                 <div className="reserved">
                     <p>Reserved</p>
