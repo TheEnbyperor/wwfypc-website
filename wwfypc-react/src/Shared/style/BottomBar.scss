@@ -63,4 +63,13 @@ $bar-height: 70px;
     transition-delay: .1s;
     border-radius: 999999px;
   }
+
+  > *:not(span) {
+    margin: 0 15px;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
 }

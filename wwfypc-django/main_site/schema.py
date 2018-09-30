@@ -8,11 +8,13 @@ import phonenumber_field.modelfields
 from django.core.exceptions import ValidationError
 import datetime
 from django.utils import timezone
+from django.core import mail
 import pytz
 import buy_and_sell.schema
 import requests
 import os
 from . import models
+from . import forms
 
 WORLDPAY_API_KEY = os.getenv("WORLDPAY_SERVER_KEY", "")
 
@@ -162,6 +164,10 @@ class FormError(ObjectType):
 
 def validation_error_to_graphene(error):
     return map(lambda item: FormError(field=item[0], errors=item[1]), error)
+
+
+def form_error_to_graphene(error: dict):
+    return map(lambda item: FormError(field=item[0], errors=item[1]), error.items())
 
 
 class CreatePostalOrder(Mutation):
@@ -386,6 +392,61 @@ class CreateOrder(Mutation):
         return CreateOrder(ok=True, order=order)
 
 
+class ContactForm(Mutation):
+    class Arguments:
+        name = graphene.String(required=True)
+        email = graphene.String(required=True)
+        phone = graphene.String(required=True)
+        message = graphene.String(required=True)
+
+    ok = graphene.NonNull(graphene.Boolean)
+    errors = graphene.List(FormError)
+
+    def mutate(self, info, name, email, phone, message):
+        contact_form = forms.ContactForm({
+            'name': name,
+            'email': email,
+            'phone': phone,
+            'message': message
+        })
+
+        if not contact_form.is_valid():
+            return ContactForm(ok=False, errors=form_error_to_graphene(contact_form.errors))
+
+        name = contact_form.cleaned_data["name"]
+        email = contact_form.cleaned_data["email"]
+        phone = contact_form.cleaned_data["phone"]
+        message = contact_form.cleaned_data["message"]
+
+        matching_customers = models.Customer.objects.filter(email=email)
+        if len(matching_customers) > 0:
+            customer = matching_customers.first()
+        else:
+            customer = models.Customer()
+            customer.email = email
+        customer.name = name
+        customer.phone = phone
+
+        try:
+            customer.full_clean()
+        except ValidationError as e:
+            return CreateOrder(ok=False, errors=validation_error_to_graphene(e))
+        customer.save()
+
+        site_config = models.SiteConfig.objects.first()
+
+        email_message = mail.EmailMessage(
+            f"Contact form message from {name}",
+            f"Name: {name}\r\nEmail: {email}\r\nPhone: {phone}\r\n\r\n---\r\n\r\n{message}",
+            site_config.email,
+            [site_config.email],
+            reply_to=[email],
+        )
+        email_message.send()
+
+        return ContactForm(ok=True)
+
+
 def check_booking_time(date: datetime.date, time: datetime.time):
     tz = pytz.timezone("Europe/London")
     rules = models.AppointmentTimeRule.objects.all()
@@ -575,3 +636,4 @@ class Mutation:
     create_postal_order = CreatePostalOrder.Field()
     create_appointment = CreateAppointment.Field()
     create_order = CreateOrder.Field()
+    contact_form = ContactForm.Field()
