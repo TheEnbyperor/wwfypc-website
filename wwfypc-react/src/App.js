@@ -11,6 +11,7 @@ import Home from './Home/Home';
 import Service from './Service/Service';
 import BuyAndSell from './BuyAndSell/BuyAndSell';
 import Cart from './Cart/Cart';
+import Contact from './Contact/Contact';
 
 export const BASE_URL = process.env.REACT_APP_BACKEND_HOST || "http://127.0.0.1:8000";
 export const WORLDPAY_KEY = "T_C_52bc5b16-562d-4198-95d4-00b91f30fe2c";
@@ -40,6 +41,7 @@ class App extends Component {
                             <Route exact path="/" component={Home}/>
                             <Route path="/buy-and-sell" component={BuyAndSell}/>
                             <Route path="/cart" component={Cart}/>
+                            <Route path="/contact" component={Contact}/>
                             <Query query={SERVICES_QUERY}>
                                 {({loading, error, data}) => {
                                     if (loading || error) return null;

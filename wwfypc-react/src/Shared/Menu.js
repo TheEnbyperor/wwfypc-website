@@ -58,7 +58,7 @@ export default class Top extends Component {
                         <Link to="/buy-and-sell">Buy & Sell</Link>
                     </div>
                     <div>
-                        <a href="">Contact</a>
+                        <Link to="/contact">Contact</Link>
                     </div>
                 </nav>
             </div>

@@ -139,3 +139,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 CHROME_PATH = "/usr/bin/google-chrome"
 
 PHONENUMBER_DEFAULT_REGION = "GB"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
