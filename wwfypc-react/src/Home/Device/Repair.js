@@ -178,10 +178,10 @@ class RepairInfo extends Component {
                                                                     &pound;{data.repairType.price}
                                                                 </div>,
                                                                 this.props.deliveryType === null ? null :
-                                                                <Button key={2} colour={2}
-                                                                        onClick={this.props.nextStep}>
-                                                                    Fix your device now
-                                                                </Button>
+                                                                    <Button key={2} colour={2}
+                                                                            onClick={this.props.nextStep}>
+                                                                        Fix your device now
+                                                                    </Button>
                                                             ];
                                                         }}
                                                     </Query>

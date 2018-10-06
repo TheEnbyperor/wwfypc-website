@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
+import {Link} from 'react-router-dom';
 import './style/Filter.scss';
 
 const FILTER_QUERY = gql`
@@ -33,7 +34,9 @@ export default class Filter extends Component {
                     }}
                 </Query>
                 <div className="colour-4">
-                    Sell
+                    <Link to="/sell">
+                        Sell
+                    </Link>
                 </div>
                 <div className="colour-5">
                     Build a PC

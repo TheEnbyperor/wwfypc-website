@@ -1,18 +1,10 @@
 @import "../../variables";
 
-.ContactInner {
+.SellInner {
   background: #fff;
-  background: linear-gradient(90deg, #fff 0%, #fff 50%, $grey4 50%, $grey4 100%);
+  background: linear-gradient(90deg, #fff 0%, #fff 50%, $green 50%, $green 100%);
   display: flex;
   align-items: center;
-
-  &.orange {
-    background: linear-gradient(90deg, $orange 0%, $orange 50%, $grey4 50%, $grey4 100%);
-
-    .left {
-      background: $orange !important;
-    }
-  }
 
   div.inner {
     max-width: $max-width;
@@ -21,6 +13,29 @@
     display: flex;
     margin: 0 auto;
     height: 100%;
+    justify-content: center;
+
+    h1 {
+      color: $green;
+      font-size: 35px;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      color: $grey4;
+      font-family: "Bariol", sans-serif;
+      text-transform: none;
+      font-size: 30px;
+      margin-top: 5px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+
+    hr {
+      border-top: 3px solid $green;
+    }
 
     .left {
       padding: 60px 15px 100px 50px;
@@ -29,38 +44,26 @@
       overflow-y: auto;
       position: relative;
 
-      h1 {
-        color: $grey4;
-        border-bottom: 2px solid $orange;
-        padding-bottom: 5px;
-        display: inline-block;
-      }
-
-      .ContactForm {
+      .SellForm {
         display: grid;
         grid-auto-flow: row;
         grid-auto-rows: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
 
         p {
-          color: $orange;
+          color: $grey4;
           font-weight: bold;
           margin: 0;
           padding: 0 10px;
         }
 
-        .input, .textarea {
+        .input, .textarea, .select {
           display: flex;
           flex-direction: column;
           padding: 5px 0;
 
-          .inner {
-            display: grid;
-            grid-auto-flow: column;
-            grid-auto-columns: 1fr;
-            grid-gap: 20px;
-          }
-
-          input, textarea {
+          input, textarea, select {
             font-family: "Bariol", sans-serif;
             padding: 15px;
             border: 1px solid $grey4;
@@ -69,35 +72,43 @@
             flex: 1;
             width: 100%;
             resize: none;
+            background: #fff;
           }
         }
 
         .textarea {
           grid-row: span 3;
         }
-      }
 
-      .ContactSuccess {
-        display: flex;
-        background: $orange;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 100%;
+        .select {
+          .inner {
+            position: relative;
 
-        h1 {
-          font-size: 50px;
-          border-bottom: none !important;
-          padding-bottom: 0 !important;
-        }
-
-        p {
-          font-size: 25px;
-        }
-
-        h1, p {
-          margin: 10px;
-          color: #fff !important;
+            &:after {
+              position: absolute;
+              color: $orange;
+              font-size: 25px;
+              padding: 0 5px;
+              right: 0px;
+              top: 50%;
+              transform: translateY(-50%);
+              content: "\f107";
+              font-family: "Font Awesome 5 Free";
+              font-weight: 900;
+              pointer-events: none;
+              background: #fff;
+              height: calc(100% - 2px);
+              line-height: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-top-right-radius: 15px;
+              border-bottom-right-radius: 15px;
+              border-right: 1px solid $grey4;
+              border-top: 1px solid $grey4;
+              border-bottom: 1px solid $grey4;
+            }
+          }
         }
       }
     }
@@ -106,36 +117,47 @@
       padding-right: 10px;
       padding-left: 10px;
       width: 40%;
-      background: $grey4;
+      background: $green;
       text-align: center;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-
-      p, i {
         color: #fff;
-        font-size: 20px;
+        font-size: 23px;
         white-space: pre;
-        text-align: center;
+
+      h2 {
+        color: #fff;
       }
 
-      .icon {
-        display: inline-grid;
-        grid-template-columns: auto 1fr;
-        margin: 10px 0;
-        grid-gap: 10px;
-        align-items: center;
+      ul {
+        padding-left: 0;
+        text-align: left;
 
-        i {
-          grid-column: 1;
-          color: $orange;
+        li {
+          margin: 2px 0;
         }
+      }
 
-        p {
-          grid-column: 2;
-          margin: 0;
+      .price {
+        span {
+          display: block;
+
+          &.price {
+          font-size: 50px;
+          font-family: "Neutra", sans-serif;
+          }
+
+          &.disclaimer {
+            font-size: 17px;
+          }
         }
       }
     }
   }
+}
+
+.Footer {
+  padding-top: 60px;
 }
