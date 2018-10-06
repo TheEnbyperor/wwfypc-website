@@ -1,6 +1,7 @@
 from django.contrib import admin
 import solo.admin
 import buy_and_sell.models
+import unlocking.models
 from . import models
 
 
@@ -31,11 +32,16 @@ class OrderItemAdmin(admin.TabularInline):
     def item_from_type(self, obj):
         if obj.type == "buy_and_sell":
             return buy_and_sell.models.Item.objects.get(id=obj.item_id)
+        elif obj.type == "unlocking":
+            id, _ = obj.item_id.split(";", 1)
+            return buy_and_sell.models.UnlockingPrice.objects.get(id=id)
     item_from_type.short_description = 'Item'
 
     def delivery_from_type(self, obj):
         if obj.type == "buy_and_sell":
             return buy_and_sell.models.ItemPostage.objects.get(id=obj.delivery)
+        elif obj.type == "unlocking":
+            return "N/A"
     delivery_from_type.short_description = 'Delivery'
 
     def has_add_permission(self, request, obj=None):

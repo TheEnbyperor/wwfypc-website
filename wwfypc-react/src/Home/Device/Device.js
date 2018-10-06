@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Query} from "react-apollo";
 import gql from "graphql-tag";
 import "./style/Device.scss";
-import Indicators from "./Indicators";
+import Indicators from "../../Shared/Indicators";
 import RepairSelection from './Repair';
 import {BASE_URL} from "../../App";
 import WalkIn from "./WalkIn";
@@ -45,8 +45,8 @@ class Devices extends Component {
                             if (loading) return <h2>Loading</h2>;
                             if (error) return <h2>Error</h2>;
 
-                            return data.deviceCategories.map(({id, icon, name, description, colour}) => (
-                                <div>
+                            return data.deviceCategories.map(({id, icon, name, description, colour}, i) => (
+                                <div key={i}>
                                         <img src={BASE_URL + icon} alt={name} key={id}/>
                                         <h3 className={"colour-" + colour}>{name}</h3>
                                         <p>{description}</p>

@@ -21,6 +21,8 @@ def validate_item(id, delivery, quantity):
         item = models.Item.objects.get(id=id)
     except models.Item.DoesNotExist:
         return [("id", ["Invalid device"])]
+    if item.sold:
+        return [("id", ["Invalid device"])]
     try:
         delivery = models.ItemPostage.objects.get(id=delivery)
     except models.ItemPostage.DoesNotExist:
@@ -45,6 +47,12 @@ def make_item_description(id, delivery, quantity):
     specs = ", ".join(map(lambda s: f"{s.name}: {s.value}", item.specs.all()))
 
     return f"{item.name} x {quantity} ({specs}) {delivery.name}"
+
+
+def place_order(id, delivery, quantity):
+    item = models.Item.objects.get(id=id)
+    item.sold = True
+    item.save()
 
 
 class ItemCategoryType(DjangoObjectType):
@@ -80,7 +88,7 @@ class Query:
     def resolve_buy_and_sell_items(self, info, **kwargs):
         category = kwargs.get("category")
 
-        items = models.Item.objects.all()
+        items = models.Item.objects.filter(sold=False)
         if category is not None:
             items = items.filter(category_id=category)
 

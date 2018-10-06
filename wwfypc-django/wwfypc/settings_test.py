@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'graphene_django',
     'corsheaders',
     'solo',
-    'main_site',
-    'buy_and_sell',
-    'services',
+    'main_site.apps.MainSiteConfig',
+    'buy_and_sell.apps.BuyAndSellConfig',
+    'services.apps.ServicesConfig',
+    'selling.apps.SellingConfig',
+    'unlocking.apps.UnlockingConfig',
 ]
 
 MIDDLEWARE = [
