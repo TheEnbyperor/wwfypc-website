@@ -184,52 +184,76 @@
   }
 }
 
-.Device .Info > div {
-  background: $grey;
-  padding: 25px;
-  border-radius: 25px;
+.Device, .Unlocking {
+  .Info > div {
+    background: $grey;
+    padding: 25px;
+    border-radius: 25px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-items: center;
-
-  img {
-    margin-bottom: 20px;
-    width: 50%;
-  }
-
-  h2 {
-    color: $grey4;
-    text-transform: uppercase;
-    border-bottom: 2px solid $grey3;
-    padding-bottom: 13px;
-    margin: 0 0 13px;
-    width: 100%;
-    text-align: center;
-    font-size: 18px;
-  }
-
-  .info {
     display: flex;
-    width: 100%;
+    flex-direction: column;
     align-items: center;
-    padding: 0 15px;
+    justify-items: center;
 
-    ul {
-      flex: 1;
-      list-style: none;
-      margin: 0;
-      padding-left: 0;
+    img {
+      margin-bottom: 20px;
+      max-width: 50%;
+      max-height: 100px;
+    }
 
-      li {
-        position: relative;
-        margin: 10px 0;
-        font-size: 18px;
+    h2 {
+      color: $grey4;
+      text-transform: uppercase;
+      border-bottom: 2px solid $grey3;
+      padding-bottom: 13px;
+      margin: 0 0 13px;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .info {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      padding: 0 15px;
+
+      ul {
+        flex: 1;
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+
+        li {
+          position: relative;
+          margin: 10px 0;
+          font-size: 18px;
+        }
       }
     }
-  }
 
+    .input {
+      display: flex;
+      flex-direction: column;
+
+      input, textarea {
+        font-family: "Bariol", sans-serif;
+        padding: 5px;
+        border: 0;
+        flex: 1;
+        margin: 5px 0;
+      }
+
+      p {
+        font-weight: bold;
+        margin: 0;
+        padding: 0 10px;
+
+        span {
+          color: $orange;
+        }
+      }
+    }
 
     .price {
       font-family: "Neutra", sans-serif;
@@ -237,8 +261,9 @@
       flex: 1;
     }
 
-  .Button {
-    width: 100%;
-    margin-bottom: 0;
+    .Button {
+      width: 100%;
+      margin-bottom: 0;
+    }
   }
 }

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'buy_and_sell.apps.BuyAndSellConfig',
     'services.apps.ServicesConfig',
     'selling.apps.SellingConfig',
+    'unlocking.apps.UnlockingConfig',
 ]
 
 MIDDLEWARE = [

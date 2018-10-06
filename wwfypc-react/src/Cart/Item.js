@@ -102,25 +102,27 @@ class Item extends Component {
                               onChange={this.props.onUpdateNum} key={2}/>,
                     <div className="price" key={3}>
                         <span>&pound;{(this.props.item.quantity * data.cartItem.price).toFixed(2)}</span>
-                        <form>
-                            {
-                                data.cartItem.deliveries.map((option) => {
-                                    let price = "";
+                        {data.cartItem.deliveries.length <= 1 ? null :
+                            <form>
+                                {
+                                    data.cartItem.deliveries.map((option) => {
+                                        let price = "";
 
-                                    if (option.price > 0) {
-                                        price = " (+£" + option.price.toFixed(2) + ")";
-                                    }
+                                        if (option.price > 0) {
+                                            price = " (+£" + option.price.toFixed(2) + ")";
+                                        }
 
-                                    return [
-                                        <input key={0} type="radio" value={"delivery-" + option.id}
-                                               checked={this.props.item.selectedDelivery === option.id}
-                                               onChange={() => this.props.onDeliveryChange(option.id)}
-                                        />,
-                                        <label key={1}>{option.name + price}</label>
-                                    ]
-                                })
-                            }
-                        </form>
+                                        return [
+                                            <input key={0} type="radio" value={"delivery-" + option.id}
+                                                   checked={this.props.item.selectedDelivery === option.id}
+                                                   onChange={() => this.props.onDeliveryChange(option.id)}
+                                            />,
+                                            <label key={1}>{option.name + price}</label>
+                                        ]
+                                    })
+                                }
+                            </form>
+                        }
                     </div>,
                 ]
             }}

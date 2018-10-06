@@ -1,0 +1,73 @@
+@import "../../variables";
+
+[data-anchor="unlocking"] {
+  background-color: $grey4;
+  padding-top: 30px !important;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px + 70px !important;
+}
+
+.UnlockingInner {
+  box-shadow: 0 0 38px rgba(0, 0, 0, .23);
+  background: #fff;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 40px;
+
+  h1 {
+    text-align: center;
+  }
+
+  > div {
+    max-width: $max-width;
+    width: 100%;
+    flex: 1;
+  }
+}
+
+.UnlockingDevice {
+  display: flex;
+  flex-direction: column;
+
+  .RepairSelection {
+    > div {
+      &.stage-3, &.stage-4 {
+        .Select {
+          grid-template-columns: repeat(2, 1fr) 2fr !important;
+
+          .model {
+            display: block !important;
+          }
+
+          .repairType {
+            grid-column: 3 !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.Notice {
+  padding: 0 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    height: 150px;
+    margin-bottom: 50px;
+  }
+
+  p {
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 10px 0;
+    color: $grey4;
+  }
+}

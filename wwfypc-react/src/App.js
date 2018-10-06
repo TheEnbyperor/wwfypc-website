@@ -13,6 +13,7 @@ import BuyAndSell from './BuyAndSell/BuyAndSell';
 import Cart from './Cart/Cart';
 import Contact from './Contact/Contact';
 import Sell from './Sell/Sell';
+import Unlocking from './Unlocking/Unlocking';
 
 export const BASE_URL = process.env.REACT_APP_BACKEND_HOST || "http://127.0.0.1:8000";
 export const WORLDPAY_KEY = "T_C_52bc5b16-562d-4198-95d4-00b91f30fe2c";
@@ -44,6 +45,7 @@ class App extends Component {
                             <Route path="/sell" component={Sell}/>
                             <Route path="/cart" component={Cart}/>
                             <Route path="/contact" component={Contact}/>
+                            <Route path="/unlocking" component={Unlocking}/>
                             <Query query={SERVICES_QUERY}>
                                 {({loading, error, data}) => {
                                     if (loading || error) return null;

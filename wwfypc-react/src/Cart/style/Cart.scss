@@ -59,6 +59,17 @@
           width: 95%;
         }
 
+        .Img {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+
+          .Button {
+            align-self: stretch;
+          }
+        }
+
         .ItemInfo {
           .name {
             font-size: 23px;

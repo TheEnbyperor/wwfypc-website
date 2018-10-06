@@ -11,6 +11,7 @@ from django.utils import timezone
 from django.core import mail
 import pytz
 import buy_and_sell.schema
+import unlocking.schema
 import requests
 import os
 from . import models
@@ -315,6 +316,10 @@ class CreateOrder(Mutation):
                 validation = buy_and_sell.schema.validate_item(item.id, item.delivery, item.quantity)
                 if validation is not None:
                     return CreateOrder(ok=False, errors=validation_error_to_graphene(validation))
+            if item.type == "unlocking":
+                validation = unlocking.schema.validate_item(item.id, item.delivery, item.quantity)
+                if validation is not None:
+                    return CreateOrder(ok=False, errors=validation_error_to_graphene(validation))
             else:
                 return CreateOrder(ok=False, errors=validation_error_to_graphene([("type", ["Invalid item type"])]))
 
@@ -335,13 +340,18 @@ class CreateOrder(Mutation):
         customer.save()
 
         total_price = 0
-        description = []
+        description_items = []
         for item in items:
             if item.type == "buy_and_sell":
                 total_price += buy_and_sell.schema.calculate_price(item.id, item.delivery, item.quantity)
-                description.append(buy_and_sell.schema.make_item_description(item.id, item.delivery, item.quantity))
+                description_items.append(
+                    buy_and_sell.schema.make_item_description(item.id, item.delivery, item.quantity))
+            if item.type == "unlocking":
+                total_price += unlocking.schema.calculate_price(item.id, item.delivery, item.quantity)
+                description_items.append(
+                    unlocking.schema.make_item_description(item.id, item.delivery, item.quantity))
 
-        description = "; ".join(description)
+        description = "; ".join(description_items)
 
         card_resp = requests.post("https://api.worldpay.com/v1/orders", headers={
             "Authorization": WORLDPAY_API_KEY,
@@ -359,7 +369,6 @@ class CreateOrder(Mutation):
             "shopperAcceptHeader": info.context.META.get('HTTP_ACCEPT'),
         })
         resp_data = card_resp.json()
-        print(resp_data)
 
         if card_resp.status_code != requests.codes.ok:
             error = resp_data["message"] + ": " + resp_data["description"]
@@ -381,6 +390,8 @@ class CreateOrder(Mutation):
         order.save()
 
         for item in items:
+            if item.type == "buy_and_sell":
+                buy_and_sell.schema.place_order(item.id, item.delivery, item.quantity)
             order_item = models.OrderItem()
             order_item.order = order
             order_item.type = item.type
@@ -388,6 +399,26 @@ class CreateOrder(Mutation):
             order_item.delivery = item.delivery
             order_item.quantity = item.quantity
             order_item.save()
+
+        site_config = models.SiteConfig.objects.first()
+
+        cart_message = "\r\n".join(description_items)
+        message = f"Name: {name}\r\n" \
+                  f"Email: {email}\r\n" \
+                  f"Phone: {phone}\r\n" \
+                  f"Address:\r\n{address}\r\n\r\n" \
+                  "---\r\n\r\n" \
+                  "Cart contents" \
+                  f"{cart_message}"
+
+        email_message = mail.EmailMessage(
+            f"New order placed {order.uid}",
+            message,
+            site_config.email,
+            [site_config.email],
+            reply_to=[email],
+        )
+        email_message.send()
 
         return CreateOrder(ok=True, order=order)
 
@@ -555,24 +586,16 @@ class Query:
     device_category = graphene.NonNull(DeviceCategoryType,
                                        id=graphene.NonNull(graphene.ID))
 
-    device_types = graphene.NonNull(graphene.List(
-        DeviceTypeType,
-                         category=graphene.ID()))
-    device_type = graphene.NonNull(
-        DeviceTypeType,
-        id=graphene.NonNull(graphene.ID))
+    device_types = graphene.NonNull(graphene.List(DeviceTypeType), category=graphene.ID())
+    device_type = graphene.NonNull(DeviceTypeType, id=graphene.NonNull(graphene.ID))
 
-    repair_types = graphene.NonNull(graphene.List(
-        RepairTypeType,
-                         device_type=graphene.ID()))
-    repair_type = graphene.NonNull(
-        RepairTypeType,
-        id=graphene.NonNull(graphene.ID))
+    repair_types = graphene.NonNull(graphene.List(RepairTypeType), device_type=graphene.ID())
+    repair_type = graphene.NonNull(RepairTypeType, id=graphene.NonNull(graphene.ID))
 
-    appointment_times = graphene.NonNull(graphene.List(
-        graphene.NonNull(AppointmentTime),
+    appointment_times = graphene.NonNull(
+        graphene.List(graphene.NonNull(AppointmentTime)),
         date=graphene.Date(required=True)
-    ))
+    )
 
     cart_item = graphene.NonNull(
         CartItem,
@@ -628,6 +651,8 @@ class Query:
     def resolve_cart_item(self, info, category, id):
         if category == "buy_and_sell":
             return buy_and_sell.schema.get_item(id)
+        elif category == "unlocking":
+            return unlocking.schema.get_item(id)
         else:
             raise GraphQLError("Invalid type")
 

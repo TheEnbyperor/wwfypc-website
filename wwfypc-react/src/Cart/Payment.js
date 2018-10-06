@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import gql from 'graphql-tag';
 import {WORLDPAY_KEY, client} from "../App";
+import {ITEM_PRICE_QUERY} from "./Cart";
 import Button from "../Shared/Buttons";
 
 const MAKE_ORDER = gql`
@@ -96,35 +97,51 @@ export default class Payment extends Component {
     submit() {
         this.updateCardInfo().then(() => {
             if (this.state.token !== null) {
-                client.mutate({
-                    mutation: MAKE_ORDER,
-                    variables: {
-                        name: this.name.current.value,
-                        email: this.email.current.value,
-                        phone: this.phone.current.value,
-                        address: this.address.current.value,
-                        nameOnCard: this.nameOnCard.current.value,
-                        cardToken: this.state.token,
-                        items: this.props.cart.map(item => ({
-                            type: item.type,
-                            id: item.id,
-                            quantity: item.quantity,
-                            delivery: item.selectedDelivery,
-                        }))
+                this.props.cart.map(async item => {
+                    const {data} = await client.query({
+                        query: ITEM_PRICE_QUERY,
+                        variables: {type: item.type, id: item.id},
+                    });
+                    let selectedDelivery;
+                    if (data.cartItem.deliveries.length <= 1) {
+                        selectedDelivery = data.cartItem.deliveries[0].id;
+                    } else {
+                        selectedDelivery = item.selectedDelivery
                     }
-                })
-                    .then(({data, error}) => {
-                        console.log(data, error);
-                        if (data.createOrder.ok) {
-                            setTimeout(this.props.onSubmit, 500);
-                        } else {
-                            this.setState({
-                                called: true,
-                                error: error,
-                                data: data,
-                            });
+
+
+                    return {
+                        type: item.type,
+                        id: item.id,
+                        quantity: item.quantity,
+                        delivery: selectedDelivery,
+                    };
+                }).then(cart => {
+                    client.mutate({
+                        mutation: MAKE_ORDER,
+                        variables: {
+                            name: this.name.current.value,
+                            email: this.email.current.value,
+                            phone: this.phone.current.value,
+                            address: this.address.current.value,
+                            nameOnCard: this.nameOnCard.current.value,
+                            cardToken: this.state.token,
+                            items: cart
                         }
-                })
+                    })
+                        .then(({data, error}) => {
+                            console.log(data, error);
+                            if (data.createOrder.ok) {
+                                setTimeout(this.props.onSubmit, 500);
+                            } else {
+                                this.setState({
+                                    called: true,
+                                    error: error,
+                                    data: data,
+                                });
+                            }
+                        })
+                });
             }
         });
     }

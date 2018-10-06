@@ -8,7 +8,7 @@ import Success from './Success';
 import {client} from "../App";
 import "./style/Cart.scss";
 
-const ITEM_PRICE_QUERY = gql`
+export const ITEM_PRICE_QUERY = gql`
   query($type: ID!, $id: ID!) {
     cartItem(category: $type, id: $id) {
       price
@@ -99,7 +99,12 @@ class PriceTotal extends Component {
                     query: ITEM_PRICE_QUERY,
                     variables: {type: item.type, id: item.id},
                 });
-                const delivery = data.cartItem.deliveries.find(elm => elm.id === item.selectedDelivery);
+                let delivery = null;
+                if (data.cartItem.deliveries.length <= 1) {
+                    delivery = data.cartItem.deliveries[0]
+                } else {
+                    delivery = data.cartItem.deliveries.find(elm => elm.id === item.selectedDelivery);
+                }
                 const prev2 = await prev;
                 return [prev2[0] + data.cartItem.price * item.quantity, prev2[1] + delivery.price * item.quantity];
             }, [0, 0]).then(price => {
@@ -155,6 +160,7 @@ export default class Cart extends Component {
         this.state = {
             cart: getCart(),
             state: 0,
+            cartIsReady: false,
         };
 
         this.onUpdate = this.onUpdate.bind(this);
@@ -168,7 +174,8 @@ export default class Cart extends Component {
             navigationPosition: 'right',
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-        })
+        });
+        this.cartIsReady();
     }
 
     componentWillUnmount() {
@@ -177,17 +184,33 @@ export default class Cart extends Component {
 
     onUpdate(cart) {
         updateCart(cart);
+        this.cartIsReady();
         this.setState({
             cart: cart
         });
     }
 
     cartIsReady() {
-        return this.state.cart.reduce((prev, item) => {
-            if (item.selectedDelivery === null) return false;
+        this.state.cart.reduce(async (prev, item) => {
+            const {data} = await client.query({
+                query: ITEM_PRICE_QUERY,
+                variables: {type: item.type, id: item.id},
+            });
+            if (data.cartItem.deliveries.length > 1 && item.selectedDelivery === null)
+                return false;
 
             return prev;
-        }, true);
+        }, Promise.resolve(true)).then(res => {
+            if (this.state.cart.length > 0) {
+                this.setState({
+                    cartIsReady: res
+                })
+            } else {
+                this.setState({
+                    cartIsReady: false
+                })
+            }
+        });
     }
 
     onComplete() {
@@ -204,27 +227,27 @@ export default class Cart extends Component {
 
         if (this.state.state === 0) {
             left = <Items cart={this.state.cart} onUpdate={this.onUpdate}/>;
-            right = this.cartIsReady() ?
+            right = this.state.cartIsReady ?
                 <Button colour={3} onClick={() => this.setState({state: 1})}>Checkout</Button> :
                 <h3>Please complete the cart</h3>;
         } else if (this.state.state === 1) {
             left = <Payment cart={this.state.cart} onSubmit={this.onComplete}/>;
-        } else if  (this.state.state === 2) {
+        } else if (this.state.state === 2) {
             left = <Success/>;
         }
 
         return <div className="Cart">
-                <div className={"section CartInner" + (this.state.state === 2 ? " orange" : "")}>
-                    <div className="inner">
-                        <div className="left">
-                            {left}
-                        </div>
-                        <div className="right">
-                            <PriceTotal cart={this.state.cart}/>
-                            {right}
-                        </div>
+            <div className={"section CartInner" + (this.state.state === 2 ? " orange" : "")}>
+                <div className="inner">
+                    <div className="left">
+                        {left}
+                    </div>
+                    <div className="right">
+                        <PriceTotal cart={this.state.cart}/>
+                        {right}
                     </div>
                 </div>
+            </div>
             <div className="section fp-auto-height" style={{
                 paddingBottom: 70,
             }}><Footer/></div>
