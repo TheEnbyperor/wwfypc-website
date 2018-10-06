@@ -436,7 +436,7 @@ class ContactForm(Mutation):
         site_config = models.SiteConfig.objects.first()
 
         email_message = mail.EmailMessage(
-            f"Contact form message from {name}",
+            f"Sell form message from {name}",
             f"Name: {name}\r\nEmail: {email}\r\nPhone: {phone}\r\n\r\n---\r\n\r\n{message}",
             site_config.email,
             [site_config.email],

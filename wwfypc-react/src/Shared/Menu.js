@@ -8,7 +8,6 @@ import gql from 'graphql-tag';
 const SERVICES_QUERY = gql`
   query {
     servicePages {
-      id
       name
       url
     }
@@ -43,8 +42,8 @@ export default class Top extends Component {
 
                                 return (
                                     <div>
-                                        {data.servicePages.map((page) => {
-                                            return <Link to={"/" + page.url} key={page.id}>{page.name}</Link>;
+                                        {data.servicePages.map((page, i) => {
+                                            return <Link to={"/" + page.url} key={i}>{page.name}</Link>;
                                         })}
                                     </div>
                                 );

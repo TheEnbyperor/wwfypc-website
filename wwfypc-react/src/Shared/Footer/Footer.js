@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Query} from "react-apollo";
 import gql from "graphql-tag";
 import "./Footer.scss";
+import {Link} from "react-router-dom";
 
 const INFO_QUERY = gql`
   {
@@ -13,6 +14,10 @@ const INFO_QUERY = gql`
       twitterUrl
       googleUrl
       facebookUrl
+    }
+    servicePages {
+      name
+      url
     }
   }
 `;
@@ -31,13 +36,9 @@ export default class Footer extends Component {
                                     <h2>Legal</h2>
 
                                     <div>
-                                        <a href="">Laptops & Computers</a>
-                                        <a href="">Apple Macs</a>
-                                        <a href="">iPhones</a>
-                                        <a href="">iPads</a>
-                                        <a href="">Apple Watches</a>
-                                        <a href="">Unlocking</a>
-                                        <a href="">Buying & selling</a>
+                                        {data.servicePages.map((page, i) => {
+                                            return <Link to={"/" + page.url} key={i}>{page.name}</Link>;
+                                        })}
                                     </div>
 
                                     <div>
