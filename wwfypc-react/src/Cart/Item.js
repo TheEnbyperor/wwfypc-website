@@ -36,7 +36,7 @@ class Quantity extends Component {
 
     increment() {
         let newVal = this.props.num + 1;
-        if (newVal >= this.props.max) newVal = this.props.max;
+        if (newVal >= this.props.max && this.props.max !== -1) newVal = this.props.max;
         this.props.onChange(newVal);
     }
 
@@ -62,7 +62,7 @@ class Quantity extends Component {
         return <div className="Quantity">
             <i className={"fas fa-minus" + (this.props.num <= 1 ? " disabled" : "")} onClick={this.decrement}/>
             <input type="text" size={2} value={isNaN(val) ? 1 : val} onChange={this.setNum}/>
-            <i className={"fas fa-plus" + (this.props.num >= this.props.max ? " disabled" : "")}
+            <i className={"fas fa-plus" + (this.props.num >= this.props.max && this.props.max !== -1 ? " disabled" : "")}
                onClick={this.increment}/>
         </div>
     }

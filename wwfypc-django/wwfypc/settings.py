@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'services.apps.ServicesConfig',
     'selling.apps.SellingConfig',
     'unlocking.apps.UnlockingConfig',
+    'build_pc.apps.BuildPcConfig',
 ]
 
 MIDDLEWARE = [

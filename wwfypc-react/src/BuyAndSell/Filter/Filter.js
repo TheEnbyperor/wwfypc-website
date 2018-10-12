@@ -39,7 +39,9 @@ export default class Filter extends Component {
                     </Link>
                 </div>
                 <div className="colour-5">
-                    Build a PC
+                    <Link to="/build-pc">
+                        Build a PC
+                    </Link>
                 </div>
             </div>
         )

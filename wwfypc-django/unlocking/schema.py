@@ -45,7 +45,7 @@ def validate_item(id, delivery, quantity):
         return [("id", ["Invalid id"])]
     if delivery != 1:
         return [("delivery", ["Invalid delivery"])]
-    if quantity > 1:
+    if quantity != 1:
         return [("quantity", ["Invalid quantity"])]
 
 
@@ -56,10 +56,8 @@ def calculate_price(id, delivery, quantity):
 
 
 def make_item_description(id, delivery, quantity):
-    id, imei = id.split(";", 1)
     item = models.UnlockingPrice.objects.get(id=id)
-
-    return f"Unlocking {item.device.name}: {item.network.name}, IMEI: {imei}"
+    return str(item)
 
 
 class UnlockingDeviceTypeType(DjangoObjectType):

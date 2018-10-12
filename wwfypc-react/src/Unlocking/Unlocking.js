@@ -95,7 +95,7 @@ class UnlockInfo extends Component {
             bEven = !bEven;
         }
 
-        return (nCheck % 10) == 0;
+        return (nCheck % 10) === 0;
     }
 
     addToCart(id) {

@@ -233,21 +233,12 @@
     }
 
     .input {
-      display: flex;
-      flex-direction: column;
-
       input, textarea {
-        font-family: "Bariol", sans-serif;
-        padding: 5px;
-        border: 0;
-        flex: 1;
         margin: 5px 0;
       }
 
       p {
-        font-weight: bold;
-        margin: 0;
-        padding: 0 10px;
+        color: #000;
 
         span {
           color: $orange;

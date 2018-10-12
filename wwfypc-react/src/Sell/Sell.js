@@ -196,7 +196,7 @@ class SellForm extends Component {
                                         if (error) return <h2>Error</h2>;
 
                                         let everyPermutationSelected = true;
-                                        const queryPermutations = []
+                                        const queryPermutations = [];
                                         const permutations = data.sellingDeviceModel.devicePermutations
                                             .map((permutation, i) => {
                                                 const selectedPermutation = Object.keys(this.state.selectedPermutations)

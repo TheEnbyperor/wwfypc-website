@@ -1,0 +1,179 @@
+@import "../../variables";
+
+.BuildPcInner {
+  height: 100%;
+
+  h1, h2 {
+    max-width: $max-width;
+    width: 100%;
+    text-align: center;
+    margin: 5px;
+  }
+
+  h2 {
+    color: $grey4;
+  }
+
+  > * {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    header {
+      background: $grey;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &:first-of-type {
+        padding-top: 80px;
+      }
+    }
+
+    section {
+      flex: 1;
+    }
+
+    .Images, .Info {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 20%;
+      grid-gap: 20px;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .Images {
+      img {
+        width: 75%;
+        max-width: $max-width/8;
+        justify-self: center;
+      }
+    }
+
+    .Info {
+      > * {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h2 {
+          font-size: 30px;
+          margin-bottom: 0;
+        }
+
+        h3 {
+          text-align: center;
+          margin: 0 5px 5px;
+        }
+
+        &:nth-of-type(4n+1) {
+          h2, h3 {
+            color: $yellow;
+          }
+        }
+
+        &:nth-of-type(4n+2) {
+          h2, h3 {
+            color: $blue;
+          }
+        }
+
+        &:nth-of-type(4n+3) {
+          h2, h3 {
+            color: $orange;
+          }
+        }
+
+        &:nth-of-type(4n) {
+          h2, h3 {
+            color: $green;
+          }
+        }
+      }
+    }
+
+    .Customise {
+      display: grid;
+      grid-gap: 20px;
+      height: 100%;
+      grid-template-columns: auto repeat(2, 1fr);
+      max-width: $max-width;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+
+      .back {
+        i {
+          font-size: 50px;
+          color: $orange;
+        }
+      }
+
+      > div.img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 70%;
+        }
+      }
+
+      h2 {
+        text-align: left;
+        color: $blue;
+        font-size: 25px;
+        margin: 0;
+      }
+
+      p {
+        font-size: 20px;
+      }
+
+      .select {
+        margin: 20px 0;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-gap: 10px;
+
+        .info {
+          position: relative;
+          justify-self: center;
+          align-self: center;
+
+          p {
+            position: absolute;
+            background: $grey2;
+            padding: 15px;
+            border-radius: 15px;
+            z-index: 9999;
+            right: 0;
+            margin-left: -3000%;
+            visibility: hidden;
+            font-size: 17px;
+          }
+
+          &:hover {
+            p {
+              visibility: visible;
+            }
+          }
+        }
+      }
+
+      .price {
+        display: flex;
+
+        .Button {
+          flex: 1;
+        }
+      }
+    }
+  }
+}

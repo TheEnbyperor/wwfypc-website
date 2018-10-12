@@ -67,10 +67,6 @@ class EstimationNode:
         self.seen_permutations = seen_permutations
         self.next_nodes = []
 
-    def __str__(self):
-        next_nodes = "\n\t".join((",\n".join(map(str, self.next_nodes))).split("\n"))
-        return f"<EstimationNode({self.num}, {self.passes})\n\t[{next_nodes}]\n>"
-
 
 def _get_device_price(last_node, permutations):
     permutations = list(filter(lambda p: p not in last_node.seen_permutations, permutations))

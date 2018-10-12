@@ -29,7 +29,7 @@ def validate_item(id, delivery, quantity):
         return [("delivery", ["Invalid delivery"])]
     if delivery.item.id != item.id:
         return [("delivery", ["Invalid delivery"])]
-    if quantity > 1:
+    if quantity != 1:
         return [("quantity", ["Invalid quantity"])]
 
 

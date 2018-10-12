@@ -39,26 +39,6 @@
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
 
-    .input, .textarea {
-      display: flex;
-      flex-direction: column;
-
-      input, textarea {
-        font-family: "Bariol", sans-serif;
-        padding: 15px;
-        border: 0;
-        font-size: 20px;
-        flex: 1;
-      }
-
-      p {
-        color: $orange;
-        font-weight: bold;
-        margin: 0;
-        padding: 0 10px;
-      }
-    }
-
     .input {
       grid-column: 1 / 3;
     }
