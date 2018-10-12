@@ -4,10 +4,11 @@ import buy_and_sell.schema
 import services.schema
 import selling.schema
 import unlocking.schema
+import build_pc.schema
 
 
 class Query(main_site.schema.Query, buy_and_sell.schema.Query, services.schema.Query, selling.schema.Query,
-            unlocking.schema.Query, graphene.ObjectType):
+            unlocking.schema.Query, build_pc.schema.Query, graphene.ObjectType):
     pass
 
 

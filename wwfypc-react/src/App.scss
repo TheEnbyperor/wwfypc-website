@@ -56,12 +56,74 @@ a {
     transition: .3s background;
   }
   a.active span {
-      background: $orange;
+    background: $orange;
   }
 
   .fp-tooltip {
     background: #333;
     padding: 3px;
     border-radius: 5px;
+  }
+}
+
+.input, .textarea, .select {
+  display: flex;
+  flex-direction: column;
+
+  .inner {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    grid-gap: 20px;
+  }
+
+  input, textarea, select {
+    font-family: "Bariol", sans-serif;
+    padding: 15px;
+    border: 1px solid $grey4;
+    border-radius: 15px;
+    font-size: 20px;
+    flex: 1;
+    width: 100%;
+    resize: none;
+    background: #fff;
+  }
+
+  p {
+    color: $orange;
+    font-weight: bold;
+    margin: 0;
+    padding: 0 10px;
+  }
+}
+
+.select {
+  .inner {
+    position: relative;
+
+    &:after {
+      position: absolute;
+      color: $orange;
+      font-size: 25px;
+      padding: 0 5px;
+      right: 0px;
+      top: 50%;
+      transform: translateY(-50%);
+      content: "\f107";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      pointer-events: none;
+      background: #fff;
+      height: calc(100% - 2px);
+      line-height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+      border-right: 1px solid $grey4;
+      border-top: 1px solid $grey4;
+      border-bottom: 1px solid $grey4;
+    }
   }
 }

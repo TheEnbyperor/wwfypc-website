@@ -12,6 +12,7 @@ from django.core import mail
 import pytz
 import buy_and_sell.schema
 import unlocking.schema
+import build_pc.schema
 import requests
 import os
 from . import models
@@ -314,14 +315,14 @@ class CreateOrder(Mutation):
         for item in items:
             if item.type == "buy_and_sell":
                 validation = buy_and_sell.schema.validate_item(item.id, item.delivery, item.quantity)
-                if validation is not None:
-                    return CreateOrder(ok=False, errors=validation_error_to_graphene(validation))
-            if item.type == "unlocking":
+            elif item.type == "unlocking":
                 validation = unlocking.schema.validate_item(item.id, item.delivery, item.quantity)
-                if validation is not None:
-                    return CreateOrder(ok=False, errors=validation_error_to_graphene(validation))
+            elif item.type == "build_pc":
+                validation = build_pc.schema.validate_item(item.id, item.delivery, item.quantity)
             else:
                 return CreateOrder(ok=False, errors=validation_error_to_graphene([("type", ["Invalid item type"])]))
+            if validation is not None:
+                return CreateOrder(ok=False, errors=validation_error_to_graphene(validation))
 
         matching_customers = models.Customer.objects.filter(email=email)
         if len(matching_customers) > 0:
@@ -350,6 +351,10 @@ class CreateOrder(Mutation):
                 total_price += unlocking.schema.calculate_price(item.id, item.delivery, item.quantity)
                 description_items.append(
                     unlocking.schema.make_item_description(item.id, item.delivery, item.quantity))
+            if item.type == "build_pc":
+                total_price += build_pc.schema.calculate_price(item.id, item.delivery, item.quantity)
+                description_items.append(
+                    build_pc.schema.make_item_description(item.id, item.delivery, item.quantity))
 
         description = "; ".join(description_items)
 
@@ -653,6 +658,8 @@ class Query:
             return buy_and_sell.schema.get_item(id)
         elif category == "unlocking":
             return unlocking.schema.get_item(id)
+        elif category == "build_pc":
+            return build_pc.schema.get_item(id)
         else:
             raise GraphQLError("Invalid type")
 
