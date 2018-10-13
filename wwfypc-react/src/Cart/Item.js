@@ -7,7 +7,7 @@ import {removeFromCart} from "./Cart";
 
 const ITEM_QUERY = gql`
   query($type: ID!, $id: ID!) {
-    cartItem(category: $type, id: $id) {
+    cartItem(category: $type, item: $id) {
       name
       price
       quantityAvailable

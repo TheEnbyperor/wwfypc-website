@@ -1,18 +1,32 @@
 import graphene
 from graphql import GraphQLError
 from graphene_django.types import DjangoObjectType
+from graphql_relay import from_global_id
 import django.db.models.query
 from . import models
+
+
+class SellingDevicePermutationValueType(DjangoObjectType):
+    class Meta:
+        model = models.DevicePermutationValue
+        interfaces = (graphene.relay.Node, )
 
 
 class SellingDevicePermutationType(DjangoObjectType):
     class Meta:
         model = models.DevicePermutation
+        interfaces = (graphene.relay.Node, )
+
+    values = graphene.NonNull(graphene.List(graphene.NonNull(SellingDevicePermutationValueType)))
+
+    def resolve_values(self, info):
+        return self.values.all()
 
 
 class SellingValueEstimateType(DjangoObjectType):
     class Meta:
         model = models.ValueEstimate
+        interfaces = (graphene.relay.Node, )
 
 
 class SellingDeviceModelType(DjangoObjectType):
@@ -25,25 +39,23 @@ class SellingDeviceModelType(DjangoObjectType):
 
     class Meta:
         model = models.DeviceModel
+        interfaces = (graphene.relay.Node, )
 
     def resolve_device_permutations(self, info):
         return get_device_permutations(self.id)
 
     def resolve_price_estimate(self, info, permutations):
-        return get_device_price(self.id, permutations)
+        return get_device_price(self.id, map(lambda p: from_global_id(p)[1], permutations))
 
 
 class SellingDeviceCategoryType(DjangoObjectType):
     class Meta:
         model = models.DeviceCategory
+        interfaces = (graphene.relay.Node, )
 
     def resolve_icon(self, info):
         return self.icon.url
 
-
-class SellingDevicePermutationValueType(DjangoObjectType):
-    class Meta:
-        model = models.DevicePermutationValue
 
 
 def get_device_permutations(device_id):
@@ -112,15 +124,15 @@ class Query:
         return models.DeviceCategory.objects.all()
 
     def resolve_selling_device_category(self, info, id):
-        return models.DeviceCategory.objects.filter(id=id)
+        return models.DeviceCategory.objects.filter(id=from_global_id(id)[1])
 
     def resolve_selling_device_models(self, info, **kwargs):
         device_models = models.DeviceModel.objects.all()
         if kwargs.get("category") is not None:
-            device_models = device_models.filter(category_id=kwargs["category"])
+            device_models = device_models.filter(category_id=from_global_id(kwargs["category"])[1])
 
         return device_models
 
     def resolve_selling_device_model(self, info, id):
-        return models.DeviceModel.objects.get(id=id)
+        return models.DeviceModel.objects.get(id=from_global_id(id)[1])
 

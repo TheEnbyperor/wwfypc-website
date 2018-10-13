@@ -51,7 +51,8 @@ class Item extends Component {
         this.addToCart = this.addToCart.bind(this);
 
         this.state = {
-            activeSlide: 0
+            activeSlide: 0,
+            inCart: false,
         };
     }
 
@@ -83,6 +84,9 @@ class Item extends Component {
                 return;
             }
         }
+        this.setState({
+            inCart: true,
+        });
         addToCart("buy_and_sell", this.props.item.id);
     }
 
@@ -93,6 +97,14 @@ class Item extends Component {
             <img className={((i === this.state.activeSlide) ? "active" : "") + ((i === prevActive) ? " prevActive" : "")
             + ((i === nextActive) ? " nextActive" : "")} key={slide.id} src={BASE_URL + slide.image} alt=""/>
         );
+
+        let inCart = this.state.inCart;
+        const item = getItem("buy_and_sell", this.props.item.id);
+        if (typeof item !== "undefined") {
+            if (item.quantity >= 1) {
+                inCart = true;
+            }
+        }
 
         return (
             <div className={"Item" + ((this.props.item.reserved) ? " reserved" : "")}>
@@ -110,9 +122,15 @@ class Item extends Component {
                     })}
                 </div>
                 <div className="buttons">
-                    <Button colour={this.props.item.category.colour} small onClick={this.addToCart}>
-                        &pound;{this.props.item.price}
-                    </Button>
+                    {!inCart ?
+                        <Button colour={this.props.item.category.colour} small onClick={this.addToCart}>
+                            &pound;{this.props.item.price}
+                        </Button>
+                        :
+                        <Button colour={this.props.item.category.colour} small>
+                            Added to cart
+                        </Button>
+                    }
                     {/*<Button colour={this.props.item.category.colour} small>*/}
                         {/*Reserve*/}
                     {/*</Button>*/}
