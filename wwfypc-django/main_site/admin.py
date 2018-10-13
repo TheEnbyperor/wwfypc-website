@@ -76,8 +76,25 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [CustomerPostalOrdersInline, CustomerAppointmentInline, CustomerOrderInline]
 
 
-admin.site.register(models.DeviceCategory)
-admin.site.register(models.DeviceType)
+class DeviceTypeInlineAdmin(admin.TabularInline):
+    model = models.DeviceType
+
+
+class RepairTypeInlineAdmin(admin.StackedInline):
+    model = models.RepairType
+    extra = 1
+
+
+@admin.register(models.DeviceCategory)
+class DeviceCategoryAdmin(admin.ModelAdmin):
+    inlines = [DeviceTypeInlineAdmin]
+
+
+@admin.register(models.DeviceType)
+class DeviceTypeAdmin(admin.ModelAdmin):
+    inlines = [RepairTypeInlineAdmin]
+
+
 admin.site.register(models.RepairType)
 admin.site.register(models.MainSliderSlide)
 admin.site.register(models.SiteConfig, solo.admin.SingletonModelAdmin)

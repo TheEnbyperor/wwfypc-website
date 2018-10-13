@@ -9,3 +9,4 @@ django-hardcopy
 qrcode
 Pillow
 requests
+django-admin-shortcuts

@@ -138,7 +138,7 @@ class RepairType(models.Model):
     description = models.TextField(default="")
 
     def __str__(self):
-        return self.name
+        return f"{self.device_type.name}: {self.name}"
 
 
 def make_uid(length=8):

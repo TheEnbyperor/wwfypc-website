@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_shortcuts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -144,3 +145,143 @@ CHROME_PATH = "/usr/bin/google-chrome"
 PHONENUMBER_DEFAULT_REGION = "GB"
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ADMIN_SHORTCUTS = [
+    {
+        'title': 'General',
+        'shortcuts': [
+            {
+                'title': 'Site config',
+                'url_name': 'admin:main_site_siteconfig_change',
+            },
+            {
+                'title': 'Main slider',
+                'url_name': 'admin:main_site_mainsliderslide_changelist',
+            },
+            {
+                'title': 'Selling points',
+                'url_name': 'admin:main_site_sellingpoint_changelist',
+            },
+            {
+                'title': 'Customers',
+                'url_name': 'admin:main_site_customer_changelist',
+            },
+            {
+                'title': 'Services',
+                'url_name': 'admin:services_servicepage_changelist',
+            },
+        ]
+    },
+    {
+        'title': 'Repairs',
+        'shortcuts': [
+            {
+                'title': 'Device Categories',
+                'url_name': 'admin:main_site_devicecategory_changelist',
+            },
+            {
+                'title': 'Device Types',
+                'url_name': 'admin:main_site_devicetype_changelist',
+            },
+            {
+                'title': 'Repair Types',
+                'url_name': 'admin:main_site_repairtype_changelist',
+            },
+            {
+                'title': 'Other Services',
+                'url_name': 'admin:main_site_otherservice_changelist',
+            },
+            {
+                'title': 'Postal orders',
+                'url_name': 'admin:main_site_postalorder_changelist',
+            },
+        ],
+    },
+    {
+        'title': 'Appointments',
+        'shortcuts': [
+            {
+                'title': 'Time rules',
+                'url_name': 'admin:main_site_appointmenttimerule_changelist',
+            },
+            {
+                'title': 'Block time',
+                'url_name': 'admin:main_site_appointmenttimeblockrule_changelist',
+            },
+            {
+                'title': 'Appointments',
+                'url_name': 'admin:main_site_appointment_changelist',
+            },
+        ]
+    },
+    {
+        'title': 'Build a PC',
+        'shortcuts': [
+            {
+                'title': 'Base models',
+                'url_name': 'admin:build_pc_basepcmodel_changelist',
+            },
+            {
+                'title': 'Customisation options',
+                'url_name': 'admin:build_pc_customisation_changelist',
+            },
+            {
+                'title': 'Permutation prices',
+                'url_name': 'admin:build_pc_pcprice_changelist',
+            },
+        ]
+    },
+    {
+        'title': 'Buy & Sell',
+        'shortcuts': [
+            {
+                'title': 'Categories',
+                'url_name': 'admin:buy_and_sell_itemcategory_changelist',
+            },
+            {
+                'title': 'Items',
+                'url_name': 'admin:buy_and_sell_item_changelist',
+            },
+        ]
+    },
+    {
+        'title': 'Selling',
+        'shortcuts': [
+            {
+                'title': 'Categories',
+                'url_name': 'admin:selling_devicecategory_changelist',
+            },
+            {
+                'title': 'Permutations',
+                'url_name': 'admin:selling_devicepermutation_changelist',
+            },
+            {
+                'title': 'Value estimates',
+                'url_name': 'admin:selling_valueestimate_changelist',
+            },
+        ]
+    },
+    {
+        'title': 'Unlocking',
+        'shortcuts': [
+            {
+                'title': 'Devices',
+                'url_name': 'admin:unlocking_devicetype_changelist',
+            },
+            {
+                'title': 'Networks',
+                'url_name': 'admin:unlocking_network_changelist',
+            },
+            {
+                'title': 'Prices',
+                'url_name': 'admin:unlocking_unlockingprice_changelist',
+            },
+        ]
+    },
+]
+
+ADMIN_SHORTCUTS_SETTINGS = {
+    'show_on_all_pages': False,
+    'hide_app_list': False,
+    'open_new_window': False,
+}
