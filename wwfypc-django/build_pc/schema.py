@@ -1,6 +1,7 @@
 import graphene
 import django.db.models
 from graphene_django import DjangoObjectType
+from graphql_relay import from_global_id
 from graphql import GraphQLError
 from . import models
 import main_site.schema
@@ -14,7 +15,7 @@ def get_item(id):
         quantity_available=-1,
         image=item.base_pc.image.url,
         specs=map(lambda s: main_site.schema.CartItemSpec(name=s.customisation.name, value=s.name), item.options.all()),
-        deliveries=map(lambda s: main_site.schema.CartItemDelivery(name=s.name, price=s.price, id=s.id),
+        deliveries=map(lambda s: main_site.schema.CartItemDelivery(name=s.name, price=s.price, id=f"BuildPc:{s.id}"),
                        item.postage.all()),
     )
 
@@ -24,7 +25,14 @@ def validate_item(id, delivery, quantity):
         item = models.PcPrice.objects.get(id=id)
     except models.Item.DoesNotExist:
         return [("id", ["Invalid pc"])]
-    if delivery != 1:
+    delivery = delivery.split(":")
+    if delivery[0] != "BuildPc":
+        return [("delivery", ["Invalid delivery"])]
+    try:
+        delivery = models.PcPostage.objects.get(id=delivery[1])
+    except models.PcPostage.DoesNotExist:
+        return [("delivery", ["Invalid delivery"])]
+    if delivery.pc.id != id:
         return [("delivery", ["Invalid delivery"])]
 
 
@@ -36,12 +44,16 @@ def calculate_price(id, delivery, quantity):
 def make_item_description(id, delivery, quantity):
     item = models.PcPrice.objects.get(id=id)
 
-    return f"Unlocking {item.device.name}: {item.network.name}, IMEI: {imei}"
+    delivery = delivery.split(":")
+    delivery = models.PcPostage.objects.get(id=delivery[1])
+
+    return f"{str(item)}: {delivery.name} x {quantity}"
 
 
 class CustomisationOptionType(DjangoObjectType):
     class Meta:
         model = models.CustomisationOption
+        interfaces = (graphene.relay.Node, )
 
 
 class CustomisationType(DjangoObjectType):
@@ -49,6 +61,7 @@ class CustomisationType(DjangoObjectType):
 
     class Meta:
         model = models.Customisation
+        interfaces = (graphene.relay.Node, )
 
     def resolve_options(self, info):
         return self.options.all()
@@ -59,6 +72,7 @@ class BasePcModelType(DjangoObjectType):
 
     class Meta:
         model = models.BasePcModel
+        interfaces = (graphene.relay.Node, )
 
     def resolve_image(self, info):
         return self.image.url
@@ -73,6 +87,7 @@ class PcPriceType(DjangoObjectType):
 
     class Meta:
         model = models.PcPrice
+        interfaces = (graphene.relay.Node, )
 
     def resolve_options(self, info):
         return self.customisations.all()
@@ -127,7 +142,7 @@ class Query:
         return models.BasePcModel.objects.all()
 
     def resolve_base_pc_model(self, info, id):
-        return models.BasePcModel.objects.get(id=id)
+        return models.BasePcModel.objects.get(id=from_global_id(id)[1])
 
     def resolve_pc_price(self, info, base_pc, options):
-        return get_pc_price(base_pc, options)
+        return get_pc_price(from_global_id(base_pc)[1], map(lambda o: from_global_id(o)[1], options))

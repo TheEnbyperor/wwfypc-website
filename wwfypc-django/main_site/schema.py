@@ -2,6 +2,7 @@ import graphene
 from graphene import ObjectType, Mutation, InputObjectType
 from graphene_django.types import DjangoObjectType
 from graphene_django.converter import convert_django_field
+from graphql_relay import from_global_id
 from graphql import GraphQLError
 import django.utils.timezone
 import phonenumber_field.modelfields
@@ -42,6 +43,7 @@ class MainSliderSlideType(DjangoObjectType):
 
     class Meta:
         model = models.MainSliderSlide
+        interfaces = (graphene.relay.Node, )
 
     def resolve_image(self, info):
         return self.image.url
@@ -53,6 +55,7 @@ class MainSliderSlideType(DjangoObjectType):
 class SellingPointType(DjangoObjectType):
     class Meta:
         model = models.SellingPoint
+        interfaces = (graphene.relay.Node, )
 
     def resolve_image(self, info):
         return self.image.url
@@ -63,6 +66,7 @@ class OtherServiceType(DjangoObjectType):
 
     class Meta:
         model = models.OtherService
+        interfaces = (graphene.relay.Node, )
 
     def resolve_icon(self, info):
         return self.icon.url
@@ -71,6 +75,7 @@ class OtherServiceType(DjangoObjectType):
 class RepairTypeType(DjangoObjectType):
     class Meta:
         model = models.RepairType
+        interfaces = (graphene.relay.Node, )
 
 
 class DeviceTypeType(DjangoObjectType):
@@ -78,6 +83,7 @@ class DeviceTypeType(DjangoObjectType):
 
     class Meta:
         model = models.DeviceType
+        interfaces = (graphene.relay.Node, )
 
     def resolve_repair_types(self, info):
         return self.repair_types.all()
@@ -89,6 +95,7 @@ class DeviceCategoryType(DjangoObjectType):
 
     class Meta:
         model = models.DeviceCategory
+        interfaces = (graphene.relay.Node, )
 
     def resolve_icon(self, info):
         return self.icon.url
@@ -100,6 +107,7 @@ class DeviceCategoryType(DjangoObjectType):
 class Customer(DjangoObjectType):
     class Meta:
         model = models.Customer
+        interfaces = (graphene.relay.Node, )
 
     def resolve_phone(self, info):
         return self.phone.as_national
@@ -110,6 +118,7 @@ class PostalOrder(DjangoObjectType):
 
     class Meta:
         model = models.PostalOrder
+        interfaces = (graphene.relay.Node, )
 
 
 class Appointment(DjangoObjectType):
@@ -117,11 +126,13 @@ class Appointment(DjangoObjectType):
 
     class Meta:
         model = models.Appointment
+        interfaces = (graphene.relay.Node, )
 
 
 class OrderItem(DjangoObjectType):
     class Meta:
         model = models.OrderItem
+        interfaces = (graphene.relay.Node, )
 
 
 class Order(DjangoObjectType):
@@ -129,6 +140,7 @@ class Order(DjangoObjectType):
 
     class Meta:
         model = models.Order
+        interfaces = (graphene.relay.Node, )
 
 
 class CartItemSpec(ObjectType):
@@ -137,7 +149,9 @@ class CartItemSpec(ObjectType):
 
 
 class CartItemDelivery(ObjectType):
-    id = graphene.NonNull(graphene.ID)
+    class Meta:
+        interfaces = (graphene.relay.Node,)
+
     name = graphene.NonNull(graphene.String)
     price = graphene.NonNull(graphene.Float)
 
@@ -187,6 +201,8 @@ class CreatePostalOrder(Mutation):
     order = graphene.Field(PostalOrder)
 
     def mutate(self, info, name, email, phone, address, additional_items, device, repair):
+        _, device = from_global_id(device)
+        _, repair = from_global_id(repair)
         try:
             device = models.DeviceType.objects.get(id=device)
         except models.DeviceType.DoesNotExist:
@@ -241,6 +257,8 @@ class CreateAppointment(Mutation):
     appointment = graphene.Field(Appointment)
 
     def mutate(self, info, name, email, phone, date, time, device, repair):
+        _, device = from_global_id(device)
+        _, repair = from_global_id(repair)
         if not check_booking_time(date, time):
             return CreatePostalOrder(ok=False, errors=validation_error_to_graphene([("time", ["Invalid time"])]))
 
@@ -314,11 +332,11 @@ class CreateOrder(Mutation):
     def mutate(self, info, name, name_on_card, email, phone, address, card_token, items):
         for item in items:
             if item.type == "buy_and_sell":
-                validation = buy_and_sell.schema.validate_item(item.id, item.delivery, item.quantity)
+                validation = buy_and_sell.schema.validate_item(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
             elif item.type == "unlocking":
-                validation = unlocking.schema.validate_item(item.id, item.delivery, item.quantity)
+                validation = unlocking.schema.validate_item(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
             elif item.type == "build_pc":
-                validation = build_pc.schema.validate_item(item.id, item.delivery, item.quantity)
+                validation = build_pc.schema.validate_item(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
             else:
                 return CreateOrder(ok=False, errors=validation_error_to_graphene([("type", ["Invalid item type"])]))
             if validation is not None:
@@ -344,17 +362,17 @@ class CreateOrder(Mutation):
         description_items = []
         for item in items:
             if item.type == "buy_and_sell":
-                total_price += buy_and_sell.schema.calculate_price(item.id, item.delivery, item.quantity)
+                total_price += buy_and_sell.schema.calculate_price(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
                 description_items.append(
-                    buy_and_sell.schema.make_item_description(item.id, item.delivery, item.quantity))
+                    buy_and_sell.schema.make_item_description(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity))
             if item.type == "unlocking":
-                total_price += unlocking.schema.calculate_price(item.id, item.delivery, item.quantity)
+                total_price += unlocking.schema.calculate_price(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
                 description_items.append(
-                    unlocking.schema.make_item_description(item.id, item.delivery, item.quantity))
+                    unlocking.schema.make_item_description(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity))
             if item.type == "build_pc":
-                total_price += build_pc.schema.calculate_price(item.id, item.delivery, item.quantity)
+                total_price += build_pc.schema.calculate_price(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
                 description_items.append(
-                    build_pc.schema.make_item_description(item.id, item.delivery, item.quantity))
+                    build_pc.schema.make_item_description(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity))
 
         description = "; ".join(description_items)
 
@@ -396,12 +414,12 @@ class CreateOrder(Mutation):
 
         for item in items:
             if item.type == "buy_and_sell":
-                buy_and_sell.schema.place_order(item.id, item.delivery, item.quantity)
+                buy_and_sell.schema.place_order(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
             order_item = models.OrderItem()
             order_item.order = order
             order_item.type = item.type
-            order_item.item_id = item.id
-            order_item.delivery = item.delivery
+            order_item.item_id = from_global_id(item.id)[1]
+            order_item.delivery = from_global_id(item.delivery)[1]
             order_item.quantity = item.quantity
             order_item.save()
 
@@ -605,7 +623,7 @@ class Query:
     cart_item = graphene.NonNull(
         CartItem,
         category=graphene.NonNull(graphene.ID),
-        id=graphene.NonNull(graphene.ID)
+        item=graphene.NonNull(graphene.ID)
     )
 
     def resolve_site_config(self, info):
@@ -624,42 +642,42 @@ class Query:
         return models.DeviceCategory.objects.all()
 
     def resolve_device_category(self, info, id):
-        return models.DeviceCategory.objects.get(id=id)
+        return models.DeviceCategory.objects.get(id=from_global_id(id)[1])
 
     def resolve_device_types(self, info, **kwargs):
         device_types = models.DeviceType.objects.all()
 
         category = kwargs.get("category")
         if category is not None:
-            device_types = device_types.filter(device_category=category)
+            device_types = device_types.filter(device_category=from_global_id(category)[1])
 
         return device_types
 
     def resolve_device_type(self, info, id):
-        return models.DeviceType.objects.get(id=id)
+        return models.DeviceType.objects.get(id=from_global_id(id)[1])
 
     def resolve_repair_types(self, info, **kwargs):
         device_types = models.RepairType.objects.all()
 
         device_type = kwargs.get("device_type")
         if device_type is not None:
-            device_types = device_types.filter(device_type=device_type)
+            device_types = device_types.filter(device_type=from_global_id(device_type)[1])
 
         return device_types
 
     def resolve_repair_type(self, info, id):
-        return models.RepairType.objects.get(id=id)
+        return models.RepairType.objects.get(id=from_global_id(id)[1])
 
     def resolve_appointment_times(self, info, date):
         return get_booking_times(date)
 
-    def resolve_cart_item(self, info, category, id):
+    def resolve_cart_item(self, info, category, item):
         if category == "buy_and_sell":
-            return buy_and_sell.schema.get_item(id)
+            return buy_and_sell.schema.get_item(from_global_id(item)[1])
         elif category == "unlocking":
-            return unlocking.schema.get_item(id)
+            return unlocking.schema.get_item(from_global_id(item)[1])
         elif category == "build_pc":
-            return build_pc.schema.get_item(id)
+            return build_pc.schema.get_item(from_global_id(item)[1])
         else:
             raise GraphQLError("Invalid type")
 

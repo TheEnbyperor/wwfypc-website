@@ -97,10 +97,12 @@ class Customise extends Component {
         super(props);
 
         this.state = {
-            options: {}
+            options: {},
+            inCart: false,
         };
 
         this.onOptionSelect = this.onOptionSelect.bind(this);
+        this.addToCart = this.addToCart.bind(this);
     }
 
     onOptionSelect(id, evt) {
@@ -109,6 +111,13 @@ class Customise extends Component {
         this.setState({
             options: options,
         })
+    }
+
+    addToCart(id) {
+        this.setState({
+            inCart: true
+        });
+        addToCart("build_pc", id);
     }
 
     render() {
@@ -125,7 +134,7 @@ class Customise extends Component {
                         let everyCustomisationSelected = true;
                         data.basePcModel.customisations.forEach(option => {
                             const selectedCustomisation = Object.keys(this.state.options)
-                                    .find(elm => elm === option.id);
+                                .find(elm => elm === option.id);
                             if (typeof selectedCustomisation === "undefined" && selectedCustomisation !== null) {
                                 everyCustomisationSelected = false;
                             }
@@ -174,11 +183,15 @@ class Customise extends Component {
 
                                                 return [
                                                     <Button key={0} colour={4}>&pound;{data.pcPrice.price}</Button>,
-                                                    <Button key={1} colour={3} onClick={() => {
-                                                        addToCart("build_pc", data.pcPrice.id)
-                                                    }}>
-                                                        Add to cart
-                                                    </Button>
+                                                    !this.state.inCart ?
+                                                        <Button key={1} colour={3} onClick={() =>
+                                                            this.addToCart(data.pcPrice.id)}>
+                                                            Add to cart
+                                                        </Button>
+                                                        :
+                                                        <Button key={1} colour={3}>
+                                                            Added to cart
+                                                        </Button>
                                                 ];
                                             }}
                                         </Query>

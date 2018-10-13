@@ -10,7 +10,7 @@ import "./style/Cart.scss";
 
 export const ITEM_PRICE_QUERY = gql`
   query($type: ID!, $id: ID!) {
-    cartItem(category: $type, id: $id) {
+    cartItem(category: $type, item: $id) {
       price
       deliveries {
         id
@@ -98,6 +98,7 @@ class PriceTotal extends Component {
                 const {data} = await client.query({
                     query: ITEM_PRICE_QUERY,
                     variables: {type: item.type, id: item.id},
+                    fetchPolicy: "network-only",
                 });
                 let delivery = null;
                 if (data.cartItem.deliveries.length <= 1) {

@@ -20,7 +20,7 @@ export const BASE_URL = process.env.REACT_APP_BACKEND_HOST || "http://127.0.0.1:
 export const WORLDPAY_KEY = "T_C_52bc5b16-562d-4198-95d4-00b91f30fe2c";
 
 export const client = new ApolloClient({
-    uri: BASE_URL + "/graphql/"
+    uri: BASE_URL + "/graphql/",
 });
 
 const SERVICES_QUERY = gql`

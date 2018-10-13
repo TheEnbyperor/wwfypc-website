@@ -16,7 +16,7 @@ def get_item(id):
             main_site.schema.CartItemSpec(name="Network", value=item.network.name),
             main_site.schema.CartItemSpec(name="IMEI", value=imei)
         ],
-        deliveries=[main_site.schema.CartItemDelivery(name="Online", price=0, id=1)],
+        deliveries=[main_site.schema.CartItemDelivery(name="Online", price=0, id="Unlocking:1")],
     )
 
 
@@ -43,7 +43,7 @@ def validate_item(id, delivery, quantity):
         models.UnlockingPrice.objects.get(id=id)
     except models.UnlockingPrice.DoesNotExist:
         return [("id", ["Invalid id"])]
-    if delivery != 1:
+    if delivery != "Unlocking:1":
         return [("delivery", ["Invalid delivery"])]
     if quantity != 1:
         return [("quantity", ["Invalid quantity"])]
@@ -63,6 +63,7 @@ def make_item_description(id, delivery, quantity):
 class UnlockingDeviceTypeType(DjangoObjectType):
     class Meta:
         model = models.DeviceType
+        interfaces = (graphene.relay.Node, )
 
     def resolve_image(self, info):
         return self.image.url
@@ -71,11 +72,13 @@ class UnlockingDeviceTypeType(DjangoObjectType):
 class UnlockingNetworkType(DjangoObjectType):
     class Meta:
         model = models.Network
+        interfaces = (graphene.relay.Node, )
 
 
 class UnlockingPrice(DjangoObjectType):
     class Meta:
         model = models.UnlockingPrice
+        interfaces = (graphene.relay.Node, )
 
 
 class Query:
@@ -93,13 +96,13 @@ class Query:
         return models.DeviceType.objects.all()
 
     def resolve_unlocking_device_type(self, info, id):
-        return models.DeviceType.objects.get(id=id)
+        return models.DeviceType.objects.get(id=from_global_id(id)[1])
 
     def resolve_unlocking_networks(self, info):
         return models.Network.objects.all()
 
     def resolve_unlocking_network(self, info, id):
-        return models.Network.objects.get(id=id)
+        return models.Network.objects.get(id=from_global_id(id)[1])
 
     def resolve_unlocking_price(self, info, network, device):
-        return models.UnlockingPrice.objects.get(network_id=network, device_id=device)
+        return models.UnlockingPrice.objects.get(network_id=from_global_id(id)[1], device_id=from_global_id(id)[1])

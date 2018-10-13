@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'graphene_django',
     'corsheaders',
+    'graphene_django',
     'solo',
     'main_site.apps.MainSiteConfig',
     'buy_and_sell.apps.BuyAndSellConfig',
@@ -139,6 +139,7 @@ GRAPHENE = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = ('localhost:3000',)
 
 CHROME_PATH = "/usr/bin/google-chrome"
 
