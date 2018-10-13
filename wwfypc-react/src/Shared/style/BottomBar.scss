@@ -5,12 +5,11 @@ $bar-height: 70px;
 .BottomBar {
   position: fixed;
   bottom: 0;
-  background: #000;
+  //background: #000;
   color: #fff;
   left: 0;
   right: 0;
-  height: $bar-height;
-  border-top: 2px solid $orange;
+  //border-top: 2px solid $orange;
 
   display: flex;
   justify-content: center;
@@ -18,10 +17,20 @@ $bar-height: 70px;
 
   > div {
     max-width: $max-width;
-    width: 100%;
     display: flex;
     justify-content: flex-end;
-    padding: 0 20px;
+    width: 100%;
+
+    > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      height: $bar-height;
+      background: rgba(0, 0, 0, .7);
+    }
   }
 }
 

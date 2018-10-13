@@ -42,8 +42,10 @@ export default class BottomBar extends Component {
         return (
             <div className="BottomBar">
                 <div>
-                    <CartIndicator/>
-                    <Contact/>
+                    <div>
+                        <CartIndicator/>
+                        <Contact/>
+                    </div>
                 </div>
             </div>
         )
