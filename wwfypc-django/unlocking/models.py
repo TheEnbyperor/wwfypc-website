@@ -1,7 +1,8 @@
 from django.db import models
+import main_site.models
 
 
-class DeviceType(models.Model):
+class DeviceType(main_site.models.OrderedModel):
     name = models.CharField(max_length=255)
     image = models.FileField()
 
@@ -9,7 +10,7 @@ class DeviceType(models.Model):
         return self.name
 
 
-class Network(models.Model):
+class Network(main_site.models.OrderedModel):
     name = models.CharField(max_length=255)
     description = models.TextField()
 
