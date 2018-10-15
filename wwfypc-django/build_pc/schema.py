@@ -1,5 +1,6 @@
 import graphene
-import django.db.models
+import json
+from django.core.exceptions import ObjectDoesNotExist
 from graphene import ObjectType
 from graphene_django import DjangoObjectType
 from graphql_relay import from_global_id
@@ -8,24 +9,38 @@ from . import models
 import main_site.schema
 
 
+def pc_id_to_data(id):
+    data = json.loads(id)
+    base_pc = models.BasePcModel.objects.get(id=data.get("base"))
+    options = list(map(lambda o: models.CustomisationOption.objects.get(id=o), data.get("options", [])))
+    return base_pc, options
+
+
 def get_item(id):
-    item = models.PcPrice.objects.get(id=id)
+    base_pc, options = pc_id_to_data(id)
+    base_price = base_pc.base_price
+    for o in options:
+        base_price += o.additional_cost
     return main_site.schema.CartItem(
-        name=item.base_pc.name,
-        price=item.price,
+        name=base_pc.name,
+        price=base_price,
         quantity_available=-1,
-        image=item.base_pc.image.url,
-        specs=map(lambda s: main_site.schema.CartItemSpec(name=s.customisation.name, value=s.name), item.options.all()),
+        image=base_pc.image.url,
+        specs=map(lambda s: main_site.schema.CartItemSpec(name=s.customisation.name, value=s.name), options),
         deliveries=map(lambda s: main_site.schema.CartItemDelivery(name=s.name, price=s.price, id=f"BuildPc:{s.id}"),
-                       item.postage.all()),
+                       base_pc.postage.all()),
     )
 
 
 def validate_item(id, delivery, quantity):
     try:
-        item = models.PcPrice.objects.get(id=id)
-    except models.Item.DoesNotExist:
+        base_pc, options = pc_id_to_data(id)
+    except ObjectDoesNotExist:
         return [("id", ["Invalid pc"])]
+    seen_customisations = []
+    for o in options:
+        if o.customisation.id in seen_customisations:
+            return [("id", ["Invalid options"])]
     delivery = delivery.split(":")
     if delivery[0] != "BuildPc":
         return [("delivery", ["Invalid delivery"])]
@@ -33,22 +48,30 @@ def validate_item(id, delivery, quantity):
         delivery = models.PcPostage.objects.get(id=delivery[1])
     except models.PcPostage.DoesNotExist:
         return [("delivery", ["Invalid delivery"])]
-    if delivery.pc.id != id:
+    if delivery.pc.id != base_pc.id:
         return [("delivery", ["Invalid delivery"])]
 
 
 def calculate_price(id, delivery, quantity):
-    item = models.PcPrice.objects.get(id=id)
-    return item.price * quantity
+    base_pc, options = pc_id_to_data(id)
+    base_price = base_pc.base_price
+    for o in options:
+        base_price += o.additional_cost
+    delivery = delivery.split(":")
+    delivery = models.PcPostage.objects.get(id=delivery[1])
+    return base_price * quantity + delivery.value * quantity
 
 
 def make_item_description(id, delivery, quantity):
-    item = models.PcPrice.objects.get(id=id)
+    base_pc, options = pc_id_to_data(id)
+    name = base_pc.name
+    for o in options:
+        name += f"; {o.name}"
 
     delivery = delivery.split(":")
     delivery = models.PcPostage.objects.get(id=delivery[1])
 
-    return f"{str(item)}: {delivery.name} x {quantity}"
+    return f"{name}: {delivery.name} x {quantity}"
 
 
 class CustomisationOptionType(DjangoObjectType):
@@ -85,41 +108,26 @@ class BasePcModelType(DjangoObjectType):
 class PcPriceType(ObjectType):
     price = graphene.NonNull(graphene.Float)
 
-
-class PriceNode:
-    def __init__(self, num, results=None, seen_options=None):
-        if seen_options is None:
-            seen_options = []
-        if results is None:
-            results = django.db.models.query.QuerySet()
-        self.num = num
-        self.results = results
-        self.seen_options = seen_options
-        self.next_nodes = []
-
-
-def _get_pc_price(last_node, options):
-    options = list(filter(lambda p: p not in last_node.seen_options, options))
-    if len(options) == 0:
-        return None
-    for option in options:
-        estimates = last_node.results.filter(options__id=option)
-        if estimates.count() == 1 and last_node.num+1 >= estimates[0].options.count():
-            return estimates[0]
-        if estimates.count() != 0:
-            node = PriceNode(last_node.num+1, estimates, last_node.seen_options + [option])
-            price = _get_pc_price(node, options)
-            if price is not None:
-                return price
+    class Meta:
+        interfaces = (graphene.relay.Node, )
 
 
 def get_pc_price(base_pc_id, options):
-    prices = models.PcPrice.objects.filter(base_pc_id=base_pc_id)
-    root_pass = PriceNode(0, prices)
-    price = _get_pc_price(root_pass, options)
-    if price is None:
-        raise GraphQLError("Unable to find price")
-    return price
+    options = list(options)
+    base_pc = models.BasePcModel.objects.get(id=base_pc_id)
+    options_objects = map(lambda o: models.CustomisationOption.objects.get(id=o), options)
+    seen_customisations = []
+    base_price = base_pc.base_price
+    for o in options_objects:
+        if o.customisation.id in seen_customisations:
+            raise GraphQLError("Invalid options")
+        seen_customisations.append(o.customisation.id)
+        base_price += o.additional_cost
+    data = json.dumps({
+        "base": base_pc_id,
+        "options": options,
+    })
+    return PcPriceType(price=base_price, id=data)
 
 
 class Query:
