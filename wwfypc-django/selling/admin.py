@@ -1,22 +1,23 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 from . import models
 
 
-class DeviceModelAdmin(admin.TabularInline):
+class DeviceModelAdmin(SortableInlineAdminMixin,  admin.TabularInline):
     model = models.DeviceModel
 
 
 @admin.register(models.DeviceCategory)
-class DeviceCategoryAdmin(admin.ModelAdmin):
+class DeviceCategoryAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [DeviceModelAdmin]
 
 
-class DevicePermutationValueAdmin(admin.TabularInline):
+class DevicePermutationValueAdmin(SortableInlineAdminMixin, admin.TabularInline):
     model = models.DevicePermutationValue
 
 
 @admin.register(models.DevicePermutation)
-class DevicePermutationAdmin(admin.ModelAdmin):
+class DevicePermutationAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [DevicePermutationValueAdmin]
 
 
