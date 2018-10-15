@@ -1,18 +1,20 @@
 from django.db import models
+import main_site.models
 
 
-class DeviceCategory(models.Model):
+class DeviceCategory(main_site.models.OrderedModel):
     name = models.CharField(max_length=255)
     icon = models.FileField()
 
     class Meta:
         verbose_name_plural = "Device categories"
+        ordering = ('order',)
 
     def __str__(self):
         return self.name
 
 
-class DeviceModel(models.Model):
+class DeviceModel(main_site.models.OrderedModel):
     category = models.ForeignKey(DeviceCategory, on_delete=models.CASCADE, related_name='models')
     name = models.CharField(max_length=255)
     
@@ -20,14 +22,14 @@ class DeviceModel(models.Model):
         return f"{str(self.category)}: {self.name}"
 
 
-class DevicePermutation(models.Model):
+class DevicePermutation(main_site.models.OrderedModel):
     name = models.CharField(max_length=255)
     
     def __str__(self):
         return self.name
     
     
-class DevicePermutationValue(models.Model):
+class DevicePermutationValue(main_site.models.OrderedModel):
     permutation = models.ForeignKey(DevicePermutation, on_delete=models.CASCADE, related_name='values')
     display_name = models.CharField(max_length=255)
     value = models.CharField(max_length=255)
