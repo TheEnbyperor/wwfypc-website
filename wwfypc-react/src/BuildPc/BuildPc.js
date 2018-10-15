@@ -108,6 +108,7 @@ class Customise extends Component {
     onOptionSelect(id, evt) {
         const options = this.state.options;
         options[id] = evt.target.value === "null" ? null : evt.target.value;
+        console.log(options);
         this.setState({
             options: options,
         })
@@ -131,12 +132,15 @@ class Customise extends Component {
                         if (loading) return <h2>Loading</h2>;
                         if (error) return <h2>Error</h2>;
 
-                        let everyCustomisationSelected = true;
+                        let customisations = [];
                         data.basePcModel.customisations.forEach(option => {
                             const selectedCustomisation = Object.keys(this.state.options)
                                 .find(elm => elm === option.id);
+                            console.log(selectedCustomisation);
                             if (typeof selectedCustomisation === "undefined" && selectedCustomisation !== null) {
-                                everyCustomisationSelected = false;
+                                customisations.push(option.options[0].id);
+                            } else {
+                                customisations.push(this.state.options[selectedCustomisation]);
                             }
                         });
 
@@ -158,7 +162,6 @@ class Customise extends Component {
                                             <div className="inner">
                                                 <select value={this.state.options[id]}
                                                         onChange={evt => this.onOptionSelect(id, evt)}>
-                                                    <option value="null">---</option>
                                                     {options.map(({id, name}, i) =>
                                                         <option value={id} key={i}>{name}</option>
                                                     )}
@@ -172,30 +175,28 @@ class Customise extends Component {
                                     )}
                                 </form>
                                 <div className="price">
-                                    {!everyCustomisationSelected ? null :
-                                        <Query query={PRICE_QUERY} variables={{
-                                            basePc: this.props.model,
-                                            options: Object.keys(this.state.options).map(elm => this.state.options[elm])
-                                        }}>
-                                            {({loading, data, error}) => {
-                                                if (loading) return <Button colour={2}>Loading</Button>;
-                                                if (error) return <Button colour={1}>Error</Button>;
+                                    <Query query={PRICE_QUERY} variables={{
+                                        basePc: this.props.model,
+                                        options: customisations,
+                                    }}>
+                                        {({loading, data, error}) => {
+                                            if (loading) return <Button colour={2}>Loading</Button>;
+                                            if (error) return <Button colour={1}>Error</Button>;
 
-                                                return [
-                                                    <Button key={0} colour={4}>&pound;{data.pcPrice.price}</Button>,
-                                                    !this.state.inCart ?
-                                                        <Button key={1} colour={3} onClick={() =>
-                                                            this.addToCart(data.pcPrice.id)}>
-                                                            Add to cart
-                                                        </Button>
-                                                        :
-                                                        <Button key={1} colour={3}>
-                                                            Added to cart
-                                                        </Button>
-                                                ];
-                                            }}
-                                        </Query>
-                                    }
+                                            return [
+                                                <Button key={0} colour={4}>&pound;{data.pcPrice.price}</Button>,
+                                                !this.state.inCart ?
+                                                    <Button key={1} colour={3} onClick={() =>
+                                                        this.addToCart(data.pcPrice.id)}>
+                                                        Add to cart
+                                                    </Button>
+                                                    :
+                                                    <Button key={1} colour={3}>
+                                                        Added to cart
+                                                    </Button>
+                                            ];
+                                        }}
+                                    </Query>
                                 </div>
                             </div>
                         </div>
