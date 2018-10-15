@@ -38,7 +38,7 @@ class DevicePermutationValue(models.Model):
 
 class ValueEstimate(models.Model):
     device = models.ForeignKey(DeviceModel, on_delete=models.CASCADE, related_name='estimates')
-    permutations = models.ManyToManyField(DevicePermutationValue)
+    permutations = models.ManyToManyField(DevicePermutationValue, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):

@@ -1,5 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
+from graphql_relay import from_global_id
 import main_site.schema
 from . import models
 
@@ -105,4 +106,4 @@ class Query:
         return models.Network.objects.get(id=from_global_id(id)[1])
 
     def resolve_unlocking_price(self, info, network, device):
-        return models.UnlockingPrice.objects.get(network_id=from_global_id(id)[1], device_id=from_global_id(id)[1])
+        return models.UnlockingPrice.objects.get(network_id=from_global_id(network)[1], device_id=from_global_id(device)[1])

@@ -146,10 +146,10 @@ def make_uid(length=8):
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=255, blank=False)
+    name = models.CharField(max_length=255, blank=True)
     email = models.EmailField(blank=False)
-    phone = phonenumber_field.modelfields.PhoneNumberField(blank=False)
-    address = models.TextField(blank=False)
+    phone = phonenumber_field.modelfields.PhoneNumberField(blank=True)
+    address = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
@@ -157,10 +157,10 @@ class Customer(models.Model):
 
 class PostalOrder(models.Model):
     uid = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=False, related_name="postal_orders")
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=True, related_name="postal_orders")
     date = models.DateTimeField(blank=False, default=datetime.datetime.now)
-    device = models.ForeignKey(DeviceType, on_delete=models.DO_NOTHING, blank=False)
-    repair = models.ForeignKey(RepairType, on_delete=models.DO_NOTHING, blank=False)
+    device = models.ForeignKey(DeviceType, on_delete=models.DO_NOTHING, blank=True)
+    repair = models.ForeignKey(RepairType, on_delete=models.DO_NOTHING, blank=True)
     additional_items = models.TextField(blank=True)
 
     def __str__(self):
@@ -169,10 +169,10 @@ class PostalOrder(models.Model):
 
 class Appointment(models.Model):
     uid = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=False, related_name="appointments")
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=True, related_name="appointments")
     date = models.DateTimeField(blank=False)
-    device = models.ForeignKey(DeviceType, on_delete=models.DO_NOTHING, blank=False)
-    repair = models.ForeignKey(RepairType, on_delete=models.DO_NOTHING, blank=False)
+    device = models.ForeignKey(DeviceType, on_delete=models.DO_NOTHING, blank=True)
+    repair = models.ForeignKey(RepairType, on_delete=models.DO_NOTHING, blank=True)
 
     def __str__(self):
         return self.uid
@@ -180,7 +180,7 @@ class Appointment(models.Model):
 
 class Order(models.Model):
     uid = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=False, related_name="orders")
+    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=True, related_name="orders")
     date = models.DateTimeField(blank=False, default=datetime.datetime.now)
     card_token = models.CharField(max_length=255, blank=False)
     name_on_card = models.CharField(max_length=255, blank=False)
