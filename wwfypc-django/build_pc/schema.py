@@ -1,5 +1,6 @@
 import graphene
 import django.db.models
+from graphene import ObjectType
 from graphene_django import DjangoObjectType
 from graphql_relay import from_global_id
 from graphql import GraphQLError
@@ -81,16 +82,8 @@ class BasePcModelType(DjangoObjectType):
         return self.customisations.all()
 
 
-class PcPriceType(DjangoObjectType):
-    base_pc = graphene.NonNull(BasePcModelType)
-    options = graphene.NonNull(graphene.List(graphene.NonNull(CustomisationOptionType)))
-
-    class Meta:
-        model = models.PcPrice
-        interfaces = (graphene.relay.Node, )
-
-    def resolve_options(self, info):
-        return self.customisations.all()
+class PcPriceType(ObjectType):
+    price = graphene.NonNull(graphene.Float)
 
 
 class PriceNode:

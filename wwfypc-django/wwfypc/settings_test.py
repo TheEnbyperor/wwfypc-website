@@ -259,10 +259,6 @@ ADMIN_SHORTCUTS = [
                 'title': 'Customisation options',
                 'url_name': 'admin:build_pc_customisation_changelist',
             },
-            {
-                'title': 'Permutation prices',
-                'url_name': 'admin:build_pc_pcprice_changelist',
-            },
         ]
     },
     {

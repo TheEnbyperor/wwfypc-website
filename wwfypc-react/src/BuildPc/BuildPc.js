@@ -31,6 +31,7 @@ const CUSTOMISATION_QUERY = gql`
         helpText
         options {
           name
+          additionalCost
           id
         }
       } 
@@ -162,9 +163,13 @@ class Customise extends Component {
                                             <div className="inner">
                                                 <select value={this.state.options[id]}
                                                         onChange={evt => this.onOptionSelect(id, evt)}>
-                                                    {options.map(({id, name}, i) =>
-                                                        <option value={id} key={i}>{name}</option>
-                                                    )}
+                                                    {options.map(({id, name, additionalCost}, i) => {
+                                                        let extra = "";
+                                                        if (additionalCost > 0) {
+                                                            extra = " (+£" + additionalCost.toFixed(2) + ")";
+                                                        }
+                                                        return <option value={id} key={i}>{name + extra}</option>;
+                                                    })}
                                                 </select>
                                             </div>
                                             <div className="info">
