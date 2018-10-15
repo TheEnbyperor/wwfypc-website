@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'graphene_django',
     'corsheaders',
     'solo',
+    'ordered_model',
+    'adminsortable2'
     'main_site.apps.MainSiteConfig',
     'buy_and_sell.apps.BuyAndSellConfig',
     'services.apps.ServicesConfig',
