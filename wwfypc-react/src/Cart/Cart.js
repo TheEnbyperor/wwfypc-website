@@ -100,10 +100,10 @@ class PriceTotal extends Component {
                     variables: {type: item.type, id: item.id},
                     fetchPolicy: "network-only",
                 });
-                let delivery = null;
-                if (data.cartItem.deliveries.length <= 1) {
-                    delivery = data.cartItem.deliveries[0]
-                } else {
+                let delivery = {price:0};
+                if (data.cartItem.deliveries.length === 1) {
+                    delivery = data.cartItem.deliveries[0];
+                } else if (data.cartItem.deliveries.length > 1) {
                     delivery = data.cartItem.deliveries.find(elm => elm.id === item.selectedDelivery);
                 }
                 const prev2 = await prev;
@@ -114,7 +114,7 @@ class PriceTotal extends Component {
                     postage: price[1],
                     total: price[0] + price[1],
                 });
-            });
+            }).catch(error => console.error(error));
         }
     }
 
