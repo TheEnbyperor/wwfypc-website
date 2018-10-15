@@ -1,6 +1,16 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin
 from . import models
 
-admin.site.register(models.DeviceType)
-admin.site.register(models.Network)
+
+@admin.register(models.DeviceType)
+class DeviceTypeAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.Network)
+class NetworkAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
+
 admin.site.register(models.UnlockingPrice)
