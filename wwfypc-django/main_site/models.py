@@ -109,6 +109,7 @@ class MainSliderSlide(OrderedModel):
     colour = models.IntegerField(choices=COLOURS, blank=False, default=1)
     text = models.TextField()
     button_text = models.CharField(max_length=255)
+    link_to = models.CharField(max_length=255)
     image = models.FileField()
     background_image = models.FileField()
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Query} from "react-apollo";
 import gql from "graphql-tag";
+import {Link} from 'react-router-dom';
 import Button from '../../Shared/Buttons';
 import './style/Top.scss';
 import iPhone from './img/iphone-x.png';
@@ -15,6 +16,7 @@ const SLIDER_QUERY = gql`
       colour
       text
       buttonText
+      linkTo
       image
       backgroundImage
     }
@@ -30,8 +32,12 @@ class TopLeft extends Component {
                 <p>You've arrived at We Will Fix Your PC. <br/> If your looking for expert help with your computer or
                     phone - without breaking the bank, then search no further.</p>
                 <div className="buttons">
-                    <HashLink to="/" hash="#device"><Button colour={1}>Start your repair</Button></HashLink>
-                    <Button colour={2}>Learn more</Button>
+                    <HashLink to="/" hash="#device">
+                        <Button colour={1}>Start your repair</Button>
+                    </HashLink>
+                    <HashLink to="/" hash="#about">
+                        <Button colour={2}>Learn more</Button>
+                    </HashLink>
                 </div>
             </div>
         )
@@ -142,7 +148,9 @@ class TopRightSlider extends Component {
             activeSlide: slide
         });
         if (slide !== nextSlide) {
-            setTimeout(() => {this.setSlide(nextSlide)}, 500);
+            setTimeout(() => {
+                this.setSlide(nextSlide)
+            }, 500);
         }
         clearTimeout(this.slidesTimer);
         this.slidesTimer = setTimeout(this.moveSlide, SLIDE_TIMER);
@@ -173,7 +181,9 @@ class TopRightSlider extends Component {
                 </div>
                 <h2 className={"colour-" + slide.colour}>{slide.title}</h2>
                 <p>{slide.text}</p>
-                <Button colour={1}>{slide.buttonText}</Button>
+                <Link to={slide.linkTo}>
+                    <Button colour={1}>{slide.buttonText}</Button>
+                </Link>
             </div>
         );
 
