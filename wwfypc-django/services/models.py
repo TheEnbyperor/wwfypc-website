@@ -1,7 +1,8 @@
 from django.db import models
+import main_site.models
 
 
-class ServicePage(models.Model):
+class ServicePage(main_site.models.OrderedModel):
     name = models.CharField(max_length=255, blank=False)
     url = models.CharField(max_length=255, blank=False)
 
@@ -9,7 +10,7 @@ class ServicePage(models.Model):
         return self.name
 
 
-class ServicePageSection(models.Model):
+class ServicePageSection(main_site.models.OrderedModel):
     page = models.ForeignKey(ServicePage, on_delete=models.CASCADE, blank=False, related_name='sections')
     title = models.CharField(max_length=255, blank=True)
     subtitle = models.TextField(blank=True)
