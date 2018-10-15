@@ -7,7 +7,7 @@ from . import models
 
 def get_item(id):
     id, imei = id.split(";", 1)
-    item = models.UnlockingPrice.objects.get(id=id)
+    item = models.UnlockingPrice.objects.get(id=from_global_id(id)[1])
     return main_site.schema.CartItem(
         name=f"Unlocking: {item.device.name}",
         price=item.price,
@@ -41,7 +41,7 @@ def validate_item(id, delivery, quantity):
     if luhn_checksum(imei) != 0:
         return [("id", ["Invalid imei"])]
     try:
-        models.UnlockingPrice.objects.get(id=id)
+        models.UnlockingPrice.objects.get(id=from_global_id(id)[1])
     except models.UnlockingPrice.DoesNotExist:
         return [("id", ["Invalid id"])]
     if delivery != "Unlocking:1":
@@ -52,12 +52,13 @@ def validate_item(id, delivery, quantity):
 
 def calculate_price(id, delivery, quantity):
     id, imei = id.split(";", 1)
-    item = models.UnlockingPrice.objects.get(id=id)
+    item = models.UnlockingPrice.objects.get(id=from_global_id(id)[1])
     return item.price * quantity
 
 
 def make_item_description(id, delivery, quantity):
-    item = models.UnlockingPrice.objects.get(id=id)
+    id, imei = id.split(";", 1)
+    item = models.UnlockingPrice.objects.get(id=from_global_id(id)[1])
     return str(item)
 
 

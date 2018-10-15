@@ -334,7 +334,7 @@ class CreateOrder(Mutation):
             if item.type == "buy_and_sell":
                 validation = buy_and_sell.schema.validate_item(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
             elif item.type == "unlocking":
-                validation = unlocking.schema.validate_item(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
+                validation = unlocking.schema.validate_item(item.id, from_global_id(item.delivery)[1], item.quantity)
             elif item.type == "build_pc":
                 validation = build_pc.schema.validate_item(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
             else:
@@ -366,9 +366,9 @@ class CreateOrder(Mutation):
                 description_items.append(
                     buy_and_sell.schema.make_item_description(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity))
             if item.type == "unlocking":
-                total_price += unlocking.schema.calculate_price(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
+                total_price += unlocking.schema.calculate_price(item.id, from_global_id(item.delivery)[1], item.quantity)
                 description_items.append(
-                    unlocking.schema.make_item_description(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity))
+                    unlocking.schema.make_item_description(item.id, from_global_id(item.delivery)[1], item.quantity))
             if item.type == "build_pc":
                 total_price += build_pc.schema.calculate_price(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
                 description_items.append(
@@ -675,7 +675,7 @@ class Query:
         if category == "buy_and_sell":
             return buy_and_sell.schema.get_item(from_global_id(item)[1])
         elif category == "unlocking":
-            return unlocking.schema.get_item(from_global_id(item)[1])
+            return unlocking.schema.get_item(item)
         elif category == "build_pc":
             return build_pc.schema.get_item(from_global_id(item)[1])
         else:
