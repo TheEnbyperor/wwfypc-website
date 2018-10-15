@@ -1,7 +1,7 @@
 from django.contrib import admin
 import solo.admin
 import buy_and_sell.models
-import unlocking.models
+from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 from . import models
 
 
@@ -76,28 +76,40 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [CustomerPostalOrdersInline, CustomerAppointmentInline, CustomerOrderInline]
 
 
-class DeviceTypeInlineAdmin(admin.TabularInline):
+class DeviceTypeInlineAdmin(SortableInlineAdminMixin, admin.TabularInline):
     model = models.DeviceType
 
 
-class RepairTypeInlineAdmin(admin.StackedInline):
+class RepairTypeInlineAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = models.RepairType
     extra = 1
 
 
 @admin.register(models.DeviceCategory)
-class DeviceCategoryAdmin(admin.ModelAdmin):
+class DeviceCategoryAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [DeviceTypeInlineAdmin]
 
 
 @admin.register(models.DeviceType)
-class DeviceTypeAdmin(admin.ModelAdmin):
+class DeviceTypeAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [RepairTypeInlineAdmin]
 
 
+@admin.register(models.MainSliderSlide)
+class MainSliderSlideAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.SellingPoint)
+class SellingPointAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.OtherService)
+class OtherServiceAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
+
 admin.site.register(models.RepairType)
-admin.site.register(models.MainSliderSlide)
 admin.site.register(models.SiteConfig, solo.admin.SingletonModelAdmin)
 admin.site.register(models.PostalOrder)
-admin.site.register(models.SellingPoint)
-admin.site.register(models.OtherService)

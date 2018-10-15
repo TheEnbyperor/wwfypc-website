@@ -16,6 +16,14 @@ COLOURS = (
 )
 
 
+class OrderedModel(models.Model):
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+
+    class Meta:
+        abstract = True
+        ordering = ('order',)
+
+
 class SiteConfig(SingletonModel):
     landline = phonenumber_field.modelfields.PhoneNumberField(blank=False)
     mobile = phonenumber_field.modelfields.PhoneNumberField(blank=False)
@@ -41,7 +49,7 @@ class SiteConfig(SingletonModel):
         return "Site config"
 
 
-class SellingPoint(models.Model):
+class SellingPoint(OrderedModel):
     title = models.TextField()
     text = models.TextField()
     image = models.FileField()
@@ -50,7 +58,7 @@ class SellingPoint(models.Model):
         return self.title
 
 
-class OtherService(models.Model):
+class OtherService(OrderedModel):
     name = models.TextField()
     icon = models.FileField()
     description = models.TextField()
@@ -92,9 +100,10 @@ class AppointmentTimeRule(models.Model):
         return "#" + str(self.pk)
 
 
-class MainSliderSlide(models.Model):
+class MainSliderSlide(OrderedModel):
     class Meta:
         verbose_name_plural = "Main slider"
+        ordering = ('order',)
 
     title = models.CharField(max_length=255, blank=False)
     colour = models.IntegerField(choices=COLOURS, blank=False, default=1)
@@ -107,9 +116,10 @@ class MainSliderSlide(models.Model):
         return self.title
 
 
-class DeviceCategory(models.Model):
+class DeviceCategory(OrderedModel):
     class Meta:
         verbose_name_plural = "Device categories"
+        ordering = ('order',)
 
     name = models.TextField(blank=False)
     description = models.TextField(blank=False)
@@ -120,7 +130,7 @@ class DeviceCategory(models.Model):
         return self.name
 
 
-class DeviceType(models.Model):
+class DeviceType(OrderedModel):
     device_category = models.ForeignKey(DeviceCategory, on_delete=models.CASCADE,
                                         related_name="device_types", blank=False)
     name = models.CharField(max_length=255, blank=False)
@@ -129,7 +139,7 @@ class DeviceType(models.Model):
         return self.name
 
 
-class RepairType(models.Model):
+class RepairType(OrderedModel):
     device_type = models.ForeignKey(DeviceType, on_delete=models.CASCADE,
                                     related_name="repair_types", blank=False)
     name = models.CharField(max_length=255, blank=False)
