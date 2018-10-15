@@ -1,27 +1,28 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 from . import models
 
 
-class CustomisationOptionInlineAdmin(admin.TabularInline):
+class CustomisationOptionInlineAdmin(SortableInlineAdminMixin, admin.TabularInline):
     model = models.CustomisationOption
 
 
-class CustomisationInlineAdmin(admin.StackedInline):
+class CustomisationInlineAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = models.Customisation
     extra = 1
 
 
 @admin.register(models.BasePcModel)
-class BasePcModelAdmin(admin.ModelAdmin):
+class BasePcModelAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [CustomisationInlineAdmin]
 
 
 @admin.register(models.Customisation)
-class CustomisationAdmin(admin.ModelAdmin):
+class CustomisationAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [CustomisationOptionInlineAdmin]
 
 
-class PcPostageAdmin(admin.TabularInline):
+class PcPostageAdmin(SortableInlineAdminMixin, admin.TabularInline):
     model = models.PcPostage
     extra = 1
 
