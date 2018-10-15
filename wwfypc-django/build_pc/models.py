@@ -33,7 +33,7 @@ class CustomisationOption(models.Model):
 
 class PcPrice(models.Model):
     base_pc = models.ForeignKey(BasePcModel, on_delete=models.CASCADE, related_name='prices')
-    options = models.ManyToManyField(CustomisationOption)
+    options = models.ManyToManyField(CustomisationOption, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:

@@ -33,16 +33,16 @@ export default class Filter extends Component {
                         })
                     }}
                 </Query>
-                <div className="colour-4">
-                    <Link to="/sell">
+                <Link to="/sell">
+                    <div className="colour-4">
                         Sell
-                    </Link>
-                </div>
-                <div className="colour-5">
-                    <Link to="/build-pc">
+                    </div>
+                </Link>
+                <Link to="/build-pc">
+                    <div className="colour-5">
                         Build a PC
-                    </Link>
-                </div>
+                    </div>
+                </Link>
             </div>
         )
     }
