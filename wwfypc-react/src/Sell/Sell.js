@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 import Footer from "../Shared/Footer/Footer";
+import Button from "../Shared/Buttons";
 import {BASE_URL} from "../App";
 import "./style/Sell.scss";
 
@@ -232,6 +233,9 @@ class SellForm extends Component {
                                                             <span className="price">
                                                                 &pound;{data.sellingDeviceModel.priceEstimate.price}
                                                             </span>
+                                                            <Button colour={6}>
+                                                                Print estimate
+                                                            </Button>
                                                             <span className="disclaimer">
                                                                 Estimates are subject to change upon device inspection
                                                             </span>
