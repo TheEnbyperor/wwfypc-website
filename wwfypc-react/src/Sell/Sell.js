@@ -45,6 +45,7 @@ const DEVICE_PRICE_QUERY = gql`
     sellingDeviceModel(id: $id) {
       priceEstimate(permutations: $permutations) {
         price
+        id
       }
     }
   }
@@ -233,9 +234,12 @@ class SellForm extends Component {
                                                             <span className="price">
                                                                 &pound;{data.sellingDeviceModel.priceEstimate.price}
                                                             </span>
-                                                            <Button colour={6}>
-                                                                Print estimate
-                                                            </Button>
+                                                            <a href={BASE_URL + "/estimate/" +
+                                                            data.sellingDeviceModel.priceEstimate.id} target="_blank">
+                                                                <Button colour={6}>
+                                                                    Print estimate
+                                                                </Button>
+                                                            </a>
                                                             <span className="disclaimer">
                                                                 Estimates are subject to change upon device inspection
                                                             </span>

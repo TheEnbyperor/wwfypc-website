@@ -1,0 +1,49 @@
+{% load full_static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% full_static 'main_site/post_form.css' %}">
+    <title>Device price estimate</title>
+</head>
+<body>
+<header>
+    <img src="{% full_static 'main_site/logo.png' %}" alt="">
+    <h1>Device price estimate</h1>
+</header>
+<section>
+    <h2>Device information</h2>
+    <div class="info">
+        <span>Device</span>
+        <span>{{ estimate.device.name }}</span>
+        {% for permutation in estimate.permutations.all %}
+            <span>{{ permutation.permutation.name }}</span>
+            <span>{{ permutation.value }}</span>
+        {% endfor %}
+    </div>
+</section>
+<section>
+    <h2>Estimated Value: &pound;{{ estimate.price }}</h2>
+</section>
+<section>
+    <h2>How to find us</h2>
+    <div class="info">
+        <span>Phone</span>
+        <span>{{ config.landline.as_national }}</span>
+        <span>Mobile</span>
+        <span>{{ config.mobile.as_national }}</span>
+        <span>Email</span>
+        <span>{{ config.email }}</span>
+    </div>
+    <div class="info">
+        <span>Opening hours</span>
+        <span>{{ config.opening_hours|linebreaks }}</span>
+        <span>Address</span>
+        <span>{{ config.address|linebreaksbr }}</span>
+    </div>
+</section>
+<section>
+    <img src="data:image/svg+xml;utf8,{{ barcode }}" alt="" width="200">
+</section>
+</body>
+</html>
