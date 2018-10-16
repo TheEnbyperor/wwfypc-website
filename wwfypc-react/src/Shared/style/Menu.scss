@@ -34,13 +34,14 @@
       text-align: center;
       position: relative;
 
-      a {
+      a, span {
         font-size: 17px;
         text-transform: uppercase;
         font-family: "Adam CG Pro", sans-serif;
         font-weight: bold;
         margin: 0 auto;
         padding: 0 10px;
+        color: #fff;
       }
 
       &:hover {
