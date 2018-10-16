@@ -7,11 +7,12 @@ from io import BytesIO
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from graphql_relay import from_global_id
 from . import models
 
 
 def post_form_pdf(request, id):
-    order = get_object_or_404(models.PostalOrder, uid=id)
+    order = get_object_or_404(models.PostalOrder, uid=from_global_id(id)[1])
 
     fp = BytesIO()
     factory = qrcode.image.svg.SvgPathImage
