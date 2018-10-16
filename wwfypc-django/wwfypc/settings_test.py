@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'solo',
     'ordered_model',
-    'adminsortable2'
+    'adminsortable2',
     'main_site.apps.MainSiteConfig',
     'buy_and_sell.apps.BuyAndSellConfig',
     'services.apps.ServicesConfig',
