@@ -17,9 +17,9 @@ const SERVICES_QUERY = gql`
 class hashLink extends Component {
     render() {
         if (this.props.location.pathname === this.props.to) {
-            return <a href={this.props.hash}>{this.props.children}</a>;
+            return <a href={this.props.hash} {...this.props}>{this.props.children}</a>;
         } else {
-            return <Link to={this.props.to + this.props.hash}>{this.props.children}</Link>;
+            return <Link to={this.props.to + this.props.hash} {...this.props}>{this.props.children}</Link>;
         }
     }
 };
@@ -31,11 +31,11 @@ export default class Top extends Component {
         return (
             <div className="Menu">
                 <nav>
-                    <Link to="/" className="img">
+                    <HashLink to="/" hash="#top" className="img">
                         <img src={Logo} alt=""/>
-                    </Link>
+                    </HashLink>
                     <div>
-                        <a href="">Services</a>
+                        <span>Services</span>
                         <Query query={SERVICES_QUERY}>
                             {({loading, error, data}) => {
                                 if (loading || error) return null;
