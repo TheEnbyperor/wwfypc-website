@@ -10,3 +10,5 @@ qrcode
 Pillow
 requests
 django-admin-shortcuts
+django-ordered-model
+django-admin-sortable2
