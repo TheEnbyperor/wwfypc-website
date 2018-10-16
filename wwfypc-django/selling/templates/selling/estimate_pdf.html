@@ -15,7 +15,7 @@
     <h2>Device information</h2>
     <div class="info">
         <span>Device</span>
-        <span>{{ estimate.device.name }}</span>
+        <span>{{ estimate.device.category.name }}: {{ estimate.device.name }}</span>
         {% for permutation in estimate.permutations.all %}
             <span>{{ permutation.permutation.name }}</span>
             <span>{{ permutation.value }}</span>
