@@ -31,37 +31,37 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='devicecategory',
             name='order',
-            field=models.PositiveIntegerField(db_index=True, default=-1, editable=False),
+            field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='devicetype',
             name='order',
-            field=models.PositiveIntegerField(db_index=True, default=-1, editable=False),
+            field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='mainsliderslide',
             name='order',
-            field=models.PositiveIntegerField(db_index=True, default=-1, editable=False),
+            field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='otherservice',
             name='order',
-            field=models.PositiveIntegerField(db_index=True, default=-1, editable=False),
+            field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='repairtype',
             name='order',
-            field=models.PositiveIntegerField(db_index=True, default=-1, editable=False),
+            field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='sellingpoint',
             name='order',
-            field=models.PositiveIntegerField(db_index=True, default=-1, editable=False),
+            field=models.PositiveIntegerField(db_index=True, default=0, editable=False),
             preserve_default=False,
         ),
         migrations.AlterField(
