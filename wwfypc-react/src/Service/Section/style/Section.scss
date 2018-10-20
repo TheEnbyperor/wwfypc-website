@@ -31,7 +31,9 @@
     max-width: $max-width;
     height: 100%;
 
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr;
     justify-content: center;
     align-items: center;
 
