@@ -50,8 +50,8 @@
     .Images {
       img {
         width: 75%;
-        max-width: $max-width/8;
         justify-self: center;
+        object-fit: contain;
       }
     }
 
