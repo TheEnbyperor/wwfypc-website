@@ -5,11 +5,11 @@ import {Link, withRouter} from 'react-router-dom';
 import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
 
-const SERVICES_QUERY = gql`
+const MENU_QUERY = gql`
   query {
-    servicePages {
+    menuItems {
       name
-      url
+      linkTo
     }
   }
 `;
@@ -22,7 +22,7 @@ class hashLink extends Component {
             return <Link to={this.props.to + this.props.hash} {...this.props}>{this.props.children}</Link>;
         }
     }
-};
+}
 
 export const HashLink = withRouter(hashLink);
 
@@ -36,15 +36,14 @@ export default class Top extends Component {
                     </HashLink>
                     <div>
                         <span>Services</span>
-                        <Query query={SERVICES_QUERY}>
+                        <Query query={MENU_QUERY}>
                             {({loading, error, data}) => {
                                 if (loading || error) return null;
 
                                 return (
                                     <div>
-                                        <Link to="/unlocking">Unlocking</Link>
-                                        {data.servicePages.map((page, i) => {
-                                            return <Link to={"/" + page.url} key={i}>{page.name}</Link>;
+                                        {data.menuItems.map((page, i) => {
+                                            return <Link to={"/" + page.linkTo} key={i}>{page.name}</Link>;
                                         })}
                                     </div>
                                 );

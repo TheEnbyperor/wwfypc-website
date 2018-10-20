@@ -72,6 +72,12 @@ class OtherServiceType(DjangoObjectType):
         return self.icon.url
 
 
+class MenuItemType(DjangoObjectType):
+    class Meta:
+        model = models.MenuItem
+        interfaces = (graphene.relay.Node, )
+
+
 class RepairTypeType(DjangoObjectType):
     class Meta:
         model = models.RepairType
@@ -604,6 +610,8 @@ class Query:
 
     other_services = graphene.NonNull(graphene.List(graphene.NonNull(OtherServiceType)))
 
+    menu_items = graphene.NonNull(graphene.List(graphene.NonNull(MenuItemType)))
+
     device_categories = graphene.NonNull(graphene.List(graphene.NonNull(DeviceCategoryType)))
 
     device_category = graphene.NonNull(DeviceCategoryType,
@@ -637,6 +645,9 @@ class Query:
 
     def resolve_other_services(self, info):
         return models.OtherService.objects.all()
+
+    def resolve_menu_items(self, info):
+        return models.MenuItem.objects.all()
 
     def resolve_device_categories(self, info):
         return models.DeviceCategory.objects.all()

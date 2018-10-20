@@ -71,6 +71,14 @@ class OtherService(OrderedModel):
         return self.name
 
 
+class MenuItem(OrderedModel):
+    name = models.CharField(max_length=255)
+    link_to = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class AppointmentTimeBlockRule(models.Model):
     start_time = models.TimeField(default=datetime.time())
     end_time = models.TimeField(default=datetime.time())
