@@ -35,9 +35,8 @@
       position: relative;
 
       a, span {
-        font-size: 17px;
-        text-transform: uppercase;
-        font-family: "Adam CG Pro", sans-serif;
+        font-size: 20px;
+        font-family: Bariol, sans-serif;
         font-weight: bold;
         margin: 0 auto;
         padding: 0 10px;
@@ -61,6 +60,7 @@
         z-index: 9999;
         left: 50%;
         transform: translateX(-50%);
+        min-width: 200px;
 
         &:hover {
           display: flex;
@@ -82,7 +82,7 @@
         a {
           border-bottom: 1px solid #66e0b0;
           width: 100%;
-          text-align: left;
+          text-align: center;
           margin: 5px 0;
         }
       }

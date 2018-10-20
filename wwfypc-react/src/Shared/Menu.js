@@ -10,6 +10,7 @@ const MENU_QUERY = gql`
     menuItems {
       name
       linkTo
+      anchor
     }
   }
 `;
@@ -43,7 +44,9 @@ export default class Top extends Component {
                                 return (
                                     <div>
                                         {data.menuItems.map((page, i) => {
-                                            return <Link to={"/" + page.linkTo} key={i}>{page.name}</Link>;
+                                            return <HashLink to={"/" + page.linkTo} hash={page.anchor} key={i}>
+                                                {page.name}
+                                            </HashLink>;
                                         })}
                                     </div>
                                 );

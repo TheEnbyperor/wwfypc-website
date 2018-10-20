@@ -74,6 +74,7 @@ class OtherService(OrderedModel):
 class MenuItem(OrderedModel):
     name = models.CharField(max_length=255)
     link_to = models.CharField(max_length=255)
+    anchor = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.name
