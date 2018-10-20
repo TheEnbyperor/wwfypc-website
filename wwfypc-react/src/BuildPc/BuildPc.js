@@ -172,7 +172,7 @@ class Customise extends Component {
                                             </div>
                                             <div className="info">
                                                 <i className="fas fa-question-circle"/>
-                                                <p dangerouslySetInnerHTML={{__html: helpText}}/>
+                                                <div dangerouslySetInnerHTML={{__html: helpText}}/>
                                             </div>
                                         </div>
                                     )}
