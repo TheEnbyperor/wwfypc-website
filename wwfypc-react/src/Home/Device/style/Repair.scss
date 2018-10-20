@@ -32,6 +32,10 @@
         grid-column: 1;
       }
     }
+
+    p {
+      margin: 0;
+    }
   }
 
   > div:not(.other) {

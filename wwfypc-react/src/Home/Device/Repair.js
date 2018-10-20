@@ -145,7 +145,7 @@ class RepairInfo extends Component {
 
                             return [
                                 <img key={0} src={BASE_URL + data.deviceCategory.icon} alt={data.deviceCategory.name}/>,
-                                this.props.deviceType === null ? <h2 key={1}>{data.deviceCategory.name}</h2> :
+                                this.props.deviceType === null ? <h2 key={1} dangerouslySetInnerHTML={{__html: data.deviceCategory.name}} /> :
                                     <Query key={1} query={DEVICE_INFO_QUERY} variables={{
                                         deviceType: this.props.deviceType
                                     }}>
@@ -154,7 +154,7 @@ class RepairInfo extends Component {
                                             if (error) return <h2>Error</h2>;
 
                                             return [
-                                                <h2 key={0}>{data.deviceType.name}</h2>,
+                                                <h2 key={0} dangerouslySetInnerHTML={{__html: data.deviceType.name}} />,
                                                 this.props.repairType === null ? null :
                                                     <Query key={1} query={REPAIR_INFO_QUERY} variables={{
                                                         repairType: this.props.repairType
