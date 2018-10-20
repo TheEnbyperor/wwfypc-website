@@ -206,6 +206,10 @@ ADMIN_SHORTCUTS = [
                 'title': 'Services',
                 'url_name': 'admin:services_servicepage_changelist',
             },
+            {
+                'title': 'Menu items',
+                'url_name': 'admin:main_site_menuitem_changelist',
+            },
         ]
     },
     {
