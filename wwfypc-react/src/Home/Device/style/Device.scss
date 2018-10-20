@@ -52,7 +52,7 @@
     }
 
     .Devices {
-      flex: 1 70%;
+      flex: 1 1 100%;
       margin: 20px 0;
       display: flex;
       justify-content: center;
@@ -67,7 +67,7 @@
         grid-gap: 10px;
         justify-items: center;
         align-items: stretch;
-        flex: 1 1 100%;
+        flex: 0 1 70%;
 
         > div {
           display: flex;
