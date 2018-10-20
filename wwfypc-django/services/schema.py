@@ -9,6 +9,9 @@ class ServicePageSectionType(DjangoObjectType):
         model = models.ServicePageSection
         interfaces = (graphene.relay.Node, )
 
+    def resolve_image(self, info):
+        return self.image.url
+
 
 class ServicePageType(DjangoObjectType):
     sections = graphene.List(ServicePageSectionType)
@@ -19,6 +22,9 @@ class ServicePageType(DjangoObjectType):
 
     def resolve_sections(self, info):
         return self.sections.all()
+
+    def resolve_header_background(self, info):
+        return self.header_background.url
 
 
 class Query:

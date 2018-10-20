@@ -5,6 +5,7 @@ import main_site.models
 class ServicePage(main_site.models.OrderedModel):
     name = models.CharField(max_length=255, blank=False)
     url = models.CharField(max_length=255, blank=False)
+    header_background = models.ImageField()
 
     def __str__(self):
         return self.name

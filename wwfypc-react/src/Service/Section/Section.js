@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Laptop from './img/laptop.png';
+import {BASE_URL} from "../../App";
 import "./style/Section.scss";
 
 export default class Section extends Component {
@@ -7,7 +7,7 @@ export default class Section extends Component {
         return (
             <div className="Section">
                 <div>
-                <img src={Laptop} alt=""/>
+                <img src={BASE_URL + this.props.data.image} alt=""/>
                 <div>
                     <h1>{this.props.data.title}</h1>
                     <h2>{this.props.data.subtitle}</h2>
