@@ -52,6 +52,16 @@ const REPAIR_INFO_QUERY = gql`
   }
 `;
 
+const DEVICES_QUERY = gql`
+  {
+    deviceCategories {
+      id
+      name
+      colour
+    }
+  }
+`;
+
 class RepairModels extends Component {
     render() {
         return (
@@ -333,6 +343,18 @@ export default class RepairSelection extends Component {
                 </div>
                 <div className="other">
                     <Button colour={4} onClick={this.props.onSelectBack}>Back</Button>
+                    <Query query={DEVICES_QUERY}>
+                        {({loading, data, error}) => {
+                            if (loading) return null;
+                            if (error) return <Button colour={3}>Error</Button>;
+
+                            return data.deviceCategories.slice().reverse().map(({id, name, colour}, i) => {
+                                return <Button colour={colour} key={i} onClick={() => {
+                                    this.props.onSelectDeviceType(id);
+                                }}>{name}</Button>
+                            });
+                        }}
+                    </Query>
                 </div>
             </div>
         );

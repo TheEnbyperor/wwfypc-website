@@ -10,26 +10,27 @@
 
   .other {
     width: 100%;
-        align-items: center;
-        justify-content: flex-end;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: column;
 
-        > * {
-          &:nth-of-type(4n+1) {
-            grid-column: 4;
-          }
-          &:nth-of-type(4n+2) {
-            grid-column: 3;
-          }
-          &:nth-of-type(4n+3) {
-            grid-column: 2;
-          }
-          &:nth-of-type(4n) {
-            grid-column: 1;
-          }
-        }
+    > * {
+      &:nth-of-type(4n+1) {
+        grid-column: 4;
       }
+      &:nth-of-type(4n+2) {
+        grid-column: 3;
+      }
+      &:nth-of-type(4n+3) {
+        grid-column: 2;
+      }
+      &:nth-of-type(4n) {
+        grid-column: 1;
+      }
+    }
+  }
 
   > div:not(.other) {
     flex: 1;

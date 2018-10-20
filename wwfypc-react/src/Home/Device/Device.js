@@ -96,6 +96,8 @@ export default class Device extends Component {
     selectType(type) {
         this.setState({
             deviceType: type,
+            repair: null,
+            device: null,
             step: 2,
         })
     }
@@ -182,6 +184,7 @@ export default class Device extends Component {
                     } else if (this.state.delivery === null) {
                         disp =
                             <RepairSelection ref={this.repairSelection} goBack={this.doGoBack}
+                                             onSelectDeviceType={this.selectType}
                                              onSelectBack={this.goBack} nextStep={this.nextStep}
                                              deviceCategory={this.state.deviceType} devileryTypes={DELIVERY_TYPES}/>;
                     } else {
