@@ -67,15 +67,13 @@ export default class Location extends Component {
                                     <div>
                                         <div>
                                             <h2>Opening Hours</h2>
-                                            <p>{data.siteConfig.openingHours}
-                                            </p>
+                                            <p dangerouslySetInnerHTML={{__html: data.siteConfig.openingHours}} />
                                         </div>
                                     </div>
                                     <div>
                                         <div>
                                             <h2>Address</h2>
-                                            <p>{data.siteConfig.address}
-                                            </p>
+                                            <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}} />
                                         </div>
                                     </div>
                                     <div>

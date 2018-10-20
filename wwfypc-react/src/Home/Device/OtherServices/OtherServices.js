@@ -31,8 +31,8 @@ export default class OtherServices extends Component {
                             return data.otherServices.map(({name, icon, description, buttonText, colour, linkTo}, i) =>
                                 <div key={i}>
                                     <img src={BASE_URL + icon} alt=""/>
-                                    <h3 className={"colour-" + colour}>{name}</h3>
-                                    <p>{description}</p>
+                                    <h3 className={"colour-" + colour} dangerouslySetInnerHTML={{__html: name}} />
+                                    <p dangerouslySetInnerHTML={{__html: description}} />
                                     <Link to={linkTo}>
                                         <Button colour={colour} small>{buttonText}</Button>
                                     </Link>

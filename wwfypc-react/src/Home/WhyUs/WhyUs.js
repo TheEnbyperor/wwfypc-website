@@ -22,7 +22,7 @@ export default class WhyUs extends Component {
                             if (loading) return null;
                             if (error) return <p>Error</p>;
 
-                            return <p>{data.siteConfig.whyChooseUs}</p>;
+                            return <p dangerouslySetInnerHTML={{__html: data.siteConfig.whyChooseUs}} />;
                         }}
                     </Query>
                 </div>

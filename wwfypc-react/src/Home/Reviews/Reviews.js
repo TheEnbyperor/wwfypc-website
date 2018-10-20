@@ -39,7 +39,7 @@ export default class Reviews extends Component {
                                         <img src={Star} alt=""/>
                                         <img src={Star} alt=""/>
                                     </div>
-                                    <p>{data.siteConfig.featuredReview}</p>
+                                    <p dangerouslySetInnerHTML={{__html: data.siteConfig.featuredReview}} />
                                     <p>{data.siteConfig.featuredReviewName}</p>
                                 </div>,
                                 <div key={1} className="pointers">
@@ -47,8 +47,8 @@ export default class Reviews extends Component {
                                         <img key={i} src={BASE_URL + image} alt=""/>)}
                                     {data.sellingPoints.map(({title, text}, i) =>
                                         <div key={i}>
-                                            <h2>{title}</h2>
-                                            <p>{text}</p>
+                                            <h2 dangerouslySetInnerHTML={{__html: title}} />
+                                            <p dangerouslySetInnerHTML={{__html: text}} />
                                         </div>
                                     )}
                                 </div>

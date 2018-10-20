@@ -76,9 +76,7 @@ class Models extends Component {
                                     <div key={i}>
                                         <h2>{name}</h2>
                                         <h3>{priceRange}</h3>
-                                        <p>
-                                            {description}
-                                        </p>
+                                        <p dangerouslySetInnerHTML={{__html: description}} />
                                         <Button colour={(i + 1) % 4} onClick={() => this.props.onSelect(id)}>
                                             Customize
                                         </Button>
@@ -154,9 +152,7 @@ class Customise extends Component {
                             </div>
                             <div>
                                 <h2>{data.basePcModel.name}</h2>
-                                <p>
-                                    {data.basePcModel.description}
-                                </p>
+                                <p dangerouslySetInnerHTML={{__html: data.basePcModel.description}} />
                                 <form>
                                     {data.basePcModel.customisations.map(({id, helpText, options}, i) =>
                                         <div className="select" key={i}>
@@ -174,7 +170,7 @@ class Customise extends Component {
                                             </div>
                                             <div className="info">
                                                 <i className="fas fa-question-circle"/>
-                                                <p>{helpText}</p>
+                                                <p dangerouslySetInnerHTML={{__html: helpText}}/>
                                             </div>
                                         </div>
                                     )}

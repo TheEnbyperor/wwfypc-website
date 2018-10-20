@@ -48,8 +48,8 @@ class Devices extends Component {
                             return data.deviceCategories.map(({id, icon, name, description, colour}, i) => (
                                 <div key={i}>
                                         <img src={BASE_URL + icon} alt={name} key={id}/>
-                                        <h3 className={"colour-" + colour}>{name}</h3>
-                                        <p>{description}</p>
+                                        <h3 className={"colour-" + colour} dangerouslySetInnerHTML={{__html: name}} />
+                                        <p dangerouslySetInnerHTML={{__html: description}} />
                                     <Button colour={colour} small onClick={() => this.props.onSelect(id)}>Start repair</Button>
                                 </div>
                             ))

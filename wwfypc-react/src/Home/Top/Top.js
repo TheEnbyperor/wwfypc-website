@@ -180,7 +180,7 @@ class TopRightSlider extends Component {
                                 onSelect={this.setSlide}/>
                 </div>
                 <h2 className={"colour-" + slide.colour}>{slide.title}</h2>
-                <p>{slide.text}</p>
+                <p dangerouslySetInnerHTML={{__html: slide.text}} />
                 <Link to={slide.linkTo}>
                     <Button colour={1}>{slide.buttonText}</Button>
                 </Link>
