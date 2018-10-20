@@ -1,5 +1,6 @@
 from django.db import models
 import main_site.models
+from ckeditor.fields import RichTextField
 
 
 class DeviceType(main_site.models.OrderedModel):
@@ -12,7 +13,7 @@ class DeviceType(main_site.models.OrderedModel):
 
 class Network(main_site.models.OrderedModel):
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = RichTextField()
 
     def __str__(self):
         return self.name

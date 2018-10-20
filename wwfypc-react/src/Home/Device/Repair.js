@@ -99,7 +99,7 @@ class RepairTypes extends Component {
                                     <span>{name}</span>
                                     <img src={Arrow} alt="" onClick={() => this.props.openRepairDetail(id)}/>
                                 </div>
-                                <p>{description}</p>
+                                <p dangerouslySetInnerHTML={{__html: description}} />
                             </div>
                         ));
                     }}
@@ -122,7 +122,7 @@ class DeliveryTypes extends Component {
                         <span>{name}</span>
                         <img src={Arrow} alt="" onClick={() => this.props.openDeliveryDetail(id)}/>
                     </div>
-                    <p>{description}</p>
+                    <p dangerouslySetInnerHTML={{__html: description}} />
                 </div>
             ));
         } else {

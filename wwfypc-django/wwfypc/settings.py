@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'graphene_django',
     'solo',
     'adminsortable2',
+    'ckeditor',
+    'ckeditor_uploader',
     'main_site.apps.MainSiteConfig',
     'buy_and_sell.apps.BuyAndSellConfig',
     'services.apps.ServicesConfig',
@@ -282,4 +284,13 @@ ADMIN_SHORTCUTS_SETTINGS = {
     'show_on_all_pages': False,
     'hide_app_list': False,
     'open_new_window': False,
+}
+
+CKEDITOR_UPLOAD_PATH = os.path.join(MEDIA_ROOT, "uploads")
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
 }

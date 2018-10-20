@@ -46,7 +46,7 @@ export default class Footer extends Component {
                                         <span>{data.siteConfig.landline}</span>
                                         <span>{data.siteConfig.mobile}</span>
                                         <span>{data.siteConfig.email}</span>
-                                        <p>{data.siteConfig.address}</p>
+                                        <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}} />
                                     </div>
 
                                     <div>
@@ -56,9 +56,15 @@ export default class Footer extends Component {
                                         <a href="">Report a bug</a>
 
                                         <div className="social">
-                                            <a href={data.siteConfig.facebookUrl}><i className="fab fa-facebook-f"/></a>
-                                            <a href={data.siteConfig.googleUrl}><i className="fab fa-google"/></a>
-                                            <a href={data.siteConfig.twitterUrl}><i className="fab fa-twitter"/></a>
+                                            <a href={data.siteConfig.facebookUrl} target="_blank">
+                                                <i className="fab fa-facebook-f"/>
+                                            </a>
+                                            <a href={data.siteConfig.googleUrl} target="_blank">
+                                                <i className="fab fa-google"/>
+                                            </a>
+                                            <a href={data.siteConfig.twitterUrl} target="_blank">
+                                                <i className="fab fa-twitter"/>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

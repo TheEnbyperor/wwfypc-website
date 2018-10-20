@@ -12,3 +12,4 @@ requests
 django-admin-shortcuts
 django-ordered-model
 django-admin-sortable2
+django-ckeditor

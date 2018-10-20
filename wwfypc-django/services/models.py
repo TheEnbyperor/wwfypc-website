@@ -1,5 +1,6 @@
 from django.db import models
 import main_site.models
+from ckeditor.fields import RichTextField
 
 
 class ServicePage(main_site.models.OrderedModel):
@@ -14,8 +15,8 @@ class ServicePage(main_site.models.OrderedModel):
 class ServicePageSection(main_site.models.OrderedModel):
     page = models.ForeignKey(ServicePage, on_delete=models.CASCADE, blank=False, related_name='sections')
     title = models.CharField(max_length=255, blank=True)
-    subtitle = models.TextField(blank=True)
-    text = models.TextField(blank=True)
+    subtitle = RichTextField(blank=True)
+    text = RichTextField(blank=True)
     image = models.FileField(blank=True)
 
     def __str__(self):

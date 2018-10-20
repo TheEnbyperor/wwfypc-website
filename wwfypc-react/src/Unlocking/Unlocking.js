@@ -212,7 +212,7 @@ class Networks extends Component {
                             <span>{name}</span>
                             <img src={Arrow} alt="" onClick={() => this.props.onSelectDetail(id)}/>
                         </div>
-                        <p>{description}</p>
+                        <p dangerouslySetInnerHTML={{__html: description}} />
                     </div>
                 )
                     ;

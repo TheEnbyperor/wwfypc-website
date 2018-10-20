@@ -5,6 +5,7 @@ import django.utils.timezone
 import datetime
 import string
 import phonenumber_field.modelfields
+from ckeditor.fields import RichTextField
 
 COLOURS = (
     (1, "Yellow"),
@@ -28,18 +29,18 @@ class SiteConfig(SingletonModel):
     landline = phonenumber_field.modelfields.PhoneNumberField(blank=False)
     mobile = phonenumber_field.modelfields.PhoneNumberField(blank=False)
     email = models.EmailField(blank=False)
-    address = models.TextField(blank=False)
-    opening_hours = models.TextField(blank=False)
+    address = RichTextField(blank=False)
+    opening_hours = RichTextField(blank=False)
     google_maps_place_id = models.CharField(max_length=255, blank=False)
 
-    appointment_description = models.TextField(verbose_name="\"Book an appointment\" description")
-    walk_in_description = models.TextField(verbose_name="\"Walk in\" description")
-    post_description = models.TextField(verbose_name="\"Post\" description")
+    appointment_description = RichTextField(verbose_name="\"Book an appointment\" description")
+    walk_in_description = RichTextField(verbose_name="\"Walk in\" description")
+    post_description = RichTextField(verbose_name="\"Post\" description")
 
-    featured_review = models.TextField()
+    featured_review = RichTextField()
     featured_review_name = models.CharField(max_length=255)
 
-    why_choose_us = models.TextField()
+    why_choose_us = RichTextField()
 
     twitter_url = models.URLField(blank=True)
     google_url = models.URLField(blank=True)
@@ -50,8 +51,8 @@ class SiteConfig(SingletonModel):
 
 
 class SellingPoint(OrderedModel):
-    title = models.TextField()
-    text = models.TextField()
+    title = RichTextField()
+    text = RichTextField()
     image = models.FileField()
 
     def __str__(self):
@@ -59,9 +60,9 @@ class SellingPoint(OrderedModel):
 
 
 class OtherService(OrderedModel):
-    name = models.TextField()
+    name = RichTextField()
     icon = models.FileField()
-    description = models.TextField()
+    description = RichTextField()
     colour = models.IntegerField(choices=COLOURS, default=1)
     button_text = models.CharField(max_length=255)
     link_to = models.CharField(max_length=255)
@@ -107,7 +108,7 @@ class MainSliderSlide(OrderedModel):
 
     title = models.CharField(max_length=255, blank=False)
     colour = models.IntegerField(choices=COLOURS, blank=False, default=1)
-    text = models.TextField()
+    text = RichTextField()
     button_text = models.CharField(max_length=255)
     link_to = models.CharField(max_length=255)
     image = models.FileField()
@@ -122,8 +123,8 @@ class DeviceCategory(OrderedModel):
         verbose_name_plural = "Device categories"
         ordering = ('order',)
 
-    name = models.TextField(blank=False)
-    description = models.TextField(blank=False)
+    name = RichTextField(blank=False)
+    description = RichTextField(blank=False)
     colour = models.IntegerField(choices=COLOURS, blank=False, default=1)
     icon = models.FileField(blank=False)
 
@@ -146,7 +147,7 @@ class RepairType(OrderedModel):
     name = models.CharField(max_length=255, blank=False)
     price = models.DecimalField(blank=False, decimal_places=2, max_digits=10)
     repair_time = models.CharField(max_length=255, blank=True)
-    description = models.TextField(default="")
+    description = RichTextField(default="")
 
     def __str__(self):
         return f"{self.device_type.name}: {self.name}"
