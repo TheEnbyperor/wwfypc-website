@@ -137,7 +137,9 @@ class Customise extends Component {
                                 .find(elm => elm === option.id);
                             console.log(selectedCustomisation);
                             if (typeof selectedCustomisation === "undefined" && selectedCustomisation !== null) {
-                                customisations.push(option.options[0].id);
+                                if (typeof option.options[0] !== "undefined") {
+                                    customisations.push(option.options[0].id);
+                                }
                             } else {
                                 customisations.push(this.state.options[selectedCustomisation]);
                             }
