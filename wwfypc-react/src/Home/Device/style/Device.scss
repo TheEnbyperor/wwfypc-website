@@ -71,9 +71,9 @@
         margin: 13px 0;
 
         > div {
-          display: flex;
-          flex-direction: column;
+          display: grid;
           width: 100%;
+          grid-template-rows: 50% 15% 25% 10%;
 
           background: $grey;
           border-radius: 25px;
@@ -81,7 +81,6 @@
 
             img {
               align-self: center;
-              flex: 1 1 auto;
             }
 
             h3 {
@@ -115,7 +114,6 @@
             }
 
             p {
-              flex: 1 1 auto;
               margin: 15px;
               font-size: 14px;
             }
