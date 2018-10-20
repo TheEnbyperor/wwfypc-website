@@ -68,6 +68,7 @@
         justify-items: center;
         align-items: stretch;
         flex: 0 1 70%;
+        margin: 13px 0;
 
         > div {
           display: flex;
@@ -79,7 +80,6 @@
           padding: 25px 25px 7px;
 
             img {
-              max-width: 150px;
               align-self: center;
               flex: 1 1 auto;
             }
