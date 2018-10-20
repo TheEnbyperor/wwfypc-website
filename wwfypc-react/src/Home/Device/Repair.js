@@ -97,7 +97,10 @@ class RepairTypes extends Component {
                                  onClick={() => this.props.selectRepair(id)}>
                                 <div className="top">
                                     <span>{name}</span>
-                                    <img src={Arrow} alt="" onClick={() => this.props.openRepairDetail(id)}/>
+                                    <img src={Arrow} alt="" onClick={(event) => {
+                                        this.props.openRepairDetail(id);
+                                        event.stopPropagation();
+                                    }}/>
                                 </div>
                                 <p dangerouslySetInnerHTML={{__html: description}} />
                             </div>
@@ -120,7 +123,10 @@ class DeliveryTypes extends Component {
                      onClick={() => this.props.selectDelivery(id)}>
                     <div className="top">
                         <span>{name}</span>
-                        <img src={Arrow} alt="" onClick={() => this.props.openDeliveryDetail(id)}/>
+                        <img src={Arrow} alt="" onClick={(event) => {
+                            this.props.openDeliveryDetail(id);
+                            event.stopPropagation();
+                        }}/>
                     </div>
                     <p dangerouslySetInnerHTML={{__html: description}} />
                 </div>

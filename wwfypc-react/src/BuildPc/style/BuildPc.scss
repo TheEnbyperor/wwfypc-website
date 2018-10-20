@@ -42,7 +42,7 @@
       grid-gap: 20px;
       padding: 20px;
       justify-content: center;
-      align-items: center;
+      align-items: stretch;
       text-align: center;
       width: 100%;
     }
@@ -61,6 +61,10 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        p {
+          flex: 1;
+        }
 
         h2 {
           font-size: 30px;
@@ -119,6 +123,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 100%;
 
         img {
           width: 70%;
