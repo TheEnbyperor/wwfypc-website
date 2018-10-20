@@ -152,7 +152,7 @@
           justify-self: center;
           align-self: center;
 
-          p {
+          div {
             position: absolute;
             background: $grey2;
             padding: 15px;
@@ -165,7 +165,7 @@
           }
 
           &:hover {
-            p {
+            div {
               visibility: visible;
             }
           }
