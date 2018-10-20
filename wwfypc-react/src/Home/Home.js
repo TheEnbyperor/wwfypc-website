@@ -19,7 +19,7 @@ export default class Home extends Component {
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
             paddingTop: "60px",
-            paddingBottom: "70px",
+            paddingBottom: "30px",
             scrollOverflow: true,
         })
     }
