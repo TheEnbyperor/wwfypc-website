@@ -10,6 +10,7 @@ class DeviceModelAdmin(SortableInlineAdminMixin,  admin.TabularInline):
 @admin.register(models.DeviceCategory)
 class DeviceCategoryAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [DeviceModelAdmin]
+    save_as = True
 
 
 class DevicePermutationValueAdmin(SortableInlineAdminMixin, admin.TabularInline):
@@ -19,8 +20,9 @@ class DevicePermutationValueAdmin(SortableInlineAdminMixin, admin.TabularInline)
 @admin.register(models.DevicePermutation)
 class DevicePermutationAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [DevicePermutationValueAdmin]
+    save_as = True
 
 
 @admin.register(models.ValueEstimate)
 class ValueEstimateAdmin(admin.ModelAdmin):
-    pass
+    save_as = True

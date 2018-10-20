@@ -11,17 +11,20 @@ class AppointmentTimeRuleAdmin(admin.ModelAdmin):
                     'wednesday', 'thursday', 'friday', 'saturday', 'sunday')
     list_editable = ('start_time', 'end_time', 'recurring', 'start_date', 'end_date', 'monday', 'tuesday', 'wednesday',
                      'thursday', 'friday', 'saturday', 'sunday')
+    save_as = True
 
 
 @admin.register(models.AppointmentTimeBlockRule)
 class AppointmentTimeRuleAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'start_time', 'end_time', 'date')
     list_editable = ('start_time', 'end_time', 'date')
+    save_as = True
 
 
 @admin.register(models.Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'date')
+    save_as = True
 
 
 class OrderItemAdmin(admin.TabularInline):
@@ -54,6 +57,7 @@ class OrderItemAdmin(admin.TabularInline):
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemAdmin]
+    save_as = True
 
 
 class CustomerPostalOrdersInline(admin.StackedInline):
@@ -74,6 +78,7 @@ class CustomerOrderInline(admin.StackedInline):
 @admin.register(models.Customer)
 class OrderAdmin(admin.ModelAdmin):
     inlines = [CustomerPostalOrdersInline, CustomerAppointmentInline, CustomerOrderInline]
+    save_as = True
 
 
 class DeviceTypeInlineAdmin(SortableInlineAdminMixin, admin.TabularInline):
@@ -88,21 +93,23 @@ class RepairTypeInlineAdmin(SortableInlineAdminMixin, admin.StackedInline):
 @admin.register(models.DeviceCategory)
 class DeviceCategoryAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [DeviceTypeInlineAdmin]
+    save_as = True
 
 
 @admin.register(models.DeviceType)
 class DeviceTypeAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [RepairTypeInlineAdmin]
+    save_as = True
 
 
 @admin.register(models.RepairType)
 class RepairTypeAdmin(SortableAdminMixin, admin.ModelAdmin):
-    pass
+    save_as = True
 
 
 @admin.register(models.MainSliderSlide)
 class MainSliderSlideAdmin(SortableAdminMixin, admin.ModelAdmin):
-    pass
+    save_as = True
 
 
 @admin.register(models.SellingPoint)
@@ -112,12 +119,12 @@ class SellingPointAdmin(SortableAdminMixin, admin.ModelAdmin):
 
 @admin.register(models.OtherService)
 class OtherServiceAdmin(SortableAdminMixin, admin.ModelAdmin):
-    pass
+    save_as = True
 
 
 @admin.register(models.MenuItem)
 class MenuItemAdmin(SortableAdminMixin, admin.ModelAdmin):
-    pass
+    save_as = True
 
 
 admin.site.register(models.SiteConfig, solo.admin.SingletonModelAdmin)

@@ -20,8 +20,10 @@ class CustomisationInlineAdmin(SortableInlineAdminMixin, admin.StackedInline):
 @admin.register(models.BasePcModel)
 class BasePcModelAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [CustomisationInlineAdmin, PcPostageAdmin]
+    save_as = True
 
 
 @admin.register(models.Customisation)
 class CustomisationAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [CustomisationOptionInlineAdmin]
+    save_as = True
