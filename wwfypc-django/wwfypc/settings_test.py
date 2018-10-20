@@ -328,5 +328,6 @@ CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
+        'font_names': 'Bariol; Moon; Neutra; Helvetica Neue; Adam CG Pro;',
     },
 }
