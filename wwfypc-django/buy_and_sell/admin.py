@@ -21,8 +21,9 @@ class ItemPostageInline(SortableInlineAdminMixin, admin.TabularInline):
 @admin.register(models.Item)
 class ItemAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [ItemImageInline, ItemSpecInline, ItemPostageInline]
+    save_as = True
 
 
 @admin.register(models.ItemCategory)
 class ItemCategoryAdmin(SortableAdminMixin, admin.ModelAdmin):
-    pass
+    save_as = True

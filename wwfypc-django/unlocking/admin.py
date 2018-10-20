@@ -5,12 +5,14 @@ from . import models
 
 @admin.register(models.DeviceType)
 class DeviceTypeAdmin(SortableAdminMixin, admin.ModelAdmin):
-    pass
+    save_as = True
 
 
 @admin.register(models.Network)
 class NetworkAdmin(SortableAdminMixin, admin.ModelAdmin):
-    pass
+    save_as = True
 
-
-admin.site.register(models.UnlockingPrice)
+    
+@admin.register(models.UnlockingPrice)
+class UnlockingAdmin(admin.ModelAdmin):
+    save_as = True

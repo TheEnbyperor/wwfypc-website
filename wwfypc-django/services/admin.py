@@ -11,4 +11,5 @@ class ServicePageSectionAdmin(SortableInlineAdminMixin, admin.StackedInline):
 @admin.register(models.ServicePage)
 class ServicePageAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [ServicePageSectionAdmin]
+    save_as = True
 
