@@ -95,6 +95,11 @@ class DeviceTypeAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [RepairTypeInlineAdmin]
 
 
+@admin.register(models.RepairType)
+class RepairTypeAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
+
 @admin.register(models.MainSliderSlide)
 class MainSliderSlideAdmin(SortableAdminMixin, admin.ModelAdmin):
     pass
@@ -110,6 +115,10 @@ class OtherServiceAdmin(SortableAdminMixin, admin.ModelAdmin):
     pass
 
 
-admin.site.register(models.RepairType)
+@admin.register(models.MenuItem)
+class MenuItemAdmin(SortableAdminMixin, admin.ModelAdmin):
+    pass
+
+
 admin.site.register(models.SiteConfig, solo.admin.SingletonModelAdmin)
 admin.site.register(models.PostalOrder)
