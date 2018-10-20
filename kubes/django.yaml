@@ -44,6 +44,18 @@ spec:
         ports:
         - containerPort: 8000
         imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 8000
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
         env:
         - name: DB_HOST
           value: mysql
