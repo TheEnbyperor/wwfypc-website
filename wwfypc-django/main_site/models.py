@@ -146,7 +146,7 @@ class DeviceType(OrderedModel):
     name = models.CharField(max_length=255, blank=False)
 
     def __str__(self):
-        return self.name
+        return f"{self.device_category.name}: {self.name}"
 
 
 class RepairType(OrderedModel):
@@ -158,7 +158,7 @@ class RepairType(OrderedModel):
     description = RichTextField(default="")
 
     def __str__(self):
-        return f"{self.device_type.name}: {self.name}"
+        return f"{self.device_type.device_category.name}: {self.device_type.name}; {self.name}"
 
 
 def make_uid(length=8):
