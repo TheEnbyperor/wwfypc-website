@@ -351,7 +351,7 @@ export default class RepairSelection extends Component {
                             return data.deviceCategories.slice().reverse().map(({id, name, colour}, i) => {
                                 return <Button colour={colour} key={i} onClick={() => {
                                     this.props.onSelectDeviceType(id);
-                                }}>{name}</Button>
+                                }}><span dangerouslySetInnerHTML={{__html: name}} /></Button>
                             });
                         }}
                     </Query>
