@@ -52,7 +52,7 @@
     }
 
     .Devices {
-      flex: 1 auto;
+      flex: 1 70%;
       margin: 20px 0;
       display: flex;
       justify-content: center;
@@ -67,7 +67,7 @@
         grid-gap: 10px;
         justify-items: center;
         align-items: stretch;
-        height: 100%;
+        flex: 1 1 100%;
 
         > div {
           display: flex;
@@ -81,6 +81,7 @@
             img {
               max-width: 150px;
               align-self: center;
+              flex: 1 1 auto;
             }
 
             h3 {
@@ -114,7 +115,7 @@
             }
 
             p {
-              flex: 1;
+              flex: 1 1 auto;
               margin: 15px;
               font-size: 14px;
             }
