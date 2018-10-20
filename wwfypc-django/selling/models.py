@@ -19,7 +19,7 @@ class DeviceModel(main_site.models.OrderedModel):
     name = models.CharField(max_length=255)
     
     def __str__(self):
-        return f"{str(self.category)}: {self.name}"
+        return f"{self.category.name}: {self.name}"
 
 
 class DevicePermutation(main_site.models.OrderedModel):
