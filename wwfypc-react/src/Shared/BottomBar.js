@@ -23,9 +23,9 @@ class Contact extends Component {
                         if (!loading && !error) {
                             return <div className="ContactButton">
                                 <span>Contact</span>
-                                <a href={data.siteConfig.facebookUrl}><i className="fab fa-facebook-f"/></a>
-                                <a href={data.siteConfig.googleUrl}><i className="fab fa-google"/></a>
-                                <a href={data.siteConfig.twitterUrl}><i className="fab fa-twitter"/></a>
+                                <a href={data.siteConfig.facebookUrl} target="_blank"><i className="fab fa-facebook-f"/></a>
+                                <a href={data.siteConfig.googleUrl} target="_blank"><i className="fab fa-google"/></a>
+                                <a href={data.siteConfig.twitterUrl} target="_blank"><i className="fab fa-twitter"/></a>
                                 <Link to="/contact"><i className="fa fa-envelope"/></Link>
                             </div>
                         } else {
