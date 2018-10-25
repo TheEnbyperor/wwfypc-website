@@ -10,6 +10,14 @@ import Lock from "./img/lock.svg";
 import "./style/Unlocking.scss";
 import Arrow from "./img/Arrow.svg";
 
+const CONFIG_QUERY = gql`
+  query {
+    siteConfig {
+      unlockingText
+    }
+  }
+`
+
 const DEVICE_MODELS_QUERY = gql`
   query {
     unlockingDeviceTypes {
@@ -53,12 +61,18 @@ const DEVICE_NETWORK_QUERY = gql`
 class Notice extends Component {
     render() {
         return <div className="Notice">
-            <img src={Lock} alt=""/>
-            <p>Phone unlocking may be completed by a third party affiliate and is not protected by your carrier. Results
-                & timescale may vary by demand. Phones must be out of contract, not have a blocked IMEI, and be a UK
-                number.</p>
-            <p>By clicking next you agree to these terms.</p>
-            <Button colour={3} onClick={this.props.onAccept}>Next</Button>
+            <Query query={CONFIG_QUERY}>
+                    {({loading, data, error}) => {
+                        if (loading) return <h2>Loading</h2>;
+                        if (error) return <h2>Error</h2>;
+                        
+                        return [
+                            <img key={0} src={Lock} alt=""/>,
+                            <div key={1}>{data.siteConfig.unlockingText}</div>,
+                            <Button key={2} colour={3} onClick={this.props.onAccept}>Next</Button>
+                        ];
+                    }}
+                </Query>
         </div>
     }
 }

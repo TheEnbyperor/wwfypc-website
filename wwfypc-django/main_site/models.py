@@ -37,6 +37,8 @@ class SiteConfig(SingletonModel):
     walk_in_description = RichTextField(verbose_name="\"Walk in\" description")
     post_description = RichTextField(verbose_name="\"Post\" description")
 
+    unlocking_text = RichTextField()
+
     featured_review = RichTextField()
     featured_review_name = models.CharField(max_length=255)
 
