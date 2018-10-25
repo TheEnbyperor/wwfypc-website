@@ -145,7 +145,6 @@
       .repairType, .deliveryType {
         grid-column: 3;
         margin: 0 0 0 13px;
-        text-transform: uppercase;
         padding: 0;
 
         .top {
@@ -162,7 +161,6 @@
 
         p {
           display: none;
-          text-transform: none;
           padding: 15px;
           margin: 0;
         }
