@@ -3,6 +3,7 @@ import {Query} from "react-apollo";
 import gql from "graphql-tag";
 import "./Footer.scss";
 import {Link} from "react-router-dom";
+import {BASE_URL} from "../../App";
 
 const INFO_QUERY = gql`
   {
@@ -52,8 +53,10 @@ export default class Footer extends Component {
                                     </div>
 
                                     <div>
-                                        <a href="">Terms & conditions</a>
-                                        <a href="">Warranty</a>
+                                        <a href={BASE_URL + data.siteConfig.termsAndConditions} target="_blank">
+                                            Terms & conditions
+                                        </a>
+                                        <a href={BASE_URL + data.siteConfig.warranty} target="_blank">Warranty</a>
 
                                         <div className="social">
                                             <a href={data.siteConfig.facebookUrl} target="_blank">

@@ -159,14 +159,21 @@ export default class Contact extends Component {
                                             <div className="icon">
                                                 <i className="fa fa-phone"/>
                                                 <p>
-                                                    {data.siteConfig.landline}<br/>
-                                                    {data.siteConfig.mobile}
+                                                    <a href={"tel:" + data.siteConfig.landline}>
+                                                        {data.siteConfig.landline}
+                                                    </a>
+                                                    <br/>
+                                                    <a href={"tel:" + data.siteConfig.mobile}>
+                                                        {data.siteConfig.mobile}
+                                                    </a>
                                                 </p>
                                             </div>
                                             <div className="icon">
                                                 <i className="fa fa-envelope"/>
                                                 <p>
-                                                    {data.siteConfig.email}
+                                                    <a href={"mailto:" + data.siteConfig.email}>
+                                                        {data.siteConfig.email}
+                                                    </a>
                                                 </p>
                                             </div>
                                         </div>;
