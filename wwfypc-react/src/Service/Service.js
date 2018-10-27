@@ -22,12 +22,6 @@ const SERVICES_QUERY = gql`
 `;
 
 export default class Service extends Component {
-    constructor(props) {
-        super(props);
-
-        this.renderCallback = this.renderCallback.bind(this);
-    }
-
     componentDidMount() {
         new window.fullpage(".Service", {
             navigationPosition: 'right',
