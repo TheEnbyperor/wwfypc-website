@@ -1,31 +1,31 @@
 kind: Ingress
 apiVersion: extensions/v1beta1
 metadata:
-  name: api-test
-  namespace: wwfypc
+  name: api
+  namespace: website-test
   labels:
-    app: wwfypc-test
+    app: website
   annotations:
     ingress.kubernetes.io/referrer-policy: "strict-origin-when-cross-origin"
     ingress.kubernetes.io/browser-xss-filter: "true"
     ingress.kubernetes.io/content-type-nosniff: "true"
 spec:
   rules:
-  - host: api.test.wwfypc.fluidmedia.wales
+  - host: api.test.wewillfixyourpc.co.uk
     http:
       paths:
       - path: "/"
         backend:
-          serviceName: wwfypc-nginx-test
+          serviceName: nginx
           servicePort: 8000
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: wwfypc-nginx-test
-  namespace: wwfypc
+  name: nginx
+  namespace: website-test
   labels:
-    app: wwfypc-test
+    app: website
     tier: nginx
 spec:
   ports:
@@ -33,32 +33,32 @@ spec:
     port: 8000
     targetPort: 8000
   selector:
-    app: wwfypc-test
+    app: website
     tier: nginx
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wwfypc-nginx-test
-  namespace: wwfypc
+  name: nginx
+  namespace: website-test
 spec:
   selector:
     matchLabels:
-      app: wwfypc-test
+      app: website
       tier: nginx
   replicas: 3
   template:
     metadata:
       labels:
-        app: wwfypc-test
+        app: website
         tier: nginx
     spec:
       volumes:
       - name: gluster
         glusterfs:
           endpoints: glusterfs-cluster
-          path: kubes-pv
+          path: apps
       containers:
       - name: nginx
         image: evilben/wwfypc-nginx:(hash)
@@ -68,10 +68,10 @@ spec:
         volumeMounts:
         - name: gluster
           mountPath: /src/static
-          subPath: wwfypc-test/static
+          subPath: website-test/static
         - name: gluster
           mountPath: /src/media
-          subPath: wwfypc-test/media
+          subPath: website-test/media
 
 
 

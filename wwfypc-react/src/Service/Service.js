@@ -2,11 +2,13 @@ import React, {Component} from "react";
 import Top from "./Top/Top";
 import Section from "./Section/Section";
 import {Query} from 'react-apollo';
+import DocumentTitle from 'react-document-title';
 import gql from 'graphql-tag';
 
 const SERVICES_QUERY = gql`
   query($id: ID!) {
     servicePage(id: $id) {
+      name
       headerBackground
       sections {
         image
@@ -49,14 +51,14 @@ export default class Service extends Component {
                         setTimeout(this.renderCallback, 10);
 
                         return [
-                            <div className="section" data-tooltip="Top" key={data.servicePage.sections.length}>
-                                <Top background={data.servicePage.headerBackground}/>
-                            </div>
-                        ].concat(data.servicePage.sections.map((section, i) => {
-                            return <div className="section" key={i} data-tooltip={section.title}>
-                                <Section data={section}/>
-                            </div>;
-                        }));
+                                <div className="section" data-tooltip="Top" key={data.servicePage.sections.length}>
+                                    <Top background={data.servicePage.headerBackground}/>
+                                </div>
+                            ].concat(data.servicePage.sections.map((section, i) => {
+                                return <div className="section" key={i} data-tooltip={section.title}>
+                                    <Section data={section}/>
+                                </div>;
+                            }));
                     }}
                 </Query>
             </div>

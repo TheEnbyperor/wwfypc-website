@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: wwfypc-django-test
-  namespace: wwfypc
+  name: django
+  namespace: website-test
   labels:
-    app: wwfypc-test
+    app: website
     tier: django
 spec:
   ports:
@@ -12,32 +12,32 @@ spec:
     port: 8000
     targetPort: 8000
   selector:
-    app: wwfypc-test
+    app: website
     tier: django
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wwyfpc-django-test
-  namespace: wwfypc
+  name: django
+  namespace: website-test
 spec:
   selector:
     matchLabels:
-      app: wwfypc-test
+      app: website
       tier: django
   replicas: 3
   template:
     metadata:
       labels:
-        app: wwfypc-test
+        app: website
         tier: django
     spec:
       volumes:
       - name: gluster
         glusterfs:
           endpoints: glusterfs-cluster
-          path: kubes-pv
+          path: apps
       containers:
       - name: django
         image: evilben/wwfypc-django:(hash)
@@ -58,33 +58,33 @@ spec:
           timeoutSeconds: 5
         env:
         - name: DB_HOST
-          value: mysql
+          value: mysql.kube-system
         - name: DB_USER
-          value: wwfypc-test
+          value: website-test
         - name: DB_NAME
-          value: wwfypc-test
+          value: website-test
         - name: DB_PASS
           valueFrom:
             secretKeyRef:
-              name: mysql-pass-test
+              name: mysql-pass
               key: pass
         - name: WORLDPAY_SERVER_KEY
           valueFrom:
             secretKeyRef:
-              name: worldpay-test
+              name: worldpay
               key: server
         - name: DJANGO_SECRET
           valueFrom:
             secretKeyRef:
-              name: django-secret-test
+              name: django-secret
               key: secret
         volumeMounts:
         - name: gluster
           mountPath: /src/static
-          subPath: wwfypc-test/static
+          subPath: website-test/static
         - name: gluster
           mountPath: /src/media
-          subPath: wwfypc-test/media
+          subPath: website-test/media
 
 
 

@@ -2,10 +2,10 @@ apiVersion: v1
 kind: Endpoints
 metadata:
   name: glusterfs-cluster
-  namespace: wwfypc
+  namespace: website-test
 subsets:
   - addresses:
-    - ip: 195.201.58.86
+    - ip: 159.69.213.4
     ports:
     - port: 1
 ---
@@ -13,7 +13,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: glusterfs-cluster
-  namespace: wwfypc
+  namespace: website-test
 spec:
   ports:
   - port: 1

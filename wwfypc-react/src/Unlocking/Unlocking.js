@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
+import DocumentTitle from 'react-document-title';
 import Footer from "../Shared/Footer/Footer";
 import Button from "../Shared/Buttons";
 import Indicators from "../Shared/Indicators";
@@ -16,7 +17,7 @@ const CONFIG_QUERY = gql`
       unlockingText
     }
   }
-`
+`;
 
 const DEVICE_MODELS_QUERY = gql`
   query {
@@ -65,7 +66,7 @@ class Notice extends Component {
                     {({loading, data, error}) => {
                         if (loading) return <h2>Loading</h2>;
                         if (error) return <h2>Error</h2>;
-                        
+
                         return [
                             <img key={0} src={Lock} alt=""/>,
                             <div key={1}>{data.siteConfig.unlockingText}</div>,
@@ -349,15 +350,17 @@ export default class Unlocking extends Component {
 
     render() {
         return <div className="Unlocking">
-            <div className="section">
-                <div className="UnlockingInner">
-                    <h1>Phone Unlocking</h1>
-                    {!this.state.termsAccepted ?
-                        <Notice onAccept={this.acceptTerms}/> :
-                        <Device/>}
+            <DocumentTitle title="Unlocking | We Will Fix Your PC">
+                <div className="section">
+                    <div className="UnlockingInner">
+                        <h1>Phone Unlocking</h1>
+                        {!this.state.termsAccepted ?
+                            <Notice onAccept={this.acceptTerms}/> :
+                            <Device/>}
+                    </div>
                 </div>
-            </div>
-            <div className="section fp-auto-height"><Footer/></div>
+                <div className="section fp-auto-height"><Footer/></div>
+            </DocumentTitle>
         </div>;
     }
 }
