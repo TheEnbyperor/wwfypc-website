@@ -84,12 +84,15 @@ class SellForm extends Component {
     selectCategory(event) {
         this.setState({
             selectedCategory: event.target.value === "null" ? null : event.target.value,
+            selectedModel: null,
+            selectedPermutations: {}
         })
     }
 
     selectModel(event) {
         this.setState({
             selectedModel: event.target.value === "null" ? null : event.target.value,
+            selectedPermutations: {}
         })
     }
 
