@@ -61,8 +61,7 @@
 
       > div:not(.other) {
         display: grid;
-        grid-auto-columns: 25%;
-        grid-auto-flow: column;
+        grid-template-columns: repeat(auto-fit, minmax(26%, 250px));
         justify-content: center;
         grid-gap: 10px;
         justify-items: center;

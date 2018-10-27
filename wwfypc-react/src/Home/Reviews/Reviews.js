@@ -43,10 +43,9 @@ export default class Reviews extends Component {
                                     <p>{data.siteConfig.featuredReviewName}</p>
                                 </div>,
                                 <div key={1} className="pointers">
-                                    {data.sellingPoints.map(({image}, i) =>
-                                        <img key={i} src={BASE_URL + image} alt=""/>)}
-                                    {data.sellingPoints.map(({title, text}, i) =>
+                                    {data.sellingPoints.map(({title, text, image}, i) =>
                                         <div key={i}>
+                                            <img key={i} src={BASE_URL + image} alt=""/>
                                             <h2 dangerouslySetInnerHTML={{__html: title}} />
                                             <p dangerouslySetInnerHTML={{__html: text}} />
                                         </div>
