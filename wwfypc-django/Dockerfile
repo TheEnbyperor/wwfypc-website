@@ -1,12 +1,15 @@
-FROM python:3
+FROM ubuntu:18.04
 ENV PYTHONUNBUFFERED 1
-RUN apt-get update \
-    && apt-get -y upgrade \
-    && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && apt install -y ./google-chrome-stable_current_amd64.deb \
-    && apt install -y --no-install-recommends default-libmysqlclient-dev \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip install --upgrade pip
+RUN apt-get update -qqy \
+    && apt-get install wget gnupg2 -qqy \
+    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update -qqy \
+    && apt-get upgrade -qqy \
+    && apt-get -qqy install google-chrome-stable default-libmysqlclient-dev python3 python3-pip \
+    && rm /etc/apt/sources.list.d/google-chrome.list \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/* \
+    && pip3 install --upgrade pip
 
 RUN mkdir /src
 WORKDIR /src
