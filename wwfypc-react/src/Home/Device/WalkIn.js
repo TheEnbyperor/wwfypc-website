@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
+import Button from '../../Shared/Buttons';
 import './style/WalkIn.scss'
 
 const WALK_IN_QUERY = gql`
@@ -23,15 +24,15 @@ export default class WalkIn extends Component {
                         if (loading) return <h2>Loading</h2>;
                         if (error) return <h2>Error</h2>;
 
-                        return (
-                            <div className="Info">
+                        return [
+                            <div className="Info" key={0}>
                                 <div>
                                     <h2>Opening Hours</h2>
                                     <p dangerouslySetInnerHTML={{__html: data.siteConfig.openingHours}}/>
                                 </div>
                                 <div>
                                     <h2>Address</h2>
-                                    <p dangerouslySetInnerHTML={{_html: data.siteConfig.address}} />
+                                    <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}} />
                                 </div>
                                 <div>
                                     <iframe title="google map" frameBorder="0" style={{border: 0}}
@@ -39,8 +40,9 @@ export default class WalkIn extends Component {
                                             data.siteConfig.googleMapsPlaceId +
                                             "&key=AIzaSyBmGRHy0mtaNM6QNZdK2Cku3yt_u__AyBs"} allowFullScreen/>
                                 </div>
-                            </div>
-                        );
+                            </div>,
+                            <Button key={1} colour={4} onClick={this.props.onSelectBack}>Back</Button>
+                        ];
                     }}
                 </Query>
             </div>

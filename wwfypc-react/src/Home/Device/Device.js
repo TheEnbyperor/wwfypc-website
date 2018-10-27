@@ -189,14 +189,16 @@ export default class Device extends Component {
                                              deviceCategory={this.state.deviceType} devileryTypes={DELIVERY_TYPES}/>;
                     } else {
                         if (this.state.delivery === WALK_IN_TYPE) {
-                            disp = <WalkIn/>;
+                            disp = <WalkIn onSelectBack={this.goBack}/>;
                             title = "Walk in";
                         } else if (this.state.delivery === POST_TYPE) {
                             disp =
-                                <Post nextStep={this.finalStep} device={this.state.device} repair={this.state.repair}/>;
+                                <Post onSelectBack={this.goBack} nextStep={this.finalStep} device={this.state.device}
+                                      repair={this.state.repair}/>;
                             title = "Post";
                         } else if (this.state.delivery === APPOINTMENT_TYPE) {
-                            disp = <Appointment device={this.state.device} repair={this.state.repair}/>;
+                            disp = <Appointment device={this.state.device} repair={this.state.repair}
+                                                onSelectBack={this.goBack}/>;
                             title = "Book your appointment";
                         }
                     }
