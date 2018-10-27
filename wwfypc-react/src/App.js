@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ApolloClient from "apollo-boost";
 import {ApolloProvider, Query} from "react-apollo";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import DocumentTitle from 'react-document-title';
 import gql from 'graphql-tag';
 
 import './App.scss';
@@ -38,29 +39,31 @@ class App extends Component {
         return (
             <ApolloProvider client={client}>
                 <BrowserRouter>
-                    <div className="App">
-                        <Menu/>
-                        <Switch>
-                            <Route exact path="/" component={Home}/>
-                            <Route path="/buy-and-sell" component={BuyAndSell}/>
-                            <Route path="/sell" component={Sell}/>
-                            <Route path="/cart" component={Cart}/>
-                            <Route path="/contact" component={Contact}/>
-                            <Route path="/unlocking" component={Unlocking}/>
-                            <Route path="/build-pc" component={BuildPc}/>
-                            <Query query={SERVICES_QUERY}>
-                                {({loading, error, data}) => {
-                                    if (loading || error) return null;
+                    <DocumentTitle title="We Will Fix Your PC">
+                        <div className="App">
+                            <Menu/>
+                            <Switch>
+                                <Route exact path="/" component={Home}/>
+                                <Route path="/buy-and-sell" component={BuyAndSell}/>
+                                <Route path="/sell" component={Sell}/>
+                                <Route path="/cart" component={Cart}/>
+                                <Route path="/contact" component={Contact}/>
+                                <Route path="/unlocking" component={Unlocking}/>
+                                <Route path="/build-pc" component={BuildPc}/>
+                                <Query query={SERVICES_QUERY}>
+                                    {({loading, error, data}) => {
+                                        if (loading || error) return null;
 
-                                    return data.servicePages.map((page) => {
-                                        return <Route path={"/" + page.url} key={page.id}
-                                                      render={(props) => <Service {...props} serviceId={page.id} />}/>;
-                                    });
-                                }}
-                            </Query>
-                        </Switch>
-                        <BottomBar/>
-                    </div>
+                                        return data.servicePages.map((page) => {
+                                            return <Route path={"/" + page.url} key={page.id}
+                                                          render={(props) => <Service {...props} serviceId={page.id} />}/>;
+                                        });
+                                    }}
+                                </Query>
+                            </Switch>
+                            <BottomBar/>
+                        </div>
+                    </DocumentTitle>
                 </BrowserRouter>
             </ApolloProvider>
         );
