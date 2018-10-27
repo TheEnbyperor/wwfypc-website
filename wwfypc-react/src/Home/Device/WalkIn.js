@@ -27,13 +27,11 @@ export default class WalkIn extends Component {
                             <div className="Info">
                                 <div>
                                     <h2>Opening Hours</h2>
-                                    <p>{data.siteConfig.openingHours}
-                                    </p>
+                                    <p dangerouslySetInnerHTML={{__html: data.siteConfig.openingHours}}/>
                                 </div>
                                 <div>
                                     <h2>Address</h2>
-                                    <p>{data.siteConfig.address}
-                                    </p>
+                                    <p dangerouslySetInnerHTML={{_html: data.siteConfig.address}} />
                                 </div>
                                 <div>
                                     <iframe title="google map" frameBorder="0" style={{border: 0}}
