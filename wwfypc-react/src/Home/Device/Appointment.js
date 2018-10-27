@@ -255,6 +255,7 @@ class AppointmentFinal extends Component {
                 <RepairInfo deviceType={this.props.device} repairType={this.props.repair}
                             selectedDay={this.props.selectedDay} selectedTime={this.props.selectedTime}/>
             </div>
+            <Button colour={4} onClick={this.props.onSelectBack}>Back</Button>
         </div>
     }
 }
@@ -320,6 +321,7 @@ class AppointmentForm extends Component {
                                 <input type="phone" ref={this.phone} placeholder="Phone"/>
                             </div>
                             <Button colour={1} onClick={() => this.submit(createOrder)}>Submit</Button>
+                            <Button colour={4} onClick={this.props.onSelectBack}>Back</Button>
                         </div>);
                 }}
             </Mutation>
@@ -376,13 +378,15 @@ export default class Appointment extends Component {
                     <Calendar key={0} repair={this.props.repair} device={this.props.device}
                               selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime}
                               onSelectDay={this.selectDay} onSelectTime={this.selectTime}/>,
-                    <Button key={1} colour={1} onClick={this.book}>Book</Button>
+                    <Button key={1} colour={1} onClick={this.book}>Book</Button>,
+                    <Button key={2} colour={4} onClick={this.props.onSelectBack}>Back</Button>
                 ] : (this.state.appointmentID === null) ?
                     <AppointmentForm repair={this.props.repair} device={this.props.device}
                                      selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime}
-                                     onSubmit={this.submit}/> :
+                                     onSubmit={this.submit} onSelectBack={this.props.onSelectBack}/> :
                     <AppointmentFinal repair={this.props.repair} device={this.props.device}
-                                      selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime}/>
+                                      selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime}
+                                      onSelectBack={this.props.onSelectBack}/>
                 }
             </div>
         )

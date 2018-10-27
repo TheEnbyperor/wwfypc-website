@@ -55,6 +55,7 @@ class PostFinal extends Component {
                                 <p>We'll be in touch once your device is fixed to take payment and to arrange postage
                                     back to you</p>
                             </div>
+                            <Button colour={4} onClick={this.props.onSelectBack}>Back</Button>
                         </div>
                     );
                 }}
@@ -134,6 +135,7 @@ class PostForm extends Component {
                                 <textarea name="address" ref={this.address} placeholder="Address"/>
                             </div>
                             <Button colour={1} onClick={() => this.submit(createOrder)}> Get your postage sheet</Button>
+                            <Button colour={4} onClick={this.props.onSelectBack}>Back</Button>
                         </div>);
                 }}
             </Mutation>
@@ -163,9 +165,10 @@ export default class Post extends Component {
         let disp = null;
 
         if (this.state.orderId === null) {
-            disp = <PostForm onSubmit={this.onSubmitOrder} device={this.props.device} repair={this.props.repair} />;
+            disp = <PostForm onSubmit={this.onSubmitOrder} device={this.props.device} repair={this.props.repair}
+                             onSelectBack={this.props.onSelectBack} />;
         } else {
-            disp = <PostFinal orderId={this.state.orderId}/>;
+            disp = <PostFinal orderId={this.state.orderId} onSelectBack={this.props.onSelectBack} />;
         }
 
         return (
