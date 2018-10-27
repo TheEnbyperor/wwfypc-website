@@ -13,6 +13,7 @@ class DeviceType(main_site.models.OrderedModel):
 
 class Network(main_site.models.OrderedModel):
     name = models.CharField(max_length=255)
+    unlocking_time = models.CharField(max_length=255)
     description = RichTextField()
 
     def __str__(self):
