@@ -35,7 +35,7 @@ export default class Filter extends Component {
                 </Query>
                 <Link to="/sell">
                     <div className="colour-4">
-                        Sell
+                        Sell your item
                     </div>
                 </Link>
                 <Link to="/build-pc">
