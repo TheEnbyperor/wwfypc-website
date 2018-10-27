@@ -14,6 +14,6 @@ cat kubes/mysql.yaml | kubectl apply -f -
 cat kubes/django.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
 cat kubes/nginx.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
 kubectl -n website-test rollout status deployment/django
-kubectl -n website-test rollout status deployment/wwfypc-react
+kubectl -n website-test rollout status deployment/react
 kubectl -n website-test rollout status deployment/nginx
 
