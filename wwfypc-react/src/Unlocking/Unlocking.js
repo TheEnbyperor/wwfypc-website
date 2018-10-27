@@ -69,7 +69,7 @@ class Notice extends Component {
 
                     return [
                         <img key={0} src={Lock} alt=""/>,
-                        <div key={1}>{data.siteConfig.unlockingText}</div>,
+                        <div key={1} dangerouslySetInnerHTML={{__html: data.siteConfig.unlockingText}} />,
                         <Button key={2} colour={3} onClick={this.props.onAccept}>Next</Button>
                     ];
                 }}
