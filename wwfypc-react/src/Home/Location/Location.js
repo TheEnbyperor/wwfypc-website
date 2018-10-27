@@ -62,6 +62,7 @@ export default class Location extends Component {
                     {({loading, error, data}) => {
                         if (!loading && !error) {
                             return [
+                                <Map key={2} placeId={data.siteConfig.googleMapsPlaceId}/>,
                                 <div className="Info" key={1}>
                                     <div>
                                     <div>
@@ -87,8 +88,7 @@ export default class Location extends Component {
                                         </div>
                                     </div>
                                     </div>
-                                </div>,
-                                <Map key={2} placeId={data.siteConfig.googleMapsPlaceId}/>
+                                </div>
                             ];
                         } else {
                             return null;

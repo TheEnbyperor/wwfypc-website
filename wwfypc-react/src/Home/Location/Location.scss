@@ -7,10 +7,10 @@
 
 .Location {
   position: relative;
-  height: 100%;
+  overflow: scroll;
 
   .mapContainer {
-    height: 100%;
+    height: calc(100vh - 70px);
 
     iframe {
       width: 100%;
@@ -23,6 +23,10 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+
+    @media (max-width: 1000px) {
+      position: relative;
+    }
 
     padding: 20px;
     background: rgba($grey, .7);
