@@ -13,7 +13,7 @@ cat kubes/gluster.yaml | kubectl apply -f -
 cat kubes/mysql.yaml | kubectl apply -f -
 cat kubes/django.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
 cat kubes/nginx.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
-kubectl -n wwfypc rollout status deployment/wwyfpc-django-test
+kubectl -n wwfypc rollout status deployment/django
 kubectl -n wwfypc rollout status deployment/wwfypc-react
-kubectl -n wwfypc rollout status deployment/wwfypc-nginx-test
+kubectl -n wwfypc rollout status deployment/nginx
 

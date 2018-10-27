@@ -1,65 +1,62 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: wwfypc
----
 kind: Ingress
 apiVersion: extensions/v1beta1
 metadata:
-  name: wwfypc-test
-  namespace: wwfypc
+  name: react
+  namespace: website-test
   labels:
-    app: wwfypc-test
+    app: website
+    teir: react
   annotations:
     ingress.kubernetes.io/referrer-policy: "strict-origin-when-cross-origin"
     ingress.kubernetes.io/browser-xss-filter: "true"
     ingress.kubernetes.io/content-type-nosniff: "true"
 spec:
   rules:
-  - host: test.wwfypc.fluidmedia.wales
+  - host: test.wewillfixyourpc.co.uk
     http:
       paths:
       - path: "/"
         backend:
-          serviceName: wwfypc-react
+          serviceName: react
           servicePort: 80
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: wwfypc-react
-  namespace: wwfypc
+  name: react
+  namespace: website-test
   labels:
-    app: wwfypc-test
+    app: website
+    teir: react
 spec:
   ports:
   - protocol: TCP
     port: 80
     targetPort: 5000
   selector:
-    app: wwfypc-test
-    tier: server
+    app: website
+    tier: react
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wwfypc-react
-  namespace: wwfypc
+  name: react
+  namespace: website-test
 spec:
   selector:
     matchLabels:
-      app: wwfypc-test
-      tier: server
+      app: website
+      tier: react
   replicas: 3
   template:
     metadata:
       labels:
-        app: wwfypc-test
-        tier: server
+        app: website
+        tier: react
     spec:
       containers:
-      - name: server
+      - name: react
         image: evilben/wwfypc-react:(hash)
         ports:
         - containerPort: 5000
