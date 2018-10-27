@@ -45,7 +45,7 @@ export default class Top extends Component {
                                 return (
                                     <div>
                                         {data.menuItems.map((page, i) => {
-                                            return <HashLink to={"/" + page.linkTo} hash={page.anchor} key={i}>
+                                            return <HashLink to={page.linkTo} hash={page.anchor} key={i}>
                                                 {page.name}
                                             </HashLink>;
                                         })}
