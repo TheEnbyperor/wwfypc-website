@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET", "")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["test.wewillfixyoupc.co.uk"]
+ALLOWED_HOSTS = ["api.test.wewillfixyourpc.co.uk"]
 
 # Application definition
 
