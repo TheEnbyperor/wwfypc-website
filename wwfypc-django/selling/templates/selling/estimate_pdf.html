@@ -37,9 +37,9 @@
     </div>
     <div class="info">
         <span>Opening hours</span>
-        <span>{{ config.opening_hours|linebreaks }}</span>
+        <span>{{ config.opening_hours|safe }}</span>
         <span>Address</span>
-        <span>{{ config.address|linebreaksbr }}</span>
+        <span>{{ config.address|safe }}</span>
     </div>
 </section>
 <section>
