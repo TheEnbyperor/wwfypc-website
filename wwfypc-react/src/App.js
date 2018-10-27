@@ -7,7 +7,6 @@ import gql from 'graphql-tag';
 
 import './App.scss';
 import Menu from './Shared/Menu';
-import BottomBar from './Shared/BottomBar';
 import Home from './Home/Home';
 import Service from './Service/Service';
 import BuyAndSell from './BuyAndSell/BuyAndSell';
@@ -38,8 +37,8 @@ class App extends Component {
     render() {
         return (
             <ApolloProvider client={client}>
-                <BrowserRouter>
-                    <DocumentTitle title="We Will Fix Your PC">
+                <DocumentTitle title="We Will Fix Your PC">
+                    <BrowserRouter>
                         <div className="App">
                             <Menu/>
                             <Switch>
@@ -56,15 +55,15 @@ class App extends Component {
 
                                         return data.servicePages.map((page) => {
                                             return <Route path={"/" + page.url} key={page.id}
-                                                          render={(props) => <Service {...props} serviceId={page.id} />}/>;
+                                                          render={(props) => <Service {...props}
+                                                                                      serviceId={page.id}/>}/>;
                                         });
                                     }}
                                 </Query>
                             </Switch>
-                            <BottomBar/>
                         </div>
-                    </DocumentTitle>
-                </BrowserRouter>
+                    </BrowserRouter>
+                </DocumentTitle>
             </ApolloProvider>
         );
     }

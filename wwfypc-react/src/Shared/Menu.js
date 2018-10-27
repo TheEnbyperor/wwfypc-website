@@ -4,6 +4,7 @@ import './style/Menu.scss';
 import {Link, withRouter} from 'react-router-dom';
 import {Query} from 'react-apollo';
 import gql from 'graphql-tag';
+import CartIndicator from '../Cart/Indicator/Indicator';
 
 const MENU_QUERY = gql`
   query {
@@ -18,9 +19,9 @@ const MENU_QUERY = gql`
 class hashLink extends Component {
     render() {
         if (this.props.location.pathname === this.props.to) {
-            return <a href={this.props.hash} {...this.props}>{this.props.children}</a>;
+            return <a href={this.props.hash} className={this.props.className}>{this.props.children}</a>;
         } else {
-            return <Link to={this.props.to + this.props.hash} {...this.props}>{this.props.children}</Link>;
+            return <Link to={this.props.to + this.props.hash} className={this.props.className}>{this.props.children}</Link>;
         }
     }
 }
@@ -61,6 +62,9 @@ export default class Top extends Component {
                     </div>
                     <div>
                         <Link to="/contact">Contact</Link>
+                    </div>
+                    <div className="cart">
+                        <CartIndicator />
                     </div>
                 </nav>
             </div>
