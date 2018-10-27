@@ -1,24 +1,27 @@
 .CartIndicator {
-  padding: 0 20px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 
   i {
     font-size: 50px;
   }
 
+  img {
+    height: 50px
+  }
+
   .num {
-    $size: 18px;
+    $size: 12px;
 
     position: absolute;
-    top: 50%;
-    left: 50%;
-    background: #000;
-    border-radius: 50%;
+    top: 41%;
+    left: 53%;
     font-size: $size;
     font-weight: bold;
-    width: $size+2px;
-    height: $size+2px;
     text-align: center;
-    transform: translateY(-75%) translateX(-25%);
+    //transform: translateY(-75%) translateX(-25%);
   }
 }

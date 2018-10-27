@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {getCart, bindUpdateCart} from "../Cart";
+import Cart from './cart.svg';
 import './Indicator.scss';
 
 export default class CartIndicator extends Component {
@@ -23,7 +24,7 @@ export default class CartIndicator extends Component {
     render() {
         return <Link to="/cart">
             <div className="CartIndicator">
-                <i className="fas fa-shopping-cart"/>
+                <img src={Cart} alt="" />
                 <div className="num">
                     {this.state.cart.reduce((prev, item) => prev + item.quantity, 0)}
                 </div>
