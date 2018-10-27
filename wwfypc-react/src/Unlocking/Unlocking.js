@@ -51,6 +51,7 @@ const DEVICE_NETWORK_QUERY = gql`
   query($id: ID!, $device: ID!) {
     unlockingNetwork(id: $id) {
       name
+      unlockingTime
     }
     unlockingPrice(network: $id, device: $device) {
       price
@@ -164,7 +165,7 @@ class UnlockInfo extends Component {
                                                 <div key={0} className="info">
                                                     <ul>
                                                         <li>{data.unlockingNetwork.name}</li>
-                                                        <li>3-5 Days</li>
+                                                        <li>{data.unlockingNetwork.unlockingTime}</li>
                                                     </ul>
                                                 </div>,
                                                 <div key={1} className="price">
