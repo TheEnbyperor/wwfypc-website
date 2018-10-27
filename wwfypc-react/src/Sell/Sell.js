@@ -4,6 +4,7 @@ import {Query} from 'react-apollo';
 import Footer from "../Shared/Footer/Footer";
 import Button from "../Shared/Buttons";
 import {BASE_URL} from "../App";
+import DocumentTitle from 'react-document-title';
 import "./style/Sell.scss";
 
 const DEVICE_CATEGORIES_QUERY = gql`
@@ -276,13 +277,15 @@ export default class Sell extends Component {
     }
 
     render() {
-        return <div className="Sell">
-            <div className="section SellInner">
-                <SellForm/>
+        return <DocumentTitle title="Sell | We Will Fix Your PC">
+            <div className="Sell">
+                <div className="section SellInner">
+                    <SellForm/>
+                </div>
+                <div className="section fp-auto-height" style={{
+                    paddingBottom: 70,
+                }}><Footer/></div>
             </div>
-            <div className="section fp-auto-height" style={{
-                paddingBottom: 70,
-            }}><Footer/></div>
-        </div>;
+        </DocumentTitle>;
     }
 }

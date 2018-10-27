@@ -7,6 +7,7 @@ import Payment from './Payment';
 import Success from './Success';
 import {client} from "../App";
 import "./style/Cart.scss";
+import DocumentTitle from "react-document-title";
 
 export const ITEM_PRICE_QUERY = gql`
   query($type: ID!, $id: ID!) {
@@ -237,21 +238,23 @@ export default class Cart extends Component {
             left = <Success/>;
         }
 
-        return <div className="Cart">
-            <div className={"section CartInner" + (this.state.state === 2 ? " orange" : "")}>
-                <div className="inner">
-                    <div className="left">
-                        {left}
-                    </div>
-                    <div className="right">
-                        <PriceTotal cart={this.state.cart}/>
-                        {right}
+        return <DocumentTitle title="Cart | We Will Fix Your PC">
+            <div className="Cart">
+                <div className={"section CartInner" + (this.state.state === 2 ? " orange" : "")}>
+                    <div className="inner">
+                        <div className="left">
+                            {left}
+                        </div>
+                        <div className="right">
+                            <PriceTotal cart={this.state.cart}/>
+                            {right}
+                        </div>
                     </div>
                 </div>
+                <div className="section fp-auto-height" style={{
+                    paddingBottom: 70,
+                }}><Footer/></div>
             </div>
-            <div className="section fp-auto-height" style={{
-                paddingBottom: 70,
-            }}><Footer/></div>
-        </div>;
+        </DocumentTitle>;
     }
 }

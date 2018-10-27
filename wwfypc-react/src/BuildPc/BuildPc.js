@@ -6,6 +6,7 @@ import Button from '../Shared/Buttons';
 import {BASE_URL} from "../App";
 import {addToCart} from "../Cart/Cart";
 import './style/BuildPc.scss';
+import DocumentTitle from "react-document-title";
 
 const BASE_MODELS_QUERY = gql`
   query {
@@ -76,7 +77,7 @@ class Models extends Component {
                                     <div key={i}>
                                         <h2>{name}</h2>
                                         <h3>{priceRange}</h3>
-                                        <p dangerouslySetInnerHTML={{__html: description}} />
+                                        <p dangerouslySetInnerHTML={{__html: description}}/>
                                         <Button colour={(i + 1) % 4} onClick={() => this.props.onSelect(id)}>
                                             Customize
                                         </Button>
@@ -154,7 +155,7 @@ class Customise extends Component {
                             </div>
                             <div>
                                 <h2>{data.basePcModel.name}</h2>
-                                <p dangerouslySetInnerHTML={{__html: data.basePcModel.description}} />
+                                <p dangerouslySetInnerHTML={{__html: data.basePcModel.description}}/>
                                 <form>
                                     {data.basePcModel.customisations.map(({id, helpText, options}, i) =>
                                         <div className="select" key={i}>
@@ -243,16 +244,18 @@ export default class BuildPc extends Component {
     }
 
     render() {
-        return <div className="BuildPc">
-            <div className="section">
-                <div className="BuildPcInner">
-                    {this.state.selectedModel === null ?
-                        <Models onSelect={this.selectModel}/> :
-                        <Customise model={this.state.selectedModel} onBack={() => this.selectModel(null)}/>
-                    }
+        return <DocumentTitle title="Build a PC | We Will Fix Your PC">
+            <div className="BuildPc">
+                <div className="section">
+                    <div className="BuildPcInner">
+                        {this.state.selectedModel === null ?
+                            <Models onSelect={this.selectModel}/> :
+                            <Customise model={this.state.selectedModel} onBack={() => this.selectModel(null)}/>
+                        }
+                    </div>
                 </div>
+                <div className="section fp-auto-height"><Footer/></div>
             </div>
-            <div className="section fp-auto-height"><Footer/></div>
-        </div>;
+        </DocumentTitle>;
     }
 }

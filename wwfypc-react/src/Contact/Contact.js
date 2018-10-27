@@ -5,6 +5,7 @@ import "./style/Contact.scss";
 import {Query, Mutation} from "react-apollo";
 import Button from '../Shared/Buttons';
 import {Link} from "react-router-dom";
+import DocumentTitle from "react-document-title";
 
 const INFO_QUERY = gql`
   query {
@@ -138,44 +139,46 @@ export default class Contact extends Component {
     }
 
     render() {
-        return <div className="Contact">
-            <div className={"section ContactInner" + (this.state.submitted ? " orange" : "")}>
-                <div className="inner">
-                    <div className="left">
-                        {!this.state.submitted ? [
-                            <h1 key={0}>Contact</h1>,
-                            <ContactForm key={1} onSubmit={this.submit}/>
-                        ] : <Success/>}
-                    </div>
-                    <div className="right">
-                        <Query query={INFO_QUERY}>
-                            {({loading, error, data}) => {
-                                if (!loading && !error) {
-                                    return <div>
-                                        <p dangerouslySetInnerHTML={{__html: data.siteConfig.openingHours}} />
-                                        <div className="icon">
-                                            <i className="fa fa-phone"/>
-                                            <p>
-                                                {data.siteConfig.landline}<br/>
-                                                {data.siteConfig.mobile}
-                                            </p>
-                                        </div>
-                                        <div className="icon">
-                                            <i className="fa fa-envelope"/>
-                                            <p>
-                                                {data.siteConfig.email}
-                                            </p>
-                                        </div>
-                                    </div>;
-                                } else {
-                                    return null;
-                                }
-                            }}
-                        </Query>
+        return <DocumentTitle title="Contact | We Will Fix Your PC">
+            <div className="Contact">
+                <div className={"section ContactInner" + (this.state.submitted ? " orange" : "")}>
+                    <div className="inner">
+                        <div className="left">
+                            {!this.state.submitted ? [
+                                <h1 key={0}>Contact</h1>,
+                                <ContactForm key={1} onSubmit={this.submit}/>
+                            ] : <Success/>}
+                        </div>
+                        <div className="right">
+                            <Query query={INFO_QUERY}>
+                                {({loading, error, data}) => {
+                                    if (!loading && !error) {
+                                        return <div>
+                                            <p dangerouslySetInnerHTML={{__html: data.siteConfig.openingHours}}/>
+                                            <div className="icon">
+                                                <i className="fa fa-phone"/>
+                                                <p>
+                                                    {data.siteConfig.landline}<br/>
+                                                    {data.siteConfig.mobile}
+                                                </p>
+                                            </div>
+                                            <div className="icon">
+                                                <i className="fa fa-envelope"/>
+                                                <p>
+                                                    {data.siteConfig.email}
+                                                </p>
+                                            </div>
+                                        </div>;
+                                    } else {
+                                        return null;
+                                    }
+                                }}
+                            </Query>
+                        </div>
                     </div>
                 </div>
+                <div className="section fp-auto-height"><Footer/></div>
             </div>
-            <div className="section fp-auto-height"><Footer/></div>
-        </div>;
+        </DocumentTitle>;
     }
 }
