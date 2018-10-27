@@ -63,17 +63,17 @@ class Notice extends Component {
     render() {
         return <div className="Notice">
             <Query query={CONFIG_QUERY}>
-                    {({loading, data, error}) => {
-                        if (loading) return <h2>Loading</h2>;
-                        if (error) return <h2>Error</h2>;
+                {({loading, data, error}) => {
+                    if (loading) return <h2>Loading</h2>;
+                    if (error) return <h2>Error</h2>;
 
-                        return [
-                            <img key={0} src={Lock} alt=""/>,
-                            <div key={1}>{data.siteConfig.unlockingText}</div>,
-                            <Button key={2} colour={3} onClick={this.props.onAccept}>Next</Button>
-                        ];
-                    }}
-                </Query>
+                    return [
+                        <img key={0} src={Lock} alt=""/>,
+                        <div key={1}>{data.siteConfig.unlockingText}</div>,
+                        <Button key={2} colour={3} onClick={this.props.onAccept}>Next</Button>
+                    ];
+                }}
+            </Query>
         </div>
     }
 }
@@ -227,7 +227,7 @@ class Networks extends Component {
                             <span>{name}</span>
                             <img src={Arrow} alt="" onClick={() => this.props.onSelectDetail(id)}/>
                         </div>
-                        <p dangerouslySetInnerHTML={{__html: description}} />
+                        <p dangerouslySetInnerHTML={{__html: description}}/>
                     </div>
                 )
                     ;
@@ -349,8 +349,8 @@ export default class Unlocking extends Component {
     }
 
     render() {
-        return <div className="Unlocking">
-            <DocumentTitle title="Unlocking | We Will Fix Your PC">
+        return <DocumentTitle title="Unlocking | We Will Fix Your PC">
+            <div className="Unlocking">
                 <div className="section">
                     <div className="UnlockingInner">
                         <h1>Phone Unlocking</h1>
@@ -360,7 +360,7 @@ export default class Unlocking extends Component {
                     </div>
                 </div>
                 <div className="section fp-auto-height"><Footer/></div>
-            </DocumentTitle>
-        </div>;
+            </div>
+        </DocumentTitle>;
     }
 }

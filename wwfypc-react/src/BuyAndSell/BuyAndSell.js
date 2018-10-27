@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import './style/BuyAndSell.scss';
-
+import DocumentTitle from 'react-document-title';
 import Footer from "../Shared/Footer/Footer";
 import Filter from "./Filter/Filter";
 import Items from "./Items/Items";
@@ -48,15 +48,17 @@ export default class BuyAndSell extends Component {
 
     render() {
         return (
-            <div className="BuyAndSell">
-                <div className="section">
-                    <section>
-                        <Filter onSelect={this.selectCategory}/>
-                        <Items selectedCategory={this.state.selectedCategory}/>
-                    </section>
+            <DocumentTitle title="Buy & Sell | We Will Fix Your PC">
+                <div className="BuyAndSell">
+                    <div className="section">
+                        <section>
+                            <Filter onSelect={this.selectCategory}/>
+                            <Items selectedCategory={this.state.selectedCategory}/>
+                        </section>
+                    </div>
+                    <div className="section fp-auto-height"><Footer/></div>
                 </div>
-                <div className="section fp-auto-height"><Footer/></div>
-            </div>
+            </DocumentTitle>
         )
     }
 }
