@@ -48,6 +48,9 @@ class SiteConfig(SingletonModel):
     google_url = models.URLField(blank=True)
     facebook_url = models.URLField(blank=True)
 
+    terms_and_conditions = models.FileField(blank=True)
+    warranty = models.FileField(blank=True)
+
     def __str__(self):
         return "Site config"
 
