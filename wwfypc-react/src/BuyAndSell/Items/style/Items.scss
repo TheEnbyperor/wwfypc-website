@@ -34,15 +34,15 @@
           right: -100%;
         }
 
+        &.nextActive {
+          left: 100%;
+          right: 100%;
+        }
+
         &.active {
           left: 0;
           right: 0;
           opacity: 1;
-        }
-
-        &.nextActive {
-          left: 100%;
-          right: 100%;
         }
       }
     }
