@@ -18,6 +18,28 @@ spec:
         backend:
           serviceName: nginx
           servicePort: 8000
+  tls:
+  - secretName: nginx-tls
+    hosts:
+    - api.test.wewillfixyourpc.co.uk
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: nginx-cert
+  namespace: website-test
+spec:
+  secretName: nginx-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: api.test.wewillfixyourpc.co.uk
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - api.test.wewillfixyourpc.co.uk
 ---
 kind: Service
 apiVersion: v1
