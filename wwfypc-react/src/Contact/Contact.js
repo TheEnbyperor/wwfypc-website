@@ -152,7 +152,7 @@ export default class Contact extends Component {
                             {({loading, error, data}) => {
                                 if (!loading && !error) {
                                     return <div>
-                                        <p>{data.siteConfig.openingHours}</p>
+                                        <p dangerouslySetInnerHTML={{__html: data.siteConfig.openingHours}} />
                                         <div className="icon">
                                             <i className="fa fa-phone"/>
                                             <p>
