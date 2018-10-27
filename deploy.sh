@@ -10,7 +10,6 @@ docker push evilben/wwfypc-django:$HASH
 docker push evilben/wwfypc-nginx:$HASH
 cat wwfypc-react/kubes/deploy.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
 cat kubes/gluster.yaml | kubectl apply -f -
-cat kubes/mysql.yaml | kubectl apply -f -
 cat kubes/django.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
 cat kubes/nginx.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
 kubectl -n website-test rollout status deployment/django
