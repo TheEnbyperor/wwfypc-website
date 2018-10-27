@@ -94,7 +94,7 @@ class PostForm extends Component {
 
     render() {
         return [
-            <h2 key={1}>Enter your details, and any aditionals items you'll be putting in the box</h2>,
+            <h2 key={1}>Please enter your details, and any additional items you'll be putting in the box</h2>,
             <Mutation key={2} mutation={CREATE_ORDER_QUERY}>
                 {(createOrder, {data, error, loading, called}) => {
                     if (error) return <h2>Error</h2>;
