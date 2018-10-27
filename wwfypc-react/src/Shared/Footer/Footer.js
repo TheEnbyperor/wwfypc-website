@@ -14,6 +14,8 @@ const INFO_QUERY = gql`
       twitterUrl
       googleUrl
       facebookUrl
+      termsAndConditions
+      warranty
     }
     servicePages {
       name
@@ -50,10 +52,8 @@ export default class Footer extends Component {
                                     </div>
 
                                     <div>
-                                        <a href="">Sitemap</a>
                                         <a href="">Terms & conditions</a>
                                         <a href="">Warranty</a>
-                                        <a href="">Report a bug</a>
 
                                         <div className="social">
                                             <a href={data.siteConfig.facebookUrl} target="_blank">

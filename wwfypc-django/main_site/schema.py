@@ -37,6 +37,12 @@ class SiteConfigType(DjangoObjectType):
     def resolve_mobile(self, info):
         return self.mobile.as_national
 
+    def resolve_terms_and_conditions(self, info):
+        return self.terms_and_conditions.url if self.terms_and_conditions else ""
+
+    def resolve_warranty(self, info):
+        return self.warranty.url if self.warranty else ""
+
 
 class MainSliderSlideType(DjangoObjectType):
     colour = graphene.NonNull(graphene.Int)
