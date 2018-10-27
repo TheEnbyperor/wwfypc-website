@@ -47,7 +47,7 @@ export default class Service extends Component {
                     if (loading) return null;
                     if (error) return <div className="section"><h1>Error</h1></div>;
 
-                    setTimeout(this.renderCallback, 10);
+                    setTimeout(this.renderCallback, 500);
 
                     return <DocumentTitle title={data.servicePage.name + " | We Will Fix Your PC"}>
                         <div className="Service">
