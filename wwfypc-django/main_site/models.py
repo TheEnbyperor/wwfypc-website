@@ -71,6 +71,7 @@ class OtherService(OrderedModel):
     colour = models.IntegerField(choices=COLOURS, default=1)
     button_text = models.CharField(max_length=255)
     link_to = models.CharField(max_length=255)
+    is_link_external = models.BooleanField()
 
     def __str__(self):
         return self.name
@@ -79,6 +80,7 @@ class OtherService(OrderedModel):
 class MenuItem(OrderedModel):
     name = models.CharField(max_length=255)
     link_to = models.CharField(max_length=255)
+    is_link_external = models.BooleanField()
     anchor = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
@@ -88,7 +90,6 @@ class MenuItem(OrderedModel):
 class AppointmentTimeBlockRule(models.Model):
     start_time = models.TimeField(default=datetime.time())
     end_time = models.TimeField(default=datetime.time())
-
     date = models.DateField(default=django.utils.timezone.now)
 
     def __str__(self):
