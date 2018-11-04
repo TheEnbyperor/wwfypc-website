@@ -14,6 +14,7 @@ const OTHER_SERVICES_QUERY = gql`
       buttonText
       colour
       linkTo
+      isLinkExternal
     }
   }
 `;
@@ -28,14 +29,20 @@ export default class OtherServices extends Component {
                             if (loading) return <h2>Loading</h2>;
                             if (error) return <h2>Error</h2>;
 
-                            return data.otherServices.map(({name, icon, description, buttonText, colour, linkTo}, i) =>
+                            return data.otherServices.map(({name, icon, description, buttonText, colour, linkTo,
+                                                               isLinkExternal}, i) =>
                                 <div key={i}>
                                     <img src={BASE_URL + icon} alt=""/>
                                     <h3 className={"colour-" + colour} dangerouslySetInnerHTML={{__html: name}} />
                                     <p dangerouslySetInnerHTML={{__html: description}} />
-                                    <Link to={linkTo}>
-                                        <Button colour={colour} small>{buttonText}</Button>
-                                    </Link>
+                                    {isLinkExternal ?
+                                        <a href={linkTo}>
+                                            <Button colour={colour} small>{buttonText}</Button>
+                                        </a> :
+                                        <Link to={linkTo}>
+                                            <Button colour={colour} small>{buttonText}</Button>
+                                        </Link>
+                                    }
                                 </div>
                             );
                         }}

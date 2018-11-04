@@ -21,7 +21,8 @@ class hashLink extends Component {
         if (this.props.location.pathname === this.props.to) {
             return <a href={this.props.hash} className={this.props.className}>{this.props.children}</a>;
         } else {
-            return <Link to={this.props.to + this.props.hash} className={this.props.className}>{this.props.children}</Link>;
+            return <Link to={this.props.to + this.props.hash}
+                         className={this.props.className}>{this.props.children}</Link>;
         }
     }
 }
@@ -45,9 +46,13 @@ export default class Top extends Component {
                                 return (
                                     <div>
                                         {data.menuItems.map((page, i) => {
-                                            return <HashLink to={page.linkTo} hash={page.anchor} key={i}>
-                                                {page.name}
-                                            </HashLink>;
+                                            return page.isLinkExternal ?
+                                                <a href={page.linkTo + page.anchor}>
+                                                    {page.name}
+                                                </a> :
+                                                <HashLink to={page.linkTo} hash={page.anchor} key={i}>
+                                                    {page.name}
+                                                </HashLink>;
                                         })}
                                     </div>
                                 );
@@ -64,7 +69,7 @@ export default class Top extends Component {
                         <Link to="/contact">Contact</Link>
                     </div>
                     <div className="cart">
-                        <CartIndicator />
+                        <CartIndicator/>
                     </div>
                 </nav>
             </div>
