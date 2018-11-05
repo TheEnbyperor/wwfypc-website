@@ -176,7 +176,7 @@ class UnlockInfo extends Component {
                                                     <input type="text" placeholder="IMEI" ref={this.imei}/>
                                                     <p>
                                                         You can find your IMEI by dialing <span>*#06#</span>
-                                                        on your phone.
+                                                        &nbsp;on your phone.
                                                     </p>
                                                 </div>,
                                                 <Button key={3} colour={2}
