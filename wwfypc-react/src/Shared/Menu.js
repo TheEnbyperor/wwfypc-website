@@ -47,7 +47,7 @@ export default class Top extends Component {
                                     <div>
                                         {data.menuItems.map((page, i) => {
                                             return page.isLinkExternal ?
-                                                <a href={page.linkTo + page.anchor}>
+                                                <a href={page.linkTo + page.anchor} target="_blank">
                                                     {page.name}
                                                 </a> :
                                                 <HashLink to={page.linkTo} hash={page.anchor} key={i}>

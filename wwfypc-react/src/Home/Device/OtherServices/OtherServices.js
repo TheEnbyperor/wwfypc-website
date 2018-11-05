@@ -36,7 +36,7 @@ export default class OtherServices extends Component {
                                     <h3 className={"colour-" + colour} dangerouslySetInnerHTML={{__html: name}} />
                                     <p dangerouslySetInnerHTML={{__html: description}} />
                                     {isLinkExternal ?
-                                        <a href={linkTo}>
+                                        <a href={linkTo} target="_blank">
                                             <Button colour={colour} small>{buttonText}</Button>
                                         </a> :
                                         <Link to={linkTo}>
