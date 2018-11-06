@@ -1,7 +1,6 @@
 import io
 import qrcode.image.svg
-import tempfile
-import hardcopy
+import pdfkit
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -28,12 +27,8 @@ def estimate_pdf(request, id):
     if request.GET.get("html") is not None:
         response = HttpResponse(html.encode())
     else:
-        options = {
-            'disable-gpu': None,
-            'no-sandbox': None
-        }
-        with tempfile.NamedTemporaryFile() as file:
-            hardcopy.bytestring_to_pdf(html.encode(), file, **options)
-            response = HttpResponse(file.read(), content_type='application/pdf')
+        response = HttpResponse(pdfkit.from_string(html, False, {
+            'page-size': 'A4',
+        }), content_type='application/pdf')
 
     return response
