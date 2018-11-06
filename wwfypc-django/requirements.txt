@@ -3,6 +3,7 @@ django-solo
 gunicorn
 mysqlclient
 django-phonenumber-field
+phonenumbers
 graphene-django>=2.0
 django-cors-headers
 pdfkit
