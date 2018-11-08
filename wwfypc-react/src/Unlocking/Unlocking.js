@@ -70,7 +70,7 @@ class Notice extends Component {
 
                     return [
                         <img key={0} src={Lock} alt=""/>,
-                        <div key={1} dangerouslySetInnerHTML={{__html: data.siteConfig.unlockingText}} />,
+                        <div key={1} dangerouslySetInnerHTML={{__html: data.siteConfig.unlockingText}}/>,
                         <Button key={2} colour={3} onClick={this.props.onAccept}>Next</Button>
                     ];
                 }}
@@ -85,7 +85,9 @@ class UnlockInfo extends Component {
 
         this.state = {
             imeiErrors: null,
-        }
+            inCart: false,
+            lastProps: null,
+        };
 
         this.imei = React.createRef();
 
@@ -123,8 +125,21 @@ class UnlockInfo extends Component {
         } else {
             this.setState({
                 imeiErrors: null,
+                inCart: true,
             });
             addToCart("unlocking", id + ";" + imei);
+        }
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        if (JSON.stringify(props) !== state.lastProps) {
+            return {
+                imeiErrors: null,
+                inCart: false,
+                lastProps: JSON.stringify(props),
+            }
+        } else {
+            return null;
         }
     }
 
@@ -179,10 +194,15 @@ class UnlockInfo extends Component {
                                                         &nbsp;on your phone.
                                                     </p>
                                                 </div>,
-                                                <Button key={3} colour={2}
-                                                        onClick={() => this.addToCart(data.unlockingPrice.id)}>
-                                                    Add to cart
-                                                </Button>
+                                                !this.state.inCart ?
+                                                    <Button key={3} colour={2}
+                                                            onClick={() => this.addToCart(data.unlockingPrice.id)}>
+                                                        Add to cart
+                                                    </Button>
+                                                    :
+                                                    <Button key={3} colour={3}>
+                                                        Added to cart
+                                                    </Button>
                                             ];
                                         }}
                                     </Query>
