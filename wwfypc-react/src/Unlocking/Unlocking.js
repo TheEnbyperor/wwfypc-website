@@ -241,12 +241,11 @@ class Networks extends Component {
                 if (error) return <h2>Error</h2>;
 
                 return data.unlockingNetworks.map(({id, name, description}, i) =>
-                    <div className={"repairType" + ((this.props.selectedNetwork === id) ? " selected" : "") +
-                    ((this.props.selectedNetworkDetail === id) ? " open" : "")}
+                    <div className={"repairType" + ((this.props.selectedNetwork === id) ? " selected open" : "")}
                          key={i} onClick={() => this.props.onSelect(id)}>
                         <div className="top">
                             <span>{name}</span>
-                            <img src={Arrow} alt="" onClick={() => this.props.onSelectDetail(id)}/>
+                            <img src={Arrow} alt=""/>
                         </div>
                         <p dangerouslySetInnerHTML={{__html: description}}/>
                     </div>
@@ -264,12 +263,10 @@ class Device extends Component {
         this.state = {
             selectedModel: null,
             selectedNetwork: null,
-            selectedNetworkDetail: null,
         };
 
         this.selectModel = this.selectModel.bind(this);
         this.selectNetwork = this.selectNetwork.bind(this);
-        this.openNetworkDetail = this.openNetworkDetail.bind(this);
     }
 
     selectModel(model) {
@@ -298,18 +295,6 @@ class Device extends Component {
         }
     }
 
-    openNetworkDetail(network) {
-        if (this.state.selectedNetworkDetail === network) {
-            this.setState({
-                selectedNetworkDetail: null
-            })
-        } else {
-            this.setState({
-                selectedNetworkDetail: network
-            })
-        }
-    }
-
     render() {
         let stage = 1;
         if (this.state.selectedModel !== null) {
@@ -325,9 +310,7 @@ class Device extends Component {
                 <div className={"stage-" + stage}>
                     <div className="Select">
                         <DeviceModels onSelect={this.selectModel} selectedModel={this.state.selectedModel}/>
-                        <Networks onSelect={this.selectNetwork} onSelectDetail={this.openNetworkDetail}
-                                  selectedNetwork={this.state.selectedNetwork}
-                                  selectedNetworkDetail={this.state.selectedNetworkDetail}/>
+                        <Networks onSelect={this.selectNetwork} selectedNetwork={this.state.selectedNetwork}/>
                     </div>
                     <UnlockInfo selectedModel={this.state.selectedModel} selectedNetwork={this.state.selectedNetwork}/>
                 </div>

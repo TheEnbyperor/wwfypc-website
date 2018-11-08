@@ -92,15 +92,11 @@ class RepairTypes extends Component {
                         if (error) return <h2>Error</h2>;
 
                         return data.repairTypes.map(({id, name, description}) => (
-                            <div className={"repairType" + ((this.props.selectedRepair === id) ? " selected" : "") +
-                            ((this.props.selectedRepairDetail === id) ? " open" : "")} key={id}
+                            <div className={"repairType" + ((this.props.selectedRepair === id) ? " selected open" : "")} key={id}
                                  onClick={() => this.props.selectRepair(id)}>
                                 <div className="top">
                                     <span>{name}</span>
-                                    <img src={Arrow} alt="" onClick={(event) => {
-                                        this.props.openRepairDetail(id);
-                                        event.stopPropagation();
-                                    }}/>
+                                    <img src={Arrow} alt=""/>
                                 </div>
                                 <p dangerouslySetInnerHTML={{__html: description}} />
                             </div>
@@ -118,15 +114,11 @@ class DeliveryTypes extends Component {
     render() {
         if (this.props.repairType !== null) {
             return this.props.deliveryTypes.map(({id, name, description}) => (
-                <div className={"deliveryType" + ((this.props.selectedDelivery === id) ? " selected" : "") +
-                ((this.props.selectedDeliveryDetail === id) ? " open" : "")} key={id}
+                <div className={"deliveryType" + ((this.props.selectedDelivery === id) ? " selected open" : "")} key={id}
                      onClick={() => this.props.selectDelivery(id)}>
                     <div className="top">
                         <span>{name}</span>
-                        <img src={Arrow} alt="" onClick={(event) => {
-                            this.props.openDeliveryDetail(id);
-                            event.stopPropagation();
-                        }}/>
+                        <img src={Arrow} alt=""/>
                     </div>
                     <p dangerouslySetInnerHTML={{__html: description}} />
                 </div>
@@ -220,17 +212,13 @@ export default class RepairSelection extends Component {
         this.state = {
             selectedModel: null,
             selectedRepair: null,
-            selectedRepairDetail: null,
             selectedDelivery: null,
-            selectedDeliveryDetail: null,
         };
 
         this.goBack = this.goBack.bind(this);
         this.selectModel = this.selectModel.bind(this);
         this.selectRepair = this.selectRepair.bind(this);
         this.selectDelivery = this.selectDelivery.bind(this);
-        this.openRepairDetail = this.openRepairDetail.bind(this);
-        this.openDeliveryDetail = this.openDeliveryDetail.bind(this);
         this.nextStep = this.nextStep.bind(this);
     }
 
@@ -283,30 +271,6 @@ export default class RepairSelection extends Component {
         }
     }
 
-    openRepairDetail(repair) {
-        if (this.state.selectedRepairDetail === repair) {
-            this.setState({
-                selectedRepairDetail: null
-            })
-        } else {
-            this.setState({
-                selectedRepairDetail: repair
-            })
-        }
-    }
-
-    openDeliveryDetail(delivery) {
-        if (this.state.selectedDeliveryDetail === delivery) {
-            this.setState({
-                selectedDeliveryDetail: null
-            })
-        } else {
-            this.setState({
-                selectedDeliveryDetail: delivery
-            })
-        }
-    }
-
     nextStep() {
         this.props.nextStep(this.state.selectedModel, this.state.selectedRepair, this.state.selectedDelivery);
     }
@@ -332,15 +296,11 @@ export default class RepairSelection extends Component {
                                       selectModel={this.selectModel}/>
                         <RepairTypes deviceType={this.state.selectedModel}
                                      selectedRepair={this.state.selectedRepair}
-                                     selectedRepairDetail={this.state.selectedRepairDetail}
-                                     selectRepair={this.selectRepair}
-                                     openRepairDetail={this.openRepairDetail}/>
+                                     selectRepair={this.selectRepair}/>
                         <DeliveryTypes repairType={this.state.selectedRepair}
-                                       selectedDeliveryDetail={this.state.selectedDeliveryDetail}
                                        selectedDelivery={this.state.selectedDelivery}
                                        selectDelivery={this.selectDelivery}
-                                       deliveryTypes={this.props.devileryTypes}
-                                       openDeliveryDetail={this.openDeliveryDetail}/>
+                                       deliveryTypes={this.props.devileryTypes}/>
                     </div>
                     <RepairInfo deviceCategory={this.props.deviceCategory}
                                 deviceType={this.state.selectedModel} repairType={this.state.selectedRepair}
