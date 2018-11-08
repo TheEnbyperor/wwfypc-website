@@ -27,8 +27,6 @@ def estimate_pdf(request, id):
     if request.GET.get("html") is not None:
         response = HttpResponse(html.encode())
     else:
-        response = HttpResponse(pdfkit.from_string(html, False, {
-            'page-size': 'A4',
-        }), content_type='application/pdf')
+        response = HttpResponse(pdfkit.from_string(html, output_path=False), content_type='application/pdf')
 
     return response
