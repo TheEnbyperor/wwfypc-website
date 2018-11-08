@@ -47,7 +47,7 @@ class PostFinal extends Component {
                             </div>
                             <div>
                                 <h2>Step 2: Post it to us</h2>
-                                <p>{data.siteConfig.address}</p>
+                                <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}} />
                                 <p>Note: You will have to pay postage</p>
                             </div>
                             <div>
