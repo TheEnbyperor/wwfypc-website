@@ -51,13 +51,13 @@ section .info {
   margin: 10px 0;
   width: 100%;
 }
-section .info span {
+section .info > span {
   box-sizing: border-box;
   padding: 10px;
   float: left;
   width: 25%;
 }
-section .info span:nth-of-type(2n+1) {
+section .info > span:nth-of-type(2n+1) {
   text-decoration: underline;
 }
 section .info::after {
