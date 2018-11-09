@@ -180,10 +180,13 @@ class RepairInfo extends Component {
                                                                         {this.props.deliveryType === null ? null :
                                                                             <li>{deliveryType.name}</li>
                                                                         }
+                                                                        <li>No fix no fee</li>
+                                                                        <li>Only pay when the work is done</li>
                                                                     </ul>
                                                                 </div>,
                                                                 <div key={1} className="price">
                                                                     &pound;{data.repairType.price}
+                                                                    <span>(inc. VAT)</span>
                                                                 </div>,
                                                                 this.props.deliveryType === null ? null :
                                                                     <Button key={2} colour={2}

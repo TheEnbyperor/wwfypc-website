@@ -7,7 +7,7 @@
 
 .Location {
   position: relative;
-  overflow: scroll;
+  overflow-y: auto;
 
   .mapContainer {
     height: calc(100vh - 70px);
