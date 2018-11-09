@@ -141,6 +141,10 @@
   @media (max-width: 800px) {
     background: #fff;
 
+    &.orange {
+      background: $orange;
+    }
+
     div.inner {
       display: block;
 
