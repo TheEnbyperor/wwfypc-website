@@ -30,9 +30,33 @@ class hashLink extends Component {
 export const HashLink = withRouter(hashLink);
 
 export default class Top extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            open: false,
+        };
+
+        this.openMenu = this.openMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
+    }
+
+    openMenu() {
+        this.setState({
+            open: true,
+        });
+    }
+
+    closeMenu() {
+        this.setState({
+            open: false,
+        });
+    }
+
     render() {
         return (
-            <div className="Menu">
+            <div className={"Menu " + (this.state.open ? "is-open" : "is-closed")}>
+                <i className="fas fa-bars open" onClick={this.openMenu}/>
                 <nav>
                     <HashLink to="/" hash="#top" className="img">
                         <img src={Logo} alt=""/>
@@ -71,6 +95,7 @@ export default class Top extends Component {
                     <div className="cart">
                         <CartIndicator/>
                     </div>
+                    <i className="fas fa-minus close" onClick={this.closeMenu}/>
                 </nav>
             </div>
         )
