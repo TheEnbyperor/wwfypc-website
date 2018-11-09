@@ -252,9 +252,7 @@ export default class Cart extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="section fp-auto-height" style={{
-                    paddingBottom: 70,
-                }}><Footer/></div>
+                <div className="section fp-auto-height"><Footer/></div>
             </div>
         </DocumentTitle>;
     }
