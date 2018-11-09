@@ -339,6 +339,7 @@ export default class Unlocking extends Component {
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
             paddingTop: "60px",
             paddingBottom: "0",
+            scrollOverflow: true,
         })
     }
 
