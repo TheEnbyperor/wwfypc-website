@@ -229,7 +229,7 @@ export default class BuildPc extends Component {
             navigationPosition: 'right',
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            paddingBottom: "70px",
+            scrollOverflow: true,
         })
     }
 
