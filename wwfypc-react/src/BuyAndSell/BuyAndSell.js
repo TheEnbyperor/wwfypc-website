@@ -24,8 +24,8 @@ export default class BuyAndSell extends Component {
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
             paddingTop: "60px",
-            paddingBottom: "70px",
             scrollOverflow: true,
+            scrollBar: true,
         })
     }
 
