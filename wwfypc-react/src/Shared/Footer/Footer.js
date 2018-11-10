@@ -18,10 +18,11 @@ const INFO_QUERY = gql`
       termsAndConditions
       warranty
     }
-    servicePages {
+    menuItems {
       id
       name
-      url
+      linkTo
+      anchor
     }
   }
 `;
@@ -41,8 +42,10 @@ export default class Footer extends Component {
 
                                     <div>
                                         <Link to="/unlocking">Unlocking</Link>
-                                        {data.servicePages.map((page, i) => {
-                                            return <Link to={"/" + page.url} key={i}>{page.name}</Link>;
+                                        {data.menuItems.map((page, i) => {
+                                            return <HashLink to={"/" + page.linkTo} hash={page.anchor} key={i}>
+                                                {page.name}
+                                            </HashLink>;
                                         })}
                                     </div>
 
