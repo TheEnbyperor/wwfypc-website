@@ -233,6 +233,7 @@ export default class RepairSelection extends Component {
                 selectedRepair: null,
                 selectedDelivery: null,
             });
+            setTimeout(window.$.scrollify.update, 500);
         }
     }
 
@@ -243,12 +244,14 @@ export default class RepairSelection extends Component {
                 selectedRepair: null,
                 selectedDelivery: null,
             });
+            setTimeout(window.$.scrollify.update, 500);
         } else {
             this.setState({
                 selectedModel: null,
                 selectedRepair: null,
                 selectedDelivery: null,
             });
+            setTimeout(window.$.scrollify.update, 500);
         }
     }
 
@@ -257,12 +260,14 @@ export default class RepairSelection extends Component {
             this.setState({
                 selectedRepair: repair,
                 selectedDelivery: null,
-            })
+            });
+            setTimeout(window.$.scrollify.update, 500);
         } else {
             this.setState({
                 selectedRepair: null,
                 selectedDelivery: null,
-            })
+            });
+            setTimeout(window.$.scrollify.update, 500);
         }
     }
 
@@ -270,7 +275,8 @@ export default class RepairSelection extends Component {
         if (delivery !== this.state.selectedDelivery) {
             this.setState({
                 selectedDelivery: delivery
-            })
+            });
+            setTimeout(window.$.scrollify.update, 500);
         }
     }
 
