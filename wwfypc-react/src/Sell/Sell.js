@@ -270,7 +270,6 @@ export default class Sell extends Component {
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
             scrollOverflow: true,
-            scrollBar: true,
         })
     }
 

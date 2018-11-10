@@ -126,7 +126,6 @@ export default class Contact extends Component {
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
             scrollOverflow: true,
-            scrollBar: true,
         })
     }
 
