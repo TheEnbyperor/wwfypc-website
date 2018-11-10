@@ -178,7 +178,6 @@ export default class Cart extends Component {
             navigation: true,
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
             scrollOverflow: true,
-            scrollBar: true,
         });
         this.cartIsReady();
     }

@@ -20,7 +20,6 @@ export default class Home extends Component {
             licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
             paddingTop: "60px",
             scrollOverflow: true,
-            scrollBar: true,
         })
     }
 
