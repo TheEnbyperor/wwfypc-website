@@ -4,6 +4,8 @@ import {ApolloProvider, Query} from "react-apollo";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import gql from 'graphql-tag';
+import $ from 'jquery';
+import 'jquery-scrollify';
 
 import './App.scss';
 import Menu from './Shared/Menu';
@@ -16,6 +18,8 @@ import Sell from './Sell/Sell';
 import Unlocking from './Unlocking/Unlocking';
 import BuildPc from './BuildPc/BuildPc';
 
+window.$ = $;
+
 export const BASE_URL = process.env.REACT_APP_BACKEND_HOST || "http://127.0.0.1:8000";
 export const WORLDPAY_KEY = "T_C_52bc5b16-562d-4198-95d4-00b91f30fe2c";
 
@@ -27,7 +31,6 @@ const SERVICES_QUERY = gql`
   query {
     servicePages {
       id
-      name
       url
     }
   }

@@ -4,6 +4,7 @@ import Section from "./Section/Section";
 import {Query} from 'react-apollo';
 import DocumentTitle from 'react-document-title';
 import gql from 'graphql-tag';
+import Footer from "../Shared/Footer/Footer";
 
 const SERVICES_QUERY = gql`
   query($id: ID!) {
@@ -23,16 +24,15 @@ const SERVICES_QUERY = gql`
 
 class InnerService extends Component {
     componentDidMount() {
-        new window.fullpage(".Service", {
-            navigationPosition: 'right',
-            navigation: true,
-            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            scrollOverflow: true,
+        window.$.scrollify({
+            section: ".section",
+            sectionName : "anchor",
+            interstitialSection: ".fp-auto-height",
         })
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy();
+        window.$.scrollify.destroy();
     }
 
     render() {
@@ -50,6 +50,8 @@ class InnerService extends Component {
                         <Section data={section}/>
                     </div>;
                 })}
+
+                <div className="section fp-auto-height"><Footer/></div>
             </div>
         </DocumentTitle>;
     }

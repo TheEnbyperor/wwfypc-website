@@ -263,27 +263,24 @@ class SellForm extends Component {
 
 export default class Sell extends Component {
     componentDidMount() {
-        new window.fullpage(".Sell", {
-            anchors: ["sell", "footer"],
-            navigationTooltips: ["Sell", "Footer"],
-            navigationPosition: 'right',
-            navigation: true,
-            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            scrollOverflow: true,
+        window.$.scrollify({
+            section: ".section",
+            sectionName : "anchor",
+            interstitialSection: ".fp-auto-height",
         })
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy();
+        window.$.scrollify.destroy();
     }
 
     render() {
         return <DocumentTitle title="Sell | We Will Fix Your PC">
             <div className="Sell">
-                <div className="section SellInner">
+                <div className="section SellInner" data-anchor="sell">
                     <SellForm/>
                 </div>
-                <div className="section fp-auto-height" style={{
+                <div className="section fp-auto-height" data-anchor="footer" style={{
                     paddingBottom: 70,
                 }}><Footer/></div>
             </div>

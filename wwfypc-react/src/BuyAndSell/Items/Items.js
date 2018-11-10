@@ -154,6 +154,8 @@ export default class Items extends Component {
                         if (loading) return null;
                         if (error) return <h2>Error</h2>;
 
+                        setTimeout(window.$.scrollify.update, 500);
+
                         return data.buyAndSellItems.map((item) => {
                             return <Item key={item.id} item={item}/>
                         })

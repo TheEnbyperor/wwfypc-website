@@ -223,19 +223,17 @@ export default class BuildPc extends Component {
     }
 
     componentDidMount() {
-        new window.fullpage(".BuildPc", {
-            anchors: ["build-pc", "footer"],
-            navigationTooltips: ["Build a PC", "Footer"],
-            navigationPosition: 'right',
-            navigation: true,
-            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            scrollOverflow: true,
+        window.$.scrollify({
+            section: ".section",
+            sectionName : "anchor",
+            interstitialSection: ".fp-auto-height",
         })
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy();
+        window.$.scrollify.destroy();
     }
+
 
     selectModel(model) {
         this.setState({
@@ -246,7 +244,7 @@ export default class BuildPc extends Component {
     render() {
         return <DocumentTitle title="Build a PC | We Will Fix Your PC">
             <div className="BuildPc">
-                <div className="section">
+                <div className="section" data-anchor="build-pc">
                     <div className="BuildPcInner">
                         {this.state.selectedModel === null ?
                             <Models onSelect={this.selectModel}/> :
@@ -254,7 +252,7 @@ export default class BuildPc extends Component {
                         }
                     </div>
                 </div>
-                <div className="section fp-auto-height"><Footer/></div>
+                <div className="section fp-auto-height" data-anchor="footer"><Footer/></div>
             </div>
         </DocumentTitle>;
     }

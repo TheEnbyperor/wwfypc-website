@@ -170,21 +170,20 @@ export default class Cart extends Component {
         this.onComplete = this.onComplete.bind(this);
     }
 
+
     componentDidMount() {
-        new window.fullpage(".Cart", {
-            anchors: ["cart", "footer"],
-            navigationTooltips: ["Cart", "Footer"],
-            navigationPosition: 'right',
-            navigation: true,
-            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            scrollOverflow: true,
+        window.$.scrollify({
+            section: ".section",
+            sectionName : "anchor",
+            interstitialSection: ".fp-auto-height",
         });
         this.cartIsReady();
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy();
+        window.$.scrollify.destroy();
     }
+
 
     onUpdate(cart) {
         updateCart(cart);
@@ -242,7 +241,7 @@ export default class Cart extends Component {
 
         return <DocumentTitle title="Cart | We Will Fix Your PC">
             <div className="Cart">
-                <div className={"section CartInner" + (this.state.state === 2 ? " orange" : "")}>
+                <div className={"section CartInner" + (this.state.state === 2 ? " orange" : "")} data-anchor="cart">
                     <div className="inner">
                         <div className="left">
                             {left}
@@ -253,7 +252,7 @@ export default class Cart extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="section fp-auto-height"><Footer/></div>
+                <div className="section fp-auto-height" data-anchor="footer"><Footer/></div>
             </div>
         </DocumentTitle>;
     }

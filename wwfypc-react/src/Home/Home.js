@@ -11,32 +11,28 @@ import Footer from '../Shared/Footer/Footer';
 
 export default class Home extends Component {
     componentDidMount() {
-        new window.fullpage(".Home", {
-            anchors: ["top", "device", "about", "reviews", "why-us", "location", "footer"],
-            navigationTooltips: ["Home", "Repair your device", "About Us", "Reviews", "Why choose us",
-                "How to find us", "Footer"],
-            navigationPosition: 'right',
-            navigation: true,
-            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            paddingTop: "60px",
-            scrollOverflow: true,
+        window.$.scrollify({
+            section: ".section",
+            sectionName : "anchor",
+            interstitialSection: ".fp-auto-height",
         })
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy();
+        window.$.scrollify.destroy();
     }
+
 
     render() {
         return (
             <div className="Home">
-                <div className="section"><Top/></div>
-                <div className="section"><Device/></div>
-                <div className="section"><About/></div>
-                <div className="section"><Reviews/></div>
-                <div className="section"><WhyUs/></div>
-                <div className="section"><Location/></div>
-                <div className="section fp-auto-height"><Footer/></div>
+                <div className="section" data-anchor="top"><Top/></div>
+                <div className="section" data-anchor="device"><Device/></div>
+                <div className="section" data-anchor="about"><About/></div>
+                <div className="section" data-anchor="reviews"><Reviews/></div>
+                <div className="section" data-anchor="why-us"><WhyUs/></div>
+                <div className="section" data-anchor="location"><Location/></div>
+                <div className="section fp-auto-height" data-anchor="footer"><Footer/></div>
             </div>
         );
     }
