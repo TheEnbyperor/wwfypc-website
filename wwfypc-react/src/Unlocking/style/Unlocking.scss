@@ -11,7 +11,7 @@
 .UnlockingInner {
   box-shadow: 0 0 38px rgba(0, 0, 0, .23);
   background: #fff;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
