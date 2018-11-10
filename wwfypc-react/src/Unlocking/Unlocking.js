@@ -332,20 +332,15 @@ export default class Unlocking extends Component {
     }
 
     componentDidMount() {
-        new window.fullpage(".Unlocking", {
-            anchors: ["unlocking", "footer"],
-            navigationTooltips: ["Unlocking", "Footer"],
-            navigationPosition: 'right',
-            navigation: true,
-            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            paddingTop: "60px",
-            paddingBottom: "0",
-            scrollOverflow: true,
+        window.$.scrollify({
+            section: ".section",
+            sectionName : "anchor",
+            interstitialSection: ".fp-auto-height",
         })
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy();
+        window.$.scrollify.destroy();
     }
 
     acceptTerms() {
@@ -357,7 +352,7 @@ export default class Unlocking extends Component {
     render() {
         return <DocumentTitle title="Unlocking | We Will Fix Your PC">
             <div className="Unlocking">
-                <div className="section">
+                <div className="section" data-anchor="footer">
                     <div className="UnlockingInner">
                         <h1>Phone Unlocking</h1>
                         {!this.state.termsAccepted ?
@@ -365,7 +360,7 @@ export default class Unlocking extends Component {
                             <Device/>}
                     </div>
                 </div>
-                <div className="section fp-auto-height"><Footer/></div>
+                <div className="section fp-auto-height" data-anchor="footer"><Footer/></div>
             </div>
         </DocumentTitle>;
     }
