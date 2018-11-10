@@ -223,6 +223,8 @@ export default class RepairSelection extends Component {
         this.selectRepair = this.selectRepair.bind(this);
         this.selectDelivery = this.selectDelivery.bind(this);
         this.nextStep = this.nextStep.bind(this);
+
+        window.addEventListener('popstate', this.goBack);
     }
 
     goBack() {
@@ -261,6 +263,7 @@ export default class RepairSelection extends Component {
                 selectedRepair: repair,
                 selectedDelivery: null,
             });
+            window.history.pushState({}, "", "");
             setTimeout(window.$.scrollify.update, 500);
         } else {
             this.setState({
