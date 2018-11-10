@@ -13,7 +13,9 @@ header.Top {
 }
 
 .TopContent {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  height: 100%;
   max-width: $max-width;
   margin: 10px auto;
   align-items: center;
@@ -21,7 +23,8 @@ header.Top {
   min-height: 0;
   
   @media (max-width: 1000px) {
-    flex-direction: column;
+    justify-items: center;
+    grid-template-columns: 1fr;
 
     .TopRight {
       max-width: 300px;
@@ -36,7 +39,6 @@ header.Top {
 
 .TopLeft {
   margin-left: 10px;
-  flex: 2;
 
   h1, h2 {
     margin: 0;
@@ -59,10 +61,6 @@ header.Top {
     width: 90%;
     justify-content: space-between;
   }
-}
-
-.TopRight {
-  flex: 1;
 }
 
 .TopSlider {
