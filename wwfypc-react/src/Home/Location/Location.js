@@ -65,28 +65,36 @@ export default class Location extends Component {
                                 <Map key={2} placeId={data.siteConfig.googleMapsPlaceId}/>,
                                 <div className="Info" key={1}>
                                     <div>
-                                    <div>
                                         <div>
-                                            <h2>Opening Hours</h2>
-                                            <p dangerouslySetInnerHTML={{__html: data.siteConfig.openingHours}} />
+                                            <div>
+                                                <h2>Opening Hours</h2>
+                                                <p dangerouslySetInnerHTML={{__html: data.siteConfig.openingHours}}/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
                                         <div>
-                                            <h2>Address</h2>
-                                            <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}} />
+                                            <div>
+                                                <h2>Address</h2>
+                                                <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}}/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
                                         <div>
-                                            <h2>Contact</h2>
-                                            <p>
-                                                {data.siteConfig.landline}<br/>
-                                                {data.siteConfig.mobile}
-                                            </p>
-                                            <p>{data.siteConfig.email}</p>
+                                            <div>
+                                                <h2>Contact</h2>
+                                                <p>
+                                                    <a href={"tel:" + data.siteConfig.landline}>
+                                                        {data.siteConfig.landline}
+                                                    </a>
+                                                    <br/>
+                                                    <a href={"tel:" + data.siteConfig.mobile}>
+                                                        {data.siteConfig.mobile}
+                                                    </a>
+                                                </p>
+                                                <p>
+                                                    <a href={"maillto:" + data.siteConfig.email}>
+                                                        {data.siteConfig.email}
+                                                    </a></p>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                             ];
