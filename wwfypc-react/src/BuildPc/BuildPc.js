@@ -240,7 +240,8 @@ export default class BuildPc extends Component {
     selectModel(model) {
         this.setState({
             selectedModel: model,
-        })
+        });
+        setTimeout(window.$.scrollify.update, 500);
     }
 
     render() {
