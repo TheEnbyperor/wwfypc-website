@@ -47,10 +47,22 @@ export default class Footer extends Component {
                                     </div>
 
                                     <div>
-                                        <span>{data.siteConfig.landline}</span>
-                                        <span>{data.siteConfig.mobile}</span>
-                                        <span>{data.siteConfig.email}</span>
-                                        <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}} />
+                                        <span>
+                                            <a href={"tel:" + data.siteConfig.landline}>
+                                                {data.siteConfig.landline}
+                                            </a>
+                                        </span>
+                                        <span>
+                                            <a href={"tel:" + data.siteConfig.mobile}>
+                                                {data.siteConfig.mobile}
+                                            </a>
+                                        </span>
+                                        <span>
+                                            <a href={"mailto:" + data.siteConfig.email}>
+                                                {data.siteConfig.email}
+                                            </a>
+                                        </span>
+                                        <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}}/>
                                     </div>
 
                                     <div>
