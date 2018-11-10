@@ -160,7 +160,7 @@ class RepairType(OrderedModel):
     device_type = models.ForeignKey(DeviceType, on_delete=models.CASCADE,
                                     related_name="repair_types", blank=False)
     name = models.CharField(max_length=255, blank=False)
-    price = models.DecimalField(blank=False, decimal_places=2, max_digits=10)
+    price = models.CharField(max_length=255)
     repair_time = models.CharField(max_length=255, blank=True)
     description = RichTextField(default="")
 
