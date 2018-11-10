@@ -64,6 +64,8 @@ class Models extends Component {
                     if (error) return <header>
                         <h2>Error</h2>
                     </header>;
+                    
+                    setTimeout(window.$.scrollify.update, 500);
 
                     return [
                         <header key={0}>
