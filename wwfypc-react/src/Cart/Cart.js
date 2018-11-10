@@ -222,6 +222,7 @@ export default class Cart extends Component {
             cart: [],
         });
         updateCart([]);
+        setTimeout(window.$.scrollify.update, 500);
     }
 
     render() {
@@ -231,7 +232,10 @@ export default class Cart extends Component {
         if (this.state.state === 0) {
             left = <Items cart={this.state.cart} onUpdate={this.onUpdate}/>;
             right = this.state.cartIsReady ?
-                <Button colour={3} onClick={() => this.setState({state: 1})}>Checkout</Button> :
+                <Button colour={3} onClick={() => {
+                    this.setState({state: 1});
+                    setTimeout(window.$.scrollify.update, 500);
+                }}>Checkout</Button> :
                 <h3>Please select delivery option(s) before continuing</h3>;
         } else if (this.state.state === 1) {
             left = <Payment cart={this.state.cart} onSubmit={this.onComplete}/>;
