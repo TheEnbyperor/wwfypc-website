@@ -118,19 +118,17 @@ export default class Contact extends Component {
         this.submit = this.submit.bind(this);
     }
 
+
     componentDidMount() {
-        new window.fullpage(".Contact", {
-            anchors: ["contact", "footer"],
-            navigationTooltips: ["Contact", "Footer"],
-            navigationPosition: 'right',
-            navigation: true,
-            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-            scrollOverflow: true,
+        window.$.scrollify({
+            section: ".section",
+            sectionName : "anchor",
+            interstitialSection: ".fp-auto-height",
         })
     }
 
     componentWillUnmount() {
-        window.fullpage_api.destroy();
+        window.$.scrollify.destroy();
     }
 
     submit() {
@@ -142,7 +140,7 @@ export default class Contact extends Component {
     render() {
         return <DocumentTitle title="Contact | We Will Fix Your PC">
             <div className="Contact">
-                <div className={"section ContactInner" + (this.state.submitted ? " orange" : "")}>
+                <div className={"section ContactInner" + (this.state.submitted ? " orange" : "")} data-anchor="contact">
                     <div className="inner">
                         <div className="left">
                             {!this.state.submitted ? [
@@ -186,7 +184,7 @@ export default class Contact extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="section fp-auto-height"><Footer/></div>
+                <div className="section fp-auto-height" data-anchor="footer"><Footer/></div>
             </div>
         </DocumentTitle>;
     }

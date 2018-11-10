@@ -19,6 +19,7 @@ const INFO_QUERY = gql`
       warranty
     }
     servicePages {
+      id
       name
       url
     }

@@ -6,11 +6,11 @@
 }
 
 .Location {
+  height: 100%;
   position: relative;
-  overflow-y: auto;
 
   .mapContainer {
-    height: calc(100vh - 70px);
+    height: calc(100vh);
 
     iframe {
       width: 100%;

@@ -85,6 +85,8 @@ class Item extends Component {
                 if (loading) return null;
                 if (error) return <h2>Error</h2>;
 
+                setTimeout(window.$.scrollify.update, 500);
+
                 return [
                     <div key={0} className="Img">
                         <img src={BASE_URL + data.cartItem.image} alt=""/>
