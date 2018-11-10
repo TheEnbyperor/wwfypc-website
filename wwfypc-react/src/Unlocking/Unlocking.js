@@ -341,6 +341,7 @@ export default class Unlocking extends Component {
             paddingTop: "60px",
             paddingBottom: "0",
             scrollOverflow: true,
+            scrollBar: true,
         })
     }
 
