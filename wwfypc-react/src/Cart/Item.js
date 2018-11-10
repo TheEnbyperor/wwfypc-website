@@ -85,7 +85,10 @@ class Item extends Component {
                 if (loading) return null;
                 if (error) return <h2>Error</h2>;
 
-                setTimeout(window.$.scrollify.update, 500);
+                setTimeout(() => {
+                    window.$.scrollify.update();
+                    window.$.scrollify.instantMove("#cart");
+                }, 500);
 
                 return [
                     <div key={0} className="Img">
