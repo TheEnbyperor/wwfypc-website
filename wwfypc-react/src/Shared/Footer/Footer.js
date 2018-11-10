@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import "./Footer.scss";
 import {Link} from "react-router-dom";
 import {BASE_URL} from "../../App";
+import {HashLink} from '../Menu';
 
 const INFO_QUERY = gql`
   {
