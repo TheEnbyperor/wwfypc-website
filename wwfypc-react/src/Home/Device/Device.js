@@ -99,7 +99,8 @@ export default class Device extends Component {
             repair: null,
             device: null,
             step: 2,
-        })
+        });
+        window.history.pushState({page: 1}, "", "");
     }
 
     doGoBack() {
