@@ -121,7 +121,7 @@ class TopRightSlider extends Component {
 
     updateDimensions() {
         const img = this.refs.img;
-        const size = getImgSizeInfo(img, 338);
+        const size = getImgSizeInfo(img, 223);
 
         this.refs.slides.setAttribute("style", "width: " + size.width + "px;");
     }
