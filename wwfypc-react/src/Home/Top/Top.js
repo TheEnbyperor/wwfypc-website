@@ -78,7 +78,7 @@ class TopRight extends Component {
             {({loading, error, data}) => {
                 if (!loading && !error) {
                     setTimeout(window.$.scrollify.update, 500);
-                    
+
                     return (
                         <TopRightSlider slides={data.mainSliderSlides}/>
                     )

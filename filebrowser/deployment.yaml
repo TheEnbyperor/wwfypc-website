@@ -1,0 +1,119 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: filebrowser
+  namespace: website
+  labels:
+    app: filebrowser
+  annotations:
+    ingress.kubernetes.io/referrer-policy: "strict-origin-when-cross-origin"
+    ingress.kubernetes.io/browser-xss-filter: "true"
+    ingress.kubernetes.io/content-type-nosniff: "true"
+spec:
+  rules:
+  - host: files.wewillfixyourpc.co.uk
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: filebrowser
+          servicePort: 80
+  tls:
+  - secretName: filebrowser-tls
+    hosts:
+    - files.wewillfixyourpc.co.uk
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: filebrowser-cert
+  namespace: website
+spec:
+  secretName: filebrowser-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: files.wewillfixyourpc.co.uk
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - files.wewillfixyourpc.co.uk
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: filebrowser
+  namespace: website
+  labels:
+    app: filebrowser
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  selector:
+    app: filebrowser
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: filebrowser-config
+  namespace: website
+data:
+  config.json: |
+    {
+      "port": 80,
+      "address": "",
+      "database": "/etc/database/database.db",
+      "scope": "/srv",
+      "allowCommands": true,
+      "allowEdit": true,
+      "allowNew": true,
+      "commands": []
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filebrowser
+  namespace: website
+spec:
+  selector:
+    matchLabels:
+      app: filebrowser
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: filebrowser
+    spec:
+      volumes:
+      - name: gluster
+        glusterfs:
+          endpoints: glusterfs-cluster
+          path: apps
+      - name: config
+        configMap:
+          name: filebrowser-config
+      containers:
+      - name: filebrowser
+        image: filebrowser/filebrowser
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: gluster
+          mountPath: /srv
+          subPath: website/filebrowser/files
+        - name: gluster
+          mountPath: /etc/database
+          subPath: website/filebrowser/database
+        - name: config
+          mountPath: /etc/config.json
+          subPath: config.json
+
+
+
