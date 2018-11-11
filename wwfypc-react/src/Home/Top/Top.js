@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Query} from "react-apollo";
 import gql from "graphql-tag";
 import {Link} from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
 import Button from '../../Shared/Buttons';
 import './style/Top.scss';
 import iPhone from './img/iphone-x.png';
@@ -180,7 +181,7 @@ class TopRightSlider extends Component {
                                 onSelect={this.setSlide}/>
                 </div>
                 <h2 className={"colour-" + slide.colour}>{slide.title}</h2>
-                <p dangerouslySetInnerHTML={{__html: slide.text}} />
+                {ReactHtmlParser(slide.text)}
                 <Link to={slide.linkTo}>
                     <Button colour={1}>{slide.buttonText}</Button>
                 </Link>
