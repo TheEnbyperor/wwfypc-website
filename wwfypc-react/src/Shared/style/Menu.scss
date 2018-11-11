@@ -144,5 +144,8 @@
         transform: translateY(0);
       }
     }
+    &.is-closed {
+      pointer-events: none;
+    }
   }
 }

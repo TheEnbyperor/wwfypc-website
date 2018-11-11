@@ -77,6 +77,8 @@ class TopRight extends Component {
         return <Query query={SLIDER_QUERY}>
             {({loading, error, data}) => {
                 if (!loading && !error) {
+                    setTimeout(window.$.scrollify.update, 500);
+                    
                     return (
                         <TopRightSlider slides={data.mainSliderSlides}/>
                     )
