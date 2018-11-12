@@ -168,7 +168,7 @@ export default class Device extends Component {
                         },
                         {
                             id: POST_TYPE,
-                            name: "Post",
+                            name: "By Post",
                             description: data.siteConfig.postDescription
                         }
                     ];

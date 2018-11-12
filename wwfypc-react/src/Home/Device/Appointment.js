@@ -251,6 +251,7 @@ class AppointmentFinal extends Component {
     render() {
         return <div className="AppointmentFinal">
             <h2>Appointment made</h2>
+            <h3>We look forward to seeing you on {dateformat(this.props.selectedDay, "dddd dd/mm/yyyy")}</h3>
             <div className="Info">
                 <RepairInfo deviceType={this.props.device} repairType={this.props.repair}
                             selectedDay={this.props.selectedDay} selectedTime={this.props.selectedTime}/>
