@@ -40,13 +40,13 @@ class PostFinal extends Component {
                     return (
                         <div className="Info">
                             <div>
-                                <h2>Step 1: Print this out</h2>
-                                <p>Print this sheet out and put it in the box with your device</p>
+                                <h2>Step 1: Print postage sheet</h2>
                                 <p><a href={BASE_URL + "/post_form/" + this.props.orderId}
-                                      target="_blank">Click here</a> to download the sheet</p>
+                                      target="_blank">Click here</a> to print your booking sheet and place into
+                                    the box with your device.</p>
                             </div>
                             <div>
-                                <h2>Step 2: Post it to us</h2>
+                                <h2>Step 2: Send the device to us</h2>
                                 <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}} />
                                 <p>Note: You will have to pay postage</p>
                             </div>
@@ -128,11 +128,11 @@ class PostForm extends Component {
                             </div>
                             <div className="input">
                                 {errors["additionalItems"]}
-                                <input type="text" ref={this.additional} placeholder="Additional items"/>
+                                <input type="text" ref={this.additional} placeholder="Additional items e.g. a charger"/>
                             </div>
                             <div className="textarea">
                                 {errors["address"]}
-                                <textarea name="address" ref={this.address} placeholder="Address"/>
+                                <textarea name="address" ref={this.address} placeholder="Your address"/>
                             </div>
                             <Button colour={1} onClick={() => this.submit(createOrder)}> Get your postage sheet</Button>
                             <Button colour={4} onClick={this.props.onSelectBack}>Back</Button>
