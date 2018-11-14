@@ -135,6 +135,21 @@
           margin: 0;
         }
       }
+
+      .social {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+
+        > * {
+          margin: 10px;
+          font-size: 25px;
+
+          i {
+            color: $orange;
+          }
+        }
+      }
     }
   }
 

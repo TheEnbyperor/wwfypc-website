@@ -15,6 +15,9 @@ const INFO_QUERY = gql`
       openingHours
       address
       email
+      facebookUrl
+      googleUrl
+      twitterUrl
     }
   }
 `;
@@ -174,6 +177,17 @@ export default class Contact extends Component {
                                                         {data.siteConfig.email}
                                                     </a>
                                                 </p>
+                                            </div>
+                                            <div className="social">
+                                                <a href={data.siteConfig.facebookUrl} target="_blank">
+                                                    <i className="fab fa-facebook-f"/>
+                                                </a>
+                                                <a href={data.siteConfig.googleUrl} target="_blank">
+                                                    <i className="fab fa-google"/>
+                                                </a>
+                                                <a href={data.siteConfig.twitterUrl} target="_blank">
+                                                    <i className="fab fa-twitter"/>
+                                                </a>
                                             </div>
                                         </div>;
                                     } else {
