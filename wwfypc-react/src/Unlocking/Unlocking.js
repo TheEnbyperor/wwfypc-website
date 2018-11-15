@@ -336,7 +336,8 @@ export default class Unlocking extends Component {
             section: ".section",
             sectionName : "anchor",
             interstitialSection: ".fp-auto-height",
-        })
+        });
+        window.$.scrollify.instantMove("#unlocking");
     }
 
     componentWillUnmount() {
@@ -352,7 +353,7 @@ export default class Unlocking extends Component {
     render() {
         return <DocumentTitle title="Unlocking | We Will Fix Your PC">
             <div className="Unlocking">
-                <div className="section" data-anchor="footer">
+                <div className="section" data-anchor="unlocking">
                     <div className="UnlockingInner">
                         <h1>Phone Unlocking</h1>
                         {!this.state.termsAccepted ?

@@ -229,7 +229,8 @@ export default class BuildPc extends Component {
             section: ".section",
             sectionName : "anchor",
             interstitialSection: ".fp-auto-height",
-        })
+        });
+        window.$.scrollify.instantMove("#build-pc");
     }
 
     componentWillUnmount() {

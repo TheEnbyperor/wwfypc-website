@@ -323,7 +323,7 @@ ADMIN_SHORTCUTS_SETTINGS = {
     'open_new_window': False,
 }
 
-CKEDITOR_UPLOAD_PATH = os.path.join(MEDIA_ROOT, "uploads")
+CKEDITOR_UPLOAD_PATH = "uploads"
 CKEDITOR_IMAGE_BACKEND = "pillow"
 
 CKEDITOR_CONFIGS = {

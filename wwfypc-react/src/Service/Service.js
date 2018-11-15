@@ -11,6 +11,7 @@ const SERVICES_QUERY = gql`
     servicePage(id: $id) {
       name
       headerBackground
+      headerText
       sections {
         image
         title
@@ -28,7 +29,8 @@ class InnerService extends Component {
             section: ".section",
             sectionName : "anchor",
             interstitialSection: ".fp-auto-height",
-        })
+        });
+        window.$.scrollify.instantMove("#top");
     }
 
     componentWillUnmount() {
@@ -42,7 +44,7 @@ class InnerService extends Component {
             <div className="Service">
                 <div className="section" data-tooltip="Top" data-anchor="top"
                      key={data.servicePage.sections.length}>
-                    <Top background={data.servicePage.headerBackground}/>
+                    <Top background={data.servicePage.headerBackground} text={data.servicePage.headerText}/>
                 </div>
                 {data.servicePage.sections.map((section, i) => {
                     return <div className="section" key={i} data-tooltip={section.title}

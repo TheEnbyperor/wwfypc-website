@@ -127,7 +127,8 @@ export default class Contact extends Component {
             section: ".section",
             sectionName : "anchor",
             interstitialSection: ".fp-auto-height",
-        })
+        });
+        window.$.scrollify.instantMove("#contact");
     }
 
     componentWillUnmount() {

@@ -21,7 +21,8 @@ export default class BuyAndSell extends Component {
             section: ".section",
             sectionName : "anchor",
             interstitialSection: ".fp-auto-height",
-        })
+        });
+        window.$.scrollify.instantMove("#buy-and-sell");
     }
 
     componentWillUnmount() {
