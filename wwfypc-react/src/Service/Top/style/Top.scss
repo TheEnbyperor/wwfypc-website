@@ -1,9 +1,43 @@
 @import "../../../variables";
 
+@keyframes bounce {
+  from {transform: translateY(-10px);}
+  to {transform: translateY(0);}
+}
+
 header.Service-Top {
   background-size: cover;
   background-position: 85% 50%;
   height: 100%;
   display: flex;
-  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    max-width: $max-width;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    div {
+      display: flex;
+      width: auto;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+
+      h1 {
+        text-align: right;
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      i {
+        font-size: 35px;
+        color: $orange;
+        cursor: pointer;
+        animation: bounce .3s cubic-bezier(.5,0.05,1,.5) infinite alternate;
+      }
+    }
+  }
 }
