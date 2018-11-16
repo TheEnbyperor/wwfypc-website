@@ -71,10 +71,10 @@ export default class Device extends Component {
         this.repairSelection = React.createRef();
 
         this.state = {
-            deviceType: null,
-            device: null,
-            repair: null,
-            delivery: null,
+            deviceType: "RGV2aWNlQ2F0ZWdvcnlUeXBlOjE=",
+            device: "RGV2aWNlVHlwZVR5cGU6NQ==",
+            repair: "UmVwYWlyVHlwZVR5cGU6MQ==",
+            delivery: 2,
             step: 1,
             otherServices: false,
         };
@@ -82,6 +82,7 @@ export default class Device extends Component {
         this.selectType = this.selectType.bind(this);
         this.goBack = this.goBack.bind(this);
         this.doGoBack = this.doGoBack.bind(this);
+        this.onDone = this.onDone.bind(this);
         this.nextStep = this.nextStep.bind(this);
         this.finalStep = this.finalStep.bind(this);
         this.selectOtherServices = this.selectOtherServices.bind(this);
@@ -119,6 +120,15 @@ export default class Device extends Component {
                 step: 2,
             });
         }
+    }
+
+    onDone() {
+        this.setState({
+            deviceType: null,
+            repair: null,
+            device: null,
+            step: 1,
+        });
     }
 
     goBack() {
@@ -199,7 +209,7 @@ export default class Device extends Component {
                             title = "Post";
                         } else if (this.state.delivery === APPOINTMENT_TYPE) {
                             disp = <Appointment device={this.state.device} repair={this.state.repair}
-                                                onSelectBack={this.goBack}/>;
+                                                onSelectBack={this.goBack} onSelectDone={this.onDone}/>;
                             title = "Book your appointment";
                         }
                     }

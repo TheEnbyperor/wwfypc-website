@@ -37,8 +37,8 @@ class PostFinal extends Component {
                     if (loading) return <h2>Loading</h2>;
                     if (error) return <h2>Error</h2>;
 
-                    return (
-                        <div className="Info">
+                    return [
+                        <div className="Info" key={0}>
                             <div>
                                 <h2>Step 1: Print postage sheet</h2>
                                 <p><a href={BASE_URL + "/post_form/" + this.props.orderId}
@@ -47,17 +47,19 @@ class PostFinal extends Component {
                             </div>
                             <div>
                                 <h2>Step 2: Send the device to us</h2>
-                                <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}} />
-                                <p>Note: You will have to pay postage</p>
+                                <div>
+                                    <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}} />
+                                    <p>Note: You will have to pay postage</p>
+                                </div>
                             </div>
                             <div>
                                 <h2>Step 3: We'll repair your device</h2>
                                 <p>We'll be in touch once your device is fixed to take payment and to arrange postage
                                     back to you</p>
                             </div>
-                            <Button colour={4} onClick={this.props.onSelectBack}>Back</Button>
-                        </div>
-                    );
+                        </div>,
+                        <Button key={1} colour={4} onClick={this.props.onSelectBack}>Back</Button>
+                    ];
                 }}
             </Query>
         ];
@@ -148,7 +150,7 @@ export default class Post extends Component {
         super(props);
 
         this.state = {
-            orderId: null,
+            orderId: 1,
         };
 
         this.onSubmitOrder = this.onSubmitOrder.bind(this);

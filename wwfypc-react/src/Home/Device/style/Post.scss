@@ -18,13 +18,20 @@
   .Info {
     flex-grow: 1;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 20px;
-    grid-auto-flow: column;
 
     div {
       word-wrap: normal;
       font-size: 20px;
+
+      display: grid;
+      grid-template-rows: 25% 75%;
+      align-items: start;
+
+      h2 {
+        align-self: end;
+      }
     }
 
     a {

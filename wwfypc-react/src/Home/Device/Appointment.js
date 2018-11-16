@@ -31,6 +31,16 @@ const BOOKING_TIMES_QUERY = gql`
   }
 `;
 
+const WALK_IN_QUERY = gql`
+  {
+    siteConfig {
+      address
+      googleMapsPlaceId
+      openingHours
+    }
+  }
+`;
+
 const CREATE_ORDER_QUERY = gql`
   mutation($name: String!, $email: String!, $phone: String!, $date: Date!, $time: Time! $device: ID!, $repair: ID!) {
     createAppointment(name: $name, email: $email, phone: $phone, date: $date, time: $time, device: $device, repair: $repair) {
@@ -253,9 +263,33 @@ class AppointmentFinal extends Component {
             <h2>Appointment made</h2>
             <h3>We look forward to seeing you on {dateformat(this.props.selectedDay, "dddd dd/mm/yyyy")}</h3>
             <div className="Info">
-                <RepairInfo deviceType={this.props.device} repairType={this.props.repair}
-                            selectedDay={this.props.selectedDay} selectedTime={this.props.selectedTime}/>
+                <Query query={WALK_IN_QUERY}>
+                    {({loading, error, data}) => {
+                        if (loading) return <h2>Loading</h2>;
+                        if (error) return <h2>Error</h2>;
+
+                        return [
+                            <div key={0}>
+                                <h2>Opening Hours</h2>
+                                <p dangerouslySetInnerHTML={{__html: data.siteConfig.openingHours}}/>
+                            </div>,
+                            <div key={1}>
+                                <h2>Address</h2>
+                                <p dangerouslySetInnerHTML={{__html: data.siteConfig.address}}/>
+                            </div>,
+                            <div key={2}>
+                                <iframe title="google map" frameBorder="0" style={{border: 0}}
+                                        src={"https://www.google.com/maps/embed/v1/place?q=place_id:" +
+                                        data.siteConfig.googleMapsPlaceId +
+                                        "&key=AIzaSyBmGRHy0mtaNM6QNZdK2Cku3yt_u__AyBs"} allowFullScreen/>
+                            </div>,
+                            <RepairInfo key={3} deviceType={this.props.device} repairType={this.props.repair}
+                                        selectedDay={this.props.selectedDay} selectedTime={this.props.selectedTime}/>
+                        ];
+                    }}
+                </Query>
             </div>
+            <Button colour={3} onClick={this.props.onSelectDone}>Done</Button>
             <Button colour={4} onClick={this.props.onSelectBack}>Back</Button>
         </div>
     }
@@ -387,7 +421,7 @@ export default class Appointment extends Component {
                                      onSubmit={this.submit} onSelectBack={this.props.onSelectBack}/> :
                     <AppointmentFinal repair={this.props.repair} device={this.props.device}
                                       selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime}
-                                      onSelectBack={this.props.onSelectBack}/>
+                                      onSelectBack={this.props.onSelectBack} onSelectDone={this.props.onSelectDone}/>
                 }
             </div>
         )
