@@ -150,7 +150,7 @@ export default class Post extends Component {
         super(props);
 
         this.state = {
-            orderId: 1,
+            orderId: null,
         };
 
         this.onSubmitOrder = this.onSubmitOrder.bind(this);
