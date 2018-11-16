@@ -71,10 +71,10 @@ export default class Device extends Component {
         this.repairSelection = React.createRef();
 
         this.state = {
-            deviceType: "RGV2aWNlQ2F0ZWdvcnlUeXBlOjE=",
-            device: "RGV2aWNlVHlwZVR5cGU6NQ==",
-            repair: "UmVwYWlyVHlwZVR5cGU6MQ==",
-            delivery: 2,
+            deviceType: null,
+            device: null,
+            repair: null,
+            delivery: null,
             step: 1,
             otherServices: false,
         };
