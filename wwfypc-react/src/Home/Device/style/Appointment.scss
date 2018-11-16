@@ -170,11 +170,38 @@
 }
 
 .AppointmentFinal {
-  h2 {
+  h2, h3 {
     text-align: center;
+  }
+  h2 {
     margin-bottom: 0;
   }
-  .Info .Info {
-    padding: 25px !important;
+
+  .Info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+
+    > div {
+      padding: 25px;
+    }
+
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+
+    div {
+      font-size: 20px;
+    }
+
+    h2 {
+      color: $orange;
+      margin-top: 20px;
+    }
+
+    .Info {
+      padding: 0 !important;
+    }
   }
 }
