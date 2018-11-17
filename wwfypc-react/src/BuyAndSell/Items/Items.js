@@ -120,6 +120,10 @@ class item extends Component {
                 </div>
                 <Indicators num={this.props.item.images.length} active={this.state.activeSlide} onSelect={this.setSlide}/>
                 <h2>{this.props.item.name}</h2>
+                <div className="price">
+                    &pound;{this.props.item.price}
+                    <span>(inc. VAT)</span>
+                </div>
                 <div className="expand" onClick={this.toggleExpand}>
                     <span>{this.state.expanded ? "Less info" : "More info"}</span>
                     <i className="fas fa-caret-down"/>
@@ -131,10 +135,6 @@ class item extends Component {
                             <span key={2}>{spec.value}</span>
                         ]
                     })}
-                </div>
-                <div className="price">
-                    &pound;{this.props.item.price}
-                    <span>(inc. VAT)</span>
                 </div>
                 <div className="buttons">
                     {!inCart ?

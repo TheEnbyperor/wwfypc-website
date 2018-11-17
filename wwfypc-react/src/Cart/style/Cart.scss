@@ -31,6 +31,17 @@
       background: #fff;
       position: relative;
 
+      .other {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        justify-content: flex-start;
+        grid-gap: 20px;
+
+        .Button {
+          margin: 0;
+        }
+      }
+
       h1 {
         color: $grey4;
         border-bottom: 2px solid $orange;

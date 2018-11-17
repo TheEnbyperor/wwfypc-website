@@ -8,6 +8,7 @@ import Success from './Success';
 import {client} from "../App";
 import "./style/Cart.scss";
 import DocumentTitle from "react-document-title";
+import {HashLink} from "../Shared/Menu";
 
 export const ITEM_PRICE_QUERY = gql`
   query($type: ID!, $id: ID!) {
@@ -249,6 +250,20 @@ export default class Cart extends Component {
                     <div className="inner">
                         <div className="left">
                             {left}
+                            <div className="other">
+                                <HashLink to="/unlocking" hash="">
+                                    <Button colour={3}>Phone Unlocking</Button>
+                                </HashLink>
+                                <HashLink to="/" hash="#device">
+                                    <Button colour={2}>Device repair</Button>
+                                </HashLink>
+                                <HashLink to="/buy-and-sell" hash="">
+                                    <Button colour={4}>Buy & Sell</Button>
+                                </HashLink>
+                                <HashLink to="/build-pc" hash="">
+                                    <Button colour={5}>Build a PC</Button>
+                                </HashLink>
+                            </div>
                         </div>
                         <div className="right">
                             <PriceTotal cart={this.state.cart}/>

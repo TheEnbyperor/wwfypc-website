@@ -28,6 +28,10 @@
       justify-content: center;
       align-items: center;
 
+      @supports (display: grid) {
+        display: flex;
+      }
+
       &:first-of-type {
         padding-top: 80px;
       }
@@ -54,7 +58,7 @@
         float: left;
 
     @supports (display: grid) {
-      width: 100%;
+      width: 100% !important;
     }
       }
     }

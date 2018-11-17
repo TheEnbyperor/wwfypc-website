@@ -75,6 +75,7 @@
     }
 
     .expand {
+      margin-top: 5px;
       background: $orange;
       padding: 5px;
       border-radius: 15px;
@@ -156,7 +157,6 @@
     }
 
     .price {
-      margin-top: 5px;
       font-family: "Neutra", sans-serif;
       font-size: 30px;
       flex: 1;
