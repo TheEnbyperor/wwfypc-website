@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {withRouter} from 'react-router-dom'
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 import Footer from "../Shared/Footer/Footer";
@@ -94,13 +95,12 @@ class Models extends Component {
     }
 }
 
-class Customise extends Component {
+class customise extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             options: {},
-            inCart: false,
         };
 
         this.onOptionSelect = this.onOptionSelect.bind(this);
@@ -117,10 +117,8 @@ class Customise extends Component {
     }
 
     addToCart(id) {
-        this.setState({
-            inCart: true
-        });
         addToCart("build_pc", id);
+        this.props.history.push("/cart");
     }
 
     render() {
@@ -191,14 +189,9 @@ class Customise extends Component {
 
                                             return [
                                                 <Button key={0} colour={4}>&pound;{data.pcPrice.price}</Button>,
-                                                !this.state.inCart ?
-                                                    <Button key={1} colour={3} onClick={() =>
+                                                <Button key={1} colour={3} onClick={() =>
                                                         this.addToCart(data.pcPrice.id)}>
                                                         Add to cart
-                                                    </Button>
-                                                    :
-                                                    <Button key={1} colour={3}>
-                                                        Added to cart
                                                     </Button>
                                             ];
                                         }}
@@ -212,6 +205,7 @@ class Customise extends Component {
         </div>;
     }
 }
+const Customise = withRouter(customise);
 
 export default class BuildPc extends Component {
     constructor(props) {

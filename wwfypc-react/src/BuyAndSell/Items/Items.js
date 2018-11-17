@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {withRouter} from 'react-router-dom';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 import './style/Items.scss';
@@ -43,16 +44,17 @@ class Indicators extends Component {
     }
 }
 
-class Item extends Component {
+class item extends Component {
     constructor(props) {
         super(props);
 
         this.setSlide = this.setSlide.bind(this);
         this.addToCart = this.addToCart.bind(this);
+        this.toggleExpand = this.toggleExpand.bind(this);
 
         this.state = {
             activeSlide: 0,
-            inCart: false,
+            expanded: false,
         };
     }
 
@@ -84,10 +86,14 @@ class Item extends Component {
                 return;
             }
         }
-        this.setState({
-            inCart: true,
-        });
         addToCart("buy_and_sell", this.props.item.id);
+        this.props.history.push("/cart");
+    }
+
+    toggleExpand() {
+        this.setState({
+            expanded: !this.state.expanded
+        });
     }
 
     render() {
@@ -98,7 +104,7 @@ class Item extends Component {
             + ((i === nextActive) ? " nextActive" : "")} key={slide.id} src={BASE_URL + slide.image} alt=""/>
         );
 
-        let inCart = this.state.inCart;
+        let inCart = false;
         const item = getItem("buy_and_sell", this.props.item.id);
         if (typeof item !== "undefined") {
             if (item.quantity >= 1) {
@@ -107,12 +113,17 @@ class Item extends Component {
         }
 
         return (
-            <div className={"Item" + ((this.props.item.reserved) ? " reserved" : "")}>
+            <div className={"Item" + ((this.props.item.reserved) ? " reserved" : "")
+            + (this.state.expanded ? " open" : " closed")}>
                 <div className="ImgSlider">
                     {slidesDisp}
                 </div>
                 <Indicators num={this.props.item.images.length} active={this.state.activeSlide} onSelect={this.setSlide}/>
                 <h2>{this.props.item.name}</h2>
+                <div className="expand" onClick={this.toggleExpand}>
+                    <span>{this.state.expanded ? "Less info" : "More info"}</span>
+                    <i className="fas fa-caret-down"/>
+                </div>
                 <div className="specs">
                     {this.props.item.specs.map((spec) => {
                         return [
@@ -121,10 +132,14 @@ class Item extends Component {
                         ]
                     })}
                 </div>
+                <div className="price">
+                    &pound;{this.props.item.price}
+                    <span>(inc. VAT)</span>
+                </div>
                 <div className="buttons">
                     {!inCart ?
                         <Button colour={this.props.item.category.colour} small onClick={this.addToCart}>
-                            &pound;{this.props.item.price}
+                            Add to cart
                         </Button>
                         :
                         <Button colour={this.props.item.category.colour} small>
@@ -144,6 +159,7 @@ class Item extends Component {
         )
     }
 }
+const Item = withRouter(item);
 
 export default class Items extends Component {
     render() {

@@ -9,6 +9,7 @@ import CartIndicator from '../Cart/Indicator/Indicator';
 const MENU_QUERY = gql`
   query {
     menuItems {
+      id
       name
       linkTo
       anchor
