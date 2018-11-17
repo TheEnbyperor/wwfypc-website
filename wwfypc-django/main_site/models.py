@@ -8,12 +8,12 @@ import phonenumber_field.modelfields
 from ckeditor.fields import RichTextField
 
 COLOURS = (
-    (1, "Yellow"),
+    (3, "Red"),
+    (1, "Orange"),
     (2, "Blue"),
-    (3, "Orange"),
     (4, "Green"),
     (5, "Black"),
-    (6, "Orange Inverse"),
+    (6, "Red Inverse"),
 )
 
 

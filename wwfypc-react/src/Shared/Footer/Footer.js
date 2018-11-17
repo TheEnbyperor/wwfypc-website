@@ -42,7 +42,6 @@ export default class Footer extends Component {
                                     <h2>Legal</h2>
 
                                     <div>
-                                        <Link to="/unlocking">Unlocking</Link>
                                         {data.menuItems.map((page, i) => {
                                             return <HashLink to={"/" + page.linkTo} hash={page.anchor} key={i}>
                                                 {page.name}
