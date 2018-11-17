@@ -447,7 +447,7 @@ class CreateOrder(Mutation):
                   f"{cart_message}"
 
         email_message = mail.EmailMessage(
-            f"New order placed {order.uid}",
+            f"New order placed {order.id}",
             message,
             site_config.email,
             [site_config.email],

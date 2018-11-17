@@ -50,7 +50,7 @@ const CREATE_ORDER_QUERY = gql`
         errors
       }
       appointment {
-        uid
+        id
       }
     }
   }
@@ -337,7 +337,7 @@ class AppointmentForm extends Component {
                                 errors[error.field] = <p>{error.errors.join(", ")}</p>;
                             });
                         } else {
-                            this.props.onSubmit(data.createAppointment.appointment.uid);
+                            this.props.onSubmit(data.createAppointment.appointment.id);
                         }
                     }
 
