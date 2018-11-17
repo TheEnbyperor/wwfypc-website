@@ -306,7 +306,7 @@ class Device extends Component {
                 <div className={"stage-" + stage}>
                     <div className="Select">
                         <h2>Select your device</h2>
-                        <h2>Select your network</h2>
+                        <h2>Network device is locked to</h2>
                         <DeviceModels onSelect={this.selectModel} selectedModel={this.state.selectedModel}/>
                         <Networks onSelect={this.selectNetwork} selectedNetwork={this.state.selectedNetwork}/>
                     </div>
