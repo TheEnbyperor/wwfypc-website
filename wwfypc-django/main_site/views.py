@@ -11,11 +11,11 @@ from . import models
 
 
 def post_form_pdf(request, id):
-    order = get_object_or_404(models.PostalOrder, uid=from_global_id(id)[1])
+    order = get_object_or_404(models.PostalOrder, id=from_global_id(id)[1])
 
     fp = BytesIO()
     factory = qrcode.image.svg.SvgPathImage
-    img = qrcode.make(order.uid, image_factory=factory, border=1)
+    img = qrcode.make(id, image_factory=factory, border=1)
     img.save(fp)
     fp.seek(0)
     barcode_data = fp.read().decode()

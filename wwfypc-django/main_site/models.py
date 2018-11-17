@@ -183,7 +183,7 @@ class Customer(models.Model):
 
 
 class PostalOrder(models.Model):
-    uid = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
+    id = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=True, related_name="postal_orders")
     date = models.DateTimeField(blank=False, default=datetime.datetime.now)
     device = models.ForeignKey(DeviceType, on_delete=models.DO_NOTHING, blank=True)
@@ -191,22 +191,22 @@ class PostalOrder(models.Model):
     additional_items = models.TextField(blank=True)
 
     def __str__(self):
-        return self.uid
+        return self.id
 
 
 class Appointment(models.Model):
-    uid = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
+    id = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=True, related_name="appointments")
     date = models.DateTimeField(blank=False)
     device = models.ForeignKey(DeviceType, on_delete=models.DO_NOTHING, blank=True)
     repair = models.ForeignKey(RepairType, on_delete=models.DO_NOTHING, blank=True)
 
     def __str__(self):
-        return self.uid
+        return self.id
 
 
 class Order(models.Model):
-    uid = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
+    id = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=True, related_name="orders")
     date = models.DateTimeField(blank=False, default=datetime.datetime.now)
     card_token = models.CharField(max_length=255, blank=False)
@@ -214,7 +214,7 @@ class Order(models.Model):
     worldpay_order_id = models.CharField(max_length=255, blank=False)
 
     def __str__(self):
-        return self.uid
+        return self.id
 
 
 class OrderItem(models.Model):

@@ -22,7 +22,7 @@ const CREATE_ORDER_QUERY = gql`
         errors
       }
       order {
-        uid
+        id
       }
     }
   }
@@ -110,7 +110,7 @@ class PostForm extends Component {
                                 errors[error.field] = <p>{error.errors.join(", ")}</p>;
                             });
                         } else {
-                            this.props.onSubmit(data.createPostalOrder.order.uid);
+                            this.props.onSubmit(data.createPostalOrder.order.id);
                         }
                     }
 
