@@ -54,10 +54,13 @@
     .Devices {
       flex: 1 1 100%;
       margin: 20px 0;
-      display: flex;
       justify-content: center;
       flex-direction: column;
       width: 100%;
+
+      @supports (display: grid) {
+        display: flex;
+      }
 
       > div:not(.other) {
         display: grid;
@@ -70,8 +73,14 @@
         margin: 13px 0;
 
         > div {
+          width: 25%;
+          float: left;
+
+          @supports (display: grid) {
+            width: 100%;
+          }
+
           display: grid;
-          width: 100%;
           grid-template-rows: 50% 15% 25% 10%;
 
           background: $grey;
@@ -123,6 +132,7 @@
       }
 
       .other {
+        clear: both;
         align-items: center;
         justify-content: flex-end;
         display: grid;

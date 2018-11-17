@@ -24,6 +24,12 @@
     div {
       word-wrap: normal;
       font-size: 20px;
+      width: 33%;
+      float: left;
+
+      @supports (display: grid) {
+        width: 100%;
+      }
 
       display: grid;
       grid-template-rows: 25% 75%;

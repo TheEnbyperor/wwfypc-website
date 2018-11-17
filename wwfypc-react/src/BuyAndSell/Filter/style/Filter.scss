@@ -16,6 +16,12 @@
     font-family: "Moon", sans-serif;
     cursor: pointer;
     text-align: center;
+    float: left;
+    width: 20%;
+
+    @supports (display: grid) {
+      width: 100%;
+    }
 
     &:first-of-type {
       margin-left: 0;

@@ -2,7 +2,6 @@
 
 .RepairSelection {
   flex: 1 100%;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -10,7 +9,12 @@
   max-width: 1200px;
   padding: 20px 0;
 
+    @supports (display: grid) {
+      display: flex;
+    }
+
   .other {
+    clear: both;
     width: 100%;
     align-items: center;
     justify-content: flex-end;
@@ -19,6 +23,8 @@
     grid-auto-flow: column;
 
     > * {
+      float: left;
+
       &:nth-of-type(4n+1) {
         grid-column: 4;
       }
@@ -56,6 +62,13 @@
     }
 
     .Info {
+      float: left;
+      width: 25%;
+
+      @supports (display: grid) {
+        width: 100%;
+      }
+
       height: 100%;
 
       > div {
@@ -102,6 +115,13 @@
     }
 
     .Select {
+      float: left;
+      width: 75%;
+      
+      @supports (display: grid) {
+        width: 100%;
+      }
+
       display: grid;
       grid-auto-flow: column;
       grid-row-gap: 13px;
@@ -121,6 +141,7 @@
 
       .model, .repairType, .deliveryType {
         @include text-box;
+        float: left;
 
         &.selected {
           background: $blue;
@@ -128,7 +149,10 @@
         }
 
         .top {
-          display: flex;
+          @supports (display: grid) {
+            display: flex;
+          }
+
           span {
             flex: 1;
           }
@@ -142,8 +166,15 @@
 
       .repairType, .deliveryType {
         grid-column: 3;
-        margin: 0 0 0 13px;
         padding: 0;
+
+        &.first {
+          clear: both;
+        }
+
+        @supports (display: grid) {
+          margin: 0 0 0 13px;
+        }
 
         .top {
           padding: 13px;
@@ -193,8 +224,11 @@
     background: $grey;
     padding: 25px;
     border-radius: 25px;
+    
+    @supports (display: grid) {
+      display: flex;
+    }
 
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-items: center;
@@ -254,6 +288,7 @@
       font-family: "Neutra", sans-serif;
       font-size: 30px;
       flex: 1;
+      text-align: center;
 
       span {
         font-size: 12px;
