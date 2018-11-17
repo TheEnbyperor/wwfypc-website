@@ -413,7 +413,8 @@ export default class Appointment extends Component {
                     <Calendar key={0} repair={this.props.repair} device={this.props.device}
                               selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime}
                               onSelectDay={this.selectDay} onSelectTime={this.selectTime}/>,
-                    <Button key={1} colour={1} onClick={this.book}>Book</Button>,
+                    (this.state.selectedDay !== null && this.state.selectedTime !== null) ?
+                        <Button key={1} colour={1} onClick={this.book}>Book</Button> : null,
                     <Button key={2} colour={4} onClick={this.props.onSelectBack}>Back</Button>
                 ] : (this.state.appointmentID === null) ?
                     <AppointmentForm repair={this.props.repair} device={this.props.device}
