@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Query} from "react-apollo";
 import gql from "graphql-tag";
 import "./Footer.scss";
-import {Link} from "react-router-dom";
 import {BASE_URL} from "../../App";
 import {HashLink} from '../Menu';
 
@@ -43,9 +42,13 @@ export default class Footer extends Component {
 
                                     <div>
                                         {data.menuItems.map((page, i) => {
-                                            return <HashLink to={"/" + page.linkTo} hash={page.anchor} key={i}>
-                                                {page.name}
-                                            </HashLink>;
+                                            return page.isLinkExternal ?
+                                                <a href={page.linkTo + page.anchor} target="_blank">
+                                                    {page.name}
+                                                </a> :
+                                                <HashLink to={page.linkTo} hash={page.anchor} key={i}>
+                                                    {page.name}
+                                                </HashLink>;
                                         })}
                                     </div>
 

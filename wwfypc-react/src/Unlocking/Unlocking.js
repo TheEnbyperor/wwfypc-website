@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom'
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 import DocumentTitle from 'react-document-title';
@@ -79,13 +80,12 @@ class Notice extends Component {
     }
 }
 
-class UnlockInfo extends Component {
+class unlockInfo extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             imeiErrors: null,
-            inCart: false,
             lastProps: null,
         };
 
@@ -125,9 +125,9 @@ class UnlockInfo extends Component {
         } else {
             this.setState({
                 imeiErrors: null,
-                inCart: true,
             });
             addToCart("unlocking", id + ";" + imei);
+            this.props.history.push("/cart");
         }
     }
 
@@ -135,7 +135,6 @@ class UnlockInfo extends Component {
         if (JSON.stringify(props) !== state.lastProps) {
             return {
                 imeiErrors: null,
-                inCart: false,
                 lastProps: JSON.stringify(props),
             }
         } else {
@@ -195,14 +194,9 @@ class UnlockInfo extends Component {
                                                         &nbsp;on your phone.
                                                     </p>
                                                 </div>,
-                                                !this.state.inCart ?
-                                                    <Button key={3} colour={2}
+                                                <Button key={3} colour={2}
                                                             onClick={() => this.addToCart(data.unlockingPrice.id)}>
                                                         Add to cart
-                                                    </Button>
-                                                    :
-                                                    <Button key={3} colour={3}>
-                                                        Added to cart
                                                     </Button>
                                             ];
                                         }}
@@ -215,6 +209,7 @@ class UnlockInfo extends Component {
         </div>;
     }
 }
+const UnlockInfo = withRouter(unlockInfo);
 
 class DeviceModels extends Component {
     render() {

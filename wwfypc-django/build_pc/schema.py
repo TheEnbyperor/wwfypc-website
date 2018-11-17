@@ -17,6 +17,7 @@ def pc_id_to_data(id):
 
 
 def get_item(id):
+    print(id)
     base_pc, options = pc_id_to_data(id)
     base_price = base_pc.base_price
     for o in options:
