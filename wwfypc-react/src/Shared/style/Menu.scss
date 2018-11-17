@@ -39,6 +39,10 @@
       }
     }
 
+    img, > div {
+      float: left;
+    }
+
     > div {
       text-align: center;
       display: flex;

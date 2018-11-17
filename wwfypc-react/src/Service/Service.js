@@ -53,7 +53,7 @@ class InnerService extends Component {
                     </div>;
                 })}
 
-                <div className="section fp-auto-height"><Footer/></div>
+                <div className="section fp-auto-height" data-anchor="footer"><Footer/></div>
             </div>
         </DocumentTitle>;
     }

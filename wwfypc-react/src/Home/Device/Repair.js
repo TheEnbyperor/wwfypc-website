@@ -92,7 +92,8 @@ class RepairTypes extends Component {
                         if (error) return <h2>Error</h2>;
 
                         return data.repairTypes.map(({id, name, description}, i) => (
-                            <div className={"repairType" + ((this.props.selectedRepair === id) ? " selected open" : "")} key={id}
+                            <div className={"repairType" + ((this.props.selectedRepair === id) ? " selected open" : "")
+                            + (i === 0 ? " first": "")} key={id}
                                  onClick={() => this.props.selectRepair(id)} style={this.props.selectedRepair === id ? {
                                      gridRowStart: i+1,
                             } : {}}>
@@ -116,7 +117,8 @@ class DeliveryTypes extends Component {
     render() {
         if (this.props.repairType !== null) {
             return this.props.deliveryTypes.map(({id, name, description}, i) => (
-                <div className={"deliveryType" + ((this.props.selectedDelivery === id) ? " selected open" : "")} key={id}
+                <div className={"deliveryType" + ((this.props.selectedDelivery === id) ? " selected open" : "")
+                + (i === 0 ? " first": "")} key={id}
                      onClick={() => this.props.selectDelivery(id)} style={this.props.selectedDelivery === id ? {
                                      gridRowStart: i+1,
                             } : {}}>

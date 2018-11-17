@@ -12,7 +12,13 @@
     border-radius: 25px;
     flex-direction: column;
     position: relative;
+    width: 25%;
+    float: left;
+
+    @supports (display: grid) {
+      width: 100%;
     display: flex;
+    }
 
     .ImgSlider {
       position: relative;

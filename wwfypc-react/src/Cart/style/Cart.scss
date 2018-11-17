@@ -16,11 +16,14 @@
 
   div.inner {
     max-width: $max-width;
-    flex: 1;
     width: 100%;
     display: flex;
     margin: 0 auto;
     min-height: 100%;
+
+    @supports (display: grid) {
+      flex: 1;
+    }
 
     .left {
       padding: 60px 15px 100px 50px;
@@ -67,9 +70,23 @@
           .Button {
             align-self: stretch;
           }
+
+          width: 20%;
+          float: left;
+
+          @supports (display: grid) {
+            width: 100%;
+          }
         }
 
         .ItemInfo {
+          width: 40%;
+          float: left;
+
+          @supports (display: grid) {
+            width: 100%;
+          }
+
           .name {
             font-size: 23px;
             border-bottom: 3px solid $grey3;
@@ -87,6 +104,12 @@
           display: flex;
           justify-content: center;
           align-items: start;
+          width: 10%;
+          float: left;
+
+          @supports (display: grid) {
+            width: 100%;
+          }
 
           input {
             border: none;
@@ -107,6 +130,13 @@
           justify-self: right;
           font-size: 23px;
           padding: 15px 0;
+
+          width: 25%;
+          float: left;
+
+          @supports (display: grid) {
+            width: 100%;
+          }
 
           span {
             text-align: right;
@@ -140,9 +170,13 @@
           grid-auto-rows: 1fr;
 
           .input, .textarea {
-            display: flex;
             flex-direction: column;
             padding: 5px 0;
+            display: block !important;
+
+            @supports (display: grid) {
+              display: flex !important;
+            }
 
             .inner {
               display: grid;

@@ -17,7 +17,8 @@ header.Top {
   grid-template-columns: 1fr auto;
   height: 100%;
   max-width: $max-width;
-  margin: 10px auto;
+  width: 100%;
+  margin: 70px auto 10px;
   align-items: center;
   flex: 1 1 0;
   min-height: 0;
@@ -39,6 +40,12 @@ header.Top {
 
 .TopLeft {
   margin-left: 10px;
+  width: 70%;
+  float: left;
+
+  @supports (display: grid) {
+    width: 100%;
+  }
 
   h1, h2 {
     margin: 0;
@@ -60,6 +67,15 @@ header.Top {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     width: 90%;
     justify-content: space-between;
+  }
+}
+
+.TopRight {
+  width: 28%;
+  float: left;
+
+  @supports (display: grid) {
+    width: 100%;
   }
 }
 

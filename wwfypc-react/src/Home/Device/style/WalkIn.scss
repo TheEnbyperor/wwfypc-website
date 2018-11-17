@@ -18,6 +18,12 @@
 
     div {
       font-size: 20px;
+      width: 33%;
+      float: left;
+
+      @supports (display: grid) {
+        width: 100%;
+      }
     }
 
     iframe {
