@@ -192,7 +192,7 @@ class RepairInfo extends Component {
                                                                 </div>,
                                                                 <div key={1} className="price">
                                                                     {data.repairType.price}
-                                                                    <span>(inc. VAT)</span>
+                                                                    <span>VAT is already included.</span>
                                                                 </div>,
                                                                 this.props.deliveryType === null ? null :
                                                                     <Button key={2} colour={2}
