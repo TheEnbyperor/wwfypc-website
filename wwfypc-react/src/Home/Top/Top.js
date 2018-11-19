@@ -18,6 +18,7 @@ const SLIDER_QUERY = gql`
       text
       buttonText
       linkTo
+      anchor
       image
       backgroundImage
     }
@@ -184,9 +185,9 @@ class TopRightSlider extends Component {
                 </div>
                 <h2 className={"colour-" + slide.colour}>{slide.title}</h2>
                 {ReactHtmlParser(slide.text)}
-                <Link to={slide.linkTo}>
+                <HashLink to={slide.linkTo} hash={slide.anchor}>
                     <Button colour={1}>{slide.buttonText}</Button>
-                </Link>
+                </HashLink>
             </div>
         );
 

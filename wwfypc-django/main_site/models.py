@@ -126,6 +126,7 @@ class MainSliderSlide(OrderedModel):
     text = RichTextField()
     button_text = models.CharField(max_length=255)
     link_to = models.CharField(max_length=255)
+    anchor = models.CharField(max_length=255, blank=True)
     image = models.FileField()
     background_image = models.FileField()
 
