@@ -86,7 +86,7 @@ class RepairInfo extends Component {
                             </ul>
                         </div>,
                         <div key={3} className="price">
-                            &pound;{data.repairType.price}
+                            {data.repairType.price}
                         </div>
                     ];
                 }}
