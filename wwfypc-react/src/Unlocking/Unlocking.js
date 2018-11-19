@@ -184,7 +184,7 @@ class unlockInfo extends Component {
                                                 </div>,
                                                 <div key={1} className="price">
                                                     &pound;{data.unlockingPrice.price}
-                                                    <span>(inc. VAT)</span>
+                                                    <span>VAT is already included.</span>
                                                 </div>,
                                                 <div key={2} className="input">
                                                     {this.state.imeiErrors}

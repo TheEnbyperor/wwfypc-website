@@ -152,7 +152,7 @@ class PriceTotal extends Component {
             <span>&pound;{this.state.postage.toFixed(2)}</span>
             <span>Total:</span>
             <span>&pound;{this.state.total.toFixed(2)}</span>
-            <span>(inc. VAT)</span>
+            <span>VAT is already included.</span>
         </div>;
     }
 }

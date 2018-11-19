@@ -122,7 +122,7 @@ class item extends Component {
                 <h2>{this.props.item.name}</h2>
                 <div className="price">
                     &pound;{this.props.item.price}
-                    <span>(inc. VAT)</span>
+                    <span>VAT is already included.</span>
                 </div>
                 <div className="expand" onClick={this.toggleExpand}>
                     <span>{this.state.expanded ? "Less info" : "More info"}</span>
