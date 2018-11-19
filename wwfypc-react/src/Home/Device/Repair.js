@@ -218,12 +218,6 @@ export default class RepairSelection extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            selectedModel: null,
-            selectedRepair: null,
-            selectedDelivery: null,
-        };
-
         this.goBack = this.goBack.bind(this);
         this.selectModel = this.selectModel.bind(this);
         this.selectRepair = this.selectRepair.bind(this);
@@ -234,74 +228,62 @@ export default class RepairSelection extends Component {
     }
 
     goBack() {
-        if (this.state.selectedRepair === null) {
+        if (this.props.selectedRepair === null) {
             this.props.goBack();
         } else {
-            this.setState({
-                selectedRepair: null,
-                selectedDelivery: null,
-            });
+            this.props.selectRepair(null);
+            this.props.selectDelivery(null);
             setTimeout(window.$.scrollify.update, 500);
         }
     }
 
     selectModel(model) {
-        if (model !== this.state.selectedModel) {
-            this.setState({
-                selectedModel: model,
-                selectedRepair: null,
-                selectedDelivery: null,
-            });
+        if (model !== this.props.selectedDevice) {
+            this.props.selectDevice(model);
+            this.props.selectRepair(null);
+            this.props.selectDelivery(null);
             setTimeout(window.$.scrollify.update, 500);
         } else {
-            this.setState({
-                selectedModel: null,
-                selectedRepair: null,
-                selectedDelivery: null,
-            });
+            this.props.selectDevice(null);
+            this.props.selectRepair(null);
+            this.props.selectDelivery(null);
             setTimeout(window.$.scrollify.update, 500);
         }
     }
 
     selectRepair(repair) {
-        if (repair !== this.state.selectedRepair) {
-            this.setState({
-                selectedRepair: repair,
-                selectedDelivery: null,
-            });
+        if (repair !== this.props.selectedRepair) {
+            this.props.selectRepair(repair);
+            this.props.selectDelivery(null);
             window.history.pushState({}, "", "");
             setTimeout(window.$.scrollify.update, 500);
         } else {
-            this.setState({
-                selectedRepair: null,
-                selectedDelivery: null,
-            });
+            this.props.selectRepair(null);
+            this.props.selectDelivery(null);
             setTimeout(window.$.scrollify.update, 500);
         }
     }
 
     selectDelivery(delivery) {
-        if (delivery !== this.state.selectedDelivery) {
-            this.setState({
-                selectedDelivery: delivery
-            });
+        if (delivery !== this.props.selectedDelivery) {
+            this.props.selectDelivery(delivery);
             setTimeout(window.$.scrollify.update, 500);
         }
     }
 
     nextStep() {
-        this.props.nextStep(this.state.selectedModel, this.state.selectedRepair, this.state.selectedDelivery);
+        this.props.nextStep();
     }
 
     render() {
         let stage = 1;
-        if (this.state.selectedModel !== null) {
+        if (this.props.selectedDevice !== null) {
             stage = 2;
         }
-        if (this.state.selectedRepair !== null) {
+        if (this.props.selectedRepair !== null) {
             stage = 3;
         }
-        if (this.state.selectedDelivery !== null) {
+        if (this.props.selectedDelivery !== null) {
             stage = 4;
         }
 
@@ -310,19 +292,19 @@ export default class RepairSelection extends Component {
                 <div className={"stage-" + stage}>
                     <div className="Select ">
                         <RepairModels category={this.props.deviceCategory}
-                                      selectedModel={this.state.selectedModel}
+                                      selectedModel={this.props.selectedDevice}
                                       selectModel={this.selectModel}/>
-                        <RepairTypes deviceType={this.state.selectedModel}
-                                     selectedRepair={this.state.selectedRepair}
+                        <RepairTypes deviceType={this.props.selectedDevice}
+                                     selectedRepair={this.props.selectedRepair}
                                      selectRepair={this.selectRepair}/>
-                        <DeliveryTypes repairType={this.state.selectedRepair}
-                                       selectedDelivery={this.state.selectedDelivery}
+                        <DeliveryTypes repairType={this.props.selectedRepair}
+                                       selectedDelivery={this.props.selectedDelivery}
                                        selectDelivery={this.selectDelivery}
                                        deliveryTypes={this.props.devileryTypes}/>
                     </div>
                     <RepairInfo deviceCategory={this.props.deviceCategory}
-                                deviceType={this.state.selectedModel} repairType={this.state.selectedRepair}
-                                deliveryType={this.state.selectedDelivery} nextStep={this.nextStep}
+                                deviceType={this.props.selectedDevice} repairType={this.props.selectedRepair}
+                                deliveryType={this.props.selectedDelivery} nextStep={this.nextStep}
                                 deliveryTypes={this.props.devileryTypes}/>
                 </div>
                 <div className="other">
@@ -334,11 +316,6 @@ export default class RepairSelection extends Component {
 
                             return data.deviceCategories.slice().reverse().map(({id, name, colour}, i) => {
                                 return <Button colour={colour} key={i} onClick={() => {
-                                    this.setState({
-                                        selectedModel: null,
-                                        selectedRepair: null,
-                                        selectedDelivery: null,
-                                    });
                                     this.props.onSelectDeviceType(id);
                                 }}><span dangerouslySetInnerHTML={{__html: name}} /></Button>
                             });

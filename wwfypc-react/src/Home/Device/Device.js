@@ -86,6 +86,9 @@ export default class Device extends Component {
         this.nextStep = this.nextStep.bind(this);
         this.finalStep = this.finalStep.bind(this);
         this.selectOtherServices = this.selectOtherServices.bind(this);
+        this.selectDelivery = this.selectDelivery.bind(this);
+        this.selectRepair = this.selectRepair.bind(this);
+        this.selectDevice = this.selectDevice.bind(this);
     }
 
     selectOtherServices(selected) {
@@ -99,6 +102,7 @@ export default class Device extends Component {
             deviceType: type,
             repair: null,
             device: null,
+            delivery: null,
             step: 2,
         });
         window.history.pushState({page: 1}, "", "");
@@ -139,15 +143,31 @@ export default class Device extends Component {
         }
     }
 
-    nextStep(device, repair, delivery) {
+    selectDevice(device) {
+        this.setState({
+            device: device
+        });
+    }
+
+
+    selectRepair(repair) {
+        this.setState({
+            repair: repair
+        });
+    }
+
+    selectDelivery(delivery) {
+        this.setState({
+            delivery: delivery
+        });
+    }
+
+    nextStep() {
         let step = 3;
-        if (delivery === WALK_IN_TYPE) {
+        if (this.state.delivery === WALK_IN_TYPE) {
             step = 4;
         }
         this.setState({
-            device: device,
-            repair: repair,
-            delivery: delivery,
             step: step,
         });
     }
@@ -192,12 +212,16 @@ export default class Device extends Component {
                     } else if (this.state.deviceType === null) {
                         disp = <Devices onSelect={this.selectType}
                                         onSelectOther={() => this.selectOtherServices(true)}/>;
-                    } else if (this.state.delivery === null) {
+                    } else if (this.state.step < 3) {
                         disp =
                             <RepairSelection ref={this.repairSelection} goBack={this.doGoBack}
                                              onSelectDeviceType={this.selectType}
                                              onSelectBack={this.goBack} nextStep={this.nextStep}
-                                             deviceCategory={this.state.deviceType} devileryTypes={DELIVERY_TYPES}/>;
+                                             deviceCategory={this.state.deviceType} devileryTypes={DELIVERY_TYPES}
+                                             selectedDevice={this.state.device} selectDevice={this.selectDevice}
+                                             selectedRepair={this.state.repair} selectRepair={this.selectRepair}
+                                             selectedDelivery={this.state.delivery} selectDelivery={this.selectDelivery}
+                            />;
                     } else {
                         if (this.state.delivery === WALK_IN_TYPE) {
                             disp = <WalkIn onSelectBack={this.goBack}/>;

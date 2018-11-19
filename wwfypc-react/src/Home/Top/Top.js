@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Query} from "react-apollo";
 import gql from "graphql-tag";
-import {Link} from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 import Button from '../../Shared/Buttons';
 import './style/Top.scss';
