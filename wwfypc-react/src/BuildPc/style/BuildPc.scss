@@ -57,15 +57,17 @@
         width: 25% !important;
         float: left;
 
-    @supports (display: grid) {
-      width: 100% !important;
-    }
+        @supports (display: grid) {
+          width: 100% !important;
+        }
       }
     }
 
     .Images {
       img {
-        width: 75%;
+        @supports (display: grid) {
+          width: 75% !important;
+        }
         justify-self: center;
         object-fit: contain;
         max-height: 100%;

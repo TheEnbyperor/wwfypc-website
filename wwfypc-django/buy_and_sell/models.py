@@ -16,7 +16,7 @@ class ItemCategory(main_site.models.OrderedModel):
 
 
 class Item(main_site.models.OrderedModel):
-    category = models.ForeignKey(ItemCategory, related_name='items', on_delete=models.DO_NOTHING, blank=True)
+    category = models.ForeignKey(ItemCategory, related_name='items', on_delete=models.SET_NULL, blank=True, null=True)
     name = models.CharField(max_length=255, blank=False)
     price = models.DecimalField(decimal_places=2, max_digits=10, blank=False)
     sold = models.BooleanField(blank=False, default=False)
