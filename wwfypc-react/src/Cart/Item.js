@@ -83,7 +83,12 @@ class Item extends Component {
         return <Query query={ITEM_QUERY} variables={{type: this.props.item.type, id: this.props.item.id}}>
             {({data, loading, error}) => {
                 if (loading) return null;
-                if (error) return <h2>Error</h2>;
+                if (error) {
+                    if (error.graphQLErrors[0].message === "Item matching query does not exist.") {
+                        removeFromCart(this.props.item.type, this.props.item.id);
+                    }
+                    return <h2>Error</h2>;
+                }
 
                 setTimeout(() => {
                     window.$.scrollify.update();
