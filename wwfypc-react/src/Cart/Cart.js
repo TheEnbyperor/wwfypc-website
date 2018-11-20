@@ -185,13 +185,33 @@ export default class Cart extends Component {
         window.$.scrollify.destroy();
     }
 
-
     onUpdate(cart) {
-        updateCart(cart);
-        this.cartIsReady();
-        this.setState({
-            cart: cart
-        });
+        (async (cart) => {
+            cart = await Cart.cleanupCart(cart);
+            updateCart(cart);
+            this.cartIsReady();
+            this.setState({
+                cart: cart
+            });
+        })(cart);
+    }
+
+    static async cleanupCart(cart) {
+        let out = [];
+        for (let i = 0; i < cart.length; i++) {
+            let item = cart[i];
+            const {error} = await client.query({
+                query: ITEM_PRICE_QUERY,
+                variables: {type: item.type, id: item.id},
+            });
+            if (error) {
+                if (error.graphQLErrors[0].message === "Item matching query does not exist.") {
+                    continue;
+                }
+            }
+            out.push(item);
+        }
+        return out;
     }
 
     cartIsReady() {

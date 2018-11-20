@@ -16,13 +16,25 @@
     grid-gap: 20px;
     grid-auto-flow: column;
 
-    div {
+    > div {
       font-size: 20px;
       width: 33%;
       float: left;
 
       @supports (display: grid) {
         width: 100%;
+      }
+
+      display: grid;
+      grid-template-rows: 25% 75%;
+      align-items: start;
+
+      h2 {
+        align-self: end;
+      }
+
+      iframe {
+        grid-row: span 2;
       }
     }
 

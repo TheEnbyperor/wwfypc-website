@@ -42,7 +42,7 @@ class PostFinal extends Component {
                             <div>
                                 <h2>Step 1: Print postage sheet</h2>
                                 <p><a href={BASE_URL + "/post_form/" + this.props.orderId}
-                                      target="_blank">Click here</a> to print your booking sheet and place into
+                                      target="_blank">Click here</a> to print your postage sheet and place into
                                     the box with your device.</p>
                             </div>
                             <div>
