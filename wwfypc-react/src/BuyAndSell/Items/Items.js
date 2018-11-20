@@ -118,7 +118,12 @@ class item extends Component {
                 <div className="ImgSlider">
                     {slidesDisp}
                 </div>
-                <Indicators num={this.props.item.images.length} active={this.state.activeSlide} onSelect={this.setSlide}/>
+                {
+                    (this.props.item.images.length > 1) ?
+                    <Indicators num={this.props.item.images.length}
+                                active={this.state.activeSlide} onSelect={this.setSlide}/>
+                    : null
+                }
                 <h2>{this.props.item.name}</h2>
                 <div className="price">
                     &pound;{this.props.item.price}

@@ -237,6 +237,7 @@ export default class BuildPc extends Component {
             selectedModel: model,
         });
         setTimeout(window.$.scrollify.update, 500);
+        window.$.scrollify.instantMove("#build-pc");
     }
 
     render() {

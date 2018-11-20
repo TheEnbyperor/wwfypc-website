@@ -84,9 +84,6 @@ class Item extends Component {
             {({data, loading, error}) => {
                 if (loading) return null;
                 if (error) {
-                    if (error.graphQLErrors[0].message === "Item matching query does not exist.") {
-                        removeFromCart(this.props.item.type, this.props.item.id);
-                    }
                     return <h2>Error</h2>;
                 }
 

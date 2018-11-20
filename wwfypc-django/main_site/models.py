@@ -50,6 +50,7 @@ class SiteConfig(SingletonModel):
 
     terms_and_conditions = models.FileField(blank=True)
     warranty = models.FileField(blank=True)
+    public_liability = models.FileField(blank=True, verbose_name="Public liability insurance certificate")
 
     def __str__(self):
         return "Site config"
@@ -185,10 +186,10 @@ class Customer(models.Model):
 
 class PostalOrder(models.Model):
     id = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=True, related_name="postal_orders")
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True, related_name="postal_orders")
     date = models.DateTimeField(blank=False, default=datetime.datetime.now)
-    device = models.ForeignKey(DeviceType, on_delete=models.DO_NOTHING, blank=True)
-    repair = models.ForeignKey(RepairType, on_delete=models.DO_NOTHING, blank=True)
+    device = models.ForeignKey(DeviceType, on_delete=models.SET_NULL, blank=True, null=True)
+    repair = models.ForeignKey(RepairType, on_delete=models.SET_NULL, blank=True, null=True)
     additional_items = models.TextField(blank=True)
 
     def __str__(self):
@@ -197,10 +198,10 @@ class PostalOrder(models.Model):
 
 class Appointment(models.Model):
     id = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=True, related_name="appointments")
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True, related_name="appointments")
     date = models.DateTimeField(blank=False)
-    device = models.ForeignKey(DeviceType, on_delete=models.DO_NOTHING, blank=True)
-    repair = models.ForeignKey(RepairType, on_delete=models.DO_NOTHING, blank=True)
+    device = models.ForeignKey(DeviceType, on_delete=models.SET_NULL, blank=True, null=True)
+    repair = models.ForeignKey(RepairType, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.id
@@ -208,7 +209,7 @@ class Appointment(models.Model):
 
 class Order(models.Model):
     id = models.CharField(max_length=8, unique=True, editable=False, default=make_uid, primary_key=True)
-    customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING, blank=True, related_name="orders")
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True, related_name="orders")
     date = models.DateTimeField(blank=False, default=datetime.datetime.now)
     card_token = models.CharField(max_length=255, blank=False)
     name_on_card = models.CharField(max_length=255, blank=False)

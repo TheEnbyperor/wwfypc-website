@@ -17,6 +17,7 @@ const INFO_QUERY = gql`
       facebookUrl
       termsAndConditions
       warranty
+      publicLiability
     }
     menuItems {
       id
@@ -76,6 +77,9 @@ export default class Footer extends Component {
                                             Terms & conditions
                                         </a>
                                         <a href={BASE_URL + data.siteConfig.warranty} target="_blank">Warranty</a>
+                                        <a href={BASE_URL + data.siteConfig.publicLiability} target="_blank">
+                                            Public liability insurance certificate
+                                        </a>
 
                                         <div className="social">
                                             <a href={data.siteConfig.facebookUrl} target="_blank">
