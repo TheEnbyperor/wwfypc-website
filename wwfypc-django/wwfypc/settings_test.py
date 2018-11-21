@@ -97,6 +97,9 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST', 'db'),
         'ENGINE': 'django.db.backends.mysql',
         'PORT': '',
+        'OPTIONS': {
+            "init_command": "SET foreign_key_checks = 0;",
+        },
     }
 }
 
