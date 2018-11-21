@@ -37,12 +37,14 @@ class SiteConfig(SingletonModel):
     walk_in_description = RichTextField(verbose_name="\"Walk in\" description")
     post_description = RichTextField(verbose_name="\"Post\" description")
 
-    unlocking_text = RichTextField()
+    unlocking_text = RichTextField(blank=True)
 
     featured_review = RichTextField()
     featured_review_name = models.CharField(max_length=255)
 
-    why_choose_us = RichTextField()
+    home_top_text = RichTextField(blank=True)
+    about_text = RichTextField(blank=True)
+    why_choose_us = RichTextField(blank=True)
 
     twitter_url = models.URLField(blank=True)
     google_url = models.URLField(blank=True)

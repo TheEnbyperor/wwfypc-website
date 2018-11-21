@@ -24,23 +24,43 @@ const SLIDER_QUERY = gql`
   }
 `;
 
+const TOP_QUERY = gql`
+  {
+    siteConfig {
+      homeTopText
+    }
+  }
+`;
+
 class TopLeft extends Component {
     render() {
         return (
-            <div className="TopLeft">
-                <h2>Welcome to</h2>
-                <h1 className="large">We Will Fix Your PC</h1>
-                <p>You've arrived at We Will Fix Your PC. <br/> If your looking for expert help with your computer or
-                    phone - without breaking the bank, then search no further.</p>
-                <div className="buttons">
-                    <HashLink to="/" hash="#device">
-                        <Button colour={1}>Start your repair</Button>
-                    </HashLink>
-                    <HashLink to="/" hash="#about">
-                        <Button colour={2}>Learn more</Button>
-                    </HashLink>
-                </div>
-            </div>
+            <Query query={TOP_QUERY}>
+                {({loading, data, error}) => {
+                    if (loading) return (
+                    <div className="TopLeft">
+                        <h2>Loading</h2>
+                    </div>);
+                    if (error) return (
+                    <div className="TopLeft">
+                        <h2>Error</h2>
+                    </div>);
+
+                    return <div className="TopLeft">
+                        <h2>Welcome to</h2>
+                        <h1 className="large">We Will Fix Your PC</h1>
+                        {ReactHtmlParser(data.siteConfig.homeTopText)}
+                        <div className="buttons">
+                            <HashLink to="/" hash="#device">
+                                <Button colour={1}>Start your repair</Button>
+                            </HashLink>
+                            <HashLink to="/" hash="#about">
+                                <Button colour={2}>Learn more</Button>
+                            </HashLink>
+                        </div>
+                    </div>
+                }}
+            </Query>
         )
     }
 }
