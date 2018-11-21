@@ -43,6 +43,9 @@ class SiteConfigType(DjangoObjectType):
     def resolve_warranty(self, info):
         return self.warranty.url if self.warranty else ""
 
+    def resolve_public_liability(self, info):
+        return self.public_liability.url if self.public_liability else ""
+
 
 class MainSliderSlideType(DjangoObjectType):
     colour = graphene.NonNull(graphene.Int)
