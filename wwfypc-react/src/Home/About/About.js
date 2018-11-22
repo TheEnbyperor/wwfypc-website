@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import "./style/About.scss";
 import {Query} from "react-apollo";
+import gql from "graphql-tag";
 import ReactHtmlParser from "react-html-parser";
 
 const ABOUT_QUERY = gql`
