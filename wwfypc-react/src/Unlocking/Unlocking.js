@@ -238,7 +238,9 @@ class Networks extends Component {
 
                 return data.unlockingNetworks.map(({id, name, description}, i) =>
                     <div className={"repairType" + ((this.props.selectedNetwork === id) ? " selected open" : "")}
-                         key={i} onClick={() => this.props.onSelect(id)}>
+                         key={i} onClick={() => this.props.onSelect(id)} style={this.props.selectedNetwork === id ? {
+                             gridRowStart: i+2,
+                        } : {}}>
                         <div className="top">
                             <span>{name}</span>
                             <img src={Arrow} alt=""/>

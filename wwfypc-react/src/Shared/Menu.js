@@ -20,15 +20,14 @@ const MENU_QUERY = gql`
 class hashLink extends Component {
     render() {
         if (this.props.location.pathname === this.props.to) {
-            return <a href={this.props.to} className={this.props.className} onClick={() => {
-                console.log(window.$.scrollify);
-                window.$.scrollify.move(this.props.hash);
-            }}>
+            return <a href={this.props.to + this.props.hash} className={this.props.className}
+                      onClick={() => {window.$.scrollify.move(this.props.hash)}}>
                 {this.props.children}
                 </a>;
         } else {
-            return <Link to={this.props.to + this.props.hash}
-                         className={this.props.className}>{this.props.children}</Link>;
+            return <Link to={this.props.to + this.props.hash} className={this.props.className}>
+                {this.props.children}
+                </Link>;
         }
     }
 }

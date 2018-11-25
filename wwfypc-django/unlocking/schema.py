@@ -7,7 +7,10 @@ from . import models
 
 def get_item(id):
     id, imei = id.split(";", 1)
-    item = models.UnlockingPrice.objects.get(id=from_global_id(id)[1])
+    try:
+        item = models.UnlockingPrice.objects.get(id=from_global_id(id)[1])
+    except models.UnlockingPrice.DoesNotExist:
+        raise Exception("item-nonexistent")
     return main_site.schema.CartItem(
         name=f"Unlocking: {item.device.name}",
         price=item.price,

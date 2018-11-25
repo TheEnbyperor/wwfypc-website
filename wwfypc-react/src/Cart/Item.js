@@ -146,7 +146,6 @@ export default class Items extends Component {
     }
 
     onRemove(cart) {
-        console.log(cart);
         this.props.onUpdate(cart);
     }
 
