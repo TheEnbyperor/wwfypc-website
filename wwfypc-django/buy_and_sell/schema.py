@@ -6,7 +6,10 @@ from . import models
 
 
 def get_item(id):
-    item = models.Item.objects.get(id=id)
+    try:
+        item = models.Item.objects.get(id=id)
+    except models.Item.DoesNotExist:
+        raise Exception("item-nonexistent")
     return main_site.schema.CartItem(
         name=item.name,
         price=item.price,

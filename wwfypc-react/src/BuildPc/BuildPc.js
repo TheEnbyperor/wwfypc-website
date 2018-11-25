@@ -110,7 +110,6 @@ class customise extends Component {
     onOptionSelect(id, evt) {
         const options = this.state.options;
         options[id] = evt.target.value === "null" ? null : evt.target.value;
-        console.log(options);
         this.setState({
             options: options,
         })
@@ -136,7 +135,6 @@ class customise extends Component {
                         data.basePcModel.customisations.forEach(option => {
                             const selectedCustomisation = Object.keys(this.state.options)
                                 .find(elm => elm === option.id);
-                            console.log(selectedCustomisation);
                             if (typeof selectedCustomisation === "undefined" && selectedCustomisation !== null) {
                                 if (typeof option.options[0] !== "undefined") {
                                     customisations.push(option.options[0].id);

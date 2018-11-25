@@ -162,7 +162,7 @@ export default class Cart extends Component {
         super(props);
 
         this.state = {
-            cart: getCart(),
+            cart: [],
             state: 0,
             cartIsReady: false,
         };
@@ -178,7 +178,7 @@ export default class Cart extends Component {
             sectionName : "anchor",
             interstitialSection: ".fp-auto-height",
         });
-        this.cartIsReady();
+        this.onUpdate(getCart());
     }
 
     componentWillUnmount() {
@@ -200,12 +200,16 @@ export default class Cart extends Component {
         let out = [];
         for (let i = 0; i < cart.length; i++) {
             let item = cart[i];
-            const {error} = await client.query({
+            const error = await client.query({
                 query: ITEM_PRICE_QUERY,
                 variables: {type: item.type, id: item.id},
-            });
+            }).then(({error}) => error).catch((error) => error);
             if (error) {
-                if (error.graphQLErrors[0].message === "Item matching query does not exist.") {
+                if (error.graphQLErrors.reduce((prev, err) => {
+                    if (err.message === "item-nonexistent")
+                        return true;
+                    return prev;
+                }, false)) {
                     continue;
                 }
             }

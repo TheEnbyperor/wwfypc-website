@@ -31,7 +31,6 @@ export default class BuyAndSell extends Component {
 
 
     selectCategory(i) {
-        console.log(i, i === this.state.selectedCategory);
         if (i === this.state.selectedCategory) {
             this.setState({
                 selectedCategory: null

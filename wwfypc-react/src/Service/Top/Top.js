@@ -28,7 +28,6 @@ export default class Top extends Component {
                                     if (!(src.startsWith("http://") || src.startsWith("https://"))) {
                                         node.attribs["src"] = BASE_URL + src;
                                     }
-                                    console.log(node);
                                     return convertNodeToElement(node, index, null);
                                 }
                             }

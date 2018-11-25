@@ -11,8 +11,11 @@ import main_site.schema
 
 def pc_id_to_data(id):
     data = json.loads(id)
-    base_pc = models.BasePcModel.objects.get(id=data.get("base"))
-    options = list(map(lambda o: models.CustomisationOption.objects.get(id=o), data.get("options", [])))
+    try:
+        base_pc = models.BasePcModel.objects.get(id=data.get("base"))
+        options = list(map(lambda o: models.CustomisationOption.objects.get(id=o), data.get("options", [])))
+    except (models.Base.DoesNotExist, models.CustomisationOption.DoesNotExist):
+        raise Exception("item-nonexistent")
     return base_pc, options
 
 

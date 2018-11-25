@@ -130,7 +130,6 @@ export default class Payment extends Component {
                         }
                     })
                         .then(({data, error}) => {
-                            console.log(data, error);
                             if (data.createOrder.ok) {
                                 setTimeout(this.props.onSubmit, 500);
                             } else {
