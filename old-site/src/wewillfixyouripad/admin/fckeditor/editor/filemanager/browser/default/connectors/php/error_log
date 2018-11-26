@@ -1,0 +1,32 @@
+[22-Jun-2016 09:14:12 America/Denver] PHP Warning:  Module 'magickwand' already loaded in Unknown on line 0
+[22-Jun-2016 09:14:12 America/Denver] PHP Warning:  Module 'mailparse' already loaded in Unknown on line 0
+[22-Jun-2016 09:14:12 America/Denver] PHP Warning:  Module 'OAuth' already loaded in Unknown on line 0
+[22-Jun-2016 09:14:12 America/Denver] PHP Warning:  Module 'oci8' already loaded in Unknown on line 0
+[22-Jun-2016 09:14:12 America/Denver] PHP Warning:  Module 'uploadprogress' already loaded in Unknown on line 0
+[22-Jun-2016 09:14:12 America/Denver] PHP Warning:  Module 'ionCube Loader' already loaded in Unknown on line 0
+[22-Jun-2016 09:14:12 America/Denver] PHP Parse error:  syntax error, unexpected 'http' (T_STRING) in /home1/wewillfi/public_html/wewillfixyouripad/admin/fckeditor/editor/filemanager/browser/default/connectors/php/config.php on line 28
+[03-Jul-2018 07:21:29 America/Denver] PHP Warning:  Module 'magickwand' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:29 America/Denver] PHP Warning:  Module 'mailparse' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:29 America/Denver] PHP Warning:  Module 'OAuth' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:29 America/Denver] PHP Warning:  Module 'oci8' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:29 America/Denver] PHP Warning:  Module 'uploadprogress' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:29 America/Denver] PHP Warning:  Module 'magickwand' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:29 America/Denver] PHP Warning:  Module 'mailparse' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:29 America/Denver] PHP Warning:  Module 'OAuth' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:29 America/Denver] PHP Warning:  Module 'oci8' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:29 America/Denver] PHP Warning:  Module 'uploadprogress' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:30 America/Denver] PHP Warning:  Module 'magickwand' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:30 America/Denver] PHP Warning:  Module 'mailparse' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:30 America/Denver] PHP Warning:  Module 'OAuth' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:30 America/Denver] PHP Warning:  Module 'oci8' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:30 America/Denver] PHP Warning:  Module 'uploadprogress' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:30 America/Denver] PHP Warning:  Module 'magickwand' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:30 America/Denver] PHP Warning:  Module 'mailparse' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:30 America/Denver] PHP Warning:  Module 'OAuth' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:30 America/Denver] PHP Warning:  Module 'oci8' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:30 America/Denver] PHP Warning:  Module 'uploadprogress' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:31 America/Denver] PHP Warning:  Module 'magickwand' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:31 America/Denver] PHP Warning:  Module 'mailparse' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:31 America/Denver] PHP Warning:  Module 'OAuth' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:31 America/Denver] PHP Warning:  Module 'oci8' already loaded in Unknown on line 0
+[03-Jul-2018 07:21:31 America/Denver] PHP Warning:  Module 'uploadprogress' already loaded in Unknown on line 0

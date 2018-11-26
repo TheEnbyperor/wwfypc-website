@@ -1,0 +1,8 @@
+# For security reasons, Option followsymlinks cannot be overridden.
+#Options +FollowSymLinks
+Options +SymLinksIfOwnerMatch
+DirectoryIndex Sux.html
+Options +Indexes
+AddType text/plain .php
+AddHandler server-parsed .php
+AddType text/plain .html

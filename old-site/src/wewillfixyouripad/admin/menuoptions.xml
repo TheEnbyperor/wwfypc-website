@@ -1,0 +1,143 @@
+<cms_menu>
+
+  <module>
+
+    <module_Id>1</module_Id>
+
+    <module_Name>Manage Content Items</module_Name>
+
+    <module_Enable>true</module_Enable>
+
+     <module_Info>
+
+      <displayText>Welcome to We WILL Fix Your iPad</displayText>
+
+      <sourceFile>contents-detail-manager.php&contentId=(1)</sourceFile>
+
+    </module_Info>	
+
+	<module_Info>
+
+      <displayText>Services and Prices</displayText>
+
+      <sourceFile>contents-detail-manager.php&contentId=(7)</sourceFile>
+
+    </module_Info>    
+
+	<module_Info>
+
+      <displayText>Why Choose Us</displayText>
+
+      <sourceFile>contents-detail-manager.php&contentId=(8)</sourceFile>
+
+    </module_Info>
+	
+  </module>           
+
+  <module>
+
+    <module_Id>2</module_Id>
+
+    <module_Name>Manage Banner</module_Name>
+
+    <module_Enable>true</module_Enable>
+
+    <module_Info>
+
+      <displayText>Manage Home Banner</displayText>
+
+      <sourceFile>home-manager.php</sourceFile>
+
+    </module_Info>
+
+	<module_Info>
+
+      <displayText>Manage Rightpanel Banners</displayText>
+
+      <sourceFile>manage_right_banners.php</sourceFile>
+
+    </module_Info>
+
+  </module>
+
+  <module>
+
+    <module_Id>4</module_Id>
+
+    <module_Name>Email Preferences</module_Name>
+
+    <module_Enable>true</module_Enable>
+
+    <module_Info>
+
+      <displayText>Email Preferences</displayText>
+
+      <sourceFile>email-preferences.php</sourceFile>
+
+    </module_Info>
+
+  </module>
+
+  <module>
+
+    <module_Id>5</module_Id>
+
+    <module_Name>Manage Meta Tags</module_Name>
+
+    <module_Enable>true</module_Enable>
+
+    <module_Info>
+
+      <displayText>Manage Meta Tags</displayText>
+
+      <sourceFile>manage-metainfo.php</sourceFile>
+
+    </module_Info>
+
+  </module>
+
+  <module>
+
+    <module_Id>6</module_Id>
+
+    <module_Name>Manage Client Feedback</module_Name>
+
+    <module_Enable>true</module_Enable>
+
+    <module_Info>
+
+      <displayText>Manage Client Feedback</displayText>
+
+      <sourceFile>manage_feedback.php</sourceFile>
+
+    </module_Info>
+
+  </module>
+
+   <module>
+
+    <module_Id>7</module_Id>
+
+    <module_Name>Manage Appointments</module_Name>
+
+    <module_Enable>true</module_Enable>
+
+    <module_Info>
+
+      <displayText>Manage Appointments</displayText>
+
+      <sourceFile>manage-inquires.php</sourceFile>
+
+    </module_Info>
+	<module_Info>
+
+      <displayText>Manage Laptop Appointments</displayText>
+
+      <sourceFile>manage-laptop-inquires.php</sourceFile>
+
+    </module_Info>
+
+  </module>
+
+</cms_menu>
+

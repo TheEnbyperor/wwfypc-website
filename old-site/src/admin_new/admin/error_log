@@ -1,0 +1,205 @@
+[01-Mar-2014 06:43:48] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 06:47:14] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 06:47:21] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 06:49:02] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 06:49:18] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 06:49:21] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 06:50:28] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 06:51:45] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 06:52:00] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 06:53:43 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/modified/admin/lib/authentication.class.php on line 75
+[01-Mar-2014 06:53:43 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 06:54:30 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 06:54:37 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:02:06 America/Denver] PHP Notice:  Undefined index: sessionId in /home1/wewillf2/public_html/modified/admin/require/sessions.inc.php on line 7
+[01-Mar-2014 07:02:06 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:02:06 America/Denver] PHP Notice:  Undefined index: userId in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 37
+[01-Mar-2014 07:02:06 America/Denver] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, integer given in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 43
+[01-Mar-2014 07:02:06 America/Denver] PHP Notice:  Uninitialized string offset: 0 in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 335
+[01-Mar-2014 07:03:15 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:17:48 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:33:54 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:34:17 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:34:49 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:35:02 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:35:11 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:35:21 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:35:34 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:35:47 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:35:56 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:36:20 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:37:06 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:37:06 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:37:07 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:37:07 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:37:07 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:38:20 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 07:38:35 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 08:20:40 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:28:29] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 43
+[01-Mar-2014 10:29:18] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:30:06] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:30:55] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 43
+[01-Mar-2014 10:31:02] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:31:06] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:31:11] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:31:41] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:31:55] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:32:04] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:32:25] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:33:04] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:33:09] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:34:10] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:34:21] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:34:30] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home1/wewillf2/public_html/modified/admin/lib/controller.class.php:163) in /home1/wewillf2/public_html/modified/admin/lib/controller.class.php on line 81
+[01-Mar-2014 10:35:29 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/modified/admin/lib/authentication.class.php on line 75
+[01-Mar-2014 10:35:29 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:35:49 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:36:16 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/modified/admin/lib/authentication.class.php on line 75
+[01-Mar-2014 10:36:16 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:36:48 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:37:42 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/modified/admin/lib/authentication.class.php on line 75
+[01-Mar-2014 10:37:46 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:37:52 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:37:54 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:39:45 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:41:36 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:43:10 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:45:36 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:45:47 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:46:16 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:46:24 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:46:32 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:46:38 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:46:45 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:46:51 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:47:00 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:47:07 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:47:24 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:47:33 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:47:55 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:48:12 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:48:18 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:48:41 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:48:51 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:49:05 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:49:13 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:49:28 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:49:38 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:49:45 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:50:38 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:51:47 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:51:49 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:53:37 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:56:51 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:59:19 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:59:37 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 10:59:42 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:01:33 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:01:44 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:02:19 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:03:01 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:03:32 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:03:46 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:03:53 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:04:09 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:04:15 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:04:32 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:04:44 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:06:04 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:07:30 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/modified/admin/lib/authentication.class.php on line 75
+[01-Mar-2014 11:07:31 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:08:25 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:08:32 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:08:40 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:09:45 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:10:51 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:11:25 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:12:40 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:13:19 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:13:50 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:13:53 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:14:50 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:14:54 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:14:59 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:15:05 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:15:12 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:15:49 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:15:58 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:16:10 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:16:26 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:16:40 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:19:58 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:20:48 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:20:59 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:21:08 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:21:15 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:21:45 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:21:48 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:22:25 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:22:41 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:23:17 America/Denver] PHP Notice:  Undefined index: sessionId in /home1/wewillf2/public_html/modified/admin/require/sessions.inc.php on line 7
+[01-Mar-2014 11:23:17 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:23:17 America/Denver] PHP Notice:  Undefined index: userId in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 37
+[01-Mar-2014 11:23:17 America/Denver] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, integer given in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 43
+[01-Mar-2014 11:24:00 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/modified/admin/lib/authentication.class.php on line 75
+[01-Mar-2014 11:24:01 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:24:24 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:25:04 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:25:32 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:25:42 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:25:51 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:26:40 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:27:26 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:58:20 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 11:59:37 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 12:00:24 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 12:03:22 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 12:03:33 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 12:05:41 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 12:05:50 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 12:06:07 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[01-Mar-2014 12:07:10 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 09:34:59 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/modified/admin/lib/authentication.class.php on line 75
+[03-Mar-2014 09:35:00 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 09:35:23 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 09:35:54 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 09:36:12 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 09:36:36 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 09:36:49 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 09:36:56 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 09:37:34 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 09:37:41 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 09:37:49 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 10:53:09 America/Denver] PHP Notice:  Undefined index: sessionId in /home1/wewillf2/public_html/modified/admin/require/sessions.inc.php on line 7
+[03-Mar-2014 10:53:09 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 10:53:09 America/Denver] PHP Notice:  Undefined index: userId in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 37
+[03-Mar-2014 10:53:09 America/Denver] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, integer given in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 43
+[03-Mar-2014 11:56:31 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/modified/admin/lib/authentication.class.php on line 75
+[03-Mar-2014 11:56:31 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 11:58:04 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 11:58:16 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 11:58:35 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[03-Mar-2014 11:58:38 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[15-Mar-2014 09:03:23 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/modified/admin/lib/authentication.class.php on line 75
+[15-Mar-2014 09:03:24 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[15-Mar-2014 09:03:47 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[15-Mar-2014 09:03:56 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[15-Mar-2014 09:04:24 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[18-Mar-2014 21:47:00 America/Denver] PHP Notice:  Undefined index: sessionId in /home1/wewillf2/public_html/modified/admin/require/sessions.inc.php on line 7
+[18-Mar-2014 21:47:00 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[18-Mar-2014 21:47:00 America/Denver] PHP Notice:  Undefined index: userId in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 37
+[18-Mar-2014 21:47:00 America/Denver] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, integer given in /home1/wewillf2/public_html/modified/admin/require/left-menu.inc.php on line 43
+[19-Mar-2014 11:02:00 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/modified/admin/lib/authentication.class.php on line 75
+[19-Mar-2014 11:02:02 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/modified/admin/control-panel.php on line 66
+[19-Mar-2014 11:10:24 America/Denver] PHP Notice:  Undefined property: stdClass::$userType in /home1/wewillf2/public_html/admin_bk_new/admin/lib/authentication.class.php on line 75
+[19-Mar-2014 11:10:24 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/admin_bk_new/admin/control-panel.php on line 66
+[19-Mar-2014 11:22:01 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/admin_bk_new/admin/control-panel.php on line 66
+[19-Mar-2014 11:40:55 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/admin_bk_new/admin/control-panel.php on line 66
+[19-Mar-2014 13:16:08 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/admin_new/admin/control-panel.php on line 66
+[19-Mar-2014 13:22:54 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/admin_new/admin/control-panel.php on line 66
+[19-Mar-2014 15:04:30 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/admin_new/admin/control-panel.php on line 66
+[19-Mar-2014 19:59:55 America/Denver] PHP Notice:  Undefined index: sessionId in /home1/wewillf2/public_html/admin_new/admin/require/sessions.inc.php on line 7
+[19-Mar-2014 19:59:55 America/Denver] PHP Notice:  Undefined index: DetailMode in /home1/wewillf2/public_html/admin_new/admin/control-panel.php on line 66
+[19-Mar-2014 19:59:56 America/Denver] PHP Notice:  Undefined index: userId in /home1/wewillf2/public_html/admin_new/admin/require/left-menu.inc.php on line 37
+[19-Mar-2014 19:59:56 America/Denver] PHP Warning:  mysql_num_rows() expects parameter 1 to be resource, integer given in /home1/wewillf2/public_html/admin_new/admin/require/left-menu.inc.php on line 43

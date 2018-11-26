@@ -1,0 +1,102 @@
+@charset "utf-8";
+
+/* v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+/* CSS Document */
+body{ font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;}
+
+#socials{ 
+	width:150px; 
+	height:38px;  
+	margin:0 auto; 
+	margin-bottom:20px; 
+	background:url(arrow_invert.png) no-repeat 20px 0px #bc1d1d; 
+	padding-top:13px;
+	display:block; 
+	text-align:center;
+	
+	text-decoration:none;
+	}
+.abierto{background:url(arrow_invert1.png) no-repeat 20px 0px #bc1d1d!important; }
+
+#header{ text-align:center; padding:20px 0 20px 0;}
+
+#content{ padding:20px 5% 25px 5%; overflow:hidden;}
+#content h2{ font-size:14px; text-transform:uppercase; margin-bottom:10px;}
+#content h1{ font-size:18px; margin-bottom:10px; text-transform:uppercase; }
+#content p{ font-size:15px;line-height:18px;}
+#content p img{ float:left; padding:1px; margin-right:10px; }
+
+#menu .buttons{ height:50px; width:90%; margin-top:1px;  padding:0 5% 0 5%;}
+#menu .buttons a{  text-decoration:none; font-size:14px; display:block; width:100%; background:url(bullet.png) no-repeat center right; line-height:50px;}
+#menu .buttons img{ margin-right:20px; float:left; height:50px;}
+
+#footer{ text-align:center;  font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:11px; line-height:28px;}
+#footer a{}
+
+.separators{ width:100%; height:1px;}
+
+
+/* onbile dinamic styles */
+
+.bodybk{background-color:#F5F5F5;}
+.cmainbk{color:#F5F5F5;}
+.mainbk{ background-color:#445E63;}
+.icobk{color:#2C4A33;}
+.titlecolor{ color:#2C4A33;}
+.txtcolor{ color:#040F05;}
+.uppertitlecolor{ color:#2C4A33;}
+.headlinecolor{color:#2C4A33;}

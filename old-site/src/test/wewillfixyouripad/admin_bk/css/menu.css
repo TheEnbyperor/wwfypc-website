@@ -1,0 +1,94 @@
+.sdmenu {
+    width: 100%;
+    font-family:Tahoma;
+    font-size: 11px;
+    padding-bottom: 10px;
+/*    background: url(bottom.gif) no-repeat  right bottom; */
+    color:#333333;
+}
+
+.sdmenu .title, .sdmenu .titlehidden{
+    display: block;
+	cursor:pointer;
+    padding-bottom:08px;
+    font-weight: bold;
+    color: #002a5e;
+    background: #FFF url(../images/title.gif) repeat-x;
+}
+.sdmenu .title1, .sdmenu .titlehidden{
+    display: block;
+    padding-bottom:08px;
+    font-weight: bold;
+    color: #002a5e;
+    background: #FFF url(../images/title.gif) repeat-x;
+}
+
+.sdmenu .title {
+    border-bottom: 1px solid #EEEEEE;
+}
+
+.sdmenu .arrow {
+	margin-left: 0px;
+    margin-right: 15px;
+}
+.sdmenu .arrow1 {
+	margin-left: 0px;
+    margin-right: 15px;
+}
+.sdmenu .titlehidden {
+    border-bottom: none;
+}
+
+.sdmenu #top {
+	border-bottom:1px solid #EEEEEE;
+	
+/*    background: url(../images/nav_bg.jpg) repeat-x;
+	border-bottom:1px solid #FFFFFF; */
+}
+.sdmenu #top1 {
+	border-bottom:1px solid #EEEEEE;
+/*    background: url(../images/nav_bg.jpg) repeat-x; 
+	border-bottom:1px solid #FFFFFF; */
+}
+
+.sdmenu .submenu {
+    overflow: hidden;
+	
+}
+.sdmenu .submenu1 {
+    overflow: hidden;
+}
+.sdmenu .submenu a {
+	padding-left:14px;
+	padding-top:5px; 
+	height:24px;
+	line-height:24px;
+    text-indent: 10px;
+	font-family:Tahoma;
+	font-size:11px;
+    display: block;
+    border-bottom: 1px solid #EEEEEE;
+    color: #002a5e;
+    text-decoration: none;
+/*	background : url(../images/sublink_arrow.jpg) no-repeat left center; */
+}
+
+.sdmenu .submenu a:hover {
+/*    background : url(../images/sublink_arrow.jpg) no-repeat left center;*/
+    color: #FFFFF;
+    background-color:#F4F4F4;
+}
+
+/* my css */
+
+.navBg {
+/*	background-image:url(../images/nav_bg.jpg); */
+	line-height:26px;
+}
+.navTxt {
+	font-family:Tahoma;
+	font-size:11px;
+	color:#002a5e;
+	font-weight:bold;
+	text-decoration:none;
+}

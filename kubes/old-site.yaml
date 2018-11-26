@@ -1,0 +1,52 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: old-site
+  namespace: website
+  labels:
+    app: old-site
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  selector:
+    app: old-site
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: old-site
+  namespace: website
+spec:
+  selector:
+    matchLabels:
+      app: old-site
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: old-site
+    spec:
+      containers:
+      - name: old-site
+        image: evilben/wwfypc-old-site:(hash)
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        env:
+        - name: DB_HOST
+          value: mysql.kube-system
+        - name: DB_USER
+          value: website-old
+        - name: DB_NAME
+          value: website-old
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass-old
+              key: pass
+
+
+

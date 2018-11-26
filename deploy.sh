@@ -5,13 +5,16 @@ HASH=`git log --pretty=format:'%H' -n 1`
 docker build -t evilben/wwfypc-django:$HASH wwfypc-django
 docker build -t evilben/wwfypc-react:$HASH wwfypc-react
 docker build -t evilben/wwfypc-nginx:$HASH config/nginx
+docker build -t evilben/wwfypc-old-site:$HASH old-site
 docker push evilben/wwfypc-react:$HASH
 docker push evilben/wwfypc-django:$HASH
 docker push evilben/wwfypc-nginx:$HASH
+docker push evilben/wwfypc-old-site:$HASH
 cat wwfypc-react/kubes/deploy.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
 cat kubes/gluster.yaml | kubectl apply -f -
 cat kubes/django.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
 cat kubes/nginx.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
+cat kubes/old-site.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
 cat filebrowser/gluster.yaml | kubectl apply -f -
 cat filebrowser/deployment.yaml | kubectl apply -f -
 kubectl -n website-test rollout status deployment/django

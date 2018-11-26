@@ -1,0 +1,6 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^ipad\.wewillfixyourpc\.co\.uk$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.ipad\.wewillfixyourpc\.co\.uk$
+RewriteRule ^/?$ "http\:\/\/wewillfixyourpc\.co\.uk\/ipad\/" [R=301,L]
+

