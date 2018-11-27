@@ -1,6 +1,5 @@
 <?php 
 $agent = $_SERVER['HTTP_USER_AGENT'];
-$profile = $_SERVER['HTTP_PROFILE'];
 require_once('mobile_device_detect.php');
 mobile_device_detect(true,false,true,true,true,true,true,'http://mobile.wewillfixyouripad.co.uk/',false);
 include_once ("includes/includes.inc.php");

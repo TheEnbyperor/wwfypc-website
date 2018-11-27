@@ -2,7 +2,7 @@
 
 ob_start();
 
-include_once("../admin/require/webconfig.inc_2.php");
+include_once("../admin/require/webconfig.inc.php");
 
 include_once("../admin/require/sessions.inc_2.php");
 

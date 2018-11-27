@@ -2,7 +2,7 @@
 #ini_set('display_errors',1);
 #ini_set('display_warnings',1);
 
-include_once("admin/require/webconfig.inc_2.php");
+include_once("admin/require/webconfig.inc.php");
 include_once("admin/lib/connection-manager-mysql.class.php");
 include_once("admin/lib/query-builder-mysql.class.php");
 //include_once("admin/lib/Showpagecontents.class.php");

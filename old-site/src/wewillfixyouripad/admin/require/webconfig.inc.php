@@ -3,7 +3,7 @@
 session_start(); 
 
 // ----- DATABASE CONNECTION INFORMATION -----
-define('SERVER_ADDRESS','localhost');
+define('SERVER_ADDRESS', getenv('DB_HOST'));
 define('SMTP_SERVER','localhost');
 define('MAILER','smtp');
 define('MAILTO_BCC','');
@@ -13,26 +13,25 @@ define('MAILTO_TITLE','Admin');
  * Database selection to use.
  */
 
-//define('DATABASE','wewillf2_sabritech');
-define('DATABASE','wewillfi_wewillfixyouripad');
+define('DATABASE', getenv('DB_NAME_IPAD'));
 
 /**
  * Username to connect the Database.
  */
 
-define('USERNAME','wewillfi_wewillf');
+define('USERNAME', getenv('DB_NAME'));
 
 /**
  * Password to Connect Database.
  */
 
-define('PASSWORD','d3f3nd3r');
+define('PASSWORD', getenv('DB_PASS'));
 
 /**
  * Enter port to Connect Database.
  */
 
-define('PORT','3306');
+define('PORT', 3306);
 
 // ----- WEBSITE DISPLAY INFORMATION -----------------
 

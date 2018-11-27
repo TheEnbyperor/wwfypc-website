@@ -1,3 +1,46 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: website
+  namespace: website
+  labels:
+    app: website
+  annotations:
+    ingress.kubernetes.io/referrer-policy: "strict-origin-when-cross-origin"
+    ingress.kubernetes.io/browser-xss-filter: "true"
+    ingress.kubernetes.io/content-type-nosniff: "true"
+spec:
+  rules:
+  - host: wewillfixyourpc.co.uk
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: old-site
+          servicePort: 80
+#  tls:
+#  - secretName: nginx-tls
+#    hosts:
+#    - api.test.wewillfixyourpc.co.uk
+#---
+#apiVersion: certmanager.k8s.io/v1alpha1
+#kind: Certificate
+#metadata:
+#  name: main-cert
+#  namespace: website
+#spec:
+#  secretName: main-tls
+#  issuerRef:
+#    name: letsencrypt-prod
+#    kind: ClusterIssuer
+#  commonName: wewillfixyourpc.co.uk
+#  acme:
+#    config:
+#    - http01:
+#        ingressClass: nginx
+#      domains:
+#      - wewillfixyourpc.co.uk
+---
 kind: Service
 apiVersion: v1
 metadata:
@@ -42,6 +85,8 @@ spec:
           value: website-old
         - name: DB_NAME
           value: website-old
+        - name: DB_NAME_IPAD
+          value: website-old-ipad
         - name: DB_PASS
           valueFrom:
             secretKeyRef:

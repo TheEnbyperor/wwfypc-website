@@ -1,6 +1,6 @@
 <?php
 
-include_once("../admin/require/webconfig.inc_2.php");
+include_once("../admin/require/webconfig.inc.php");
 
 ?>
 
