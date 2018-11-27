@@ -24,28 +24,34 @@ spec:
     http: *website_http
   - host: www.wewillfixyouripad.co.uk
     http: *website_http
-#  tls:
-#  - secretName: main-tls
-#    hosts:
-#    - api.test.wewillfixyourpc.co.uk
-#---
-#apiVersion: certmanager.k8s.io/v1alpha1
-#kind: Certificate
-#metadata:
-#  name: main-cert
-#  namespace: website
-#spec:
-#  secretName: main-tls
-#  issuerRef:
-#    name: letsencrypt-prod
-#    kind: ClusterIssuer
-#  commonName: wewillfixyourpc.co.uk
-#  acme:
-#    config:
-#    - http01:
-#        ingressClass: nginx
-#      domains:
-#      - wewillfixyourpc.co.uk
+  tls:
+  - secretName: main-tls
+    hosts:
+    - wewillfixyourpc.co.uk
+    - www.wewillfixyourpc.co.uk
+    - wewillfixyouripad.co.uk
+    - www.wewillfixyouripad.co.uk
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: main-cert
+  namespace: website
+spec:
+  secretName: main-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: wewillfixyourpc.co.uk
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - wewillfixyourpc.co.uk
+      - www.wewillfixyourpc.co.uk
+      - wewillfixyouripad.co.uk
+      - www.wewillfixyouripad.co.uk
 ---
 kind: Service
 apiVersion: v1
