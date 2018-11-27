@@ -1,5 +1,4 @@
 <?php
-phpinfo();
 $agent = $_SERVER['HTTP_USER_AGENT'];
 require_once('mobile_device_detect.php');
 mobile_device_detect(true,false,true,true,true,true,true,'http://mobile.wewillfixyourpc.co.uk/',false);
