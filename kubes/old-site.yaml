@@ -43,6 +43,10 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
   commonName: wewillfixyourpc.co.uk
+  dnsNames:
+  - www.wewillfixyourpc.co.uk
+  - wewillfixyouripad.co.uk
+  - www.wewillfixyouripad.co.uk
   acme:
     config:
     - http01:
