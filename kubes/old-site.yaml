@@ -65,7 +65,7 @@ spec:
       - mobile.wewillfixyourpc.co.uk
       - wewillfixyouripad.co.uk
       - www.wewillfixyouripad.co.uk
-      - moblie.wewillfixyouripad.co.uk
+      - mobile.wewillfixyouripad.co.uk
 ---
 kind: Service
 apiVersion: v1
