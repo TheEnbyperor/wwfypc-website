@@ -1,8 +1,8 @@
 <?php
-$host = "localhost";
-$user = "wewillfi_wewillf";
-$pass = "d+Q,37@?AicB=c6";
-$db = "wewillfi_wewillfixyourpc";
+$host = getenv('DB_HOST');
+$user = getenv('DB_USER');
+$pass = getenv('DB_PASS');
+$db = getenv('DB_NAME');
 
 $conn = mysql_connect($host, $user, $pass);
 if(!$conn){

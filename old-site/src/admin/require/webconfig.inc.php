@@ -19,7 +19,7 @@ define('DATABASE', getenv('DB_NAME'));
  * Username to connect the Database.
  */
 
-define('USERNAME', getenv('DB_NAME'));
+define('USERNAME', getenv('DB_USER'));
 
 /**
  * Password to Connect Database.
