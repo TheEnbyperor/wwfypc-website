@@ -98,12 +98,23 @@ spec:
       labels:
         app: old-site
     spec:
+      volumes:
+        - name: mail
+          secret:
+            secretName: email-pass
+            items:
+              - key: pass
+                path: email_password
       containers:
       - name: old-site
         image: evilben/wwfypc-old-site:(hash)
         ports:
         - containerPort: 80
         imagePullPolicy: Always
+        volumeMounts:
+          - name: mail
+            mountPath: "/secrets/email"
+            readOnly: true
         env:
         - name: DB_HOST
           value: mysql.kube-system

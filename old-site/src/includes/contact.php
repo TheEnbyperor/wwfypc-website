@@ -36,8 +36,9 @@ if(isset($_POST) && (isset($_POST['contactusfrm']) == 1))
 
 		// Additional headers
 		/*
-		$headers .= 'From: '.$txtName.' <'. $txtEmail.'>' . "\r\n";
-		$headers .= 'Cc: '.$cc. "\r\n";       // just comment this linke if you dont want to use it 
+		$headers .= 'From: '.$txtName.' <noreply@wewillfixyourpc.co.uk>\r\n";
+		$headers .= 'Reply-to: '. $txtEmail."\r\n";
+		$headers .= 'Cc: '.$cc. "\r\n";       // just comment this linke if you dont want to use it
 		$headers .= 'Bcc: '.$cc . "\r\n";    // just comment this linke if you dont want to use it 
 		*/
 
