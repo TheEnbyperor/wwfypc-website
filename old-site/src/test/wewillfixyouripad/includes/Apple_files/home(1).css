@@ -1,6 +1,0 @@
-@media only screen and (min-device-width:320px) and (max-device-width:480px) and (orientation:portrait) { /* iphone portrait */
-	.cta { height:60px; }
-	.cta a { display:block; clear:both; margin-right:auto; margin-left:auto; height:60px; }
-	.cta a:hover,
-	.cta a:active { margin-top:-61px; }
-}

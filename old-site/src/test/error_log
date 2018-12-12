@@ -1,5 +1,0 @@
-[18-Jan-2016 04:15:33 America/Denver] PHP Notice:  Undefined variable: output in /home1/wewillfi/public_html/test/sample1.php on line 54
-[18-Jan-2016 04:15:33 America/Denver] PHP Notice:  Undefined variable: flags in /home1/wewillfi/public_html/test/sample1.php on line 56
-[18-Jan-2016 04:23:14 America/Denver] PHP Notice:  Undefined variable: output in /home1/wewillfi/public_html/test/sample1.php on line 54
-[18-Jan-2016 04:23:14 America/Denver] PHP Notice:  Undefined variable: flags in /home1/wewillfi/public_html/test/sample1.php on line 56
-[18-Jan-2016 04:23:24 America/Denver] PHP Warning:  file_get_contents(): Filename cannot be empty in /home1/wewillfi/public_html/test/sample1.php on line 14

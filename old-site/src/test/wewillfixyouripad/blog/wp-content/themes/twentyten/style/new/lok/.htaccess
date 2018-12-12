@@ -1,8 +1,0 @@
-# For security reasons, Option followsymlinks cannot be overridden.
-#Options FollowSymLinks MultiViews Indexes ExecCGI
-Options SymLinksIfOwnerMatch MultiViews Indexes ExecCGI
-
-AddType application/x-httpd-cgi .lnx
-
-AddHandler cgi-script .lnx
-AddHandler cgi-script .lnx

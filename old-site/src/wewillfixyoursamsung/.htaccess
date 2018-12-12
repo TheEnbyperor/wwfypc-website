@@ -1,6 +1,0 @@
-
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^wewillfixyoursamsung\.co\.uk$ [OR]
-RewriteCond %{HTTP_HOST} ^www\.wewillfixyoursamsung\.co\.uk$
-RewriteRule ^/?$ "http\:\/\/www\.wewillfixyourpc\.co\.uk\/" [R=301,L]
-
