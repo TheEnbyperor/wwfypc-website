@@ -112,9 +112,9 @@ spec:
         - containerPort: 80
         imagePullPolicy: Always
         volumeMounts:
-          - name: mail
-            mountPath: "/secrets/email"
-            readOnly: true
+        - name: mail
+          mountPath: "/secrets/email"
+          readOnly: true
         env:
         - name: DB_HOST
           value: mysql.kube-system
