@@ -35,6 +35,8 @@ if(isset($_POST) && (isset($_POST['frmLappointment']) == 22))
 		//echo $semail;exit;
 		
 	}
+
+	$to="wewillfixyourpc@gmail.com";
 	
 	$emailBody 	= appointmentFrm($quotefrm);
 	$semail	   	= $quotefrm[0]['app_email'];
@@ -43,7 +45,7 @@ if(isset($_POST) && (isset($_POST['frmLappointment']) == 22))
 	//echo $emailInfo;exit;
 	$subject="Sell Your Laptop Quote";
 		//echo "<br /><br /><br />".$emailBody ; die();
-	if($semail == '')
+	/*if($semail == '')
 	{
 		$semail = 'neil@wewillfixyourpc.co.uk';
 	}
@@ -59,7 +61,23 @@ if(isset($_POST) && (isset($_POST['frmLappointment']) == 22))
 		$emailObj->SendEmail($semail, $emailInfo->email , $subject , $emailBody, "");
 		$message = "Thank you. Your Request has been sent. We will be in touch shortly with your quote. If urgent, then please call us now on 02920 758299.";
 		//$message = "Error sending please re-try.";			
-	}
+	}*/
+	$txtName			= prepearString(trim($_POST['app_name']));
+$txtEmail			= prepearString(trim($_POST['app_email']));
+// To send HTML mail, the Content-type header must be set
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+$headers .= 'From: '.$txtName." <noreply@noreply.wewillfixyourpc.co.uk>\r\n";
+$headers .= 'Reply-to: '. $txtEmail."\r\n";
+// Mail it
+$mail=mail($to, $subject, $emailBody, $headers);
+
+if($mail){
+$message='Thank you. Your Request has been sent. We will be in touch shortly with your quote. If urgent, then please call us now on 02920 766039';
+}
+else {
+$message= 'Error sending please re-try';
+}
 }
 ## Get Page Content ##
 $rsPage = $db->select("SELECT * FROM tbl_pages WHERE pageId='102' LIMIT 1");

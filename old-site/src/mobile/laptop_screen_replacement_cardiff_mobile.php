@@ -54,11 +54,12 @@ if(isset($_POST) && (isset($_POST['frmLappointment']) == 22))
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
 		// Additional headers
-		/*
-		$headers .= 'From: '.$txtName.' <'. $txtEmail.'>' . "\r\n";
+
+		$headers .= 'From: '.$txtName." <noreply@noreply.wewillfixyourpc.co.uk>\r\n";
+		$headers .= 'Reply-to: '. $txtEmail."\r\n";
 		$headers .= 'Cc: '.$cc. "\r\n";       // just comment this linke if you dont want to use it 
 		$headers .= 'Bcc: '.$cc . "\r\n";    // just comment this linke if you dont want to use it 
-		*/
+
 
 		// Mail it
 		mail($to, $subject, $body, $headers);	

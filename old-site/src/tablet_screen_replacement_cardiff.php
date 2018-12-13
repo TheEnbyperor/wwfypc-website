@@ -65,10 +65,14 @@ if(isset($_POST) && (isset($_POST['frmLappointment']) == 22))
 		$message = "Thank you. Your Request has been sent. We will be in touch shortly with your quote. If urgent, then please call us now on 02920 766039.";
 		//$message = "Error sending please re-try.";			
 	}*/
+
+$txtName			= prepearString(trim($_POST['app_name']));
+$txtEmail			= prepearString(trim($_POST['app_email']));
 // To send HTML mail, the Content-type header must be set
 $headers  = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-// Additional headers
+$headers .= 'From: '.$txtName." <noreply@noreply.wewillfixyourpc.co.uk>\r\n";
+$headers .= 'Reply-to: '. $txtEmail."\r\n";
 // Mail it
 $mail=mail($to, $subject, $emailBody, $headers);
 
