@@ -14,10 +14,8 @@ if(isset($_POST) && (isset($_POST['contactusfrm']) == 1))
 			
 	$values 		= "'$txtName', '$txtPhone', '$txtEmail', '$message' ";
 	
-	
-		$message = $message;
+
 		$subject="Query from PC Home page";
-		$semail = 'Neil <neil@wewillfixyourpc.co.uk>'; 
 
 		$bcc = 'wewillfixyourpc@gmail.com';
 		$cc = 'neil@cardifftec.co.uk';		// for testing again using cc and bcc
@@ -35,12 +33,11 @@ if(isset($_POST) && (isset($_POST['contactusfrm']) == 1))
 	        $headers .= "Importance: High\n";
 
 		// Additional headers
-		/*
 		$headers .= 'From: '.$txtName.' <noreply@noreply.wewillfixyourpc.co.uk>\r\n";
 		$headers .= 'Reply-to: '. $txtEmail."\r\n";
 		$headers .= 'Cc: '.$cc. "\r\n";       // just comment this linke if you dont want to use it
 		$headers .= 'Bcc: '.$cc . "\r\n";    // just comment this linke if you dont want to use it 
-		*/
+
 
 		// Mail it
 		mail($to, $subject, $body, $headers);	
