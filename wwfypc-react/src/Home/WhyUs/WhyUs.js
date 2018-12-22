@@ -22,6 +22,8 @@ export default class WhyUs extends Component {
                             if (loading) return null;
                             if (error) return <p>Error</p>;
 
+                            setTimeout(window.$.scrollify.update, 500);
+
                             return <p dangerouslySetInnerHTML={{__html: data.siteConfig.whyChooseUs}} />;
                         }}
                     </Query>

@@ -9,9 +9,9 @@
   max-width: 1200px;
   padding: 20px 0;
 
-    @supports (display: grid) {
-      display: flex;
-    }
+  @supports (display: grid) {
+    display: flex;
+  }
 
   .other {
     clear: both;
@@ -51,6 +51,10 @@
     grid-gap: 13px;
     width: 100%;
     align-items: start;
+
+    @media (max-width: 800px) {
+      grid-template-columns: 1fr;
+    }
 
     @mixin text-box {
       padding: 13px;

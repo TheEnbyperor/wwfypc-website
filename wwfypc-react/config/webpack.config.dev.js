@@ -1,6 +1,7 @@
 'use strict';
 
 const autoprefixer = require('autoprefixer');
+const postcssPresetEnv = require('postcss-preset-env');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -170,9 +171,18 @@ module.exports = {
                                     ident: 'postcss',
                                     plugins: () => [
                                         require('postcss-flexbugs-fixes'),
+                                        postcssPresetEnv({
+                                            stage: 1,
+                                            browsers: [
+                                                'cover 99.9%',
+                                                'last 4 versions',
+                                                'Firefox ESR',
+                                                'not ie < 9', // React doesn't support IE8 anyway
+                                            ]
+                                        }),
                                         autoprefixer({
                                             browsers: [
-                                                '>1%',
+                                                'cover 99.9%',
                                                 'last 4 versions',
                                                 'Firefox ESR',
                                                 'not ie < 9', // React doesn't support IE8 anyway
@@ -207,9 +217,18 @@ module.exports = {
                                     ident: 'postcss',
                                     plugins: () => [
                                         require('postcss-flexbugs-fixes'),
+                                        postcssPresetEnv({
+                                            stage: 1,
+                                            browsers: [
+                                                'cover 99.9%',
+                                                'last 4 versions',
+                                                'Firefox ESR',
+                                                'not ie < 9', // React doesn't support IE8 anyway
+                                            ]
+                                        }),
                                         autoprefixer({
                                             browsers: [
-                                                '>1%',
+                                                'cover 99.9%',
                                                 'last 4 versions',
                                                 'Firefox ESR',
                                                 'not ie < 9', // React doesn't support IE8 anyway

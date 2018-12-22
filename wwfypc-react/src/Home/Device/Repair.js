@@ -230,6 +230,7 @@ export default class RepairSelection extends Component {
     goBack() {
         if (this.props.selectedRepair === null) {
             this.props.goBack();
+            setTimeout(window.$.scrollify.update, 500);
         } else {
             this.props.selectRepair(null);
             this.props.selectDelivery(null);
@@ -317,6 +318,7 @@ export default class RepairSelection extends Component {
                             return data.deviceCategories.slice().reverse().map(({id, name, colour}, i) => {
                                 return <Button colour={colour} key={i} onClick={() => {
                                     this.props.onSelectDeviceType(id);
+                                    setTimeout(window.$.scrollify.update, 500);
                                 }}><span dangerouslySetInnerHTML={{__html: name}} /></Button>
                             });
                         }}
