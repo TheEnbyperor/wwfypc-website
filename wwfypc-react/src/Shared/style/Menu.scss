@@ -142,6 +142,44 @@
         color: #fff;
         font-size: 30px;
       }
+
+      > *:not(.close) {
+        width: 100%;
+
+        &.img {
+          img {
+            margin: 0 auto;
+            float: none;
+            display: block;
+          }
+        }
+
+        &.cart {
+          a {
+            display: block;
+            margin: 0 auto;
+          }
+        }
+
+        @supports (display: grid) {
+          width: auto;
+
+          &.img {
+            img {
+              margin: initial;
+              float: left;
+              display: inline;
+            }
+          }
+
+          &.cart {
+            a {
+              display: inline;
+              margin: initial;
+            }
+          }
+        }
+      }
     }
 
     &.is-open {
