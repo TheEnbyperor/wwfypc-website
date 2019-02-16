@@ -12,11 +12,11 @@ include_once("includes/header.php");
 
 if(isset($_POST) && (isset($_POST['unlocking_form']) == 1))
 {
-        $txtName			= trim($_POST['name']);
-	$txtEmail			= trim($_POST['email']);
-	$imei		= trim($_POST['imei']);
-	$network		= trim($_POST['network']);
-	$model		= trim($_POST['model']);
+        $txtName	= trim($_POST['name']);
+	    $txtEmail	= trim($_POST['email']);
+	    $imei		= trim($_POST['imei']);
+	    $network	= trim($_POST['network']);
+	    $model		= trim($_POST['model']);
 
 
 		$message = $message;
@@ -33,10 +33,10 @@ if(isset($_POST) && (isset($_POST['unlocking_form']) == 1))
 
 
 		$headers = "MIME-Version: 1.0\n" ;
-	        $headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
-	        $headers .= "X-Priority: 1 (Highest)\n";
-	        $headers .= "X-MSMail-Priority: High\n";
-	        $headers .= "Importance: High\n";
+        $headers .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
+        $headers .= "X-Priority: 1 (Highest)\n";
+        $headers .= "X-MSMail-Priority: High\n";
+        $headers .= "Importance: High\n";
 
 		// Additional headers
 		$headers .= 'From: '.$txtName." <noreply@noreply.wewillfixyourpc.co.uk>\r\n";
@@ -46,7 +46,7 @@ if(isset($_POST) && (isset($_POST['unlocking_form']) == 1))
 
 		// Mail it
 		mail($to, $subject, $body, $headers);
-
+}
 ?>
 
 <h1>Phone unlocking</h1>
