@@ -66,13 +66,11 @@ data:
   config.json: |
     {
       "port": 80,
+      "baseURL": "",
       "address": "",
+      "log": "stdout",
       "database": "/etc/database/database.db",
-      "scope": "/srv",
-      "allowCommands": true,
-      "allowEdit": true,
-      "allowNew": true,
-      "commands": []
+      "root": "/srv"
     }
 ---
 apiVersion: apps/v1
@@ -100,7 +98,7 @@ spec:
           name: filebrowser-config
       containers:
       - name: filebrowser
-        image: filebrowser/filebrowser
+        image: filebrowser/filebrowser:v2.0.1
         ports:
         - containerPort: 80
         imagePullPolicy: Always
@@ -109,10 +107,13 @@ spec:
           mountPath: /srv
           subPath: website/filebrowser/files
         - name: gluster
+          mountPath: /srv/website-old
+          subPath: website-old/html
+        - name: gluster
           mountPath: /etc/database
           subPath: website/filebrowser/database
         - name: config
-          mountPath: /etc/config.json
+          mountPath: /.filebrowser.json
           subPath: config.json
 
 

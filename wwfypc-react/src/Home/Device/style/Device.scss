@@ -9,7 +9,7 @@
 }
 
 .Device {
-  box-shadow: 0 0 38px rgba(0,0,0,.23);
+  box-shadow: 0 0 38px rgba(0, 0, 0, .23);
   background: #fff;
   display: flex;
   justify-content: center;
@@ -52,13 +52,13 @@
     }
 
     .Devices {
-      flex: 1 1 100%;
       margin: 20px 0;
       justify-content: center;
       flex-direction: column;
       width: 100%;
 
       @supports (display: grid) {
+        flex: 1 1 100%;
         display: flex;
       }
 
@@ -72,12 +72,20 @@
         flex: 0 1 70%;
         margin: 13px 0;
 
+        &:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
         > div {
           width: 25%;
           float: left;
+          margin: 0 5px;
 
           @supports (display: grid) {
             width: 100%;
+            margin: 0;
           }
 
           display: grid;
@@ -87,47 +95,52 @@
           border-radius: 25px;
           padding: 25px 25px 7px;
 
-            img {
-              align-self: center;
+          img {
+            align-self: center;
+          }
+
+          h3 {
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0;
+            padding: 15px 0;
+            color: $grey5;
+            font-family: "Neutra", sans-serif;
+            border-bottom: 2px solid $orange;
+
+            &.colour-1 {
+              border-color: $yellow;
             }
 
-            h3 {
-              text-transform: uppercase;
-              text-align: center;
-              margin: 0;
-              padding: 15px 0;
-              color: $grey5;
-              font-family: "Neutra", sans-serif;
-              border-bottom: 2px solid $orange;
-
-              &.colour-1 {
-                border-color: $yellow;
-              }
-              &.colour-2 {
-                border-color: $blue;
-              }
-              &.colour-3 {
-                border-color: $orange;
-              }
-              &.colour-4 {
-                border-color: $green;
-              }
-              &.colour-5 {
-                border-color: $grey4;
-              }
-              &.colour-6 {
-                border-color: #fff;
-              }
+            &.colour-2 {
+              border-color: $blue;
             }
 
-            p {
-              margin: 0;
+            &.colour-3 {
+              border-color: $orange;
             }
 
-            > p {
-              margin: 15px;
-              font-size: 14px;
+            &.colour-4 {
+              border-color: $green;
             }
+
+            &.colour-5 {
+              border-color: $grey4;
+            }
+
+            &.colour-6 {
+              border-color: #fff;
+            }
+          }
+
+          p {
+            margin: 0;
+          }
+
+          > p {
+            margin: 15px;
+            font-size: 14px;
+          }
         }
       }
 
@@ -142,12 +155,15 @@
           &:nth-of-type(4n+1) {
             grid-column: 4;
           }
+
           &:nth-of-type(4n+2) {
             grid-column: 3;
           }
+
           &:nth-of-type(4n+3) {
             grid-column: 2;
           }
+
           &:nth-of-type(4n) {
             grid-column: 1;
           }

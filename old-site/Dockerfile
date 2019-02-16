@@ -8,5 +8,6 @@ COPY start.sh /
 RUN chmod +x /start.sh
 COPY ssmtp.conf /etc/ssmtp/
 COPY src /var/www/html
+VOLUME /var/www/html
 
 CMD /start.sh

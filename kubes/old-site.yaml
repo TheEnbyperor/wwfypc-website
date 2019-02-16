@@ -98,12 +98,21 @@ spec:
       labels:
         app: old-site
     spec:
+      volumes:
+      - name: gluster
+        glusterfs:
+          endpoints: glusterfs-cluster
+          path: apps
       containers:
       - name: old-site
         image: evilben/wwfypc-old-site:(hash)
         ports:
         - containerPort: 80
         imagePullPolicy: Always
+        volumeMounts:
+        - name: gluster
+          mountPath: /var/www/html
+          subPath: website-old/html
         env:
         - name: DB_HOST
           value: mysql.kube-system
