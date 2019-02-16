@@ -66,6 +66,12 @@ if(isset($_POST) && (isset($_POST['unlocking_form']) == 1))
             <option value="iPhone">iPhone</option>
             <option value="iPad">iPad</option>
             <option value="Samsung">Samsung</option>
+            <option value="Sony">Sony</option>
+            <option value="HTC">HTC</option>
+            <option value="Blackberry">Blackberry</option>
+            <option value="Huawei">Huawei</option>
+            <option value="LG">LG</option>
+            <option value="Nokia">Nokia</option>
           </select>
         </td>
       </tr>
@@ -77,7 +83,10 @@ if(isset($_POST) && (isset($_POST['unlocking_form']) == 1))
           <select name="network" id="network" required>
             <option value="O2">O2</option>
             <option value="EE">EE</option>
+            <option value="Vodafone (Fast)">Vodafone (Fast)</option>
+            <option value="Vodafone (Slow)">Vodafone (Slow)</option>
             <option value="Three">Three</option>
+            <option value="Tesco">Tesco</option>
           </select>
         </td>
       </tr>

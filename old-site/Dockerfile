@@ -8,6 +8,7 @@ COPY start.sh /
 RUN chmod +x /start.sh
 COPY ssmtp.conf /etc/ssmtp/
 COPY src /var/www/html
-VOLUME /var/www/html
+VOLUME /var/www/html/upload
+VOLUME /var/www/html/wewillfixyouripad/upload
 
 CMD /start.sh
