@@ -111,11 +111,8 @@ spec:
         imagePullPolicy: Always
         volumeMounts:
           - name: gluster
-            mountPath: /var/www/html/upload
-            subPath: website-old/html/upload
-          - name: gluster
-            mountPath: /var/www/html/wewillfixyouripad/upload
-            subPath: website-old/html/wewillfixyouripad/upload
+            mountPath: /var/www/html
+            subPath: website-old/html
         env:
         - name: DB_HOST
           value: mysql.kube-system
