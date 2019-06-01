@@ -57,7 +57,6 @@ class SellingDeviceCategoryType(DjangoObjectType):
         return self.icon.url
 
 
-
 def get_device_permutations(device_id):
     estimates = models.ValueEstimate.objects.filter(device_id=device_id)
     permutations = []

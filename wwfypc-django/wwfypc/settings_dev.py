@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,12 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET", "")
+SECRET_KEY = '+oledci8(nc&gl-$y86v)tn(9)i9qker230hx6h=)^xtxthlh3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["api.test.wewillfixyourpc.co.uk"]
+ALLOWED_HOSTS = ['*']
+
 
 # Application definition
 
@@ -38,10 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'graphene_django',
     'corsheaders',
+    'graphene_django',
     'solo',
-    'ordered_model',
     'adminsortable2',
     'ckeditor',
     'ckeditor_uploader',
@@ -91,15 +90,8 @@ WSGI_APPLICATION = 'wwfypc.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': os.getenv('DB_NAME', 'wwfypc'),
-        'USER': os.getenv('DB_USER', 'root'),
-        'PASSWORD': os.getenv('DB_PASS', ''),
-        'HOST': os.getenv('DB_HOST', 'db'),
-        'ENGINE': 'django.db.backends.mysql',
-        'PORT': '',
-        'OPTIONS': {
-            "init_command": "SET foreign_key_checks = 0;",
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -151,40 +143,13 @@ GRAPHENE = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-PHONENUMBER_DEFAULT_REGION = 'GB'
+CORS_ORIGIN_WHITELIST = ('localhost:3000',)
 
 CHROME_PATH = "/usr/bin/google-chrome"
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '[django] %(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        }
-    },
-    'handlers': {
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'stream': sys.stdout,
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
-}
+PHONENUMBER_DEFAULT_REGION = "GB"
 
-FILE_UPLOAD_PERMISSIONS = 0o644
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'front.mailu'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ADMIN_SHORTCUTS = [
     {
@@ -209,10 +174,6 @@ ADMIN_SHORTCUTS = [
             {
                 'title': 'Services',
                 'url_name': 'admin:services_servicepage_changelist',
-            },
-            {
-                'title': 'Menu items',
-                'url_name': 'admin:main_site_menuitem_changelist',
             },
         ]
     },
@@ -332,6 +293,5 @@ CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        'font_names': 'Bariol; Moon; Neutra; Helvetica Neue; Adam CG Pro;',
     },
 }
