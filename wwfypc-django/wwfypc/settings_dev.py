@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,12 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = open('SECRET_KEY').read().strip()
+SECRET_KEY = '+oledci8(nc&gl-$y86v)tn(9)i9qker230hx6h=)^xtxthlh3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["api.cardifftec.uk"]
+ALLOWED_HOSTS = ['*']
+
 
 # Application definition
 
@@ -45,11 +45,11 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'main_site.apps.MainSiteConfig',
-    # 'buy_and_sell.apps.BuyAndSellConfig',
-    # 'services.apps.ServicesConfig',
+    'buy_and_sell.apps.BuyAndSellConfig',
+    'services.apps.ServicesConfig',
     'selling.apps.SellingConfig',
-    # 'unlocking.apps.UnlockingConfig',
-    # 'build_pc.apps.BuildPcConfig',
+    'unlocking.apps.UnlockingConfig',
+    'build_pc.apps.BuildPcConfig',
 ]
 
 MIDDLEWARE = [
@@ -90,11 +90,8 @@ WSGI_APPLICATION = 'wwfypc.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
-        'NAME': 'api',
-        'USER': 'api',
-        'PASSWORD': open('DB_PASS').read().strip(),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -146,40 +143,13 @@ GRAPHENE = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-PHONENUMBER_DEFAULT_REGION = 'GB'
+CORS_ORIGIN_WHITELIST = ('localhost:3000',)
 
 CHROME_PATH = "/usr/bin/google-chrome"
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '[django] %(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        }
-    },
-    'handlers': {
-        'console': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'stream': sys.stdout,
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
-}
+PHONENUMBER_DEFAULT_REGION = "GB"
 
-FILE_UPLOAD_PERMISSIONS = 0o644
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'front.mailu'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ADMIN_SHORTCUTS = [
     {
@@ -189,26 +159,22 @@ ADMIN_SHORTCUTS = [
                 'title': 'Site config',
                 'url_name': 'admin:main_site_siteconfig_change',
             },
-            # {
-            #     'title': 'Main slider',
-            #     'url_name': 'admin:main_site_mainsliderslide_changelist',
-            # },
-            # {
-            #     'title': 'Selling points',
-            #     'url_name': 'admin:main_site_sellingpoint_changelist',
-            # },
+            {
+                'title': 'Main slider',
+                'url_name': 'admin:main_site_mainsliderslide_changelist',
+            },
+            {
+                'title': 'Selling points',
+                'url_name': 'admin:main_site_sellingpoint_changelist',
+            },
             {
                 'title': 'Customers',
                 'url_name': 'admin:main_site_customer_changelist',
             },
-            # {
-            #     'title': 'Services',
-            #     'url_name': 'admin:services_servicepage_changelist',
-            # },
-            # {
-            #     'title': 'Menu items',
-            #     'url_name': 'admin:main_site_menuitem_changelist',
-            # },
+            {
+                'title': 'Services',
+                'url_name': 'admin:services_servicepage_changelist',
+            },
         ]
     },
     {
@@ -226,14 +192,14 @@ ADMIN_SHORTCUTS = [
                 'title': 'Repair Types',
                 'url_name': 'admin:main_site_repairtype_changelist',
             },
-            # {
-            #     'title': 'Other Services',
-            #     'url_name': 'admin:main_site_otherservice_changelist',
-            # },
-            # {
-            #     'title': 'Postal orders',
-            #     'url_name': 'admin:main_site_postalorder_changelist',
-            # },
+            {
+                'title': 'Other Services',
+                'url_name': 'admin:main_site_otherservice_changelist',
+            },
+            {
+                'title': 'Postal orders',
+                'url_name': 'admin:main_site_postalorder_changelist',
+            },
         ],
     },
     {
@@ -247,38 +213,38 @@ ADMIN_SHORTCUTS = [
                 'title': 'Block time',
                 'url_name': 'admin:main_site_appointmenttimeblockrule_changelist',
             },
-            # {
-            #     'title': 'Appointments',
-            #     'url_name': 'admin:main_site_appointment_changelist',
-            # },
+            {
+                'title': 'Appointments',
+                'url_name': 'admin:main_site_appointment_changelist',
+            },
         ]
     },
-    # {
-    #     'title': 'Build a PC',
-    #     'shortcuts': [
-    #         {
-    #             'title': 'Base models',
-    #             'url_name': 'admin:build_pc_basepcmodel_changelist',
-    #         },
-    #         {
-    #             'title': 'Customisation options',
-    #             'url_name': 'admin:build_pc_customisation_changelist',
-    #         },
-    #     ]
-    # },
-    # {
-    #     'title': 'Buy & Sell',
-    #     'shortcuts': [
-    #         {
-    #             'title': 'Categories',
-    #             'url_name': 'admin:buy_and_sell_itemcategory_changelist',
-    #         },
-    #         {
-    #             'title': 'Items',
-    #             'url_name': 'admin:buy_and_sell_item_changelist',
-    #         },
-    #     ]
-    # },
+    {
+        'title': 'Build a PC',
+        'shortcuts': [
+            {
+                'title': 'Base models',
+                'url_name': 'admin:build_pc_basepcmodel_changelist',
+            },
+            {
+                'title': 'Customisation options',
+                'url_name': 'admin:build_pc_customisation_changelist',
+            },
+        ]
+    },
+    {
+        'title': 'Buy & Sell',
+        'shortcuts': [
+            {
+                'title': 'Categories',
+                'url_name': 'admin:buy_and_sell_itemcategory_changelist',
+            },
+            {
+                'title': 'Items',
+                'url_name': 'admin:buy_and_sell_item_changelist',
+            },
+        ]
+    },
     {
         'title': 'Selling',
         'shortcuts': [
@@ -296,23 +262,23 @@ ADMIN_SHORTCUTS = [
             },
         ]
     },
-    # {
-    #     'title': 'Unlocking',
-    #     'shortcuts': [
-    #         {
-    #             'title': 'Devices',
-    #             'url_name': 'admin:unlocking_devicetype_changelist',
-    #         },
-    #         {
-    #             'title': 'Networks',
-    #             'url_name': 'admin:unlocking_network_changelist',
-    #         },
-    #         {
-    #             'title': 'Prices',
-    #             'url_name': 'admin:unlocking_unlockingprice_changelist',
-    #         },
-    #     ]
-    # },
+    {
+        'title': 'Unlocking',
+        'shortcuts': [
+            {
+                'title': 'Devices',
+                'url_name': 'admin:unlocking_devicetype_changelist',
+            },
+            {
+                'title': 'Networks',
+                'url_name': 'admin:unlocking_network_changelist',
+            },
+            {
+                'title': 'Prices',
+                'url_name': 'admin:unlocking_unlockingprice_changelist',
+            },
+        ]
+    },
 ]
 
 ADMIN_SHORTCUTS_SETTINGS = {
@@ -327,6 +293,5 @@ CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        'font_names': 'Bariol; Moon; Neutra; Helvetica Neue; Adam CG Pro;',
     },
 }

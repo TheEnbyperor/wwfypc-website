@@ -11,9 +11,9 @@ import datetime
 from django.utils import timezone
 from django.core import mail
 import pytz
-import buy_and_sell.schema
-import unlocking.schema
-import build_pc.schema
+# import buy_and_sell.schema
+# import unlocking.schema
+# import build_pc.schema
 import requests
 import os
 from . import models
@@ -376,18 +376,19 @@ class CreateOrder(Mutation):
         total_price = 0
         description_items = []
         for item in items:
-            if item.type == "buy_and_sell":
-                total_price += buy_and_sell.schema.calculate_price(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
-                description_items.append(
-                    buy_and_sell.schema.make_item_description(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity))
-            if item.type == "unlocking":
-                total_price += unlocking.schema.calculate_price(item.id, from_global_id(item.delivery)[1], item.quantity)
-                description_items.append(
-                    unlocking.schema.make_item_description(item.id, from_global_id(item.delivery)[1], item.quantity))
-            if item.type == "build_pc":
-                total_price += build_pc.schema.calculate_price(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
-                description_items.append(
-                    build_pc.schema.make_item_description(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity))
+            pass
+            # if item.type == "buy_and_sell":
+            #     total_price += buy_and_sell.schema.calculate_price(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
+            #     description_items.append(
+            #         buy_and_sell.schema.make_item_description(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity))
+            # if item.type == "unlocking":
+            #     total_price += unlocking.schema.calculate_price(item.id, from_global_id(item.delivery)[1], item.quantity)
+            #     description_items.append(
+            #         unlocking.schema.make_item_description(item.id, from_global_id(item.delivery)[1], item.quantity))
+            # if item.type == "build_pc":
+            #     total_price += build_pc.schema.calculate_price(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
+            #     description_items.append(
+            #         build_pc.schema.make_item_description(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity))
 
         description = "; ".join(description_items)
 
@@ -428,8 +429,8 @@ class CreateOrder(Mutation):
         order.save()
 
         for item in items:
-            if item.type == "buy_and_sell":
-                buy_and_sell.schema.place_order(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
+            # if item.type == "buy_and_sell":
+            #     buy_and_sell.schema.place_order(from_global_id(item.id)[1], from_global_id(item.delivery)[1], item.quantity)
             order_item = models.OrderItem()
             order_item.order = order
             order_item.type = item.type
@@ -611,37 +612,37 @@ def get_booking_times(date: datetime.date):
 
 
 class Query:
-    site_config = graphene.NonNull(SiteConfigType)
+    site_config = graphene.Field(SiteConfigType)
 
-    main_slider_slides = graphene.NonNull(graphene.List(graphene.NonNull(MainSliderSlideType)))
+    # main_slider_slides = graphene.NonNull(graphene.List(graphene.NonNull(MainSliderSlideType)))
 
-    selling_points = graphene.NonNull(graphene.List(graphene.NonNull(SellingPointType)))
+    # selling_points = graphene.NonNull(graphene.List(graphene.NonNull(SellingPointType)))
 
-    other_services = graphene.NonNull(graphene.List(graphene.NonNull(OtherServiceType)))
+    # other_services = graphene.NonNull(graphene.List(graphene.NonNull(OtherServiceType)))
 
-    menu_items = graphene.NonNull(graphene.List(graphene.NonNull(MenuItemType)))
+    # menu_items = graphene.NonNull(graphene.List(graphene.NonNull(MenuItemType)))
 
     device_categories = graphene.NonNull(graphene.List(graphene.NonNull(DeviceCategoryType)))
 
-    device_category = graphene.NonNull(DeviceCategoryType,
+    device_category = graphene.Field(DeviceCategoryType,
                                        id=graphene.NonNull(graphene.ID))
 
     device_types = graphene.NonNull(graphene.List(DeviceTypeType), category=graphene.ID())
     device_type = graphene.NonNull(DeviceTypeType, id=graphene.NonNull(graphene.ID))
 
     repair_types = graphene.NonNull(graphene.List(RepairTypeType), device_type=graphene.ID())
-    repair_type = graphene.NonNull(RepairTypeType, id=graphene.NonNull(graphene.ID))
+    repair_type = graphene.Field(RepairTypeType, id=graphene.NonNull(graphene.ID))
 
-    appointment_times = graphene.NonNull(
-        graphene.List(graphene.NonNull(AppointmentTime)),
-        date=graphene.Date(required=True)
-    )
+    # appointment_times = graphene.NonNull(
+    #     graphene.List(graphene.NonNull(AppointmentTime)),
+    #     date=graphene.Date(required=True)
+    # )
 
-    cart_item = graphene.NonNull(
-        CartItem,
-        category=graphene.NonNull(graphene.ID),
-        item=graphene.NonNull(graphene.ID)
-    )
+    # cart_item = graphene.NonNull(
+    #     CartItem,
+    #     category=graphene.NonNull(graphene.ID),
+    #     item=graphene.NonNull(graphene.ID)
+    # )
 
     def resolve_site_config(self, info):
         return models.SiteConfig.objects.first()
@@ -703,7 +704,8 @@ class Query:
 
 
 class Mutation:
-    create_postal_order = CreatePostalOrder.Field()
-    create_appointment = CreateAppointment.Field()
-    create_order = CreateOrder.Field()
-    contact_form = ContactForm.Field()
+    # create_postal_order = CreatePostalOrder.Field()
+    # create_appointment = CreateAppointment.Field()
+    # create_order = CreateOrder.Field()
+    # contact_form = ContactForm.Field()
+    pass

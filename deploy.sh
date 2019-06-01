@@ -1,24 +1,11 @@
 #!/bin/bash
 
-HASH=`git log --pretty=format:'%H' -n 1`
-
-docker build -t evilben/wwfypc-django:$HASH wwfypc-django
-docker build -t evilben/wwfypc-react:$HASH wwfypc-react
-docker build -t evilben/wwfypc-nginx:$HASH config/nginx
-docker build -t evilben/wwfypc-old-site:$HASH old-site
-docker push evilben/wwfypc-react:$HASH
-docker push evilben/wwfypc-django:$HASH
-docker push evilben/wwfypc-nginx:$HASH
-docker push evilben/wwfypc-old-site:$HASH
-cat wwfypc-react/kubes/deploy.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
-cat kubes/gluster.yaml | kubectl apply -f -
-cat kubes/django.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
-cat kubes/nginx.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
-cat kubes/old-site.yaml | sed "s/(hash)/$HASH/g" | kubectl apply -f -
-cat filebrowser/gluster.yaml | kubectl apply -f -
-cat filebrowser/deployment.yaml | kubectl apply -f -
-kubectl -n website-test rollout status deployment/django
-kubectl -n website-test rollout status deployment/react
-kubectl -n website-test rollout status deployment/nginx
-kubectl -n website rollout status deployment/filebrowser
-
+rsync -rlP --exclude-from=.gitignore wwfypc-django/* root@office.cardifftec.uk:/opt/api
+ssh root@office.cardifftec.uk bash <<EOF
+cd /opt/api
+source venv/bin/activate
+pip install -r requirements.txt
+python manage.py collectstatic --no-input
+python manage.py migrate
+systemctl restart api
+EOF
