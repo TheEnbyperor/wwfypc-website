@@ -103,6 +103,9 @@ class DeviceTypeType(DjangoObjectType):
     def resolve_repair_types(self, info):
         return self.repair_types.all()
 
+    def resolve_image(self, info):
+        return self.image.url
+
 
 class DeviceCategoryType(DjangoObjectType):
     colour = graphene.NonNull(graphene.Int)

@@ -1,0 +1,7 @@
+[19-Mar-2014 15:28:37 America/Denver] PHP Notice:  Undefined index: id in /home1/wewillf2/public_html/Manage Appointments/inquires-detail_2.php on line 64
+[19-Mar-2014 19:14:13 America/Denver] PHP Notice:  Undefined index: id in /home1/wewillf2/public_html/Manage Appointments/inquires-details_2.php on line 64
+[04-Aug-2016 06:31:02 America/Denver] PHP Warning:  Module 'magickwand' already loaded in Unknown on line 0
+[04-Aug-2016 06:31:02 America/Denver] PHP Warning:  Module 'mailparse' already loaded in Unknown on line 0
+[04-Aug-2016 06:31:02 America/Denver] PHP Warning:  Module 'OAuth' already loaded in Unknown on line 0
+[04-Aug-2016 06:31:02 America/Denver] PHP Warning:  Module 'oci8' already loaded in Unknown on line 0
+[04-Aug-2016 06:31:02 America/Denver] PHP Warning:  Module 'uploadprogress' already loaded in Unknown on line 0

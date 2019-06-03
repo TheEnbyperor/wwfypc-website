@@ -142,10 +142,10 @@ class DeviceCategory(OrderedModel):
         verbose_name_plural = "Device categories"
         ordering = ('order',)
 
-    name = RichTextField(blank=False)
-    description = RichTextField(blank=False)
-    colour = models.IntegerField(choices=COLOURS, blank=False, default=1)
-    icon = models.FileField(blank=False)
+    name = models.CharField(max_length=255, blank=False)
+    # description = RichTextField(blank=False)
+    # colour = models.IntegerField(choices=COLOURS, blank=False, default=1)
+    # icon = models.FileField(blank=False)
 
     def __str__(self):
         return self.name
@@ -155,6 +155,7 @@ class DeviceType(OrderedModel):
     device_category = models.ForeignKey(DeviceCategory, on_delete=models.CASCADE,
                                         related_name="device_types", blank=False)
     name = models.CharField(max_length=255, blank=False)
+    image = models.ImageField(blank=False)
 
     def __str__(self):
         return f"{self.device_category.name}: {self.name}"

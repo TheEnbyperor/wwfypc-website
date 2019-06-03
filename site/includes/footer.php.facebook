@@ -1,0 +1,71 @@
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      xfbml            : true,
+      version          : 'v3.3'
+    });
+  };
+
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk/xfbml.customerchat.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+  attribution=setup_tool
+  page_id="388245434983013"
+  theme_color="#ff7300"
+  logged_in_greeting="Hi! How can we help you?"
+  logged_out_greeting="Hi! How can we help you?">
+</div>
+
+<div class="footer">
+<div class="copy">
+Help is just a phone call away. Tel: <a href="tel:02920766039">02920 766039</a>
+or Email: <a href="mailto:neil@wewillfixyourpc.co.uk">neil@wewillfixyourpc.co.uk</a><p>
+Copyright &copy; 2018 wewillfixyourpc.co.uk. All Rights Reserved.
+
+<P><a href="images/Refund_Return_Policy.pdf">Our Refund & Return Policy</a>
+</div><div class="powered">
+
+
+
+
+
+
+<a href="http://www.facebook.com/wewillfix" target="_blank"><img border="0" src="images/facebook_new.png" alt="laptop screen cardiff" />
+</a>
+
+
+&nbsp;&nbsp;&nbsp;
+
+
+<a href="http://twitter.com/wewillfix" target="_blank"><img border="0" src="images/twitter_new.png" alt="computer repair cardiff" />
+</a>
+
+
+&nbsp;&nbsp;&nbsp;
+
+
+<a href="http://mobile.wewillfixyourpc.co.uk" target="_blank"><img border="0" src="images/mobile_new.png" alt="pc repair cardiff" />
+</a>
+
+<img border="0" src="images/visa.png" alt="laptop repair cardiff" /></a>
+
+
+&nbsp;&nbsp;&nbsp;
+
+<img border="0" src="images/mastercard.png" alt="laptop repair cardiff" /></a>
+
+
+
+</div>
+</div>
+</body></html>
+

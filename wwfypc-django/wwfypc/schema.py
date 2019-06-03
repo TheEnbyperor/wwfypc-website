@@ -1,4 +1,5 @@
-
+import graphene
+import main_site.schema
 # import buy_and_sell.schema
 # import services.schema
 import selling.schema
